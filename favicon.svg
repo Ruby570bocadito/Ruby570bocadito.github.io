@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="rgGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1D1CE5"/>
+      <stop offset="0.55" stop-color="#4649FF"/>
+      <stop offset="1" stop-color="#C47AFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="#07060f"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="11.5" fill="none" stroke="url(#rgGrad)" stroke-opacity="0.65" stroke-width="1.5"/>
+  <text x="27" y="41" font-family="Menlo, Consolas, monospace" font-size="26" font-weight="700" fill="#eceaf6" text-anchor="middle" letter-spacing="-1">RG</text>
+  <rect x="38" y="32" width="12" height="4" rx="1" fill="url(#rgGrad)"/>
+  <text x="27" y="55" font-family="Menlo, Consolas, monospace" font-size="9" fill="#7978FF" text-anchor="middle" letter-spacing="2">SEC</text>
+</svg>
