@@ -144,6 +144,28 @@ h2 em{font-style:normal;color:var(--dim)}
 .p-m + .p-m{border-top:1px solid var(--line2)}
 .p-m b{font-size:22px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .p-m span{font-size:12.5px;color:var(--dim);text-align:right}
+/* project visuals: real screenshot + hover demo gif */
+.p-visual{display:flex;flex-direction:column;gap:14px;min-width:0}
+.p-shot{border:1px solid var(--line);border-radius:14px;background:rgba(14,14,13,.9);overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.shot-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line2)}
+.shot-bar i{width:9px;height:9px;border-radius:50%;background:#262622}
+.shot-bar span{margin-left:6px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shot-bar em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line2);padding:3px 9px;border-radius:999px;white-space:nowrap;transition:color .2s,border-color .2s}
+.p-shot:hover .shot-bar em{color:var(--ok);border-color:rgba(143,197,115,.45)}
+.shot-body{position:relative;aspect-ratio:16/10;background:#0b0b0a}
+.shot-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.shot-body .gif{display:none}
+.p-shot:hover .shot-body .gif{display:block}
+.p-shot:hover .shot-body .png{display:none}
+@media(hover:none){.shot-body .gif{display:block}.shot-body .png{display:none}.shot-bar em{display:none}}
+.prow .p-metrics{display:grid;grid-template-columns:repeat(3,1fr)}
+.prow .p-m{flex-direction:column;align-items:flex-start;gap:3px;padding:15px 18px}
+.prow .p-m b{font-size:19px}
+.prow .p-m span{text-align:left}
+.prow .p-m + .p-m{border-top:none;border-left:1px solid var(--line2)}
+.prow.flip{grid-template-columns:.95fr 1.05fr}
+.prow.flip .p-info{order:2}
+.prow.flip .p-visual{order:1}
 
 /* more projects grid */
 .more{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
@@ -254,6 +276,8 @@ footer{border-bottom:none;padding:56px 0 40px}
   .hero-inner{grid-template-columns:1fr;padding:72px 0 56px;gap:40px}
   #ribbon{width:100%;opacity:.35}
   .about-grid,.prow{grid-template-columns:1fr}
+  .prow.flip{grid-template-columns:1fr}
+  .prow.flip .p-info,.prow.flip .p-visual{order:0}
   .p-metrics{max-width:560px}
   .cards4{grid-template-columns:1fr}
   .more{grid-template-columns:1fr 1fr}
@@ -270,6 +294,8 @@ footer{border-bottom:none;padding:56px 0 40px}
   .band .wrap{grid-template-columns:1fr 1fr}
   section{padding:76px 0}
   .facts{grid-template-columns:1fr}
+  .prow .p-metrics{grid-template-columns:1fr}
+  .prow .p-m + .p-m{border-left:none;border-top:1px solid var(--line2)}
 }
 </style>
 <style>
@@ -453,7 +479,7 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
     <p class="sec-sub">Built to answer a real question about offensive security. Real screenshots, real usage, no mock-ups.</p></div>
 
     <div class="prow rv">
-      <div>
+      <div class="p-info">
         <span class="p-badge"><i></i>Active research</span>
         <h3>OrquestaRT</h3>
         <p class="p-role">AI-assisted Red Team Orchestration Platform</p>
@@ -462,15 +488,24 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
         <a class="p-link" href="https://github.com/Ruby570bocadito/orquesta-rt" target="_blank" rel="noreferrer">View project
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
-      <div class="p-metrics">
-        <div class="p-m"><b>587</b><span>automated tests</span></div>
-        <div class="p-m"><b>F0→F7</b><span>orchestration phases</span></div>
-        <div class="p-m"><b>26+</b><span>recon transports</span></div>
+      <div class="p-visual">
+        <div class="p-shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>orquesta-rt — operator console</span><em>hover · demo</em></div>
+          <div class="shot-body">
+            <img class="png" src="/assets/orquesta-console.png" alt="OrquestaRT operator console — live agent feed and machine-readable ROE" loading="lazy">
+            <img class="gif" src="/assets/orquesta-demo.gif" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </div>
+        <div class="p-metrics">
+          <div class="p-m"><b>587</b><span>automated tests</span></div>
+          <div class="p-m"><b>F0→F7</b><span>orchestration phases</span></div>
+          <div class="p-m"><b>26+</b><span>recon transports</span></div>
+        </div>
       </div>
     </div>
 
-    <div class="prow rv">
-      <div>
+    <div class="prow flip rv">
+      <div class="p-info">
         <span class="p-badge"><i></i>Active research</span>
         <h3>WorldC2</h3>
         <p class="p-role">Command &amp; Control Platform for Authorized Security Labs</p>
@@ -479,15 +514,24 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
         <a class="p-link" href="https://github.com/Ruby570bocadito/WorldC2" target="_blank" rel="noreferrer">View project
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
-      <div class="p-metrics">
-        <div class="p-m"><b>5</b><span>transport fallbacks</span></div>
-        <div class="p-m"><b>4</b><span>RBAC roles</span></div>
-        <div class="p-m"><b>14</b><span>browser E2E tests</span></div>
+      <div class="p-visual">
+        <div class="p-shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>WorldC2 — operator dashboard</span><em>hover · demo</em></div>
+          <div class="shot-body">
+            <img class="png" src="/assets/worldc2-dashboard.png" alt="WorldC2 dashboard — sessions, credentials, tasks and SIEM webhook health" loading="lazy">
+            <img class="gif" src="/assets/worldc2-demo.gif" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </div>
+        <div class="p-metrics">
+          <div class="p-m"><b>5</b><span>transport fallbacks</span></div>
+          <div class="p-m"><b>4</b><span>RBAC roles</span></div>
+          <div class="p-m"><b>14</b><span>browser E2E tests</span></div>
+        </div>
       </div>
     </div>
 
     <div class="prow rv">
-      <div>
+      <div class="p-info">
         <span class="p-badge"><i></i>Active research</span>
         <h3>HiveMind</h3>
         <p class="p-role">Distributed Multi-Agent Security Research</p>
@@ -496,15 +540,24 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
         <a class="p-link" href="https://github.com/Ruby570bocadito/HiveMind" target="_blank" rel="noreferrer">View project
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
-      <div class="p-metrics">
-        <div class="p-m"><b>273</b><span>tests passing</span></div>
-        <div class="p-m"><b>9</b><span>crates in the workspace</span></div>
-        <div class="p-m"><b>0</b><span>TCP ports between agents</span></div>
+      <div class="p-visual">
+        <div class="p-shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>HiveMind — hive colony console</span><em>hover · demo</em></div>
+          <div class="shot-body">
+            <img class="png" src="/assets/hivemind-console.png" alt="HiveMind colony console — beacon rate, registered agents and task pipeline" loading="lazy">
+            <img class="gif" src="/assets/hivemind-demo.gif" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </div>
+        <div class="p-metrics">
+          <div class="p-m"><b>282</b><span>tests passing</span></div>
+          <div class="p-m"><b>9</b><span>crates in the workspace</span></div>
+          <div class="p-m"><b>0</b><span>TCP ports between agents</span></div>
+        </div>
       </div>
     </div>
 
-    <div class="prow rv">
-      <div>
+    <div class="prow flip rv">
+      <div class="p-info">
         <span class="p-badge done"><i></i>Research complete</span>
         <h3>Wormy</h3>
         <p class="p-role">Malware &amp; Network Security Research</p>
@@ -513,10 +566,19 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
         <a class="p-link" href="https://github.com/Ruby570bocadito/Wormy-ML-Network-Worm" target="_blank" rel="noreferrer">View project
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
-      <div class="p-metrics">
-        <div class="p-m"><b>525</b><span>automated tests</span></div>
-        <div class="p-m"><b>44</b><span>gated exploit modules</span></div>
-        <div class="p-m"><b>15</b><span>lab services (127.0.0.1)</span></div>
+      <div class="p-visual">
+        <div class="p-shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>Wormy — propagation dashboard</span><em>hover · demo</em></div>
+          <div class="shot-body">
+            <img class="png" src="/assets/wormy-dashboard.png" alt="Wormy dashboard — propagation timeline, host status and vulnerability severity" loading="lazy">
+            <img class="gif" src="/assets/wormy-demo.gif" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </div>
+        <div class="p-metrics">
+          <div class="p-m"><b>525</b><span>automated tests</span></div>
+          <div class="p-m"><b>44</b><span>gated exploit modules</span></div>
+          <div class="p-m"><b>15</b><span>lab services (127.0.0.1)</span></div>
+        </div>
       </div>
     </div>
 
