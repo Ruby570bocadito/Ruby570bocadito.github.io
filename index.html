@@ -40,6 +40,16 @@ header{position:sticky;top:0;z-index:60;background:rgba(10,10,10,.82);backdrop-f
 .btn-d:hover{background:rgba(255,255,255,.07)}
 .btn-sm{padding:7px 15px;font-size:13px}
 
+/* ---------- language switch ---------- */
+.nav-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:999px;padding:3px;background:rgba(255,255,255,.03)}
+.lang-globe{color:var(--dim);flex-shrink:0;margin-left:6px}
+.lang-btn{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.12em;padding:6px 12px;border-radius:999px;color:var(--mut);background:transparent;border:none;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.lang-btn:hover{color:var(--fg)}
+.lang-btn.active{background:var(--fg);color:#0a0a0a}
+.lang-btn:active{transform:scale(.95)}
+.lang-switch:focus-within{border-color:rgba(255,255,255,.28)}
+
 /* ---------- hero ---------- */
 .hero{position:relative;border-bottom:1px solid var(--line2);overflow:hidden}
 #ribbon{position:absolute;top:0;right:0;width:56%;height:100%;pointer-events:none;opacity:.9}
@@ -296,6 +306,12 @@ footer{border-bottom:none;padding:56px 0 40px}
   .facts{grid-template-columns:1fr}
   .prow .p-metrics{grid-template-columns:1fr}
   .prow .p-m + .p-m{border-left:none;border-top:1px solid var(--line2)}
+  .nav-cta{gap:8px}
+  .lang-btn{padding:5px 10px}
+}
+@media(max-width:430px){
+  .nav .btn-sm .btn-label{display:none}
+  .nav .btn-sm{padding:8px 10px}
 }
 </style>
 <style>
@@ -347,17 +363,24 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
       Rafael Gálvez
     </a>
     <nav class="nav-links" aria-label="Main">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#certs">Certifications</a>
-      <a href="#focus-now">Now</a>
-      <a href="#contact">Contact</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#projects" data-i18n="nav.projects">Projects</a>
+      <a href="#skills" data-i18n="nav.skills">Skills</a>
+      <a href="#certs" data-i18n="nav.certs">Certifications</a>
+      <a href="#focus-now" data-i18n="nav.now">Now</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
-    <a class="btn btn-w btn-sm" href="/cv.pdf" download="CV Practicas.pdf">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download CV
-    </a>
+    <div class="nav-cta">
+      <div class="lang-switch" role="group" aria-label="Language / Idioma">
+        <svg class="lang-globe" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <a class="btn btn-w btn-sm" href="/cv.pdf" download="CV Practicas.pdf">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="btn-label" data-i18n="nav.cv">Download CV</span>
+      </a>
+    </div>
   </div>
 </header>
 
@@ -368,35 +391,35 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
   <div class="wrap">
     <div class="hero-inner">
       <div>
-        <span class="pill"><i></i>Open to internships &amp; junior roles</span>
+        <span class="pill"><i></i><span data-i18n="hero.pill">Open to internships &amp; junior roles</span></span>
         <h1 id="heroTitle">I learn<br>by <em>building.</em></h1>
-        <p class="hero-sub"><b>Rafael Gálvez Silipo</b> — cybersecurity student focused on Red Team &amp; offensive security. I build security tools and research projects to understand how systems work, how they can be attacked, and how they can be secured.</p>
+        <p class="hero-sub" data-i18n="hero.sub"><b>Rafael Gálvez Silipo</b> — cybersecurity student focused on Red Team &amp; offensive security. I build security tools and research projects to understand how systems work, how they can be attacked, and how they can be secured.</p>
         <div class="hero-ctas">
-          <a class="btn btn-w" href="#projects">View projects
+          <a class="btn btn-w" href="#projects"><span data-i18n="hero.cta1">View projects</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a class="btn btn-d" href="/cv.pdf" download="CV Practicas.pdf">Download CV</a>
+          <a class="btn btn-d" href="/cv.pdf" download="CV Practicas.pdf"><span data-i18n="nav.cv">Download CV</span></a>
         </div>
       </div>
       <div class="term rv">
         <div class="term-bar"><i></i><i></i><i></i><span>rafael@lab: ~</span></div>
         <div class="term-body">
           <div><span class="t-dir">➜ </span><span class="t-c">whoami</span></div>
-          <div class="t-o">&nbsp;&nbsp;cybersecurity student — SMR (Systems &amp; Networks)</div>
+          <div class="t-o" data-i18n="term.whoami_out">&nbsp;&nbsp;cybersecurity student — SMR (Systems &amp; Networks)</div>
           <div><span class="t-dir">➜ </span><span class="t-c">cat focus.txt</span></div>
           <div class="t-o">&nbsp;&nbsp;red team · pentesting · active directory · osint</div>
           <div><span class="t-dir">➜ </span><span class="t-c">./status --hiring</span></div>
-          <div class="t-ok">&nbsp;&nbsp;[ OK ] open to internships &amp; junior cybersecurity roles</div>
+          <div class="t-ok" data-i18n="term.status_out">&nbsp;&nbsp;[ OK ] open to internships &amp; junior cybersecurity roles</div>
           <div><span class="t-dir">➜ </span><span class="t-c">ls projects/</span></div>
           <div class="t-p">&nbsp;&nbsp;OrquestaRT/&nbsp;&nbsp;WorldC2/&nbsp;&nbsp;HiveMind/&nbsp;&nbsp;Wormy/<span class="t-cur"></span></div>
         </div>
-        <div class="t-live" id="termLive"><span class="ldot"></span><span>lab online — <span id="termClock">--:--:--</span></span></div>
+        <div class="t-live" id="termLive"><span class="ldot"></span><span><span data-i18n="term.live">lab online</span> — <span id="termClock">--:--:--</span></span></div>
       </div>
     </div>
     <div class="trio">
-      <div class="rv"><span class="n">1.</span><h3>Study</h3><p>SMR, networking and security fundamentals. eJPT-trained, working towards CRTO and CPTES.</p></div>
-      <div class="rv"><span class="n">2.</span><h3>Build</h3><p>Custom tooling instead of tutorials — C2 platforms, orchestration, recon and ML research.</p></div>
-      <div class="rv"><span class="n">3.</span><h3>Lab</h3><p>Everything runs in isolated environments: AD domains, Hack The Box, purple teaming.</p></div>
+      <div class="rv"><span class="n">1.</span><h3 data-i18n="trio.1h">Study</h3><p data-i18n="trio.1p">SMR, networking and security fundamentals. eJPT-trained, working towards CRTO and CPTES.</p></div>
+      <div class="rv"><span class="n">2.</span><h3 data-i18n="trio.2h">Build</h3><p data-i18n="trio.2p">Custom tooling instead of tutorials — C2 platforms, orchestration, recon and ML research.</p></div>
+      <div class="rv"><span class="n">3.</span><h3 data-i18n="trio.3h">Lab</h3><p data-i18n="trio.3p">Everything runs in isolated environments: AD domains, Hack The Box, purple teaming.</p></div>
     </div>
   </div>
 </section>
@@ -412,20 +435,20 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= ABOUT ================= -->
 <section id="about">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">01 — About</p>
-    <h2>Curiosity first, <em>always.</em></h2></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.about">01 — About</p>
+    <h2 data-i18n="about.h2">Curiosity first, <em>always.</em></h2></div>
     <div class="about-grid">
       <div class="about-copy rv">
-        <p>I started programming at around <b>10 years old</b>, initially learning C# and Unity through game development. Over time, my curiosity shifted from creating games to understanding the systems underneath them — and that curiosity led me to <b>cybersecurity and offensive security</b>.</p>
-        <p>Today, I am studying <b>Systems and Microcomputer Networks (SMR)</b> and focusing my learning on Red Team, penetration testing, Active Directory, Windows/Linux, OSINT, malware research and AI-assisted cybersecurity.</p>
-        <p>I learn primarily <b>by building</b>. Instead of only using existing security tools, I create my own projects to understand the technologies and the problems behind them. My projects range from Red Team orchestration and C2 infrastructure to distributed systems, malware research and AI-driven security tooling.</p>
-        <p>My goal is to start my professional career in cybersecurity and eventually specialize in <b>Red Team operations</b> and offensive security research.</p>
+        <p data-i18n="about.p1">I started programming at around <b>10 years old</b>, initially learning C# and Unity through game development. Over time, my curiosity shifted from creating games to understanding the systems underneath them — and that curiosity led me to <b>cybersecurity and offensive security</b>.</p>
+        <p data-i18n="about.p2">Today, I am studying <b>Systems and Microcomputer Networks (SMR)</b> and focusing my learning on Red Team, penetration testing, Active Directory, Windows/Linux, OSINT, malware research and AI-assisted cybersecurity.</p>
+        <p data-i18n="about.p3">I learn primarily <b>by building</b>. Instead of only using existing security tools, I create my own projects to understand the technologies and the problems behind them. My projects range from Red Team orchestration and C2 infrastructure to distributed systems, malware research and AI-driven security tooling.</p>
+        <p data-i18n="about.p4">My goal is to start my professional career in cybersecurity and eventually specialize in <b>Red Team operations</b> and offensive security research.</p>
       </div>
       <div class="facts rv">
-        <div class="fact"><span>Location</span><b>Málaga, Spain</b></div>
-        <div class="fact"><span>Studies</span><b>SMR — Systems &amp; Networks</b></div>
-        <div class="fact"><span>Focus</span><b>Red Team · Offensive Security</b></div>
-        <div class="fact"><span>Status</span><b>Open to internships</b></div>
+        <div class="fact"><span data-i18n="fact.loc">Location</span><b data-i18n="fact.locv">Málaga, Spain</b></div>
+        <div class="fact"><span data-i18n="fact.stu">Studies</span><b data-i18n="fact.stuv">SMR — Systems &amp; Networks</b></div>
+        <div class="fact"><span data-i18n="fact.foc">Focus</span><b data-i18n="fact.focv">Red Team · Offensive Security</b></div>
+        <div class="fact"><span data-i18n="fact.sta">Status</span><b data-i18n="fact.stav">Open to internships</b></div>
       </div>
     </div>
   </div>
@@ -434,28 +457,28 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= WHAT I DO ================= -->
 <section id="focus">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">02 — What I do</p>
-    <h2>Not a list of percentages — <em>areas I actively work in.</em></h2></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.what">02 — What I do</p>
+    <h2 data-i18n="what.h2">Not a list of percentages — <em>areas I actively work in.</em></h2></div>
     <div class="cards4">
       <div class="wcard rv">
-        <h3>Offensive Security</h3>
-        <p>Understanding how systems are attacked — and how to defend them.</p>
-        <div class="chips"><span class="chip hot">Red Team</span><span class="chip">Pentesting</span><span class="chip">Active Directory</span><span class="chip">Reconnaissance</span><span class="chip">OSINT</span><span class="chip">Post-Exploitation</span></div>
+        <h3 data-i18n="w1.h">Offensive Security</h3>
+        <p data-i18n="w1.p">Understanding how systems are attacked — and how to defend them.</p>
+        <div class="chips"><span class="chip hot">Red Team</span><span class="chip">Pentesting</span><span class="chip">Active Directory</span><span class="chip" data-i18n="chip.recon">Reconnaissance</span><span class="chip">OSINT</span><span class="chip">Post-Exploitation</span></div>
       </div>
       <div class="wcard rv">
-        <h3>Security Engineering</h3>
-        <p>Building the tooling an operator actually needs.</p>
-        <div class="chips"><span class="chip hot">Security Tooling</span><span class="chip">C2 Architecture</span><span class="chip">Authentication</span><span class="chip">RBAC</span><span class="chip">Detection Engineering</span><span class="chip">Automation</span></div>
+        <h3 data-i18n="w2.h">Security Engineering</h3>
+        <p data-i18n="w2.p">Building the tooling an operator actually needs.</p>
+        <div class="chips"><span class="chip hot" data-i18n="chip.stooling">Security Tooling</span><span class="chip" data-i18n="chip.c2arch">C2 Architecture</span><span class="chip" data-i18n="chip.auth">Authentication</span><span class="chip">RBAC</span><span class="chip" data-i18n="chip.deteng">Detection Engineering</span><span class="chip" data-i18n="chip.auto">Automation</span></div>
       </div>
       <div class="wcard rv">
-        <h3>AI × Cybersecurity</h3>
-        <p>Using AI as a force multiplier — never as a blind autopilot.</p>
-        <div class="chips"><span class="chip hot">Local LLMs</span><span class="chip">AI Agents</span><span class="chip">RAG</span><span class="chip">Security Automation</span><span class="chip">AI-assisted Research</span></div>
+        <h3 data-i18n="w3.h">AI × Cybersecurity</h3>
+        <p data-i18n="w3.p">Using AI as a force multiplier — never as a blind autopilot.</p>
+        <div class="chips"><span class="chip hot" data-i18n="chip.llm">Local LLMs</span><span class="chip" data-i18n="chip.agents">AI Agents</span><span class="chip">RAG</span><span class="chip" data-i18n="chip.secauto">Security Automation</span><span class="chip" data-i18n="chip.airesearch">AI-assisted Research</span></div>
       </div>
       <div class="wcard rv">
-        <h3>Systems</h3>
-        <p>The foundations everything else stands on.</p>
-        <div class="chips"><span class="chip hot">Linux</span><span class="chip">Windows</span><span class="chip">Networking</span><span class="chip">Rust</span><span class="chip">Go</span><span class="chip">Python</span><span class="chip">C#</span></div>
+        <h3 data-i18n="w4.h">Systems</h3>
+        <p data-i18n="w4.p">The foundations everything else stands on.</p>
+        <div class="chips"><span class="chip hot">Linux</span><span class="chip">Windows</span><span class="chip" data-i18n="chip.net">Networking</span><span class="chip">Rust</span><span class="chip">Go</span><span class="chip">Python</span><span class="chip">C#</span></div>
       </div>
     </div>
   </div>
@@ -464,173 +487,173 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= STATS BAND ================= -->
 <div class="band">
   <div class="wrap">
-    <div class="stat rv"><b><span data-count="18">0</span>+</b><span>public repositories</span></div>
-    <div class="stat rv"><b><span data-count="12">0</span></b><span>flagship security projects</span></div>
-    <div class="stat rv"><b><span data-count="1400">0</span>+</b><span>automated tests written</span></div>
-    <div class="stat rv"><b><span data-count="6">0</span>+</b><span>years building software</span></div>
+    <div class="stat rv"><b><span data-count="18">0</span>+</b><span data-i18n="stat.repos">public repositories</span></div>
+    <div class="stat rv"><b><span data-count="12">0</span></b><span data-i18n="stat.proj">flagship security projects</span></div>
+    <div class="stat rv"><b><span data-count="1400">0</span>+</b><span data-i18n="stat.tests">automated tests written</span></div>
+    <div class="stat rv"><b><span data-count="6">0</span>+</b><span data-i18n="stat.years">years building software</span></div>
   </div>
 </div>
 
 <!-- ================= FEATURED PROJECTS ================= -->
 <section id="projects">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">03 — Featured projects</p>
-    <h2>Four engineering projects, <em>each one a real question.</em></h2>
-    <p class="sec-sub">Built to answer a real question about offensive security. Real screenshots, real usage, no mock-ups.</p></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.feat">03 — Featured projects</p>
+    <h2 data-i18n="proj.h2">Four engineering projects, <em>each one a real question.</em></h2>
+    <p class="sec-sub" data-i18n="proj.sub">Built to answer a real question about offensive security. Real screenshots, real usage, no mock-ups.</p></div>
 
     <div class="prow rv">
       <div class="p-info">
-        <span class="p-badge"><i></i>Active research</span>
+        <span class="p-badge"><i></i><span data-i18n="proj.active">Active research</span></span>
         <h3>OrquestaRT</h3>
-        <p class="p-role">AI-assisted Red Team Orchestration Platform</p>
-        <p class="p-desc">A platform for orchestrating authorized Red Team operations through AI-assisted workflows — combining offensive security automation with human approval, scope enforcement and full auditability.</p>
+        <p class="p-role" data-i18n="orq.role">AI-assisted Red Team Orchestration Platform</p>
+        <p class="p-desc" data-i18n="orq.desc">A platform for orchestrating authorized Red Team operations through AI-assisted workflows — combining offensive security automation with human approval, scope enforcement and full auditability.</p>
         <p class="p-stack">Python · FastAPI · LangGraph · Next.js · +5</p>
-        <a class="p-link" href="https://github.com/Ruby570bocadito/orquesta-rt" target="_blank" rel="noreferrer">View project
+        <a class="p-link" href="https://github.com/Ruby570bocadito/orquesta-rt" target="_blank" rel="noreferrer"><span data-i18n="proj.view">View project</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
       <div class="p-visual">
         <div class="p-shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>orquesta-rt — operator console</span><em>hover · demo</em></div>
+          <div class="shot-bar"><i></i><i></i><i></i><span data-i18n="shot.orq">orquesta-rt — operator console</span><em data-i18n="shot.hover">hover · demo</em></div>
           <div class="shot-body">
             <img class="png" src="/assets/orquesta-console.png" alt="OrquestaRT operator console — live agent feed and machine-readable ROE" loading="lazy">
             <img class="gif" src="/assets/orquesta-demo.gif" alt="" aria-hidden="true" loading="lazy">
           </div>
         </div>
         <div class="p-metrics">
-          <div class="p-m"><b>587</b><span>automated tests</span></div>
-          <div class="p-m"><b>F0→F7</b><span>orchestration phases</span></div>
-          <div class="p-m"><b>26+</b><span>recon transports</span></div>
+          <div class="p-m"><b>587</b><span data-i18n="m.tests">automated tests</span></div>
+          <div class="p-m"><b>F0→F7</b><span data-i18n="m.phases">orchestration phases</span></div>
+          <div class="p-m"><b>26+</b><span data-i18n="m.transports">recon transports</span></div>
         </div>
       </div>
     </div>
 
     <div class="prow flip rv">
       <div class="p-info">
-        <span class="p-badge"><i></i>Active research</span>
+        <span class="p-badge"><i></i><span data-i18n="proj.active">Active research</span></span>
         <h3>WorldC2</h3>
-        <p class="p-role">Command &amp; Control Platform for Authorized Security Labs</p>
-        <p class="p-desc">A C2 platform developed as a security research and learning project — focused on understanding command-and-control architecture, encrypted communications, session management and operator infrastructure.</p>
+        <p class="p-role" data-i18n="wc2.role">Command &amp; Control Platform for Authorized Security Labs</p>
+        <p class="p-desc" data-i18n="wc2.desc">A C2 platform developed as a security research and learning project — focused on understanding command-and-control architecture, encrypted communications, session management and operator infrastructure.</p>
         <p class="p-stack">Go · Vue 3 · Networking · Cryptography · +3</p>
-        <a class="p-link" href="https://github.com/Ruby570bocadito/WorldC2" target="_blank" rel="noreferrer">View project
+        <a class="p-link" href="https://github.com/Ruby570bocadito/WorldC2" target="_blank" rel="noreferrer"><span data-i18n="proj.view">View project</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
       <div class="p-visual">
         <div class="p-shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>WorldC2 — operator dashboard</span><em>hover · demo</em></div>
+          <div class="shot-bar"><i></i><i></i><i></i><span data-i18n="shot.wc2">WorldC2 — operator dashboard</span><em data-i18n="shot.hover">hover · demo</em></div>
           <div class="shot-body">
             <img class="png" src="/assets/worldc2-dashboard.png" alt="WorldC2 dashboard — sessions, credentials, tasks and SIEM webhook health" loading="lazy">
             <img class="gif" src="/assets/worldc2-demo.gif" alt="" aria-hidden="true" loading="lazy">
           </div>
         </div>
         <div class="p-metrics">
-          <div class="p-m"><b>5</b><span>transport fallbacks</span></div>
-          <div class="p-m"><b>4</b><span>RBAC roles</span></div>
-          <div class="p-m"><b>14</b><span>browser E2E tests</span></div>
+          <div class="p-m"><b>5</b><span data-i18n="m.fallbacks">transport fallbacks</span></div>
+          <div class="p-m"><b>4</b><span data-i18n="m.rbac">RBAC roles</span></div>
+          <div class="p-m"><b>14</b><span data-i18n="m.e2e">browser E2E tests</span></div>
         </div>
       </div>
     </div>
 
     <div class="prow rv">
       <div class="p-info">
-        <span class="p-badge"><i></i>Active research</span>
+        <span class="p-badge"><i></i><span data-i18n="proj.active">Active research</span></span>
         <h3>HiveMind</h3>
-        <p class="p-role">Distributed Multi-Agent Security Research</p>
-        <p class="p-desc">A Rust-based experimental project exploring multi-agent coordination, distributed systems, concurrency, consensus and AI-assisted security research.</p>
+        <p class="p-role" data-i18n="hive.role">Distributed Multi-Agent Security Research</p>
+        <p class="p-desc" data-i18n="hive.desc">A Rust-based experimental project exploring multi-agent coordination, distributed systems, concurrency, consensus and AI-assisted security research.</p>
         <p class="p-stack">Rust · Distributed Systems · Concurrency · AI · +2</p>
-        <a class="p-link" href="https://github.com/Ruby570bocadito/HiveMind" target="_blank" rel="noreferrer">View project
+        <a class="p-link" href="https://github.com/Ruby570bocadito/HiveMind" target="_blank" rel="noreferrer"><span data-i18n="proj.view">View project</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
       <div class="p-visual">
         <div class="p-shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>HiveMind — hive colony console</span><em>hover · demo</em></div>
+          <div class="shot-bar"><i></i><i></i><i></i><span data-i18n="shot.hive">HiveMind — hive colony console</span><em data-i18n="shot.hover">hover · demo</em></div>
           <div class="shot-body">
             <img class="png" src="/assets/hivemind-console.png" alt="HiveMind colony console — beacon rate, registered agents and task pipeline" loading="lazy">
             <img class="gif" src="/assets/hivemind-demo.gif" alt="" aria-hidden="true" loading="lazy">
           </div>
         </div>
         <div class="p-metrics">
-          <div class="p-m"><b>282</b><span>tests passing</span></div>
-          <div class="p-m"><b>9</b><span>crates in the workspace</span></div>
-          <div class="p-m"><b>0</b><span>TCP ports between agents</span></div>
+          <div class="p-m"><b>282</b><span data-i18n="m.passing">tests passing</span></div>
+          <div class="p-m"><b>9</b><span data-i18n="m.crates">crates in the workspace</span></div>
+          <div class="p-m"><b>0</b><span data-i18n="m.ports">TCP ports between agents</span></div>
         </div>
       </div>
     </div>
 
     <div class="prow flip rv">
       <div class="p-info">
-        <span class="p-badge done"><i></i>Research complete</span>
+        <span class="p-badge done"><i></i><span data-i18n="proj.done">Research complete</span></span>
         <h3>Wormy</h3>
-        <p class="p-role">Malware &amp; Network Security Research</p>
-        <p class="p-desc">An experimental research project exploring malware behavior, network propagation and machine learning in isolated laboratory environments.</p>
+        <p class="p-role" data-i18n="worm.role">Malware &amp; Network Security Research</p>
+        <p class="p-desc" data-i18n="worm.desc">An experimental research project exploring malware behavior, network propagation and machine learning in isolated laboratory environments.</p>
         <p class="p-stack">Python · Machine Learning · Networking · Docker</p>
-        <a class="p-link" href="https://github.com/Ruby570bocadito/Wormy-ML-Network-Worm" target="_blank" rel="noreferrer">View project
+        <a class="p-link" href="https://github.com/Ruby570bocadito/Wormy-ML-Network-Worm" target="_blank" rel="noreferrer"><span data-i18n="proj.view">View project</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
       <div class="p-visual">
         <div class="p-shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>Wormy — propagation dashboard</span><em>hover · demo</em></div>
+          <div class="shot-bar"><i></i><i></i><i></i><span data-i18n="shot.worm">Wormy — propagation dashboard</span><em data-i18n="shot.hover">hover · demo</em></div>
           <div class="shot-body">
             <img class="png" src="/assets/wormy-dashboard.png" alt="Wormy dashboard — propagation timeline, host status and vulnerability severity" loading="lazy">
             <img class="gif" src="/assets/wormy-demo.gif" alt="" aria-hidden="true" loading="lazy">
           </div>
         </div>
         <div class="p-metrics">
-          <div class="p-m"><b>525</b><span>automated tests</span></div>
-          <div class="p-m"><b>44</b><span>gated exploit modules</span></div>
-          <div class="p-m"><b>15</b><span>lab services (127.0.0.1)</span></div>
+          <div class="p-m"><b>525</b><span data-i18n="m.tests">automated tests</span></div>
+          <div class="p-m"><b>44</b><span data-i18n="m.modules">gated exploit modules</span></div>
+          <div class="p-m"><b>15</b><span data-i18n="m.services">lab services (127.0.0.1)</span></div>
         </div>
       </div>
     </div>
 
     <div class="rv" style="margin-top:88px">
-      <p class="sec-label">04 — More projects</p>
-      <h2 style="font-size:clamp(1.6rem,2.8vw,2.3rem)">The rest of the <em>arsenal.</em></h2>
+      <p class="sec-label" data-i18n="sec.more">04 — More projects</p>
+      <h2 style="font-size:clamp(1.6rem,2.8vw,2.3rem)" data-i18n="more.h2">The rest of the <em>arsenal.</em></h2>
     </div>
     <div class="more">
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/security-framework" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>security-framework</h4><span class="m-lang">Go</span></div>
-        <p>Real-time Windows threat detection: Rust ETW sensor + Go behavioral engine + MITRE ATT&amp;CK rules + web console.</p>
-        <span class="m-star">with live website</span>
+        <p data-i18n="mc1.p">Real-time Windows threat detection: Rust ETW sensor + Go behavioral engine + MITRE ATT&amp;CK rules + web console.</p>
+        <span class="m-star" data-i18n="mc1.star">with live website</span>
       </a>
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/Vault-Kernel" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>Vault-Kernel</h4><span class="m-lang">Python</span></div>
-        <p>Linux LKM rootkit engine for authorized red-team labs — syscall hooks, hiding techniques, give-root.</p>
+        <p data-i18n="mc2.p">Linux LKM rootkit engine for authorized red-team labs — syscall hooks, hiding techniques, give-root.</p>
         <span class="m-star">★ 5</span>
       </a>
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/Auto-Privilege" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>Auto-Privilege</h4><span class="m-lang">Go</span></div>
-        <p>Automated Linux privilege escalation: 15 read-only scanners, 75 GTFOBins techniques, safest-first.</p>
+        <p data-i18n="mc3.p">Automated Linux privilege escalation: 15 read-only scanners, 75 GTFOBins techniques, safest-first.</p>
         <span class="m-star">★ 7</span>
       </a>
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/bluesky" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>bluesky</h4><span class="m-lang">Python</span></div>
-        <p>Metasploit-style Bluetooth security auditing framework — 22 modules, CLI + REPL + web dashboard, 100% offline.</p>
+        <p data-i18n="mc4.p">Metasploit-style Bluetooth security auditing framework — 22 modules, CLI + REPL + web dashboard, 100% offline.</p>
         <span class="m-star">★ 4</span>
       </a>
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/REDHAVOC" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>REDHAVOC</h4><span class="m-lang">Python</span></div>
-        <p>Red team framework in pure Python: 79 native modules, multi-host sweeps, workspaces, PDF reports.</p>
+        <p data-i18n="mc5.p">Red team framework in pure Python: 79 native modules, multi-host sweeps, workspaces, PDF reports.</p>
         <span class="m-star">★ 2</span>
       </a>
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/charon" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>charon</h4><span class="m-lang">Rust</span></div>
-        <p>Kerberos protocol workbench: own DER codec, RFC 4120/3961 crypto, kerberoast, AS-REP roast.</p>
-        <span class="m-star">wire format real, no mocks</span>
+        <p data-i18n="mc6.p">Kerberos protocol workbench: own DER codec, RFC 4120/3961 crypto, kerberoast, AS-REP roast.</p>
+        <span class="m-star" data-i18n="mc6.star">wire format real, no mocks</span>
       </a>
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/OSINT-EYE" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>OSINT-EYE</h4><span class="m-lang">Python</span></div>
-        <p>AI-powered attack surface intelligence — OSINT &amp; recon with local AI (Ollama), no API keys, 100% free.</p>
+        <p data-i18n="mc7.p">AI-powered attack surface intelligence — OSINT &amp; recon with local AI (Ollama), no API keys, 100% free.</p>
         <span class="m-star">★ 1</span>
       </a>
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/T-100AI" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>T-100AI</h4><span class="m-lang">Python</span></div>
-        <p>AI-powered offensive security terminal, 100% offline: local LLM, sandboxed execution, human-in-the-loop gates.</p>
+        <p data-i18n="mc8.p">AI-powered offensive security terminal, 100% offline: local LLM, sandboxed execution, human-in-the-loop gates.</p>
         <span class="m-star">★ 1</span>
       </a>
       <a class="mcard rv" href="https://github.com/Ruby570bocadito/aura-soc" target="_blank" rel="noreferrer">
         <div class="m-top"><h4>aura-soc</h4><span class="m-lang">Go</span></div>
-        <p>AuraSOC — open-source SOC framework: Detection-as-Code + purple team + local AI. Go + Vue 3 + NATS + OpenSearch.</p>
-        <span class="m-star">blue team side</span>
+        <p data-i18n="mc9.p">AuraSOC — open-source SOC framework: Detection-as-Code + purple team + local AI. Go + Vue 3 + NATS + OpenSearch.</p>
+        <span class="m-star" data-i18n="mc9.star">blue team side</span>
       </a>
     </div>
   </div>
@@ -640,11 +663,11 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <section id="learn">
   <div class="wrap">
     <div class="quote rv">
-      <p class="sec-label" style="text-align:center">05 — How I learn</p>
-      <p class="q">“I learn <em>by building.</em>”</p>
-      <p class="a">When I want to understand a technology or a security concept, I try to implement it myself. Building these projects forces me to understand the systems underneath the tools I use, to experiment with different approaches and to learn from failures.</p>
-      <p class="b">I also use AI as a development and research assistant, but I treat generated code as something to review, test and understand — not something to blindly trust.</p>
-      <p class="g">My goal is not just to make something work, but to understand why it works.</p>
+      <p class="sec-label" style="text-align:center" data-i18n="sec.learn">05 — How I learn</p>
+      <p class="q" data-i18n="learn.q">“I learn <em>by building.</em>”</p>
+      <p class="a" data-i18n="learn.a">When I want to understand a technology or a security concept, I try to implement it myself. Building these projects forces me to understand the systems underneath the tools I use, to experiment with different approaches and to learn from failures.</p>
+      <p class="b" data-i18n="learn.b">I also use AI as a development and research assistant, but I treat generated code as something to review, test and understand — not something to blindly trust.</p>
+      <p class="g" data-i18n="learn.g">My goal is not just to make something work, but to understand why it works.</p>
     </div>
   </div>
 </section>
@@ -652,27 +675,27 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= SKILLS ================= -->
 <section id="skills">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">06 — Technical skills</p>
-    <h2>Only what I have <em>actually used.</em></h2></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.skills">06 — Technical skills</p>
+    <h2 data-i18n="skills.h2">Only what I have <em>actually used.</em></h2></div>
     <div class="srows">
       <div class="srow rv">
-        <div class="sl"><b>Languages</b><span>primary → comfortable</span></div>
+        <div class="sl"><b data-i18n="sk.lang">Languages</b><span data-i18n="sk.lang_sub">primary → comfortable</span></div>
         <div class="chips"><span class="chip hot">Python</span><span class="chip hot">C#</span><span class="chip">Go</span><span class="chip">Rust</span><span class="chip">TypeScript</span><span class="chip">Bash</span><span class="chip">PowerShell</span></div>
       </div>
       <div class="srow rv">
-        <div class="sl"><b>Security</b><span>offensive focus</span></div>
-        <div class="chips"><span class="chip hot">Red Team</span><span class="chip hot">Pentesting</span><span class="chip">Active Directory</span><span class="chip">OSINT</span><span class="chip">C2</span><span class="chip">Reconnaissance</span></div>
+        <div class="sl"><b data-i18n="sk.sec">Security</b><span data-i18n="sk.sec_sub">offensive focus</span></div>
+        <div class="chips"><span class="chip hot">Red Team</span><span class="chip hot">Pentesting</span><span class="chip">Active Directory</span><span class="chip">OSINT</span><span class="chip">C2</span><span class="chip" data-i18n="chip.recon">Reconnaissance</span></div>
       </div>
       <div class="srow rv">
-        <div class="sl"><b>Systems</b><span>daily drivers</span></div>
-        <div class="chips"><span class="chip hot">Linux</span><span class="chip">Windows</span><span class="chip">Networking</span><span class="chip">Docker</span></div>
+        <div class="sl"><b data-i18n="sk.sys">Systems</b><span data-i18n="sk.sys_sub">daily drivers</span></div>
+        <div class="chips"><span class="chip hot">Linux</span><span class="chip">Windows</span><span class="chip" data-i18n="chip.net">Networking</span><span class="chip">Docker</span></div>
       </div>
       <div class="srow rv">
-        <div class="sl"><b>Security Research</b><span>lab-first</span></div>
-        <div class="chips"><span class="chip">Malware Research</span><span class="chip">AI/ML Security</span><span class="chip">Automation</span><span class="chip">Purple Team</span></div>
+        <div class="sl"><b data-i18n="sk.res">Security Research</b><span data-i18n="sk.res_sub">lab-first</span></div>
+        <div class="chips"><span class="chip" data-i18n="chip.malware">Malware Research</span><span class="chip" data-i18n="chip.aiml">AI/ML Security</span><span class="chip" data-i18n="chip.auto">Automation</span><span class="chip">Purple Team</span></div>
       </div>
       <div class="srow rv">
-        <div class="sl"><b>Tools / Ecosystem</b><span>hands-on</span></div>
+        <div class="sl"><b data-i18n="sk.tools">Tools / Ecosystem</b><span data-i18n="sk.tools_sub">hands-on</span></div>
         <div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip hot">MITRE ATT&amp;CK</span><span class="chip">BloodHound</span><span class="chip">Neo4j</span><span class="chip">MISP</span><span class="chip">Hack The Box</span></div>
       </div>
     </div>
@@ -682,33 +705,33 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= CERTIFICATIONS ================= -->
 <section id="certs">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">07 — Certifications</p>
-    <h2>Obtained, and <em>what's next.</em></h2></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.certs">07 — Certifications</p>
+    <h2 data-i18n="certs.h2">Obtained, and <em>what's next.</em></h2></div>
     <div class="certs">
       <div class="ccard rv">
-        <div class="c-top"><h4>eJPTv2 — Junior Penetration Tester</h4><span class="c-tag">Obtained</span></div>
+        <div class="c-top"><h4>eJPTv2 — Junior Penetration Tester</h4><span class="c-tag" data-i18n="cert.obtained">Obtained</span></div>
         <p class="c-org">INE Security</p>
-        <p>Previously certified · Expired July 2026 — renewal planned alongside the next milestones.</p>
+        <p data-i18n="cert1.p">Previously certified · Expired July 2026 — renewal planned alongside the next milestones.</p>
       </div>
       <div class="ccard rv">
-        <div class="c-top"><h4>Networking Fundamentals</h4><span class="c-tag">Coursework</span></div>
+        <div class="c-top"><h4>Networking Fundamentals</h4><span class="c-tag" data-i18n="cert.course">Coursework</span></div>
         <p class="c-org">Cisco Networking Academy</p>
-        <p>Relevant coursework completed.</p>
+        <p data-i18n="cert2.p">Relevant coursework completed.</p>
       </div>
       <div class="ccard rv">
-        <div class="c-top"><h4>Offensive Security Training</h4><span class="c-tag">Coursework</span></div>
+        <div class="c-top"><h4>Offensive Security Training</h4><span class="c-tag" data-i18n="cert.course">Coursework</span></div>
         <p class="c-org">Hack4u</p>
-        <p>Red Team &amp; pentesting coursework.</p>
+        <p data-i18n="cert3.p">Red Team &amp; pentesting coursework.</p>
       </div>
       <div class="ccard prep rv">
-        <div class="c-top"><h4>CRTO</h4><span class="c-tag">Preparing</span></div>
-        <p class="c-org">Red Team Operator training path</p>
-        <p>Deepening adversary emulation and Red Team tradecraft.</p>
+        <div class="c-top"><h4>CRTO</h4><span class="c-tag" data-i18n="cert.prep">Preparing</span></div>
+        <p class="c-org" data-i18n="crto.org">Red Team Operator training path</p>
+        <p data-i18n="crto.p">Deepening adversary emulation and Red Team tradecraft.</p>
       </div>
       <div class="ccard prep rv">
-        <div class="c-top"><h4>CPTES</h4><span class="c-tag">Preparing</span></div>
-        <p class="c-org">Penetration Testing training path</p>
-        <p>Structured preparation for professional penetration testing certifications.</p>
+        <div class="c-top"><h4>CPTES</h4><span class="c-tag" data-i18n="cert.prep">Preparing</span></div>
+        <p class="c-org" data-i18n="cptes.org">Penetration Testing training path</p>
+        <p data-i18n="cptes.p">Structured preparation for professional penetration testing certifications.</p>
       </div>
     </div>
   </div>
@@ -717,20 +740,20 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= LABS & TRAINING ================= -->
 <section id="labs">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">08 — Labs &amp; training</p>
-    <h2>Theory is nothing <em>without hands-on.</em></h2></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.labs">08 — Labs &amp; training</p>
+    <h2 data-i18n="labs.h2">Theory is nothing <em>without hands-on.</em></h2></div>
     <div class="labs">
       <div class="lcard rv">
         <h4>Hack The Box</h4>
-        <p>Building experience through practical labs and realistic attack scenarios — active machines, AD paths and CTF-style challenges.</p>
+        <p data-i18n="lab1.p">Building experience through practical labs and realistic attack scenarios — active machines, AD paths and CTF-style challenges.</p>
       </div>
       <div class="lcard rv">
-        <h4>Personal Labs</h4>
-        <p>Self-built isolated environments: Active Directory domains, deliberately vulnerable services, C2 infrastructure and detection tooling — where every project on this page runs.</p>
+        <h4 data-i18n="lab2.h">Personal Labs</h4>
+        <p data-i18n="lab2.p">Self-built isolated environments: Active Directory domains, deliberately vulnerable services, C2 infrastructure and detection tooling — where every project on this page runs.</p>
       </div>
       <div class="lcard rv">
-        <h4>Purple Team Practice</h4>
-        <p>Validating offensive work against detection: Sigma rule authoring, VECTR-style tracking and ATT&amp;CK coverage measurement.</p>
+        <h4 data-i18n="lab3.h">Purple Team Practice</h4>
+        <p data-i18n="lab3.p">Validating offensive work against detection: Sigma rule authoring, VECTR-style tracking and ATT&amp;CK coverage measurement.</p>
       </div>
     </div>
   </div>
@@ -739,14 +762,14 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= ACHIEVEMENTS ================= -->
 <section id="achievements">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">09 — Achievements</p>
-    <h2>Evidence that goes <em>beyond code.</em></h2></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.ach">09 — Achievements</p>
+    <h2 data-i18n="ach.h2">Evidence that goes <em>beyond code.</em></h2></div>
     <div class="ach rv">
       <div class="ach-num">1º<small>Málaga</small></div>
       <div>
-        <h3>ASTI Challenge — National Robotics Finalist</h3>
-        <p>Team Captain · 1st place Málaga · Spain National Final. Captain of a robotics team that finished first in Málaga and qualified for the national final in Spain. Worked on robot development, problem-solving, team coordination and competition strategy — under real time pressure and against the best teams in the country.</p>
-        <div class="tags"><span class="chip">Team Captain</span><span class="chip">1st place — Málaga</span><span class="chip">National Finalist</span></div>
+        <h3 data-i18n="ach.h3">ASTI Challenge — National Robotics Finalist</h3>
+        <p data-i18n="ach.p">Team Captain · 1st place Málaga · Spain National Final. Captain of a robotics team that finished first in Málaga and qualified for the national final in Spain. Worked on robot development, problem-solving, team coordination and competition strategy — under real time pressure and against the best teams in the country.</p>
+        <div class="tags"><span class="chip" data-i18n="ach.tag1">Team Captain</span><span class="chip" data-i18n="ach.tag2">1st place — Málaga</span><span class="chip" data-i18n="ach.tag3">National Finalist</span></div>
       </div>
     </div>
   </div>
@@ -755,26 +778,26 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= EDUCATION ================= -->
 <section id="education">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">10 — Education</p>
-    <h2>The formal <em>backbone.</em></h2></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.edu">10 — Education</p>
+    <h2 data-i18n="edu.h2">The formal <em>backbone.</em></h2></div>
     <div class="edu">
       <div class="edu-item rv">
-        <span class="e-when">2025 — Present</span>
+        <span class="e-when" data-i18n="edu.when1">2025 — Present</span>
         <div>
           <h4>SMR — Sistemas Microinformáticos y Redes</h4>
           <p class="e-org">DigitechFP</p>
-          <p>Systems administration, computer networks, operating systems and cybersecurity fundamentals — the formal backbone of my self-taught path.</p>
+          <p data-i18n="edu1.p">Systems administration, computer networks, operating systems and cybersecurity fundamentals — the formal backbone of my self-taught path.</p>
         </div>
-        <span class="c-tag">In progress</span>
+        <span class="c-tag" data-i18n="edu.now">In progress</span>
       </div>
       <div class="edu-item rv">
         <span class="e-when">2020 — 2024</span>
         <div>
-          <h4>Video Game Programming — C# / Unity</h4>
+          <h4 data-i18n="edu2.h">Video Game Programming — C# / Unity</h4>
           <p class="e-org">EVAD</p>
-          <p>My entry door to programming: C#, Unity and the discipline of shipping playable software. The curiosity about how things worked under the hood started here.</p>
+          <p data-i18n="edu2.p">My entry door to programming: C#, Unity and the discipline of shipping playable software. The curiosity about how things worked under the hood started here.</p>
         </div>
-        <span class="c-tag">Completed</span>
+        <span class="c-tag" data-i18n="edu.done">Completed</span>
       </div>
     </div>
   </div>
@@ -783,43 +806,43 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 <!-- ================= CURRENT FOCUS ================= -->
 <section id="focus-now">
   <div class="wrap">
-    <div class="rv"><p class="sec-label">11 — Currently focused on</p>
-    <h2>What I'm sharpening <em>right now.</em></h2></div>
+    <div class="rv"><p class="sec-label" data-i18n="sec.now">11 — Currently focused on</p>
+    <h2 data-i18n="now.h2">What I'm sharpening <em>right now.</em></h2></div>
     <div class="acc rv">
       <details>
-        <summary>Red Team &amp; Pentesting<span class="pm">+</span></summary>
-        <p class="a-body">Deepening practical offensive security skills: methodology, tradecraft and hands-on labs.</p>
+        <summary><span data-i18n="f1.s">Red Team &amp; Pentesting</span><span class="pm">+</span></summary>
+        <p class="a-body" data-i18n="f1.b">Deepening practical offensive security skills: methodology, tradecraft and hands-on labs.</p>
       </details>
       <details>
-        <summary>Certifications<span class="pm">+</span></summary>
-        <p class="a-body">Preparing for CRTO and CPTES as the next professional milestones.</p>
+        <summary><span data-i18n="f2.s">Certifications</span><span class="pm">+</span></summary>
+        <p class="a-body" data-i18n="f2.b">Preparing for CRTO and CPTES as the next professional milestones.</p>
       </details>
       <details>
-        <summary>Active Directory<span class="pm">+</span></summary>
-        <p class="a-body">Improving Windows and enterprise environment attack methodology — from enumeration to domain dominance.</p>
+        <summary><span data-i18n="f3.s">Active Directory</span><span class="pm">+</span></summary>
+        <p class="a-body" data-i18n="f3.b">Improving Windows and enterprise environment attack methodology — from enumeration to domain dominance.</p>
       </details>
       <details>
-        <summary>Hack The Box<span class="pm">+</span></summary>
-        <p class="a-body">Building experience through practical labs and realistic attack scenarios.</p>
+        <summary><span data-i18n="f4.s">Hack The Box</span><span class="pm">+</span></summary>
+        <p class="a-body" data-i18n="f4.b">Building experience through practical labs and realistic attack scenarios.</p>
       </details>
       <details>
-        <summary>Security Tooling<span class="pm">+</span></summary>
-        <p class="a-body">Continuing to build and refine offensive security research projects.</p>
+        <summary><span data-i18n="f5.s">Security Tooling</span><span class="pm">+</span></summary>
+        <p class="a-body" data-i18n="f5.b">Continuing to build and refine offensive security research projects.</p>
       </details>
     </div>
-    <p class="upd">LAST UPDATED — SEPTEMBER 2026</p>
+    <p class="upd" data-i18n="upd">LAST UPDATED — SEPTEMBER 2026</p>
   </div>
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section id="contact" class="contact">
   <div class="wrap">
-    <div class="rv"><p class="sec-label" style="text-align:center">12 — Contact</p>
-    <h2 style="max-width:none">Let's <em>connect.</em></h2>
-    <p class="sec-sub">I'm interested in internships, junior cybersecurity opportunities and projects related to offensive security and Red Team. Usually replies within 24 hours.</p></div>
-    <p class="loc-time rv">Málaga, ES — local time <b id="contactClock">--:--</b></p>
+    <div class="rv"><p class="sec-label" style="text-align:center" data-i18n="sec.contact">12 — Contact</p>
+    <h2 style="max-width:none" data-i18n="contact.h2">Let's <em>connect.</em></h2>
+    <p class="sec-sub" data-i18n="contact.sub">I'm interested in internships, junior cybersecurity opportunities and projects related to offensive security and Red Team. Usually replies within 24 hours.</p></div>
+    <p class="loc-time rv"><span data-i18n="contact.loc">Málaga, ES — local time</span> <b id="contactClock">--:--</b></p>
     <div class="contact-ctas rv">
-      <a class="btn btn-w" href="mailto:rafagasi09@gmail.com">Email me
+      <a class="btn btn-w" href="mailto:rafagasi09@gmail.com"><span data-i18n="contact.email">Email me</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
       <button class="btn btn-d" data-copy="rafagasi09@gmail.com">rafagasi09@gmail.com
@@ -852,30 +875,30 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
           </svg>
           Rafael Gálvez Silipo
         </a>
-        <p>Cybersecurity student · Offensive Security · Red Team. Built with curiosity, code and too much coffee.</p>
+        <p data-i18n="foot.brand">Cybersecurity student · Offensive Security · Red Team. Built with curiosity, code and too much coffee.</p>
       </div>
       <div class="f-col">
-        <span>Sections</span>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <span data-i18n="foot.sections">Sections</span>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#projects" data-i18n="nav.projects">Projects</a>
+        <a href="#skills" data-i18n="nav.skills">Skills</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
       </div>
       <div class="f-col">
-        <span>Elsewhere</span>
+        <span data-i18n="foot.elsewhere">Elsewhere</span>
         <a href="https://github.com/Ruby570bocadito" target="_blank" rel="noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/rafael-g%C3%A1lvez-silipo-07445a409/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="/cv.pdf" download="CV Practicas.pdf">CV ↓</a>
       </div>
       <div class="f-col">
-        <span>Site</span>
+        <span data-i18n="foot.site">Site</span>
         <a href="https://ruby570bocadito.github.io" target="_blank" rel="noreferrer">ruby570bocadito.github.io</a>
-        <a href="#top">Back to top ↑</a>
+        <a href="#top" data-i18n="foot.top">Back to top ↑</a>
       </div>
     </div>
     <div class="f-bottom">
       <span>© 2026 Rafael Gálvez Silipo</span>
-      <span>Designed &amp; built by Rafael Gálvez — no templates.</span>
+      <span data-i18n="foot.made">Designed &amp; built by Rafael Gálvez — no templates.</span>
     </div>
   </div>
 </footer>
@@ -943,7 +966,7 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
 /* ---------- animated counters ---------- */
 (function(){
   const nums=document.querySelectorAll('[data-count]');
-  const fmt=n=>n.toLocaleString('en-US');
+  const fmt=n=>n.toLocaleString(window.__langLocale||'en-US');
   if(!('IntersectionObserver' in window)){nums.forEach(n=>n.textContent=fmt(+n.dataset.count));return;}
   const io=new IntersectionObserver(es=>{
     es.forEach(e=>{
@@ -967,11 +990,309 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
   btn.addEventListener('click',()=>{
     const v=btn.dataset.copy;
     (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(
-      ()=>{toast.textContent='Email copied to clipboard';toast.classList.add('show');
+      ()=>{toast.textContent=(window.__t?window.__t('toast.copy'):'Email copied to clipboard');toast.classList.add('show');
         setTimeout(()=>toast.classList.remove('show'),2200);},
       ()=>{window.location.href='mailto:'+v;}
     );
   });
+})();
+</script>
+<script>
+/* ================= i18n — English / Español ================= */
+(function(){
+  var I18N={
+  "en":{
+    "meta.title":"Rafael Gálvez Silipo — Cybersecurity · Offensive Security · Red Team",
+    "meta.desc":"Cybersecurity student focused on Red Team & offensive security. I build security tools and research projects to understand how systems work, how they can be attacked, and how they can be secured.",
+    "aria.main":"Main","aria.home":"Home",
+    "nav.about":"About","nav.projects":"Projects","nav.skills":"Skills","nav.certs":"Certifications","nav.now":"Now","nav.contact":"Contact","nav.cv":"Download CV",
+    "hero.pill":"Open to internships & junior roles",
+    "hero.title":"I learn<br>by <em>building.</em>",
+    "hero.sub":"<b>Rafael Gálvez Silipo</b> — cybersecurity student focused on Red Team & offensive security. I build security tools and research projects to understand how systems work, how they can be attacked, and how they can be secured.",
+    "hero.cta1":"View projects",
+    "term.live":"lab online",
+    "term.whoami_out":"\u00a0\u00a0cybersecurity student — SMR (Systems & Networks)",
+    "term.focus_out":"\u00a0\u00a0red team · pentesting · active directory · osint",
+    "term.status_out":"\u00a0\u00a0[ OK ] open to internships & junior cybersecurity roles",
+    "term.ls_out":"OrquestaRT/  WorldC2/  HiveMind/  Wormy/",
+    "trio.1h":"Study","trio.1p":"SMR, networking and security fundamentals. eJPT-trained, working towards CRTO and CPTES.",
+    "trio.2h":"Build","trio.2p":"Custom tooling instead of tutorials — C2 platforms, orchestration, recon and ML research.",
+    "trio.3h":"Lab","trio.3p":"Everything runs in isolated environments: AD domains, Hack The Box, purple teaming.",
+    "sec.about":"01 — About",
+    "about.h2":"Curiosity first, <em>always.</em>",
+    "about.p1":"I started programming at around <b>10 years old</b>, initially learning C# and Unity through game development. Over time, my curiosity shifted from creating games to understanding the systems underneath them — and that curiosity led me to <b>cybersecurity and offensive security</b>.",
+    "about.p2":"Today, I am studying <b>Systems and Microcomputer Networks (SMR)</b> and focusing my learning on Red Team, penetration testing, Active Directory, Windows/Linux, OSINT, malware research and AI-assisted cybersecurity.",
+    "about.p3":"I learn primarily <b>by building</b>. Instead of only using existing security tools, I create my own projects to understand the technologies and the problems behind them. My projects range from Red Team orchestration and C2 infrastructure to distributed systems, malware research and AI-driven security tooling.",
+    "about.p4":"My goal is to start my professional career in cybersecurity and eventually specialize in <b>Red Team operations</b> and offensive security research.",
+    "fact.loc":"Location","fact.locv":"Málaga, Spain",
+    "fact.stu":"Studies","fact.stuv":"SMR — Systems & Networks",
+    "fact.foc":"Focus","fact.focv":"Red Team · Offensive Security",
+    "fact.sta":"Status","fact.stav":"Open to internships",
+    "sec.what":"02 — What I do",
+    "what.h2":"Not a list of percentages — <em>areas I actively work in.</em>",
+    "w1.h":"Offensive Security","w1.p":"Understanding how systems are attacked — and how to defend them.",
+    "w2.h":"Security Engineering","w2.p":"Building the tooling an operator actually needs.",
+    "w3.h":"AI × Cybersecurity","w3.p":"Using AI as a force multiplier — never as a blind autopilot.",
+    "w4.h":"Systems","w4.p":"The foundations everything else stands on.",
+    "chip.recon":"Reconnaissance","chip.stooling":"Security Tooling","chip.c2arch":"C2 Architecture","chip.auth":"Authentication","chip.deteng":"Detection Engineering","chip.auto":"Automation","chip.llm":"Local LLMs","chip.agents":"AI Agents","chip.secauto":"Security Automation","chip.airesearch":"AI-assisted Research","chip.net":"Networking","chip.malware":"Malware Research","chip.aiml":"AI/ML Security",
+    "stat.repos":"public repositories","stat.proj":"flagship security projects","stat.tests":"automated tests written","stat.years":"years building software",
+    "sec.feat":"03 — Featured projects",
+    "proj.h2":"Four engineering projects, <em>each one a real question.</em>",
+    "proj.sub":"Built to answer a real question about offensive security. Real screenshots, real usage, no mock-ups.",
+    "proj.active":"Active research","proj.done":"Research complete","proj.view":"View project",
+    "shot.hover":"hover · demo",
+    "orq.role":"AI-assisted Red Team Orchestration Platform",
+    "orq.desc":"A platform for orchestrating authorized Red Team operations through AI-assisted workflows — combining offensive security automation with human approval, scope enforcement and full auditability.",
+    "shot.orq":"orquesta-rt — operator console",
+    "m.tests":"automated tests","m.phases":"orchestration phases","m.transports":"recon transports",
+    "wc2.role":"Command & Control Platform for Authorized Security Labs",
+    "wc2.desc":"A C2 platform developed as a security research and learning project — focused on understanding command-and-control architecture, encrypted communications, session management and operator infrastructure.",
+    "shot.wc2":"WorldC2 — operator dashboard",
+    "m.fallbacks":"transport fallbacks","m.rbac":"RBAC roles","m.e2e":"browser E2E tests",
+    "hive.role":"Distributed Multi-Agent Security Research",
+    "hive.desc":"A Rust-based experimental project exploring multi-agent coordination, distributed systems, concurrency, consensus and AI-assisted security research.",
+    "shot.hive":"HiveMind — hive colony console",
+    "m.passing":"tests passing","m.crates":"crates in the workspace","m.ports":"TCP ports between agents",
+    "worm.role":"Malware & Network Security Research",
+    "worm.desc":"An experimental research project exploring malware behavior, network propagation and machine learning in isolated laboratory environments.",
+    "shot.worm":"Wormy — propagation dashboard",
+    "m.modules":"gated exploit modules","m.services":"lab services (127.0.0.1)",
+    "sec.more":"04 — More projects","more.h2":"The rest of the <em>arsenal.</em>",
+    "mc1.p":"Real-time Windows threat detection: Rust ETW sensor + Go behavioral engine + MITRE ATT&CK rules + web console.","mc1.star":"with live website",
+    "mc2.p":"Linux LKM rootkit engine for authorized red-team labs — syscall hooks, hiding techniques, give-root.",
+    "mc3.p":"Automated Linux privilege escalation: 15 read-only scanners, 75 GTFOBins techniques, safest-first.",
+    "mc4.p":"Metasploit-style Bluetooth security auditing framework — 22 modules, CLI + REPL + web dashboard, 100% offline.",
+    "mc5.p":"Red team framework in pure Python: 79 native modules, multi-host sweeps, workspaces, PDF reports.",
+    "mc6.p":"Kerberos protocol workbench: own DER codec, RFC 4120/3961 crypto, kerberoast, AS-REP roast.","mc6.star":"wire format real, no mocks",
+    "mc7.p":"AI-powered attack surface intelligence — OSINT & recon with local AI (Ollama), no API keys, 100% free.",
+    "mc8.p":"AI-powered offensive security terminal, 100% offline: local LLM, sandboxed execution, human-in-the-loop gates.",
+    "mc9.p":"AuraSOC — open-source SOC framework: Detection-as-Code + purple team + local AI. Go + Vue 3 + NATS + OpenSearch.","mc9.star":"blue team side",
+    "sec.learn":"05 — How I learn",
+    "learn.q":"\u201cI learn <em>by building.</em>\u201d",
+    "learn.a":"When I want to understand a technology or a security concept, I try to implement it myself. Building these projects forces me to understand the systems underneath the tools I use, to experiment with different approaches and to learn from failures.",
+    "learn.b":"I also use AI as a development and research assistant, but I treat generated code as something to review, test and understand — not something to blindly trust.",
+    "learn.g":"My goal is not just to make something work, but to understand why it works.",
+    "sec.skills":"06 — Technical skills","skills.h2":"Only what I have <em>actually used.</em>",
+    "sk.lang":"Languages","sk.lang_sub":"primary → comfortable",
+    "sk.sec":"Security","sk.sec_sub":"offensive focus",
+    "sk.sys":"Systems","sk.sys_sub":"daily drivers",
+    "sk.res":"Security Research","sk.res_sub":"lab-first",
+    "sk.tools":"Tools / Ecosystem","sk.tools_sub":"hands-on",
+    "sec.certs":"07 — Certifications","certs.h2":"Obtained, and <em>what's next.</em>",
+    "cert.obtained":"Obtained","cert.course":"Coursework","cert.prep":"Preparing",
+    "cert1.p":"Previously certified · Expired July 2026 — renewal planned alongside the next milestones.",
+    "cert2.p":"Relevant coursework completed.",
+    "cert3.p":"Red Team & pentesting coursework.",
+    "crto.org":"Red Team Operator training path","crto.p":"Deepening adversary emulation and Red Team tradecraft.",
+    "cptes.org":"Penetration Testing training path","cptes.p":"Structured preparation for professional penetration testing certifications.",
+    "sec.labs":"08 — Labs & training","labs.h2":"Theory is nothing <em>without hands-on.</em>",
+    "lab1.p":"Building experience through practical labs and realistic attack scenarios — active machines, AD paths and CTF-style challenges.",
+    "lab2.h":"Personal Labs","lab2.p":"Self-built isolated environments: Active Directory domains, deliberately vulnerable services, C2 infrastructure and detection tooling — where every project on this page runs.",
+    "lab3.h":"Purple Team Practice","lab3.p":"Validating offensive work against detection: Sigma rule authoring, VECTR-style tracking and ATT&CK coverage measurement.",
+    "sec.ach":"09 — Achievements","ach.h2":"Evidence that goes <em>beyond code.</em>",
+    "ach.h3":"ASTI Challenge — National Robotics Finalist",
+    "ach.p":"Team Captain · 1st place Málaga · Spain National Final. Captain of a robotics team that finished first in Málaga and qualified for the national final in Spain. Worked on robot development, problem-solving, team coordination and competition strategy — under real time pressure and against the best teams in the country.",
+    "ach.tag1":"Team Captain","ach.tag2":"1st place — Málaga","ach.tag3":"National Finalist",
+    "sec.edu":"10 — Education","edu.h2":"The formal <em>backbone.</em>",
+    "edu.when1":"2025 — Present","edu.now":"In progress","edu.done":"Completed",
+    "edu1.p":"Systems administration, computer networks, operating systems and cybersecurity fundamentals — the formal backbone of my self-taught path.",
+    "edu2.h":"Video Game Programming — C# / Unity",
+    "edu2.p":"My entry door to programming: C#, Unity and the discipline of shipping playable software. The curiosity about how things worked under the hood started here.",
+    "sec.now":"11 — Currently focused on","now.h2":"What I'm sharpening <em>right now.</em>",
+    "f1.s":"Red Team & Pentesting","f1.b":"Deepening practical offensive security skills: methodology, tradecraft and hands-on labs.",
+    "f2.s":"Certifications","f2.b":"Preparing for CRTO and CPTES as the next professional milestones.",
+    "f3.s":"Active Directory","f3.b":"Improving Windows and enterprise environment attack methodology — from enumeration to domain dominance.",
+    "f4.s":"Hack The Box","f4.b":"Building experience through practical labs and realistic attack scenarios.",
+    "f5.s":"Security Tooling","f5.b":"Continuing to build and refine offensive security research projects.",
+    "upd":"LAST UPDATED — SEPTEMBER 2026",
+    "sec.contact":"12 — Contact","contact.h2":"Let's <em>connect.</em>",
+    "contact.sub":"I'm interested in internships, junior cybersecurity opportunities and projects related to offensive security and Red Team. Usually replies within 24 hours.",
+    "contact.loc":"Málaga, ES — local time","contact.email":"Email me",
+    "toast.copy":"Email copied to clipboard",
+    "foot.brand":"Cybersecurity student · Offensive Security · Red Team. Built with curiosity, code and too much coffee.",
+    "foot.sections":"Sections","foot.elsewhere":"Elsewhere","foot.site":"Site","foot.top":"Back to top ↑",
+    "foot.made":"Designed & built by Rafael Gálvez — no templates."
+  },
+  "es":{
+    "meta.title":"Rafael Gálvez Silipo — Ciberseguridad · Seguridad Ofensiva · Red Team",
+    "meta.desc":"Estudiante de ciberseguridad enfocado en Red Team y seguridad ofensiva. Construyo herramientas y proyectos de investigación para entender cómo funcionan los sistemas, cómo pueden atacarse y cómo pueden protegerse.",
+    "aria.main":"Principal","aria.home":"Inicio",
+    "nav.about":"Sobre mí","nav.projects":"Proyectos","nav.skills":"Habilidades","nav.certs":"Certificaciones","nav.now":"Ahora","nav.contact":"Contacto","nav.cv":"Descargar CV",
+    "hero.pill":"Disponible para prácticas y roles junior",
+    "hero.title":"Aprendo<br><em>construyendo.</em>",
+    "hero.sub":"<b>Rafael Gálvez Silipo</b> — estudiante de ciberseguridad enfocado en Red Team y seguridad ofensiva. Construyo herramientas y proyectos de investigación para entender cómo funcionan los sistemas, cómo pueden atacarse y cómo pueden protegerse.",
+    "hero.cta1":"Ver proyectos",
+    "term.live":"lab en línea",
+    "term.whoami_out":"\u00a0\u00a0estudiante de ciberseguridad — SMR (Sistemas y Redes)",
+    "term.focus_out":"\u00a0\u00a0red team · pentesting · active directory · osint",
+    "term.status_out":"\u00a0\u00a0[ OK ] disponible para prácticas y roles junior en ciberseguridad",
+    "term.ls_out":"OrquestaRT/  WorldC2/  HiveMind/  Wormy/",
+    "trio.1h":"Estudio","trio.1p":"SMR, redes y fundamentos de seguridad. Formado con eJPT, avanzando hacia CRTO y CPTES.",
+    "trio.2h":"Construyo","trio.2p":"Herramientas propias en vez de tutoriales — plataformas C2, orquestación, recon e investigación con ML.",
+    "trio.3h":"Experimento","trio.3p":"Todo funciona en entornos aislados: dominios de AD, Hack The Box, purple teaming.",
+    "sec.about":"01 — Sobre mí",
+    "about.h2":"La curiosidad primero, <em>siempre.</em>",
+    "about.p1":"Empecé a programar con unos <b>10 años</b>, aprendiendo primero C# y Unity a través del desarrollo de videojuegos. Con el tiempo, mi curiosidad pasó de crear juegos a entender los sistemas que había debajo — y esa curiosidad me llevó a la <b>ciberseguridad y la seguridad ofensiva</b>.",
+    "about.p2":"Hoy estudio <b>Sistemas Microinformáticos y Redes (SMR)</b> y centro mi aprendizaje en Red Team, pentesting, Active Directory, Windows/Linux, OSINT, investigación de malware y ciberseguridad asistida por IA.",
+    "about.p3":"Aprendo sobre todo <b>construyendo</b>. En lugar de limitarme a usar herramientas de seguridad existentes, creo mis propios proyectos para entender las tecnologías y los problemas que hay detrás. Mis proyectos van desde la orquestación Red Team y la infraestructura C2 hasta sistemas distribuidos, investigación de malware y herramientas de seguridad con IA.",
+    "about.p4":"Mi objetivo es empezar mi carrera profesional en ciberseguridad y especializarme con el tiempo en <b>operaciones Red Team</b> e investigación de seguridad ofensiva.",
+    "fact.loc":"Ubicación","fact.locv":"Málaga, España",
+    "fact.stu":"Estudios","fact.stuv":"SMR — Sistemas y Redes",
+    "fact.foc":"Enfoque","fact.focv":"Red Team · Seguridad Ofensiva",
+    "fact.sta":"Estado","fact.stav":"Disponible para prácticas",
+    "sec.what":"02 — Qué hago",
+    "what.h2":"No una lista de porcentajes — <em>áreas en las que trabajo de verdad.</em>",
+    "w1.h":"Seguridad Ofensiva","w1.p":"Entender cómo se atacan los sistemas — y cómo defenderlos.",
+    "w2.h":"Ingeniería de Seguridad","w2.p":"Construir las herramientas que un operador necesita de verdad.",
+    "w3.h":"IA × Ciberseguridad","w3.p":"Usar la IA como multiplicador de fuerzas — nunca como piloto automático.",
+    "w4.h":"Sistemas","w4.p":"Los cimientos sobre los que se apoya todo lo demás.",
+    "chip.recon":"Reconocimiento","chip.stooling":"Herramientas de Seguridad","chip.c2arch":"Arquitectura C2","chip.auth":"Autenticación","chip.deteng":"Ingeniería de Detección","chip.auto":"Automatización","chip.llm":"LLMs Locales","chip.agents":"Agentes de IA","chip.secauto":"Automatización de Seguridad","chip.airesearch":"Investigación Asistida por IA","chip.net":"Redes","chip.malware":"Investigación de malware","chip.aiml":"Seguridad IA/ML",
+    "stat.repos":"repositorios públicos","stat.proj":"proyectos de seguridad estrella","stat.tests":"tests automatizados escritos","stat.years":"años construyendo software",
+    "sec.feat":"03 — Proyectos destacados",
+    "proj.h2":"Cuatro proyectos de ingeniería, <em>cada uno una pregunta real.</em>",
+    "proj.sub":"Construidos para responder a una pregunta real sobre seguridad ofensiva. Capturas reales, uso real, sin maquetas.",
+    "proj.active":"Investigación activa","proj.done":"Investigación completada","proj.view":"Ver proyecto",
+    "shot.hover":"pasa el cursor · demo",
+    "orq.role":"Plataforma de orquestación Red Team asistida por IA",
+    "orq.desc":"Una plataforma para orquestar operaciones Red Team autorizadas mediante flujos de trabajo asistidos por IA — combinando automatización de seguridad ofensiva con aprobación humana, control del alcance y auditoría completa.",
+    "shot.orq":"orquesta-rt — consola de operador",
+    "m.tests":"tests automatizados","m.phases":"fases de orquestación","m.transports":"transportes de recon",
+    "wc2.role":"Plataforma de mando y control para laboratorios de seguridad autorizados",
+    "wc2.desc":"Una plataforma C2 desarrollada como proyecto de investigación y aprendizaje de seguridad — centrada en entender la arquitectura de mando y control, las comunicaciones cifradas, la gestión de sesiones y la infraestructura de operador.",
+    "shot.wc2":"WorldC2 — panel de operador",
+    "m.fallbacks":"transportes de respaldo","m.rbac":"roles RBAC","m.e2e":"tests E2E de navegador",
+    "hive.role":"Investigación de seguridad multi-agente distribuida",
+    "hive.desc":"Un proyecto experimental en Rust que explora la coordinación multi-agente, los sistemas distribuidos, la concurrencia, el consenso y la investigación de seguridad asistida por IA.",
+    "shot.hive":"HiveMind — consola de la colonia",
+    "m.passing":"tests superados","m.crates":"crates en el workspace","m.ports":"puertos TCP entre agentes",
+    "worm.role":"Investigación de malware y seguridad de redes",
+    "worm.desc":"Un proyecto de investigación experimental que explora el comportamiento del malware, la propagación por red y el aprendizaje automático en entornos de laboratorio aislados.",
+    "shot.worm":"Wormy — panel de propagación",
+    "m.modules":"módulos de exploit controlados","m.services":"servicios de laboratorio (127.0.0.1)",
+    "sec.more":"04 — Más proyectos","more.h2":"El resto del <em>arsenal.</em>",
+    "mc1.p":"Detección de amenazas en Windows en tiempo real: sensor ETW en Rust + motor conductual en Go + reglas MITRE ATT&CK + consola web.","mc1.star":"con sitio web en vivo",
+    "mc2.p":"Motor de rootkit LKM para Linux en laboratorios red team autorizados — hooks de syscalls, técnicas de ocultación, give-root.",
+    "mc3.p":"Escalada de privilegios en Linux automatizada: 15 escáneres de solo lectura, 75 técnicas de GTFOBins, lo más seguro primero.",
+    "mc4.p":"Framework de auditoría de seguridad Bluetooth estilo Metasploit — 22 módulos, CLI + REPL + panel web, 100% offline.",
+    "mc5.p":"Framework red team en Python puro: 79 módulos nativos, barridos multi-host, workspaces, informes PDF.",
+    "mc6.p":"Banco de trabajo del protocolo Kerberos: códec DER propio, cripto RFC 4120/3961, kerberoast, AS-REP roast.","mc6.star":"formato de trama real, sin mocks",
+    "mc7.p":"Inteligencia de superficie de ataque con IA — OSINT y recon con IA local (Ollama), sin claves API, 100% gratis.",
+    "mc8.p":"Terminal de seguridad ofensiva con IA, 100% offline: LLM local, ejecución aislada, controles humanos en el bucle.",
+    "mc9.p":"AuraSOC — framework SOC de código abierto: Detección como Código + purple team + IA local. Go + Vue 3 + NATS + OpenSearch.","mc9.star":"lado blue team",
+    "sec.learn":"05 — Cómo aprendo",
+    "learn.q":"«Aprendo <em>construyendo.</em>»",
+    "learn.a":"Cuando quiero entender una tecnología o un concepto de seguridad, intento implementarlo yo mismo. Construir estos proyectos me obliga a entender los sistemas que hay debajo de las herramientas que uso, a experimentar con enfoques distintos y a aprender de los fallos.",
+    "learn.b":"También uso la IA como asistente de desarrollo e investigación, pero trato el código generado como algo que revisar, probar y entender — no como algo en lo que confiar a ciegas.",
+    "learn.g":"Mi objetivo no es solo que algo funcione, sino entender por qué funciona.",
+    "sec.skills":"06 — Habilidades técnicas","skills.h2":"Solo lo que <em>he usado de verdad.</em>",
+    "sk.lang":"Lenguajes","sk.lang_sub":"principal → cómodo",
+    "sk.sec":"Seguridad","sk.sec_sub":"enfoque ofensivo",
+    "sk.sys":"Sistemas","sk.sys_sub":"uso diario",
+    "sk.res":"Investigación de Seguridad","sk.res_sub":"laboratorio primero",
+    "sk.tools":"Herramientas / Ecosistema","sk.tools_sub":"experiencia práctica",
+    "sec.certs":"07 — Certificaciones","certs.h2":"Obtenidas, y <em>lo que viene.</em>",
+    "cert.obtained":"Obtenida","cert.course":"Formación","cert.prep":"En preparación",
+    "cert1.p":"Certificación previa · Caducó en julio de 2026 — renovación prevista junto a los próximos hitos.",
+    "cert2.p":"Formación relevante completada.",
+    "cert3.p":"Formación en Red Team y pentesting.",
+    "crto.org":"Ruta de formación Red Team Operator","crto.p":"Profundizando en emulación de adversarios y tradecraft de Red Team.",
+    "cptes.org":"Ruta de formación de pentesting","cptes.p":"Preparación estructurada para certificaciones profesionales de pentesting.",
+    "sec.labs":"08 — Laboratorios y formación","labs.h2":"La teoría no es nada <em>sin práctica.</em>",
+    "lab1.p":"Ganando experiencia con laboratorios prácticos y escenarios de ataque realistas — máquinas activas, rutas de AD y retos estilo CTF.",
+    "lab2.h":"Laboratorios propios","lab2.p":"Entornos aislados construidos por mí: dominios de Active Directory, servicios deliberadamente vulnerables, infraestructura C2 y herramientas de detección — donde corre cada proyecto de esta página.",
+    "lab3.h":"Práctica Purple Team","lab3.p":"Validando el trabajo ofensivo frente a la detección: creación de reglas Sigma, seguimiento estilo VECTR y medición de cobertura ATT&CK.",
+    "sec.ach":"09 — Logros","ach.h2":"Evidencia que va <em>más allá del código.</em>",
+    "ach.h3":"ASTI Challenge — Finalista Nacional de Robótica",
+    "ach.p":"Capitán de equipo · 1.er puesto en Málaga · Final nacional en España. Capitán de un equipo de robótica que quedó primero en Málaga y se clasificó para la final nacional en España. Trabajé en el desarrollo del robot, la resolución de problemas, la coordinación del equipo y la estrategia de competición — bajo presión real y contra los mejores equipos del país.",
+    "ach.tag1":"Capitán del equipo","ach.tag2":"1.er puesto — Málaga","ach.tag3":"Finalista nacional",
+    "sec.edu":"10 — Formación","edu.h2":"La base <em>formal.</em>",
+    "edu.when1":"2025 — Actualidad","edu.now":"En curso","edu.done":"Completado",
+    "edu1.p":"Administración de sistemas, redes, sistemas operativos y fundamentos de ciberseguridad — la base formal de mi camino autodidacta.",
+    "edu2.h":"Programación de Videojuegos — C# / Unity",
+    "edu2.p":"Mi puerta de entrada a la programación: C#, Unity y la disciplina de terminar software jugable. La curiosidad por cómo funcionaban las cosas por debajo empezó aquí.",
+    "sec.now":"11 — En qué estoy ahora","now.h2":"Lo que estoy puliendo <em>ahora mismo.</em>",
+    "f1.s":"Red Team y Pentesting","f1.b":"Profundizando en seguridad ofensiva práctica: metodología, tradecraft y laboratorios prácticos.",
+    "f2.s":"Certificaciones","f2.b":"Preparando CRTO y CPTES como próximos hitos profesionales.",
+    "f3.s":"Active Directory","f3.b":"Mejorando la metodología de ataque en Windows y entornos empresariales — desde la enumeración hasta dominar el dominio.",
+    "f4.s":"Hack The Box","f4.b":"Ganando experiencia con laboratorios prácticos y escenarios de ataque realistas.",
+    "f5.s":"Herramientas de seguridad","f5.b":"Sigo construyendo y refinando proyectos de investigación de seguridad ofensiva.",
+    "upd":"ÚLTIMA ACTUALIZACIÓN — SEPTIEMBRE 2026",
+    "sec.contact":"12 — Contacto","contact.h2":"Vamos a <em>conectar.</em>",
+    "contact.sub":"Me interesan prácticas, oportunidades junior en ciberseguridad y proyectos relacionados con la seguridad ofensiva y Red Team. Suelo responder en menos de 24 horas.",
+    "contact.loc":"Málaga, ES — hora local","contact.email":"Escríbeme",
+    "toast.copy":"Correo copiado al portapapeles",
+    "foot.brand":"Estudiante de Ciberseguridad · Seguridad Ofensiva · Red Team. Hecho con curiosidad, código y demasiado café.",
+    "foot.sections":"Secciones","foot.elsewhere":"Enlaces","foot.site":"Sitio","foot.top":"Volver arriba ↑",
+    "foot.made":"Diseñado y construido por Rafael Gálvez — sin plantillas."
+  }
+  };
+  window.I18N=I18N;
+  window.__t=function(k){var D=I18N[window.__lang]||I18N.en;return D[k]!=null?D[k]:(I18N.en[k]||'');};
+
+  function applyLangTexts(lang){
+    var d=I18N[lang]||I18N.en;
+    document.documentElement.setAttribute('lang',lang);
+    document.title=d["meta.title"];
+    var md=document.querySelector('meta[name="description"]');
+    if(md)md.setAttribute('content',d["meta.desc"]);
+    var nav=document.querySelector('.nav-links');
+    if(nav)nav.setAttribute('aria-label',d["aria.main"]);
+    var logo=document.querySelector('a.logo');
+    if(logo)logo.setAttribute('aria-label',d["aria.home"]);
+    var els=document.querySelectorAll('[data-i18n]');
+    for(var i=0;i<els.length;i++){
+      var k=els[i].getAttribute('data-i18n');
+      if(d[k]!=null)els[i].innerHTML=d[k];
+    }
+  }
+
+  function updateCounters(){
+    var loc=(window.__lang==='es')?'es-ES':'en-US';
+    window.__langLocale=loc;
+    var nums=document.querySelectorAll('[data-count]');
+    for(var i=0;i<nums.length;i++){
+      if(nums[i].textContent!=='0'){
+        nums[i].textContent=(+nums[i].dataset.count).toLocaleString(loc);
+      }
+    }
+  }
+
+  function paintButtons(lang){
+    var btns=document.querySelectorAll('.lang-btn');
+    for(var i=0;i<btns.length;i++){
+      var on=btns[i].getAttribute('data-lang')===lang;
+      btns[i].classList.toggle('active',on);
+      btns[i].setAttribute('aria-pressed',on?'true':'false');
+    }
+  }
+
+  function setLang(lang,save){
+    window.__lang=lang;
+    applyLangTexts(lang);
+    updateCounters();
+    paintButtons(lang);
+    if(window.__decodeTitle)window.__decodeTitle();
+    if(window.__typeTerminal)window.__typeTerminal();
+    if(save){try{localStorage.setItem('rgs_lang',lang);}catch(e){}}
+  }
+  window.__setLang=setLang;
+
+  var saved=null;
+  try{saved=localStorage.getItem('rgs_lang');}catch(e){}
+  var initial=(saved==='en'||saved==='es')?saved:(((navigator.language||'en').toLowerCase().indexOf('es')===0)?'es':'en');
+  window.__lang=initial;
+  window.__langLocale=(initial==='es')?'es-ES':'en-US';
+  applyLangTexts(initial);
+  paintButtons(initial);
+
+  var btns=document.querySelectorAll('.lang-btn');
+  for(var j=0;j<btns.length;j++){
+    (function(b){
+      b.addEventListener('click',function(){
+        if(b.getAttribute('data-lang')!==window.__lang)setLang(b.getAttribute('data-lang'),true);
+      });
+    })(btns[j]);
+  }
 })();
 </script>
 <script>
@@ -1027,9 +1348,16 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
     })();
   }
 
-  /* --- hero title decode --- */
+  /* --- hero title decode (language-aware, re-runnable) --- */
   const h1=document.getElementById('heroTitle');
-  if(h1&&!reduced){
+  let decodeGen=0;
+  window.__decodeTitle=function(){
+    if(!h1)return;
+    const D=(window.I18N&&window.I18N[window.__lang])?window.I18N[window.__lang]:window.I18N.en;
+    const html=D["hero.title"];
+    const gen=++decodeGen;
+    if(reduced){h1.innerHTML=html;return;}
+    h1.innerHTML=html;
     const CHARS='!<>-_\\/[]{}=+*^?#01';
     const plan=[],nodes=[];
     const w=document.createTreeWalker(h1,NodeFilter.SHOW_TEXT);
@@ -1049,6 +1377,7 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
     });
     const t0=performance.now();
     (function tick(now){
+      if(gen!==decodeGen)return;
       let done=true;
       for(const c of plan){
         const t=now-t0;
@@ -1057,15 +1386,16 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
       }
       if(!done)requestAnimationFrame(tick);
     })(t0);
-  }
+  };
+  window.__decodeTitle();
 
   /* --- nav link scramble on hover --- */
   if(!reduced){
     const CH='!<>-_/[]=+*^?';
     document.querySelectorAll('.nav-links a').forEach(a=>{
-      const orig=a.textContent;let busy=false;
+      let busy=false;
       a.addEventListener('mouseenter',()=>{
-        if(busy)return;busy=true;let f=0;const steps=12;
+        if(busy)return;const orig=a.textContent;busy=true;let f=0;const steps=12;
         const iv=setInterval(()=>{
           f++;const reveal=Math.floor(orig.length*f/steps);
           a.textContent=orig.split('').map((c,i)=>i<reveal?c:(c===' '?' ':CH[(Math.random()*CH.length)|0])).join('');
@@ -1092,38 +1422,68 @@ header.scrolled{background:rgba(10,10,10,.93);box-shadow:0 12px 34px rgba(0,0,0,
     tickClock();setInterval(tickClock,1000);
   }
 
-  /* --- terminal self-typing --- */
+  /* --- terminal self-typing (language-aware, re-runnable) --- */
   const tb=document.querySelector('.term-body');
-  if(tb&&!reduced&&!tb.dataset.typed){
-    tb.dataset.typed='1';
-    const seq=[
-      {cmd:'whoami',out:'cybersecurity student — SMR (Systems & Networks)',cls:'t-o'},
-      {cmd:'cat focus.txt',out:'red team · pentesting · active directory · osint',cls:'t-o'},
-      {cmd:'./status --hiring',out:'[ OK ] open to internships & junior cybersecurity roles',cls:'t-ok'},
-      {cmd:'ls projects/',out:'OrquestaRT/  WorldC2/  HiveMind/  Wormy/',cls:'t-p'}
+  let termGen=0;
+  function termSeq(){
+    const D=(window.I18N&&window.I18N[window.__lang])?window.I18N[window.__lang]:window.I18N.en;
+    const strip=s=>s.replace(/^\u00a0+/,'');
+    return [
+      {cmd:'whoami',out:strip(D["term.whoami_out"]),cls:'t-o'},
+      {cmd:'cat focus.txt',out:strip(D["term.focus_out"]),cls:'t-o'},
+      {cmd:'./status --hiring',out:strip(D["term.status_out"]),cls:'t-ok'},
+      {cmd:'ls projects/',out:strip(D["term.ls_out"]),cls:'t-p'}
     ];
+  }
+  window.__typeTerminal=function(){
+    if(!tb)return;
+    const gen=++termGen;
+    if(reduced){
+      tb.innerHTML='';
+      for(const s of termSeq()){
+        const l=document.createElement('div');
+        l.innerHTML='<span class="t-dir">➜ </span><span class="t-c"></span>';
+        l.querySelector('.t-c').textContent=s.cmd;
+        tb.appendChild(l);
+        const o=document.createElement('div');
+        o.className=s.cls;o.style.paddingLeft='17px';o.textContent=s.out;
+        tb.appendChild(o);
+      }
+      const cur=document.createElement('div');
+      cur.innerHTML='<span class="t-dir">➜ </span><span class="t-cur"></span>';
+      tb.appendChild(cur);
+      return;
+    }
     const wait=ms=>new Promise(r=>setTimeout(r,ms));
     (async()=>{
       await wait(460);
+      if(gen!==termGen)return;
       tb.innerHTML='';
-      for(const s of seq){
+      for(const s of termSeq()){
+        if(gen!==termGen)return;
         const line=document.createElement('div');
         line.innerHTML='<span class="t-dir">➜ </span><span class="t-c"></span><span class="t-cur"></span>';
         tb.appendChild(line);
         const cs=line.querySelector('.t-c');
-        for(const ch of s.cmd){cs.textContent+=ch;await wait(22+Math.random()*40);}
+        for(const ch of s.cmd){
+          if(gen!==termGen)return;
+          cs.textContent+=ch;await wait(22+Math.random()*40);
+        }
         line.querySelector('.t-cur').remove();
         await wait(150);
+        if(gen!==termGen)return;
         const o=document.createElement('div');
         o.className=s.cls;o.style.paddingLeft='17px';o.textContent=s.out;
         tb.appendChild(o);
         await wait(230);
       }
+      if(gen!==termGen)return;
       const cur=document.createElement('div');
       cur.innerHTML='<span class="t-dir">➜ </span><span class="t-cur"></span>';
       tb.appendChild(cur);
     })();
-  }
+  };
+  if(tb&&!tb.dataset.typed){tb.dataset.typed='1';window.__typeTerminal();}
 })();
 </script>
 </body>
