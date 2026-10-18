@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>%TITLE%</title>
+<meta name="description" content="%DESC%">
+<meta name="theme-color" content="#110f0d">
+<script>
+  // Idioma antes del primer pintado (misma lógica que el sitio original: localStorage 'rgs_lang' o idioma del navegador).
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('rgs_lang'); } catch (e) {}
+    var lang = saved === 'en' || saved === 'es' ? saved : ((navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en');
+    window.__initialLang = lang;
+    document.documentElement.setAttribute('lang', lang);
+    if (lang !== 'en') document.documentElement.setAttribute('data-lang-pending', '');
+  })();
+</script>
+<style>html[data-lang-pending] #root{visibility:hidden}</style>
+<noscript><style>#root [style*="visibility:hidden"]{visibility:visible!important}</style></noscript>
+</head>
+<body>
+<div id="root"><!--app--></div>
+<script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
