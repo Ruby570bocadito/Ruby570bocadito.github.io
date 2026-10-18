@@ -127,12 +127,14 @@ export default function Hero() {
   const { t } = useLang();
   return (
     <section className="hero" id="top">
-      <div className="hero-threads" aria-hidden="true">
-        <Threads color="#e7e5e4" accentColor="#8fc573" amplitude={1.6} distance={0.3} lineCount={80}
-          thickness={0.55} softness={1.2} speed={0.45} waves={1.1} split={0.04} fray={0.5} angle={12}
-          parting={0.35} taper={0.8} brightness={1.25} fade={0.42} opacity={0.95} enableMouseInteraction />
-      </div>
       <div className="frame">
+        {/* La hebra sale de detrás del terminal hacia la esquina inferior derecha y se desvanece
+            antes de llegar al marco: no toca el borde de la pantalla en ningún tamaño. */}
+        <div className="hero-threads" aria-hidden="true">
+          <Threads color="#e7e5e4" accentColor="#8fc573" amplitude={1.6} distance={0.32} lineCount={80}
+            thickness={0.55} softness={1.2} speed={0.45} waves={1.1} split={0.08} fray={0.5} angle={-30}
+            parting={0.35} taper={0.8} brightness={1.3} fade={0.45} opacity={0.95} enableMouseInteraction />
+        </div>
         <div className="announce">
           <span className="announce-chip"><i /></span>
           <Icon name="chevron" size={12} stroke={2} className="announce-sep" />

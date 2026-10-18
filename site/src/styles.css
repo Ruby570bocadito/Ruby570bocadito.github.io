@@ -119,12 +119,9 @@ header.scrolled { background: rgba(17, 15, 13, 0.9); box-shadow: 0 12px 34px -12
 
 /* ---------- hero ---------- */
 .hero { overflow: hidden; padding: 0; }
-.hero-threads { position: absolute; top: 0; bottom: 0; right: 0; width: 64%; pointer-events: none; z-index: 0; }
-.hero-threads::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(60% 55% at 62% 50%, transparent 40%, var(--bg) 100%);
-}
 .hero .frame { z-index: 1; }
+.hero-threads { position: absolute; top: 64px; bottom: 0; left: 56%; right: 0; pointer-events: none; z-index: 0; }
+.hero .frame > :not(.hero-threads) { position: relative; z-index: 1; }
 .announce {
   position: relative; display: flex; align-items: center; gap: 12px; height: 64px; font-size: 14px; font-weight: 500;
 }
@@ -151,7 +148,7 @@ header.scrolled { background: rgba(17, 15, 13, 0.9); box-shadow: 0 12px 34px -12
 
 .hero-visual { position: relative; }
 .term {
-  position: relative; border-radius: 14px; border: 1px solid var(--line); overflow: hidden;
+  position: relative; z-index: 1; border-radius: 14px; border: 1px solid var(--line); overflow: hidden;
   background: linear-gradient(180deg, rgba(28, 25, 23, 0.82), rgba(20, 18, 16, 0.88));
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.4);
@@ -176,7 +173,7 @@ header.scrolled { background: rgba(17, 15, 13, 0.9); box-shadow: 0 12px 34px -12
 .ldot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); animation: pulse 2.2s infinite; }
 .t-clock { color: #9aa894; font-variant-numeric: tabular-nums; }
 
-.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; max-width: 760px; padding: 0 0 64px; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; max-width: 700px; padding: 0 0 64px; }
 .trio h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.005em; }
 .trio .n { color: var(--dim); }
 .trio p { font-size: 14px; color: var(--mut); line-height: 1.5; }
@@ -399,7 +396,7 @@ footer .frame { padding-top: 72px; padding-bottom: 32px; }
   .nav-links { gap: 22px; margin-left: 24px; }
   .hero-grid, .about-grid, .proj, .now-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; }
   .hero-grid { padding: 72px 0 64px; }
-  .hero-threads { width: 100%; opacity: 0.45; }
+  .hero-threads { left: 0; opacity: 0.5; }
   .proj { padding: 56px 0; }
   .more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; }
