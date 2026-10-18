@@ -1,0 +1,1025 @@
+{
+ "marquee": [
+  "Python",
+  "Go",
+  "Rust",
+  "C#",
+  "TypeScript",
+  "Bash",
+  "PowerShell",
+  "Linux",
+  "Windows",
+  "Docker",
+  "MITRE ATT&CK",
+  "BloodHound",
+  "Neo4j",
+  "MISP",
+  "Hack The Box"
+ ],
+ "trio": [
+  {
+   "n": "1.",
+   "h": {
+    "k": "trio.1h"
+   },
+   "p": {
+    "k": "trio.1p"
+   }
+  },
+  {
+   "n": "2.",
+   "h": {
+    "k": "trio.2h"
+   },
+   "p": {
+    "k": "trio.2p"
+   }
+  },
+  {
+   "n": "3.",
+   "h": {
+    "k": "trio.3h"
+   },
+   "p": {
+    "k": "trio.3p"
+   }
+  }
+ ],
+ "facts": [
+  {
+   "label": {
+    "k": "fact.loc"
+   },
+   "value": {
+    "k": "fact.locv"
+   }
+  },
+  {
+   "label": {
+    "k": "fact.stu"
+   },
+   "value": {
+    "k": "fact.stuv"
+   }
+  },
+  {
+   "label": {
+    "k": "fact.foc"
+   },
+   "value": {
+    "k": "fact.focv"
+   }
+  },
+  {
+   "label": {
+    "k": "fact.sta"
+   },
+   "value": {
+    "k": "fact.stav"
+   }
+  }
+ ],
+ "what": [
+  {
+   "h": {
+    "k": "w1.h"
+   },
+   "p": {
+    "k": "w1.p"
+   },
+   "chips": [
+    {
+     "h": "Red Team",
+     "hot": true
+    },
+    {
+     "h": "Pentesting",
+     "hot": false
+    },
+    {
+     "h": "Active Directory",
+     "hot": false
+    },
+    {
+     "k": "chip.recon",
+     "hot": false
+    },
+    {
+     "h": "OSINT",
+     "hot": false
+    },
+    {
+     "h": "Post-Exploitation",
+     "hot": false
+    }
+   ]
+  },
+  {
+   "h": {
+    "k": "w2.h"
+   },
+   "p": {
+    "k": "w2.p"
+   },
+   "chips": [
+    {
+     "k": "chip.stooling",
+     "hot": true
+    },
+    {
+     "k": "chip.c2arch",
+     "hot": false
+    },
+    {
+     "k": "chip.auth",
+     "hot": false
+    },
+    {
+     "h": "RBAC",
+     "hot": false
+    },
+    {
+     "k": "chip.deteng",
+     "hot": false
+    },
+    {
+     "k": "chip.auto",
+     "hot": false
+    }
+   ]
+  },
+  {
+   "h": {
+    "k": "w3.h"
+   },
+   "p": {
+    "k": "w3.p"
+   },
+   "chips": [
+    {
+     "k": "chip.llm",
+     "hot": true
+    },
+    {
+     "k": "chip.agents",
+     "hot": false
+    },
+    {
+     "h": "RAG",
+     "hot": false
+    },
+    {
+     "k": "chip.secauto",
+     "hot": false
+    },
+    {
+     "k": "chip.airesearch",
+     "hot": false
+    }
+   ]
+  },
+  {
+   "h": {
+    "k": "w4.h"
+   },
+   "p": {
+    "k": "w4.p"
+   },
+   "chips": [
+    {
+     "h": "Linux",
+     "hot": true
+    },
+    {
+     "h": "Windows",
+     "hot": false
+    },
+    {
+     "k": "chip.net",
+     "hot": false
+    },
+    {
+     "h": "Rust",
+     "hot": false
+    },
+    {
+     "h": "Go",
+     "hot": false
+    },
+    {
+     "h": "Python",
+     "hot": false
+    },
+    {
+     "h": "C#",
+     "hot": false
+    }
+   ]
+  }
+ ],
+ "stats": [
+  {
+   "to": 18,
+   "suffix": "+",
+   "label": {
+    "k": "stat.repos"
+   }
+  },
+  {
+   "to": 12,
+   "suffix": "",
+   "label": {
+    "k": "stat.proj"
+   }
+  },
+  {
+   "to": 1400,
+   "suffix": "+",
+   "label": {
+    "k": "stat.tests"
+   }
+  },
+  {
+   "to": 6,
+   "suffix": "+",
+   "label": {
+    "k": "stat.years"
+   }
+  }
+ ],
+ "projects": [
+  {
+   "done": false,
+   "badge": {
+    "k": "proj.active"
+   },
+   "name": "OrquestaRT",
+   "role": {
+    "k": "orq.role"
+   },
+   "desc": {
+    "k": "orq.desc"
+   },
+   "stack": "Python · FastAPI · LangGraph · Next.js · +5",
+   "href": "https://github.com/Ruby570bocadito/orquesta-rt",
+   "view": {
+    "k": "proj.view"
+   },
+   "shot": {
+    "k": "shot.orq"
+   },
+   "hover": {
+    "k": "shot.hover"
+   },
+   "png": "/assets/orquesta-console.png",
+   "alt": "OrquestaRT operator console — live agent feed and machine-readable ROE",
+   "gif": "/assets/orquesta-demo.gif",
+   "metrics": [
+    {
+     "v": "587",
+     "label": {
+      "k": "m.tests"
+     }
+    },
+    {
+     "v": "F0→F7",
+     "label": {
+      "k": "m.phases"
+     }
+    },
+    {
+     "v": "26+",
+     "label": {
+      "k": "m.transports"
+     }
+    }
+   ]
+  },
+  {
+   "done": false,
+   "badge": {
+    "k": "proj.active"
+   },
+   "name": "WorldC2",
+   "role": {
+    "k": "wc2.role"
+   },
+   "desc": {
+    "k": "wc2.desc"
+   },
+   "stack": "Go · Vue 3 · Networking · Cryptography · +3",
+   "href": "https://github.com/Ruby570bocadito/WorldC2",
+   "view": {
+    "k": "proj.view"
+   },
+   "shot": {
+    "k": "shot.wc2"
+   },
+   "hover": {
+    "k": "shot.hover"
+   },
+   "png": "/assets/worldc2-dashboard.png",
+   "alt": "WorldC2 dashboard — sessions, credentials, tasks and SIEM webhook health",
+   "gif": "/assets/worldc2-demo.gif",
+   "metrics": [
+    {
+     "v": "5",
+     "label": {
+      "k": "m.fallbacks"
+     }
+    },
+    {
+     "v": "4",
+     "label": {
+      "k": "m.rbac"
+     }
+    },
+    {
+     "v": "14",
+     "label": {
+      "k": "m.e2e"
+     }
+    }
+   ]
+  },
+  {
+   "done": false,
+   "badge": {
+    "k": "proj.active"
+   },
+   "name": "HiveMind",
+   "role": {
+    "k": "hive.role"
+   },
+   "desc": {
+    "k": "hive.desc"
+   },
+   "stack": "Rust · Distributed Systems · Concurrency · AI · +2",
+   "href": "https://github.com/Ruby570bocadito/HiveMind",
+   "view": {
+    "k": "proj.view"
+   },
+   "shot": {
+    "k": "shot.hive"
+   },
+   "hover": {
+    "k": "shot.hover"
+   },
+   "png": "/assets/hivemind-console.png",
+   "alt": "HiveMind colony console — beacon rate, registered agents and task pipeline",
+   "gif": "/assets/hivemind-demo.gif",
+   "metrics": [
+    {
+     "v": "282",
+     "label": {
+      "k": "m.passing"
+     }
+    },
+    {
+     "v": "9",
+     "label": {
+      "k": "m.crates"
+     }
+    },
+    {
+     "v": "0",
+     "label": {
+      "k": "m.ports"
+     }
+    }
+   ]
+  },
+  {
+   "done": true,
+   "badge": {
+    "k": "proj.done"
+   },
+   "name": "Wormy",
+   "role": {
+    "k": "worm.role"
+   },
+   "desc": {
+    "k": "worm.desc"
+   },
+   "stack": "Python · Machine Learning · Networking · Docker",
+   "href": "https://github.com/Ruby570bocadito/Wormy-ML-Network-Worm",
+   "view": {
+    "k": "proj.view"
+   },
+   "shot": {
+    "k": "shot.worm"
+   },
+   "hover": {
+    "k": "shot.hover"
+   },
+   "png": "/assets/wormy-dashboard.png",
+   "alt": "Wormy dashboard — propagation timeline, host status and vulnerability severity",
+   "gif": "/assets/wormy-demo.gif",
+   "metrics": [
+    {
+     "v": "525",
+     "label": {
+      "k": "m.tests"
+     }
+    },
+    {
+     "v": "44",
+     "label": {
+      "k": "m.modules"
+     }
+    },
+    {
+     "v": "15",
+     "label": {
+      "k": "m.services"
+     }
+    }
+   ]
+  }
+ ],
+ "more": [
+  {
+   "href": "https://github.com/Ruby570bocadito/security-framework",
+   "name": "security-framework",
+   "lang": "Go",
+   "p": {
+    "k": "mc1.p"
+   },
+   "star": {
+    "k": "mc1.star"
+   }
+  },
+  {
+   "href": "https://github.com/Ruby570bocadito/Vault-Kernel",
+   "name": "Vault-Kernel",
+   "lang": "Python",
+   "p": {
+    "k": "mc2.p"
+   },
+   "star": {
+    "h": "★ 5"
+   }
+  },
+  {
+   "href": "https://github.com/Ruby570bocadito/Auto-Privilege",
+   "name": "Auto-Privilege",
+   "lang": "Go",
+   "p": {
+    "k": "mc3.p"
+   },
+   "star": {
+    "h": "★ 7"
+   }
+  },
+  {
+   "href": "https://github.com/Ruby570bocadito/bluesky",
+   "name": "bluesky",
+   "lang": "Python",
+   "p": {
+    "k": "mc4.p"
+   },
+   "star": {
+    "h": "★ 4"
+   }
+  },
+  {
+   "href": "https://github.com/Ruby570bocadito/REDHAVOC",
+   "name": "REDHAVOC",
+   "lang": "Python",
+   "p": {
+    "k": "mc5.p"
+   },
+   "star": {
+    "h": "★ 2"
+   }
+  },
+  {
+   "href": "https://github.com/Ruby570bocadito/charon",
+   "name": "charon",
+   "lang": "Rust",
+   "p": {
+    "k": "mc6.p"
+   },
+   "star": {
+    "k": "mc6.star"
+   }
+  },
+  {
+   "href": "https://github.com/Ruby570bocadito/OSINT-EYE",
+   "name": "OSINT-EYE",
+   "lang": "Python",
+   "p": {
+    "k": "mc7.p"
+   },
+   "star": {
+    "h": "★ 1"
+   }
+  },
+  {
+   "href": "https://github.com/Ruby570bocadito/T-100AI",
+   "name": "T-100AI",
+   "lang": "Python",
+   "p": {
+    "k": "mc8.p"
+   },
+   "star": {
+    "h": "★ 1"
+   }
+  },
+  {
+   "href": "https://github.com/Ruby570bocadito/aura-soc",
+   "name": "aura-soc",
+   "lang": "Go",
+   "p": {
+    "k": "mc9.p"
+   },
+   "star": {
+    "k": "mc9.star"
+   }
+  }
+ ],
+ "skills": [
+  {
+   "label": {
+    "k": "sk.lang"
+   },
+   "sub": {
+    "k": "sk.lang_sub"
+   },
+   "chips": [
+    {
+     "h": "Python",
+     "hot": true
+    },
+    {
+     "h": "C#",
+     "hot": true
+    },
+    {
+     "h": "Go",
+     "hot": false
+    },
+    {
+     "h": "Rust",
+     "hot": false
+    },
+    {
+     "h": "TypeScript",
+     "hot": false
+    },
+    {
+     "h": "Bash",
+     "hot": false
+    },
+    {
+     "h": "PowerShell",
+     "hot": false
+    }
+   ]
+  },
+  {
+   "label": {
+    "k": "sk.sec"
+   },
+   "sub": {
+    "k": "sk.sec_sub"
+   },
+   "chips": [
+    {
+     "h": "Red Team",
+     "hot": true
+    },
+    {
+     "h": "Pentesting",
+     "hot": true
+    },
+    {
+     "h": "Active Directory",
+     "hot": false
+    },
+    {
+     "h": "OSINT",
+     "hot": false
+    },
+    {
+     "h": "C2",
+     "hot": false
+    },
+    {
+     "k": "chip.recon",
+     "hot": false
+    }
+   ]
+  },
+  {
+   "label": {
+    "k": "sk.sys"
+   },
+   "sub": {
+    "k": "sk.sys_sub"
+   },
+   "chips": [
+    {
+     "h": "Linux",
+     "hot": true
+    },
+    {
+     "h": "Windows",
+     "hot": false
+    },
+    {
+     "k": "chip.net",
+     "hot": false
+    },
+    {
+     "h": "Docker",
+     "hot": false
+    }
+   ]
+  },
+  {
+   "label": {
+    "k": "sk.res"
+   },
+   "sub": {
+    "k": "sk.res_sub"
+   },
+   "chips": [
+    {
+     "k": "chip.malware",
+     "hot": false
+    },
+    {
+     "k": "chip.aiml",
+     "hot": false
+    },
+    {
+     "k": "chip.auto",
+     "hot": false
+    },
+    {
+     "h": "Purple Team",
+     "hot": false
+    }
+   ]
+  },
+  {
+   "label": {
+    "k": "sk.tools"
+   },
+   "sub": {
+    "k": "sk.tools_sub"
+   },
+   "chips": [
+    {
+     "h": "Git",
+     "hot": false
+    },
+    {
+     "h": "GitHub",
+     "hot": false
+    },
+    {
+     "h": "MITRE ATT&amp;CK",
+     "hot": true
+    },
+    {
+     "h": "BloodHound",
+     "hot": false
+    },
+    {
+     "h": "Neo4j",
+     "hot": false
+    },
+    {
+     "h": "MISP",
+     "hot": false
+    },
+    {
+     "h": "Hack The Box",
+     "hot": false
+    }
+   ]
+  }
+ ],
+ "certs": [
+  {
+   "prep": false,
+   "title": {
+    "h": "eJPTv2 — Junior Penetration Tester"
+   },
+   "tag": {
+    "k": "cert.obtained"
+   },
+   "org": {
+    "h": "INE Security"
+   },
+   "p": {
+    "k": "cert1.p"
+   }
+  },
+  {
+   "prep": false,
+   "title": {
+    "h": "Networking Fundamentals"
+   },
+   "tag": {
+    "k": "cert.course"
+   },
+   "org": {
+    "h": "Cisco Networking Academy"
+   },
+   "p": {
+    "k": "cert2.p"
+   }
+  },
+  {
+   "prep": false,
+   "title": {
+    "h": "Offensive Security Training"
+   },
+   "tag": {
+    "k": "cert.course"
+   },
+   "org": {
+    "h": "Hack4u"
+   },
+   "p": {
+    "k": "cert3.p"
+   }
+  },
+  {
+   "prep": true,
+   "title": {
+    "h": "CRTO"
+   },
+   "tag": {
+    "k": "cert.prep"
+   },
+   "org": {
+    "k": "crto.org"
+   },
+   "p": {
+    "k": "crto.p"
+   }
+  },
+  {
+   "prep": true,
+   "title": {
+    "h": "CPTES"
+   },
+   "tag": {
+    "k": "cert.prep"
+   },
+   "org": {
+    "k": "cptes.org"
+   },
+   "p": {
+    "k": "cptes.p"
+   }
+  }
+ ],
+ "labs": [
+  {
+   "h": {
+    "h": "Hack The Box"
+   },
+   "p": {
+    "k": "lab1.p"
+   }
+  },
+  {
+   "h": {
+    "k": "lab2.h"
+   },
+   "p": {
+    "k": "lab2.p"
+   }
+  },
+  {
+   "h": {
+    "k": "lab3.h"
+   },
+   "p": {
+    "k": "lab3.p"
+   }
+  }
+ ],
+ "achievement": {
+  "num": "1º",
+  "small": "Málaga",
+  "h": {
+   "k": "ach.h3"
+  },
+  "p": {
+   "k": "ach.p"
+  },
+  "tags": [
+   {
+    "k": "ach.tag1"
+   },
+   {
+    "k": "ach.tag2"
+   },
+   {
+    "k": "ach.tag3"
+   }
+  ]
+ },
+ "education": [
+  {
+   "when": {
+    "k": "edu.when1"
+   },
+   "title": {
+    "h": "SMR — Sistemas Microinformáticos y Redes"
+   },
+   "org": {
+    "h": "DigitechFP"
+   },
+   "p": {
+    "k": "edu1.p"
+   },
+   "tag": {
+    "k": "edu.now"
+   }
+  },
+  {
+   "when": {
+    "h": "2020 — 2024"
+   },
+   "title": {
+    "k": "edu2.h"
+   },
+   "org": {
+    "h": "EVAD"
+   },
+   "p": {
+    "k": "edu2.p"
+   },
+   "tag": {
+    "k": "edu.done"
+   }
+  }
+ ],
+ "now": [
+  {
+   "s": {
+    "k": "f1.s"
+   },
+   "b": {
+    "k": "f1.b"
+   }
+  },
+  {
+   "s": {
+    "k": "f2.s"
+   },
+   "b": {
+    "k": "f2.b"
+   }
+  },
+  {
+   "s": {
+    "k": "f3.s"
+   },
+   "b": {
+    "k": "f3.b"
+   }
+  },
+  {
+   "s": {
+    "k": "f4.s"
+   },
+   "b": {
+    "k": "f4.b"
+   }
+  },
+  {
+   "s": {
+    "k": "f5.s"
+   },
+   "b": {
+    "k": "f5.b"
+   }
+  }
+ ],
+ "contact": {
+  "email": "rafagasi09@gmail.com",
+  "links": [
+   {
+    "href": "https://github.com/Ruby570bocadito",
+    "label": "GitHub"
+   },
+   {
+    "href": "https://www.linkedin.com/in/rafael-g%C3%A1lvez-silipo-07445a409/",
+    "label": "LinkedIn"
+   },
+   {
+    "href": "/cv.pdf",
+    "label": "CV ↓"
+   }
+  ]
+ },
+ "footer": {
+  "brand": "Rafael Gálvez Silipo",
+  "cols": [
+   {
+    "title": {
+     "k": "foot.sections"
+    },
+    "links": [
+     {
+      "href": "#about",
+      "label": {
+       "k": "nav.about"
+      },
+      "ext": false,
+      "download": null
+     },
+     {
+      "href": "#projects",
+      "label": {
+       "k": "nav.projects"
+      },
+      "ext": false,
+      "download": null
+     },
+     {
+      "href": "#skills",
+      "label": {
+       "k": "nav.skills"
+      },
+      "ext": false,
+      "download": null
+     },
+     {
+      "href": "#contact",
+      "label": {
+       "k": "nav.contact"
+      },
+      "ext": false,
+      "download": null
+     }
+    ]
+   },
+   {
+    "title": {
+     "k": "foot.elsewhere"
+    },
+    "links": [
+     {
+      "href": "https://github.com/Ruby570bocadito",
+      "label": {
+       "h": "GitHub"
+      },
+      "ext": true,
+      "download": null
+     },
+     {
+      "href": "https://www.linkedin.com/in/rafael-g%C3%A1lvez-silipo-07445a409/",
+      "label": {
+       "h": "LinkedIn"
+      },
+      "ext": true,
+      "download": null
+     },
+     {
+      "href": "/cv.pdf",
+      "label": {
+       "h": "CV ↓"
+      },
+      "ext": false,
+      "download": "CV Practicas.pdf"
+     }
+    ]
+   },
+   {
+    "title": {
+     "k": "foot.site"
+    },
+    "links": [
+     {
+      "href": "https://ruby570bocadito.github.io",
+      "label": {
+       "h": "ruby570bocadito.github.io"
+      },
+      "ext": true,
+      "download": null
+     },
+     {
+      "href": "#top",
+      "label": {
+       "k": "foot.top"
+      },
+      "ext": false,
+      "download": null
+     }
+    ]
+   }
+  ],
+  "copy": "© 2026 Rafael Gálvez Silipo"
+ },
+ "linkedin": "https://www.linkedin.com/in/rafael-g%C3%A1lvez-silipo-07445a409/",
+ "github": "https://github.com/Ruby570bocadito"
+}
