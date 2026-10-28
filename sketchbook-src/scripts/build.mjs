@@ -81,16 +81,45 @@ const hero = `
   </div>
 </section>`;
 
-// ── Pasillo (nav visual) ──
+// ── Pasillo 3D (se recorre haciendo scroll) ──
+// Cada puerta se coloca a un lado del corredor, cada vez más al fondo (Z negativa).
+// app.js desplaza el "mundo" en Z según el scroll, así que avanzas por el pasillo.
+const corridorDoors = DOORS.map((d, i) => {
+  const z = -340 - i * 300;            // de -340 (cerca) a -2740 (fondo)
+  const left = i % 2 === 0;
+  const x = left ? -360 : 360;
+  const a = left ? 24 : -24;
+  const lx = left ? -200 : 200;
+  return `<a class="cdoor ${left ? 'l' : 'r'}" href="#${d.id}" style="transform:translate3d(${x}px,20px,${z}px) rotateY(${a}deg)" tabindex="-1" aria-hidden="true">
+      <span class="cdoor-num">0${i + 1}</span><img src="${art(d.art)}" alt="" loading="lazy">
+    </a>
+    ${node('span', d.label, 'cdoor-label', ` style="transform:translate3d(${lx}px,150px,${z}px)" aria-hidden="true"`)}`;
+}).join('');
+
 const hall = `
-<section class="hall" id="hall">
-  <div class="frame">
-    <div class="sec-head reveal" style="margin-inline:auto;text-align:center">
+<section class="corridor-journey" id="hall">
+  <div class="corridor-stage" aria-hidden="true">
+    <div class="corridor-vignette"></div>
+    <div class="corridor-world">
+      <div class="cplane cfloor"></div>
+      <div class="cplane cceil"></div>
+      <div class="cplane cwall cwall-l"></div>
+      <div class="cplane cwall cwall-r"></div>
+      <div class="cend"><img src="${art('door-end')}" alt=""></div>
+      ${corridorDoors}
+    </div>
+    <div class="corridor-hud">
+      ${node('p', '@hall.title', 'chud-title')}
+      ${node('p', '@hall.scroll', 'chud-hint')}
+    </div>
+  </div>
+  <div class="frame hall-fallback">
+    <div class="sec-head" style="margin-inline:auto;text-align:center">
       ${node('h2', '@hall.title')}
       ${node('p', '@hall.sub', 'lead')}
     </div>
     <nav class="hall-doors" data-i18n-aria="ui.aria_nav">
-      ${DOORS.map((d, i) => `<a class="hall-door reveal" href="#${d.id}"><span class="num">0${i + 1}</span><div class="d-img"><img src="${art(d.art)}" alt="" loading="lazy"></div>${node('span', d.label, 'lbl')}</a>`).join('')}
+      ${DOORS.map((d, i) => `<a class="hall-door" href="#${d.id}"><span class="num">0${i + 1}</span><div class="d-img"><img src="${art(d.art)}" alt="" loading="lazy"></div>${node('span', d.label, 'lbl')}</a>`).join('')}
     </nav>
   </div>
 </section>`;

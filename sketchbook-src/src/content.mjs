@@ -52,6 +52,7 @@ export const T = {
   'hall.title': { es: 'Elige una puerta', en: 'Pick a door' },
   'hall.sub': { es: 'Cada puerta abre una parte de lo que hago. Entra por donde quieras.',
                 en: 'Each door opens a part of what I do. Enter wherever you like.' },
+  'hall.scroll': { es: 'Baja para avanzar por el pasillo ↓', en: 'Scroll to walk down the corridor ↓' },
 
   // ── Sobre mí ──
   'about.kicker': { es: '01 — Sobre mí', en: '01 — About' },
@@ -384,7 +385,7 @@ export const ROB_SKILLS = ['@rk.1', '@rk.2', '@rk.3', '@rk.4'];
 
 export const CERTS = [
   { title: 'eJPTv2 — Junior Penetration Tester', org: 'INE Security', tag: '@cert.obtained', p: '@cert.ejpt.p', art: 'medal' },
-  { title: 'Cisco Networking Academy', org: 'Cisco', tag: '@cert.course', p: '@cert.cisco.p', art: 'gradcap' },
+  { title: 'Cisco Networking Academy', org: 'Cisco', tag: '@cert.obtained', p: '@cert.cisco.p', art: 'gradcap' },
   { title: 'Introducción al Hacking', org: 'Hack4u', tag: '@cert.course', p: '@cert.hack4u.p', art: 'gradcap' },
   { title: 'BIG School', org: 'BIG School', tag: '@cert.course', p: '@cert.big.p', art: 'gradcap' },
   { title: 'CRTO', org: '@cert.crto.org', tag: '@cert.prep', p: '@cert.crto.p', art: 'trophy', prep: true },

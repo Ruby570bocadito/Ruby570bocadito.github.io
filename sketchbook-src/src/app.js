@@ -142,12 +142,33 @@
     l.dataset.base = cs && cs !== 'none' ? '' : (l.style.transform || '');
   });
 
+  /* ---------- pasillo 3D (avanzar al hacer scroll) ---------- */
+  var cj = document.querySelector('.corridor-journey');
+  var cworld = document.querySelector('.corridor-world');
+  var DEPTH = 2050;
+  var corridorOn = false;
+  (function initCorridor() {
+    if (!cj || !cworld) return;
+    var supports3d = window.CSS && CSS.supports && (CSS.supports('transform-style', 'preserve-3d') || CSS.supports('-webkit-transform-style', 'preserve-3d'));
+    if (reduce || !supports3d) return;          // sin 3D o con "reducir animación": rejilla de reserva
+    corridorOn = true;
+    cj.classList.add('on');
+  })();
+  function onScrollCorridor() {
+    if (!corridorOn) return;
+    var total = cj.offsetHeight - window.innerHeight;
+    var p = total > 0 ? (-cj.getBoundingClientRect().top) / total : 0;
+    p = p < 0 ? 0 : p > 1 ? 1 : p;
+    cworld.style.setProperty('--cz', (p * DEPTH).toFixed(1) + 'px');
+  }
+
   var ticking = false;
   function onScroll() {
     if (ticking) return; ticking = true;
-    requestAnimationFrame(function () { onScrollHdr(); onScrollParallax(); ticking = false; });
+    requestAnimationFrame(function () { onScrollHdr(); onScrollParallax(); onScrollCorridor(); ticking = false; });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
   /* ---------- copiar correo ---------- */
