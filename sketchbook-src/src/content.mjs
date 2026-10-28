@@ -53,6 +53,7 @@ export const T = {
   'hall.sub': { es: 'Cada puerta abre una parte de lo que hago. Entra por donde quieras.',
                 en: 'Each door opens a part of what I do. Enter wherever you like.' },
   'hall.scroll': { es: 'Baja para avanzar por el pasillo ↓', en: 'Scroll to walk down the corridor ↓' },
+  'hall.enter': { es: 'Entra ↓', en: 'Enter ↓' },
 
   // ── Sobre mí ──
   'about.kicker': { es: '01 — Sobre mí', en: '01 — About' },

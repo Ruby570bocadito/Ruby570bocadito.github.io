@@ -84,16 +84,36 @@ const hero = `
 // ── Pasillo 3D (se recorre haciendo scroll) ──
 // Cada puerta se coloca a un lado del corredor, cada vez más al fondo (Z negativa).
 // app.js desplaza el "mundo" en Z según el scroll, así que avanzas por el pasillo.
+// Escala a cualquier número de secciones: el pasillo se alarga con DOORS.length.
+const DSTEP = 300, DZ0 = -340;
 const corridorDoors = DOORS.map((d, i) => {
-  const z = -340 - i * 300;            // de -340 (cerca) a -2740 (fondo)
+  const z = DZ0 - i * DSTEP;
   const left = i % 2 === 0;
   const x = left ? -360 : 360;
   const a = left ? 24 : -24;
-  const lx = left ? -200 : 200;
-  return `<a class="cdoor ${left ? 'l' : 'r'}" href="#${d.id}" style="transform:translate3d(${x}px,20px,${z}px) rotateY(${a}deg)" tabindex="-1" aria-hidden="true">
-      <span class="cdoor-num">0${i + 1}</span><img src="${art(d.art)}" alt="" loading="lazy">
+  const lx = left ? -205 : 205;
+  return `<a class="cdoor ${left ? 'l' : 'r'}" href="#${d.id}" data-cz="${z}" style="transform:translate3d(${x}px,20px,${z}px) rotateY(${a}deg)" tabindex="-1" aria-hidden="true">
+      <img src="${art(d.art)}" alt="" loading="lazy">
     </a>
-    ${node('span', d.label, 'cdoor-label', ` style="transform:translate3d(${lx}px,150px,${z}px)" aria-hidden="true"`)}`;
+    ${node('span', d.label, 'cdoor-label', ` data-cz="${z}" style="transform:translate3d(${lx}px,150px,${z}px)" aria-hidden="true"`)}`;
+}).join('');
+
+// Cuadros colgados en las paredes, entre las puertas (sensación de galería al pasar).
+const PICS = [
+  { art: 'bug', frame: 'frame-simple' }, { art: 'duck', frame: 'frame-ornate' },
+  { art: 'gear', frame: 'frame-simple' }, { art: 'magnifier', frame: 'frame-ornate' },
+  { art: 'medal', frame: 'frame-simple' }, { art: 'robot', frame: 'frame-ornate' },
+  { art: 'plane', frame: 'frame-simple' }, { art: 'trophy', frame: 'frame-ornate' }
+];
+const corridorPics = PICS.map((pic, i) => {
+  const z = DZ0 - 150 - i * DSTEP;     // intercalados entre las puertas
+  const left = i % 2 !== 0;            // lado opuesto al de la puerta cercana
+  const x = left ? -496 : 496;
+  const a = left ? 90 : -90;           // planos sobre la pared
+  return `<div class="cpic" data-cz="${z}" style="transform:translate3d(${x}px,-118px,${z}px) rotateY(${a}deg)" aria-hidden="true">
+      <img class="cpic-in" src="${art(pic.art)}" alt="">
+      <img class="cpic-frame" src="${art(pic.frame)}" alt="">
+    </div>`;
 }).join('');
 
 const hall = `
@@ -105,12 +125,15 @@ const hall = `
       <div class="cplane cceil"></div>
       <div class="cplane cwall cwall-l"></div>
       <div class="cplane cwall cwall-r"></div>
-      <div class="cend"><img src="${art('door-end')}" alt=""></div>
+      <a class="cend" href="#about" data-cz="-3150" aria-label="Entrar"><img src="${art('door-end')}" alt=""><span class="cend-cue">${node('span', '@hall.enter')}</span></a>
+      ${corridorPics}
       ${corridorDoors}
     </div>
     <div class="corridor-hud">
+      <div class="chud-now"><span class="chud-now-label"></span></div>
       ${node('p', '@hall.title', 'chud-title')}
       ${node('p', '@hall.scroll', 'chud-hint')}
+      <div class="chud-dots">${DOORS.map((d, i) => `<a class="chud-dot" href="#${d.id}" data-i18n-aria="${d.label.slice(1)}" title=""></a>`).join('')}</div>
     </div>
   </div>
   <div class="frame hall-fallback">
@@ -279,7 +302,7 @@ const goal = `
     <div class="goal-list">
       ${GOALS.map(g => `<div class="goal-item reveal"><span class="arrow" aria-hidden="true">→</span>${node('span', g)}</div>`).join('')}
     </div>
-    <img class="landscape reveal" src="${art('landscape')}" alt="Camino de campo hacia montañas al amanecer" loading="lazy">
+    <div class="banner reveal"><img class="landscape" data-px="30" src="${art('landscape')}" alt="Camino de campo hacia montañas al amanecer" loading="lazy"></div>
   </div>
 </section>`;
 
@@ -298,7 +321,7 @@ const contact = `
         <a class="btn" href="${LINKS.cv}" download="CV Rafael Galvez.pdf">${node('span', '@contact.cv')} ↓</a>
       </div>
     </div>
-    <img class="sea reveal" src="${art('sea')}" alt="Costa mediterránea al final de un muelle de madera" loading="lazy">
+    <div class="banner reveal"><img class="sea" data-px="30" src="${art('sea')}" alt="Costa mediterránea al final de un muelle de madera" loading="lazy"></div>
   </div>
 </section>`;
 
