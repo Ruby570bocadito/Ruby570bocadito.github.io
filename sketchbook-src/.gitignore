@@ -1,0 +1,6 @@
+node_modules/
+.art-raw/
+.cache/
+
+# imágenes procesadas (se regeneran con scripts/process-art.py; se publican en /sb/art)
+public/art/
