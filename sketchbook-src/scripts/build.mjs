@@ -81,60 +81,74 @@ const hero = `
   </div>
 </section>`;
 
-// ── Pasillo 3D (se recorre haciendo scroll) ──
-// Cada puerta se coloca a un lado del corredor, cada vez más al fondo (Z negativa).
-// app.js desplaza el "mundo" en Z según el scroll, así que avanzas por el pasillo.
-// Escala a cualquier número de secciones: el pasillo se alarga con DOORS.length.
-const DSTEP = 300, DZ0 = -340;
-const corridorDoors = DOORS.map((d, i) => {
-  const z = DZ0 - i * DSTEP;
-  const left = i % 2 === 0;
-  const x = left ? -360 : 360;
-  const a = left ? 24 : -24;
-  const lx = left ? -205 : 205;
-  return `<a class="cdoor ${left ? 'l' : 'r'}" href="#${d.id}" data-cz="${z}" style="transform:translate3d(${x}px,20px,${z}px) rotateY(${a}deg)" tabindex="-1" aria-hidden="true">
-      <img src="${art(d.art)}" alt="" loading="lazy">
-    </a>
-    ${node('span', d.label, 'cdoor-label', ` data-cz="${z}" style="transform:translate3d(${lx}px,150px,${z}px)" aria-hidden="true"`)}`;
-}).join('');
+// ── Pasillo 3D (corredor real que se recorre con scroll) ──
+// Puertas empotradas en las paredes (con número grabado), lámparas colgando con
+// luz, niebla de profundidad, cuadros y resplandor al final. app.js desplaza el
+// "mundo" en Z. Escala a cualquier número de secciones: se alarga con DOORS.
+const HW = 500, DSTEP = 300, DZ0 = -360;
+const LASTZ = DZ0 - (DOORS.length - 1) * DSTEP;
+const ENDZ = LASTZ - 560;
 
-// Cuadros colgados en las paredes, entre las puertas (sensación de galería al pasar).
-const PICS = [
-  { art: 'bug', frame: 'frame-simple' }, { art: 'duck', frame: 'frame-ornate' },
-  { art: 'gear', frame: 'frame-simple' }, { art: 'magnifier', frame: 'frame-ornate' },
-  { art: 'medal', frame: 'frame-simple' }, { art: 'robot', frame: 'frame-ornate' },
-  { art: 'plane', frame: 'frame-simple' }, { art: 'trophy', frame: 'frame-ornate' }
-];
-const corridorPics = PICS.map((pic, i) => {
-  const z = DZ0 - 150 - i * DSTEP;     // intercalados entre las puertas
-  const left = i % 2 !== 0;            // lado opuesto al de la puerta cercana
-  const x = left ? -496 : 496;
-  const a = left ? 90 : -90;           // planos sobre la pared
-  return `<div class="cpic" data-cz="${z}" style="transform:translate3d(${x}px,-118px,${z}px) rotateY(${a}deg)" aria-hidden="true">
-      <img class="cpic-in" src="${art(pic.art)}" alt="">
-      <img class="cpic-frame" src="${art(pic.frame)}" alt="">
+// Las puertas miran hacia la cámara (giradas ~26°) y se apoyan en el suelo, con
+// una sombra de contacto que las "pega" al suelo (adiós aspecto de pegatina).
+const DOORX = 360, DOORA = 26, FLOORY = 322;
+const corridorDoors = DOORS.map((d, i) => {
+  const left = i % 2 === 0;
+  const x = left ? -DOORX : DOORX;
+  const a = left ? DOORA : -DOORA;
+  const z = DZ0 - i * DSTEP;
+  return `<div class="cshadow" data-cz="${z}" style="transform:translate3d(${x}px,${FLOORY}px,${z}px) rotateX(90deg)" aria-hidden="true"></div>
+    <div class="cbay ${left ? 'l' : 'r'}" data-cz="${z}" data-key="${d.label.slice(1)}" style="transform:translate3d(${x}px,140px,${z}px) rotateY(${a}deg)" aria-hidden="true">
+      <span class="cbay-num">${('0' + (i + 1)).slice(-2)}</span>
+      <a class="cdoor" href="#${d.id}" tabindex="-1"><img src="${art(d.art)}" alt=""></a>
     </div>`;
 }).join('');
+
+// Cuadros enmarcados colgados en las paredes, entre las puertas (galería al pasar).
+const PICS = [
+  { art: 'bug', frame: 'frame-simple' }, { art: 'gear', frame: 'frame-ornate' },
+  { art: 'medal', frame: 'frame-simple' }, { art: 'duck', frame: 'frame-ornate' },
+  { art: 'robot', frame: 'frame-simple' }, { art: 'magnifier', frame: 'frame-ornate' }
+];
+const corridorPics = PICS.map((pic, i) => {
+  const z = DZ0 - 280 - i * DSTEP;
+  const left = i % 2 !== 0;
+  const x = left ? -(HW - 4) : (HW - 4);
+  const a = left ? 90 : -90;
+  return `<div class="cpic" data-cz="${z}" style="transform:translate3d(${x}px,-150px,${z}px) rotateY(${a}deg)" aria-hidden="true">
+      <img class="cpic-in" src="${art(pic.art)}" alt=""><img class="cpic-frame" src="${art(pic.frame)}" alt="">
+    </div>`;
+}).join('');
+
+// Lámparas colgando del techo, con su charco de luz.
+const lampZs = [];
+for (let z = -280; z > ENDZ + 160; z -= DSTEP) lampZs.push(z);
+const corridorLamps = lampZs.map(z => `<img class="clamp" data-cz="${z}" src="${art('lamp')}" alt="" style="transform:translate3d(0,-262px,${z}px)"><div class="clamp-glow" data-cz="${z}" style="transform:translate3d(0,-120px,${z}px)"></div>`).join('');
+
+// Planos de niebla: tiñen lo que queda por detrás -> profundidad atmosférica.
+const fogZs = [0.42, 0.66, 0.88].map(t => Math.round(ENDZ * t));
+const corridorFog = fogZs.map(z => `<div class="cfog" style="transform:translateZ(${z}px)"></div>`).join('');
 
 const hall = `
 <section class="corridor-journey" id="hall">
   <div class="corridor-stage" aria-hidden="true">
-    <div class="corridor-vignette"></div>
-    <div class="corridor-glow"></div>
     <div class="corridor-world">
       <div class="cplane cfloor"></div>
       <div class="cplane cceil"></div>
       <div class="cplane cwall cwall-l"></div>
       <div class="cplane cwall cwall-r"></div>
-      <a class="cend" href="#about" data-cz="-3150" aria-label="Entrar"><img src="${art('door-end')}" alt=""><span class="cend-cue">${node('span', '@hall.enter')}</span></a>
       ${corridorPics}
       ${corridorDoors}
+      ${corridorLamps}
+      ${corridorFog}
+      <a class="cend" href="#about" data-cz="${ENDZ}" style="transform:translateZ(${ENDZ}px)" aria-label="Entrar"><img src="${art('door-end')}" alt=""><span class="cend-cue">${node('span', '@hall.enter')}</span></a>
     </div>
+    <div class="corridor-glow"></div>
+    <div class="corridor-vignette"></div>
     <div class="corridor-hud">
-      <div class="chud-now"><span class="chud-now-label"></span></div>
-      ${node('p', '@hall.title', 'chud-title')}
+      <div class="chud-now"><span class="chud-now-num"></span><span class="chud-now-label"></span></div>
+      <div class="chud-bar"><span class="chud-fill"></span></div>
       ${node('p', '@hall.scroll', 'chud-hint')}
-      <div class="chud-dots">${DOORS.map((d, i) => `<a class="chud-dot" href="#${d.id}" data-i18n-aria="${d.label.slice(1)}" title=""></a>`).join('')}</div>
     </div>
   </div>
   <div class="frame hall-fallback">

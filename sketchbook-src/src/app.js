@@ -175,35 +175,30 @@
     cj.classList.add('on');
   })();
 
-  var fadeEls = corridorOn ? Array.prototype.slice.call(cworld.querySelectorAll('.cdoor, .cdoor-label, .cpic')).map(function (el) {
-    return { el: el, z: parseFloat(el.getAttribute('data-cz')) || 0, lab: el.classList.contains('cdoor-label') };
-  }) : [];
-  var doorEls = corridorOn ? Array.prototype.slice.call(cworld.querySelectorAll('.cdoor')) : [];
-  var labelEls = corridorOn ? Array.prototype.slice.call(cworld.querySelectorAll('.cdoor-label')) : [];
-  var dotEls = Array.prototype.slice.call(document.querySelectorAll('.chud-dot'));
-  var hudNow = document.querySelector('.chud-now-label');
+  var doorBays = corridorOn ? Array.prototype.slice.call(cworld.querySelectorAll('.cbay')) : [];
+  var cend = cworld && cworld.querySelector('.cend');
+  var hudNow = document.querySelector('.chud-now');
+  var hudNowLabel = document.querySelector('.chud-now-label');
+  var hudNowNum = document.querySelector('.chud-now-num');
+  var cfill = document.querySelector('.chud-fill');
   var cglow = document.querySelector('.corridor-glow');
+  // La profundidad total se deduce de la puerta del fondo (escala con el nº de secciones).
+  if (corridorOn && cend) { var ez = parseFloat(cend.getAttribute('data-cz')) || -3000; DEPTH = -ez - 580; }
 
   function updateCorridorElems(cz) {
-    var i, zc;
-    for (i = 0; i < fadeEls.length; i++) {
-      zc = fadeEls[i].z + cz;
-      var op;
-      if (zc > 150) op = 0;
-      else if (fadeEls[i].lab) op = zc > -1250 ? 1 : Math.max(0, 1 - (-zc - 1250) / 850);
-      else { op = 1 - Math.max(0, (-zc - 1400)) / 1700; if (op < 0.22) op = 0.22; }
-      fadeEls[i].el.style.opacity = op.toFixed(2);
+    var i, zc, best = -1, bd = 1e9;
+    for (i = 0; i < doorBays.length; i++) {
+      zc = (parseFloat(doorBays[i].getAttribute('data-cz')) || 0) + cz;
+      if (zc < 170) { var dd = Math.abs(zc + 260); if (dd < bd) { bd = dd; best = i; } }
     }
-    var best = -1, bd = 1e9;
-    for (i = 0; i < doorEls.length; i++) {
-      zc = (parseFloat(doorEls[i].getAttribute('data-cz')) || 0) + cz;
-      if (zc < 150) { var dd = Math.abs(zc + 230); if (dd < bd) { bd = dd; best = i; } }
-    }
-    for (i = 0; i < doorEls.length; i++) doorEls[i].classList.toggle('near', i === best);
-    for (i = 0; i < dotEls.length; i++) dotEls[i].classList.toggle('on', i === best);
+    for (i = 0; i < doorBays.length; i++) doorBays[i].classList.toggle('near', i === best);
     if (hudNow) {
-      if (best >= 0 && labelEls[best]) { hudNow.textContent = labelEls[best].textContent; hudNow.classList.add('show'); }
-      else hudNow.classList.remove('show');
+      if (best >= 0) {
+        var key = doorBays[best].getAttribute('data-key');
+        if (hudNowLabel) hudNowLabel.textContent = (I18N[lang] && I18N[lang][key]) || (I18N.es[key] || '');
+        if (hudNowNum) hudNowNum.textContent = ('0' + (best + 1)).slice(-2);
+        hudNow.classList.add('show');
+      } else hudNow.classList.remove('show');
     }
   }
 
@@ -213,7 +208,9 @@
     if (Math.abs(czTarget - czCur) < 0.5) czCur = czTarget;
     cworld.style.setProperty('--cz', czCur.toFixed(1) + 'px');
     updateCorridorElems(czCur);
-    if (cglow) { var pr = (czCur / DEPTH - 0.6) / 0.4; cglow.style.opacity = (pr < 0 ? 0 : pr > 1 ? 1 : pr).toFixed(3); }
+    var prog = czCur / DEPTH; if (prog < 0) prog = 0; else if (prog > 1) prog = 1;
+    if (cfill) cfill.style.width = (prog * 100).toFixed(1) + '%';
+    if (cglow) { var pr = (prog - 0.58) / 0.42; cglow.style.opacity = (pr < 0 ? 0 : pr > 1 ? 1 : pr).toFixed(3); }
     czRAF = czCur !== czTarget ? requestAnimationFrame(czLoop) : 0;
   }
   function onScrollCorridor() {

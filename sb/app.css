@@ -174,53 +174,64 @@ section { position: relative; padding: clamp(3.5rem, 8vw, 7rem) 0; }
 .hall-fallback { padding: clamp(3.5rem, 8vw, 7rem) 0; }
 
 /* Activado por JS (navegador con 3D y sin "reducir animación") */
-.corridor-journey.on { height: 460vh; padding: 0; }
+.corridor-journey.on { height: 540vh; padding: 0; }
 .corridor-journey.on .hall-fallback { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); }
 .corridor-journey.on .corridor-stage {
   display: block; position: sticky; top: 0; height: 100svh; overflow: hidden;
-  perspective: 820px; perspective-origin: calc(50% + var(--look-x, 0px)) calc(47% + var(--look-y, 0px));
-  background: radial-gradient(130% 100% at 50% 42%, #f0e8d6 0%, #ddd1b4 55%, #b7a684 100%);
+  perspective: 820px; perspective-origin: calc(50% + var(--look-x, 0px)) calc(46% + var(--look-y, 0px));
+  background: radial-gradient(135% 105% at 50% 45%, #f1e9d6 0%, #ddd0b2 52%, #b9a981 100%);
 }
 .corridor-world { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; transform: translateZ(var(--cz, 0px)); will-change: transform; }
 .corridor-world > * { position: absolute; left: 0; top: 0; }
-.cplane { backface-visibility: hidden; }
-.cfloor { width: 1000px; height: 6600px; margin: -3300px 0 0 -500px; transform: translateY(322px) rotateX(90deg); background: url('/sb/art/floor.webp'); background-size: 340px; opacity: .97; }
-.cceil  { width: 1000px; height: 6600px; margin: -3300px 0 0 -500px; transform: translateY(-300px) rotateX(-90deg); background: url('/sb/art/ceiling.webp'); background-size: 360px; opacity: .88; }
-.cwall  { width: 6600px; height: 626px; margin: -313px 0 0 -3300px; background: url('/sb/art/wall.webp'); background-size: 540px 626px; }
+.cfloor { width: 1000px; height: 7400px; margin: -3700px 0 0 -500px; transform: translateY(322px) rotateX(90deg); background: #d6c8a6 url('/sb/art/floor.webp'); background-size: 360px; }
+.cceil  { width: 1000px; height: 7400px; margin: -3700px 0 0 -500px; transform: translateY(-300px) rotateX(-90deg); background: #cbbc98 url('/sb/art/ceiling.webp'); background-size: 380px; }
+.cwall  { width: 7400px; height: 626px; margin: -313px 0 0 -3700px; background: #d4c5a4 url('/sb/art/wall.webp'); background-size: 560px 626px; }
 .cwall-l { transform: translateX(-500px) rotateY(90deg); }
 .cwall-r { transform: translateX(500px) rotateY(-90deg); }
-.cend { width: 1800px; height: 940px; margin: -470px 0 0 -900px; transform: translateZ(-3150px); display: flex; align-items: flex-end; justify-content: center; background: url('/sb/art/brick.webp'); background-size: 340px; overflow: hidden; }
-.cend img { height: 76%; width: auto; filter: drop-shadow(0 -4px 34px rgba(255,238,194,.75)); }
-.cdoor { width: 230px; margin: -168px 0 0 -115px; display: block; text-decoration: none; transition: opacity .25s linear; }
-.cdoor img { width: 100%; filter: drop-shadow(4px 10px 12px rgba(44,30,10,.35)); }
-.cdoor-label { width: 160px; margin: -22px 0 0 -80px; text-align: center; font-family: var(--f-hand); font-size: 1.35rem; color: var(--ink); background: var(--card); border: 2.5px solid var(--ink); border-radius: 12px 6px 13px 7px; padding: .08rem .3rem; box-shadow: 2px 2px 0 var(--ink); transition: opacity .25s linear; }
+
+/* puertas giradas hacia la cámara, apoyadas en el suelo */
+.cbay { width: 240px; height: 360px; margin: -180px 0 0 -120px; }
+.cdoor { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; text-decoration: none; }
+.cdoor img { width: 100%; filter: drop-shadow(2px 5px 5px rgba(50,36,16,.28)); transition: filter .25s; }
+.cbay.near .cdoor img { filter: drop-shadow(0 0 15px rgba(75,63,143,.6)) drop-shadow(2px 5px 5px rgba(50,36,16,.28)); }
+.cbay-num { position: absolute; top: -4%; left: 50%; transform: translateX(-50%); font-family: var(--f-display); font-size: 28px; color: #4a3a22; opacity: .55; }
+/* sombra de contacto en el suelo */
+.cshadow { width: 250px; height: 96px; margin: -48px 0 0 -125px; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(46,32,14,.34), rgba(46,32,14,0) 70%); }
+
 /* cuadros en las paredes */
-.cpic { width: 150px; margin: -95px 0 0 -75px; transition: opacity .25s linear; }
+.cpic { width: 140px; height: 175px; margin: -88px 0 0 -70px; transition: opacity .25s linear; }
 .cpic img { position: absolute; left: 0; top: 0; width: 100%; }
-.cpic-in { width: 66%; left: 17%; top: 20%; filter: saturate(.95); }
-.cpic-frame { filter: drop-shadow(2px 6px 7px rgba(44,30,10,.3)); }
-/* puerta del fondo + invitación a entrar */
-.cend { text-decoration: none; }
-.cend-cue { position: absolute; left: 50%; bottom: 8%; transform: translateX(-50%); font-family: var(--f-display); font-size: 34px; color: #3f2f1a; background: rgba(251,247,236,.86); border: 2.5px solid var(--ink); border-radius: 14px 7px 15px 6px; padding: .1rem .7rem; box-shadow: 2px 2px 0 var(--ink); white-space: nowrap; animation: cuebob 1.8s ease-in-out infinite; }
+.cpic-in { width: 62%; left: 19%; top: 20%; filter: saturate(.92) brightness(.96); }
+.cpic-frame { filter: drop-shadow(2px 5px 7px rgba(0,0,0,.4)); }
+
+/* lámparas colgando + charco de luz cálida */
+.clamp { width: 112px; margin: -56px 0 0 -56px; filter: drop-shadow(0 2px 14px rgba(255,214,140,.45)); }
+.clamp-glow { width: 440px; height: 360px; margin: -175px 0 0 -220px; pointer-events: none; background: radial-gradient(50% 50% at 50% 40%, rgba(255,236,185,.5), rgba(255,210,130,0) 70%); }
+
+/* niebla aérea: lo lejano se aclara hacia el fondo (sutil) */
+.cfog { width: 2600px; height: 1500px; margin: -750px 0 0 -1300px; pointer-events: none; background: radial-gradient(62% 60% at 50% 46%, rgba(243,236,214,0) 34%, rgba(240,231,205,.12) 64%, rgba(236,226,196,.26)); }
+
+/* puerta del fondo iluminada + invitación a entrar */
+.cend { width: 1900px; height: 1000px; margin: -500px 0 0 -950px; display: flex; align-items: flex-end; justify-content: center; text-decoration: none; background: radial-gradient(44% 48% at 50% 45%, rgba(255,240,200,.9), rgba(224,210,176,.5) 55%, rgba(210,196,160,0) 78%); overflow: hidden; }
+.cend img { height: 80%; width: auto; filter: drop-shadow(0 -4px 40px rgba(255,236,170,.9)) brightness(1.05); }
+.cend-cue { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); font-family: var(--f-display); font-size: 34px; color: #3f2f1a; background: rgba(255,246,222,.92); border: 2.5px solid #3f2f1a; border-radius: 14px 7px 15px 6px; padding: .1rem .8rem; box-shadow: 2px 2px 0 #3f2f1a; white-space: nowrap; animation: cuebob 1.8s ease-in-out infinite; }
 @keyframes cuebob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
-.corridor-vignette { position: absolute; inset: 0; z-index: 5; pointer-events: none; box-shadow: inset 0 0 160px 50px rgba(60,46,24,.45); }
-.corridor-glow { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; mix-blend-mode: screen; background: radial-gradient(46% 46% at 50% 44%, rgba(255,249,228,1), rgba(255,233,180,.7) 36%, rgba(255,233,180,0) 70%); }
-.cdoor.near img { filter: drop-shadow(0 0 18px rgba(75,63,143,.55)) drop-shadow(4px 10px 12px rgba(44,30,10,.35)); }
-.corridor-hud { position: absolute; z-index: 6; left: 0; right: 0; bottom: clamp(1.2rem, 5vh, 3rem); text-align: center; pointer-events: none; padding: 0 1rem; }
-.chud-now { height: 2.1rem; }
-.chud-now-label { display: inline-block; font-family: var(--f-hand); font-size: clamp(1.1rem,3vw,1.5rem); color: #fff; background: var(--accent); border: 2px solid var(--ink); border-radius: 20px; padding: .05rem .9rem; box-shadow: 2px 2px 0 var(--ink); opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .25s; }
-.chud-now-label.show { opacity: 1; transform: none; }
-.chud-title { font-family: var(--f-display); font-size: clamp(1.5rem, 4.6vw, 2.6rem); color: var(--ink); margin: .3rem 0 0; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
-.chud-hint { font-family: var(--f-hand); font-size: clamp(1rem,2.6vw,1.2rem); color: var(--ink-soft); margin: .2rem 0 0; }
-.chud-dots { display: flex; gap: .5rem; justify-content: center; margin-top: .7rem; pointer-events: auto; }
-.chud-dot { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--ink); background: transparent; transition: background .2s, transform .2s; }
-.chud-dot:hover { transform: scale(1.3); background: var(--accent-2); }
-.chud-dot.on { background: var(--accent); transform: scale(1.25); }
+
+.corridor-vignette { position: absolute; inset: 0; z-index: 5; pointer-events: none; box-shadow: inset 0 0 150px 8px rgba(74,56,30,.34); }
+.corridor-glow { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; mix-blend-mode: screen; background: radial-gradient(42% 44% at 50% 45%, rgba(255,246,214,.95), rgba(255,230,175,.6) 40%, rgba(255,230,175,0) 74%); }
+
+.corridor-hud { position: absolute; z-index: 6; left: 0; right: 0; bottom: clamp(1.4rem, 6vh, 3.4rem); text-align: center; pointer-events: none; padding: 0 1rem; }
+.chud-now { min-height: 2.4rem; display: flex; align-items: center; justify-content: center; gap: .55rem; opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s; }
+.chud-now.show { opacity: 1; transform: none; }
+.chud-now-num { font-family: var(--f-display); font-size: clamp(1.4rem,4vw,2rem); color: var(--accent); opacity: .7; }
+.chud-now-label { font-family: var(--f-display); font-size: clamp(1.5rem,4.4vw,2.3rem); color: var(--ink); text-shadow: 0 1px 0 rgba(255,255,255,.6); }
+.chud-bar { width: min(340px, 72vw); height: 5px; margin: .55rem auto .6rem; border-radius: 3px; background: rgba(44,40,36,.18); overflow: hidden; }
+.chud-fill { display: block; height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--accent), #8a7bd8); transition: width .12s linear; }
+.chud-hint { font-family: var(--f-hand); font-size: clamp(1rem,2.6vw,1.2rem); color: var(--ink-soft); margin: 0; }
 @media (max-width: 620px) {
   .corridor-journey.on { height: 420vh; }
-  .corridor-journey.on .corridor-stage { perspective: 560px; }
-  .cdoor { width: 180px; margin: -132px 0 0 -90px; }
-  .cdoor-label { font-size: 1.15rem; }
+  .corridor-journey.on .corridor-stage { perspective: 520px; }
+  .cbay { width: 200px; height: 310px; margin: -155px 0 0 -100px; }
 }
 
 /* rejilla de reserva (sin 3D) */
