@@ -182,6 +182,7 @@
   var labelEls = corridorOn ? Array.prototype.slice.call(cworld.querySelectorAll('.cdoor-label')) : [];
   var dotEls = Array.prototype.slice.call(document.querySelectorAll('.chud-dot'));
   var hudNow = document.querySelector('.chud-now-label');
+  var cglow = document.querySelector('.corridor-glow');
 
   function updateCorridorElems(cz) {
     var i, zc;
@@ -198,6 +199,7 @@
       zc = (parseFloat(doorEls[i].getAttribute('data-cz')) || 0) + cz;
       if (zc < 150) { var dd = Math.abs(zc + 230); if (dd < bd) { bd = dd; best = i; } }
     }
+    for (i = 0; i < doorEls.length; i++) doorEls[i].classList.toggle('near', i === best);
     for (i = 0; i < dotEls.length; i++) dotEls[i].classList.toggle('on', i === best);
     if (hudNow) {
       if (best >= 0 && labelEls[best]) { hudNow.textContent = labelEls[best].textContent; hudNow.classList.add('show'); }
@@ -211,6 +213,7 @@
     if (Math.abs(czTarget - czCur) < 0.5) czCur = czTarget;
     cworld.style.setProperty('--cz', czCur.toFixed(1) + 'px');
     updateCorridorElems(czCur);
+    if (cglow) { var pr = (czCur / DEPTH - 0.6) / 0.4; cglow.style.opacity = (pr < 0 ? 0 : pr > 1 ? 1 : pr).toFixed(3); }
     czRAF = czCur !== czTarget ? requestAnimationFrame(czLoop) : 0;
   }
   function onScrollCorridor() {

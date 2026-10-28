@@ -120,6 +120,7 @@ const hall = `
 <section class="corridor-journey" id="hall">
   <div class="corridor-stage" aria-hidden="true">
     <div class="corridor-vignette"></div>
+    <div class="corridor-glow"></div>
     <div class="corridor-world">
       <div class="cplane cfloor"></div>
       <div class="cplane cceil"></div>
