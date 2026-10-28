@@ -52,8 +52,13 @@ export const T = {
   'hall.title': { es: 'Elige una puerta', en: 'Pick a door' },
   'hall.sub': { es: 'Cada puerta abre una parte de lo que hago. Entra por donde quieras.',
                 en: 'Each door opens a part of what I do. Enter wherever you like.' },
-  'hall.scroll': { es: 'Baja para avanzar por el pasillo ↓', en: 'Scroll to walk down the corridor ↓' },
+  'hall.scroll': { es: 'Baja para avanzar · haz clic en una puerta para entrar', en: 'Scroll to walk · click a door to enter' },
   'hall.enter': { es: 'Entra ↓', en: 'Enter ↓' },
+  'hall.enter_now': { es: 'Entrar', en: 'Enter' },
+  'hall.tap_hint': { es: 'Toca la puerta para entrar', en: 'Tap the door to enter' },
+  'ui.back_hall': { es: 'Volver al pasillo', en: 'Back to the corridor' },
+  'ui.next_room': { es: 'Siguiente sala', en: 'Next room' },
+  'ui.prev_room': { es: 'Sala anterior', en: 'Previous room' },
 
   // ── Sobre mí ──
   'about.kicker': { es: '01 — Sobre mí', en: '01 — About' },

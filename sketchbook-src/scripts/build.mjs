@@ -98,9 +98,9 @@ const corridorDoors = DOORS.map((d, i) => {
   const a = left ? DOORA : -DOORA;
   const z = DZ0 - i * DSTEP;
   return `<div class="cshadow" data-cz="${z}" style="transform:translate3d(${x}px,${FLOORY}px,${z}px) rotateX(90deg)" aria-hidden="true"></div>
-    <div class="cbay ${left ? 'l' : 'r'}" data-cz="${z}" data-key="${d.label.slice(1)}" style="transform:translate3d(${x}px,140px,${z}px) rotateY(${a}deg)" aria-hidden="true">
+    <div class="cbay ${left ? 'l' : 'r'}" data-cz="${z}" data-key="${d.label.slice(1)}" data-id="${d.id}" style="transform:translate3d(${x}px,140px,${z}px) rotateY(${a}deg)" aria-hidden="true">
       <span class="cbay-num">${('0' + (i + 1)).slice(-2)}</span>
-      <a class="cdoor" href="#${d.id}" tabindex="-1"><img src="${art(d.art)}" alt=""></a>
+      <a class="cdoor" href="#${d.id}" data-door="${d.id}" tabindex="-1"><img src="${art(d.art)}" alt=""><span class="cdoor-cue">${node('span', '@hall.enter_now')} ↵</span></a>
     </div>`;
 }).join('');
 
@@ -146,7 +146,10 @@ const hall = `
     <div class="corridor-glow"></div>
     <div class="corridor-vignette"></div>
     <div class="corridor-hud">
-      <div class="chud-now"><span class="chud-now-num"></span><span class="chud-now-label"></span></div>
+      <div class="chud-now">
+        <span class="chud-now-num"></span><span class="chud-now-label"></span>
+        <button class="chud-enter" type="button" data-enter-near>${node('span', '@hall.enter_now')} <span aria-hidden="true">↵</span></button>
+      </div>
       <div class="chud-bar"><span class="chud-fill"></span></div>
       ${node('p', '@hall.scroll', 'chud-hint')}
     </div>
@@ -399,6 +402,43 @@ const head = `<!DOCTYPE html>
 <script>window.__I18N=${i18nJson};</script>
 </head>`;
 
+// ── Salas: cada sección vive a pantalla completa y se abre al entrar por su
+// puerta. Mantienen el id interno (anclas) y añaden barra para volver al
+// pasillo e ir a la sala anterior/siguiente. El pasillo es el sitio; esto no
+// es una web apilada. ──
+const ROOM_ORDER = DOORS.map(d => d.id);
+const roomLabel = id => (DOORS.find(d => d.id === id) || {}).label || '';
+const roomWrap = (id, inner) => {
+  const i = ROOM_ORDER.indexOf(id);
+  const prev = ROOM_ORDER[i - 1], next = ROOM_ORDER[i + 1];
+  const lbl = roomLabel(id);
+  return `<article class="room" data-room="${id}" role="dialog" aria-modal="true" aria-hidden="true" aria-label="${escAttr(es(lbl.slice(1)))}">
+  <div class="room-bar">
+    <button class="btn sm room-back" type="button" data-room-close>← ${node('span', '@ui.back_hall')}</button>
+    <span class="room-step"><span class="room-step-num">${('0' + (i + 1)).slice(-2)}</span>${node('span', lbl, 'room-step-label')}</span>
+    <span class="room-nav">
+      ${prev ? `<button class="btn sm ghost room-go" type="button" data-room-go="${prev}" data-i18n-aria="ui.prev_room"><span aria-hidden="true">↑</span></button>` : ''}
+      ${next ? `<button class="btn sm ghost room-go" type="button" data-room-go="${next}" data-i18n-aria="ui.next_room"><span aria-hidden="true">↓</span></button>` : ''}
+    </span>
+  </div>
+  <div class="room-scroll">${inner}</div>
+</article>`;
+};
+
+const rooms = `
+<div class="rooms-layer" id="rooms-layer" aria-hidden="true">
+  <div class="room-flash" aria-hidden="true"></div>
+  ${roomWrap('about', about)}
+  ${roomWrap('projects', projects)}
+  ${roomWrap('cyber', cyber)}
+  ${roomWrap('code', code)}
+  ${roomWrap('ai', ai)}
+  ${roomWrap('robotics', robotics)}
+  ${roomWrap('certs', certs)}
+  ${roomWrap('goal', goal)}
+  ${roomWrap('contact', contact)}
+</div>`;
+
 const html = `${head}
 <body>
 <a class="sr-only focusable" href="#about">${es('ui.skip')}</a>
@@ -407,16 +447,8 @@ ${navOverlay}
 <main id="top">
 ${hero}
 ${hall}
-${about}
-${projects}
-${cyber}
-${code}
-${ai}
-${robotics}
-${certs}
-${goal}
-${contact}
 </main>
+${rooms}
 ${footer}
 <script src="/sb/app.js" defer></script>
 </body>

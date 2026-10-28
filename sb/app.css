@@ -191,10 +191,14 @@ section { position: relative; padding: clamp(3.5rem, 8vw, 7rem) 0; }
 
 /* puertas giradas hacia la cámara, apoyadas en el suelo */
 .cbay { width: 240px; height: 360px; margin: -180px 0 0 -120px; }
-.cdoor { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; text-decoration: none; }
-.cdoor img { width: 100%; filter: drop-shadow(2px 5px 5px rgba(50,36,16,.28)); transition: filter .25s; }
+.cdoor { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; text-decoration: none; cursor: pointer; }
+.cdoor img { width: 100%; filter: drop-shadow(2px 5px 5px rgba(50,36,16,.28)); transition: filter .25s, transform .25s var(--ease); transform-origin: 50% 100%; }
 .cbay.near .cdoor img { filter: drop-shadow(0 0 15px rgba(75,63,143,.6)) drop-shadow(2px 5px 5px rgba(50,36,16,.28)); }
+.cbay.near .cdoor:hover img { transform: scale(1.035); filter: drop-shadow(0 0 22px rgba(75,63,143,.85)) drop-shadow(2px 5px 5px rgba(50,36,16,.28)); }
 .cbay-num { position: absolute; top: -4%; left: 50%; transform: translateX(-50%); font-family: var(--f-display); font-size: 28px; color: #4a3a22; opacity: .55; }
+/* "Entrar" sobre la puerta cercana */
+.cdoor-cue { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%) scale(.9); font-family: var(--f-display); font-size: 20px; color: #fff; background: var(--accent); border: 2.5px solid #fff; border-radius: 12px 6px 13px 6px; padding: .18rem .7rem; box-shadow: 0 4px 14px rgba(44,40,36,.4); white-space: nowrap; opacity: 0; transition: opacity .25s, transform .25s var(--ease); pointer-events: none; }
+.cbay.near .cdoor-cue { opacity: .96; transform: translate(-50%,-50%) scale(1); }
 /* sombra de contacto en el suelo */
 .cshadow { width: 250px; height: 96px; margin: -48px 0 0 -125px; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(46,32,14,.34), rgba(46,32,14,0) 70%); }
 
@@ -225,6 +229,9 @@ section { position: relative; padding: clamp(3.5rem, 8vw, 7rem) 0; }
 .chud-now.show { opacity: 1; transform: none; }
 .chud-now-num { font-family: var(--f-display); font-size: clamp(1.4rem,4vw,2rem); color: var(--accent); opacity: .7; }
 .chud-now-label { font-family: var(--f-display); font-size: clamp(1.5rem,4.4vw,2.3rem); color: var(--ink); text-shadow: 0 1px 0 rgba(255,255,255,.6); }
+.chud-enter { pointer-events: auto; font-family: var(--f-hand); font-size: 1rem; color: #fff; background: var(--accent); border: 2.5px solid var(--ink); border-radius: 14px 7px 16px 6px / 7px 14px 6px 16px; padding: .28rem .9rem; box-shadow: 2px 2px 0 var(--ink); transition: transform .12s var(--ease), box-shadow .12s; margin-left: .3rem; }
+.chud-enter:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+.chud-enter:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--ink); }
 .chud-bar { width: min(340px, 72vw); height: 5px; margin: .55rem auto .6rem; border-radius: 3px; background: rgba(44,40,36,.18); overflow: hidden; }
 .chud-fill { display: block; height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--accent), #8a7bd8); transition: width .12s linear; }
 .chud-hint { font-family: var(--f-hand); font-size: clamp(1rem,2.6vw,1.2rem); color: var(--ink-soft); margin: 0; }
@@ -232,6 +239,57 @@ section { position: relative; padding: clamp(3.5rem, 8vw, 7rem) 0; }
   .corridor-journey.on { height: 420vh; }
   .corridor-journey.on .corridor-stage { perspective: 520px; }
   .cbay { width: 200px; height: 310px; margin: -155px 0 0 -100px; }
+}
+
+/* ============================= Salas (se abren al entrar por una puerta) ============================= */
+.rooms-layer { position: fixed; inset: 0; z-index: 260; pointer-events: none; }
+.room-flash { position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0;
+  background: radial-gradient(60% 55% at 50% 48%, rgba(255,246,214,.95), rgba(255,232,180,.55) 42%, rgba(255,232,180,0) 76%); }
+.room-flash.go { animation: roomflash .6s var(--ease); }
+@keyframes roomflash { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+
+.room {
+  position: fixed; inset: 0; display: none; flex-direction: column;
+  background: var(--paper);
+  background-image:
+    radial-gradient(120% 90% at 50% -10%, rgba(255,246,214,.85), rgba(255,246,214,0) 55%),
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.5), transparent 42%),
+    radial-gradient(circle at 82% 82%, rgba(199,181,140,.3), transparent 48%);
+  box-shadow: inset 0 0 160px 10px rgba(74,56,30,.22);
+}
+.room.open { display: flex; pointer-events: auto; }
+.room.anim { animation: roomin .5s var(--ease); }
+@keyframes roomin { from { opacity: 0; transform: perspective(1200px) translateZ(-220px) scale(.96); } to { opacity: 1; transform: none; } }
+.room.closing { animation: roomout .32s var(--ease) forwards; }
+@keyframes roomout { to { opacity: 0; transform: scale(.97); } }
+
+.room-bar {
+  flex: 0 0 auto; position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 1rem; justify-content: space-between;
+  padding: .7rem clamp(1rem, 3vw, 2rem);
+  background: rgba(243,236,219,.92); backdrop-filter: blur(8px);
+  border-bottom: 2px dashed rgba(44,40,36,.25);
+}
+.room-step { display: inline-flex; align-items: baseline; gap: .5rem; min-width: 0; }
+.room-step-num { font-family: var(--f-hand); color: var(--accent); font-size: .95rem; }
+.room-step-label { font-family: var(--f-display); font-size: clamp(1.1rem, 3.4vw, 1.7rem); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.room-nav { display: flex; gap: .4rem; flex: 0 0 auto; }
+.room-go { font-family: var(--f-display); line-height: 1; min-width: 2.2rem; }
+.room-back { flex: 0 0 auto; }
+
+.room-scroll { flex: 1 1 auto; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+.room-scroll section { min-height: 0; }
+/* el banner inferior de contacto/objetivo no necesita margen gigante dentro de la sala */
+.room-scroll section:first-child { padding-top: clamp(2rem, 5vw, 4rem); }
+
+body.room-open { overflow: hidden; }
+@media (max-width: 560px) {
+  .room-bar { padding: .55rem .7rem; gap: .5rem; }
+  .room-step-label { font-size: 1.05rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .room.anim, .room.closing, .room-flash.go { animation: none; }
+  .room.closing { opacity: 0; }
 }
 
 /* rejilla de reserva (sin 3D) */

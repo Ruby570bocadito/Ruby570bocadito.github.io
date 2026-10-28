@@ -176,6 +176,7 @@
   })();
 
   var doorBays = corridorOn ? Array.prototype.slice.call(cworld.querySelectorAll('.cbay')) : [];
+  var nearId = null;   // id de la sección de la puerta más cercana (para "Entrar")
   var cend = cworld && cworld.querySelector('.cend');
   var hudNow = document.querySelector('.chud-now');
   var hudNowLabel = document.querySelector('.chud-now-label');
@@ -192,6 +193,7 @@
       if (zc < 170) { var dd = Math.abs(zc + 260); if (dd < bd) { bd = dd; best = i; } }
     }
     for (i = 0; i < doorBays.length; i++) doorBays[i].classList.toggle('near', i === best);
+    nearId = best >= 0 ? doorBays[best].getAttribute('data-id') : null;
     if (hudNow) {
       if (best >= 0) {
         var key = doorBays[best].getAttribute('data-key');
@@ -255,4 +257,104 @@
   /* ---------- año en curso en el footer ---------- */
   var y = new Date().getFullYear();
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = y; });
+
+  /* ---------- salas: entrar por una puerta, interactuar, volver ---------- */
+  var roomsLayer = document.getElementById('rooms-layer');
+  var roomFlash = roomsLayer && roomsLayer.querySelector('.room-flash');
+  var rooms = {};
+  if (roomsLayer) Array.prototype.forEach.call(roomsLayer.querySelectorAll('.room'), function (r) { rooms[r.getAttribute('data-room')] = r; });
+  var current = null;        // sala abierta (elemento) o null
+  var lastFocus = null;      // a quién devolver el foco al cerrar
+
+  function revealIn(room) {  // al abrir, el contenido ya estaba oculto: muéstralo
+    room.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); runCounter(el); });
+  }
+
+  function showRoom(id, anim) {
+    var room = rooms[id];
+    if (!room) return false;
+    if (current && current !== room) { current.classList.remove('open', 'anim'); current.setAttribute('aria-hidden', 'true'); }
+    current = room;
+    roomsLayer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('room-open');
+    room.setAttribute('aria-hidden', 'false');
+    room.classList.add('open');
+    var sc = room.querySelector('.room-scroll'); if (sc) sc.scrollTop = 0;
+    revealIn(room);
+    if (anim && !reduce && !motionOff) {
+      room.classList.remove('anim'); void room.offsetWidth; room.classList.add('anim');
+      if (roomFlash) { roomFlash.classList.remove('go'); void roomFlash.offsetWidth; roomFlash.classList.add('go'); }
+    }
+    var back = room.querySelector('[data-room-close]'); if (back) { try { back.focus({ preventScroll: true }); } catch (e) { back.focus(); } }
+    return true;
+  }
+
+  function openRoom(id, push) {
+    if (!rooms[id]) return;
+    if (!current) lastFocus = document.activeElement;
+    var wasOpen = !!current;
+    if (!showRoom(id, true)) return;
+    try {
+      if (push === false) history.replaceState({ room: id }, '', '#' + id);
+      else if (wasOpen) history.replaceState({ room: id }, '', '#' + id);
+      else history.pushState({ room: id }, '', '#' + id);
+    } catch (e) {}
+  }
+
+  function finishClose() {
+    if (!current) return;
+    var room = current; current = null;
+    room.classList.remove('open', 'anim', 'closing');
+    room.setAttribute('aria-hidden', 'true');
+    roomsLayer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('room-open');
+    if (lastFocus && lastFocus.focus) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
+    lastFocus = null;
+    onScroll();   // re-sincroniza el pasillo
+  }
+
+  function closeRoom() {
+    if (!current) return;
+    var room = current;
+    if (reduce || motionOff) { finishClose(); return; }
+    room.classList.add('closing');
+    var done = false;
+    var fin = function () { if (done) return; done = true; room.removeEventListener('animationend', fin); finishClose(); };
+    room.addEventListener('animationend', fin);
+    setTimeout(fin, 420);
+  }
+
+  // Volver al pasillo: usa el historial para que el botón "atrás" también funcione.
+  function requestClose() {
+    if (history.state && history.state.room) { try { history.back(); return; } catch (e) {} }
+    finishClose();
+  }
+
+  window.addEventListener('popstate', function (e) {
+    var st = e.state;
+    if (st && st.room && rooms[st.room]) { showRoom(st.room, true); roomsLayer.setAttribute('aria-hidden', 'false'); }
+    else if (current) finishClose();
+  });
+
+  // Clics: puertas del pasillo, enlaces a secciones, menú, botones de sala.
+  document.addEventListener('click', function (e) {
+    var go = e.target.closest('[data-room-go]');
+    if (go) { e.preventDefault(); openRoom(go.getAttribute('data-room-go'), true); return; }
+    if (e.target.closest('[data-room-close]')) { e.preventDefault(); requestClose(); return; }
+    if (e.target.closest('[data-enter-near]')) { e.preventDefault(); if (nearId) openRoom(nearId, true); return; }
+    var a = e.target.closest('a[href^="#"], [data-door]');
+    if (!a) return;
+    var id = a.getAttribute('data-door') || (a.getAttribute('href') || '').slice(1);
+    if (id && rooms[id]) { e.preventDefault(); openRoom(id, true); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && current) { e.preventDefault(); requestClose(); }
+  });
+
+  // Enlace profundo: si llegas con #seccion, abre esa sala directamente.
+  (function initDeepLink() {
+    var id = (location.hash || '').slice(1);
+    if (id && rooms[id]) { showRoom(id, false); try { history.replaceState({ room: id }, '', '#' + id); } catch (e) {} }
+  })();
 })();
