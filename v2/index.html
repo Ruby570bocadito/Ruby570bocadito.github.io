@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rafael Gálvez Silipo — Ciberseguridad · Programación · IA · Robótica</title>
+<meta name="description" content="Portafolio de Rafael Gálvez Silipo: ciberseguridad ofensiva y defensiva, programación, inteligencia artificial y robótica. eJPTv2, Cisco, Hack4u y proyectos reales de seguridad.">
+<meta name="theme-color" content="#06070b">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rafael Gálvez Silipo — Portafolio tecnológico">
+<meta property="og:description" content="Ciberseguridad · Programación · Inteligencia Artificial · Robótica">
+<meta property="og:image" content="https://ruby570bocadito.github.io/v2/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/CabinetGrotesk-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="rive/portfolio.riv" as="fetch" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="nav" id="top">
+  <a class="brand" href="#main" aria-label="Rafael Gálvez Silipo">
+    <span class="brand-mark">RG</span>
+    <span class="brand-name">Rafael Gálvez<span class="dim"> Silipo</span></span>
+  </a>
+  <nav class="nav-links" aria-label="Principal" data-i18n-aria="aria.nav">
+    <a href="#areas" data-i18n="nav.areas">Áreas</a>
+    <a href="#ciberseguridad" data-i18n="nav.cyber">Ciberseguridad</a>
+    <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+    <a href="#formacion" data-i18n="nav.training">Formación</a>
+    <a href="#eventos" data-i18n="nav.events">IA &amp; Eventos</a>
+    <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="lang" type="button" aria-label="Cambiar idioma / Change language">
+      <span data-l="es">ES</span><span data-l="en">EN</span><i></i>
+    </button>
+    <a class="btn btn-sm btn-ghost" href="../cv.pdf" download="CV Rafael Galvez Silipo.pdf" data-i18n="nav.cv">CV ↓</a>
+    <button class="burger" type="button" aria-label="Menú" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"><img src="img/hero.webp" alt="" fetchpriority="high"></div>
+  <div class="hero-grid wrap">
+    <div class="hero-copy">
+      <p class="pill reveal"><span class="dot"></span><span data-i18n="hero.pill">Disponible para prácticas y roles junior</span></p>
+      <h1 class="hero-title reveal">
+        <span class="line">Rafael</span>
+        <span class="line">Gálvez <em>Silipo</em></span>
+      </h1>
+      <p class="hero-roles reveal mono" aria-live="polite">
+        <span class="prompt">&gt;</span> <span class="typed" data-roles-es="Ciberseguridad|Pentesting y hacking ético|Análisis SOC|Programación|Inteligencia Artificial|Robótica" data-roles-en="Cybersecurity|Pentesting & ethical hacking|SOC analysis|Software development|Artificial Intelligence|Robotics">Ciberseguridad</span><span class="caret"></span>
+      </p>
+      <p class="hero-sub reveal" data-i18n="hero.sub">Estudiante de ciberseguridad en Málaga. Combino <b>seguridad ofensiva y defensiva</b>, programación, inteligencia artificial y robótica — y aprendo construyendo herramientas reales para entender cómo funcionan los sistemas, cómo se atacan y cómo se protegen.</p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary magnetic" href="#proyectos"><span data-i18n="hero.cta1">Ver proyectos</span> <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost magnetic" href="#contacto" data-i18n="hero.cta2">Hablemos</a>
+      </div>
+      <ul class="hero-meta reveal mono">
+        <li><span data-i18n="meta.cert">Certificación</span><b>eJPTv2</b></li>
+        <li><span data-i18n="meta.study">Estudios</span><b>SMR</b></li>
+        <li><span data-i18n="meta.loc">Base</span><b>Málaga, ES</b></li>
+      </ul>
+    </div>
+    <div class="hero-visual">
+      <div class="core-wrap">
+        <canvas id="rive-core" class="rive-canvas" aria-label="Núcleo interactivo animado con Rive: sigue el cursor" role="img"></canvas>
+        <div class="core-fallback" aria-hidden="true"></div>
+      </div>
+      <p class="core-hint mono"><span class="blink">●</span> <span data-i18n="hero.hint">mueve el cursor · haz clic para escanear</span></p>
+    </div>
+  </div>
+  <a class="scroll-cue mono" href="#sobre-mi" data-i18n="hero.scroll">scroll</a>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Python</span><span>Bash</span><span>Linux</span><span>Active Directory</span><span>Kali Linux</span><span>Metasploit</span><span>Microsoft Defender</span><span>SIEM</span><span>EDR</span><span>OSINT</span><span>MITRE ATT&amp;CK</span><span>Go</span><span>Rust</span><span>C#</span><span>Unity</span><span>HTML</span><span>CSS</span><span>Docker</span><span>BloodHound</span><span>Hack The Box</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="sobre-mi">
+  <div class="wrap about">
+    <div class="about-head">
+      <p class="eyebrow reveal" data-i18n="about.eye">00 — Sobre mí</p>
+      <h2 class="h2 reveal" data-i18n="about.h2">La curiosidad primero, <em>siempre.</em></h2>
+    </div>
+    <div class="about-body">
+      <p class="lead reveal" data-i18n="about.p1">Empecé a programar con unos <b>10 años</b>, creando videojuegos con C# y Unity. Con el tiempo mi curiosidad pasó de crear juegos a entender los sistemas que hay debajo — y eso me llevó a la <b>ciberseguridad</b>.</p>
+      <p class="reveal" data-i18n="about.p2">Hoy estudio <b>Sistemas Microinformáticos y Redes (SMR)</b> y me formo en hacking ético, pentesting, análisis SOC, Active Directory, OSINT, análisis de malware e inteligencia artificial aplicada a la seguridad. He liderado un equipo de robótica hasta la <b>final nacional del ASTI Challenge</b>.</p>
+      <p class="reveal" data-i18n="about.p3">Aprendo <b>construyendo</b>: en lugar de quedarme en los tutoriales, desarrollo mis propias herramientas — desde orquestación Red Team e infraestructura C2 hasta sistemas distribuidos y herramientas de seguridad con IA. Mi objetivo no es solo que algo funcione, sino entender <em>por qué</em> funciona.</p>
+      <div class="stats reveal">
+        <div class="stat"><b class="count" data-to="18" data-suffix="+">0</b><span data-i18n="stat.repos">repositorios públicos</span></div>
+        <div class="stat"><b class="count" data-to="27" data-suffix="+">0</b><span data-i18n="stat.courses">cursos y certificaciones</span></div>
+        <div class="stat"><b class="count" data-to="1400" data-suffix="+">0</b><span data-i18n="stat.tests">tests automatizados escritos</span></div>
+        <div class="stat"><b class="count" data-to="5" data-suffix="">0</b><span data-i18n="stat.years">años programando videojuegos</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AREAS (BENTO) ============ -->
+<section class="section" id="areas">
+  <div class="wrap">
+    <p class="eyebrow reveal" data-i18n="areas.eye">01 — Mi portafolio tecnológico</p>
+    <h2 class="h2 reveal" data-i18n="areas.h2">Seis áreas, <em>un mismo perfil.</em></h2>
+    <p class="section-sub reveal" data-i18n="areas.sub">Ciberseguridad · Programación · Inteligencia Artificial · Robótica. Pasa el cursor por cada tarjeta: los iconos son animaciones Rive interactivas.</p>
+
+    <div class="bento">
+      <a class="card area reveal" href="#ciberseguridad" style="--c:#ff3b5c" data-area="IconCyber">
+        <img class="area-img" src="img/cyber.webp" alt="" loading="lazy">
+        <canvas class="rive-icon" aria-hidden="true"></canvas>
+        <span class="area-n mono">01</span>
+        <h3 data-i18n="a1.h">Ciberseguridad</h3>
+        <p data-i18n="a1.p">Hacking ético, pentesting, análisis SOC, EDR/SIEM, Active Directory, OSINT y análisis de malware.</p>
+        <span class="more mono" data-i18n="more">explorar →</span>
+      </a>
+      <a class="card area reveal" href="#programacion" style="--c:#3b82f6" data-area="IconCode">
+        <img class="area-img" src="img/code.webp" alt="" loading="lazy">
+        <canvas class="rive-icon" aria-hidden="true"></canvas>
+        <span class="area-n mono">02</span>
+        <h3 data-i18n="a2.h">Programación y desarrollo</h3>
+        <p data-i18n="a2.p">Python, Bash, HTML, CSS y Linux — y unos cinco años de formación práctica en desarrollo de videojuegos.</p>
+        <span class="more mono" data-i18n="more">explorar →</span>
+      </a>
+      <a class="card area reveal" href="#formacion" style="--c:#a855f7" data-area="IconCerts">
+        <img class="area-img" src="img/certs.webp" alt="" loading="lazy">
+        <canvas class="rive-icon" aria-hidden="true"></canvas>
+        <span class="area-n mono">03</span>
+        <h3 data-i18n="a3.h">Certificaciones y formación</h3>
+        <p data-i18n="a3.p">eJPTv2, Cisco Networking Academy, Hack4u y BIG school — más de una veintena de cursos especializados.</p>
+        <span class="more mono" data-i18n="more">explorar →</span>
+      </a>
+      <a class="card area reveal" href="#eventos" style="--c:#f5b301" data-area="IconAI">
+        <img class="area-img" src="img/ai.webp" alt="" loading="lazy">
+        <canvas class="rive-icon" aria-hidden="true"></canvas>
+        <span class="area-n mono">04</span>
+        <h3 data-i18n="a4.h">IA y hackatones</h3>
+        <p data-i18n="a4.p">IA aplicada al hacking ético, Meta AI Developer Hackathon, Megahackatón y Talent Land.</p>
+        <span class="more mono" data-i18n="more">explorar →</span>
+      </a>
+      <a class="card area reveal" href="#robotica" style="--c:#22c55e" data-area="IconRobot">
+        <img class="area-img" src="img/robotics.webp" alt="" loading="lazy">
+        <canvas class="rive-icon" aria-hidden="true"></canvas>
+        <span class="area-n mono">05</span>
+        <h3 data-i18n="a5.h">Robótica y liderazgo</h3>
+        <p data-i18n="a5.p">Líder de un equipo de robótica, finalista nacional del ASTI Challenge.</p>
+        <span class="more mono" data-i18n="more">explorar →</span>
+      </a>
+      <a class="card area reveal" href="#objetivo" style="--c:#fb7a24" data-area="IconGoal">
+        <img class="area-img" src="img/goal.webp" alt="" loading="lazy">
+        <canvas class="rive-icon" aria-hidden="true"></canvas>
+        <span class="area-n mono">06</span>
+        <h3 data-i18n="a6.h">Objetivo profesional</h3>
+        <p data-i18n="a6.p">Analista SOC, pentesting, automatización con Python y Bash, IA y desarrollo de software.</p>
+        <span class="more mono" data-i18n="more">explorar →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CYBERSECURITY ============ -->
+<section class="section accent-red" id="ciberseguridad">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow reveal" data-i18n="cy.eye">02 — Ciberseguridad</p>
+        <h2 class="h2 reveal" data-i18n="cy.h2">Atacar para entender, <em>defender para proteger.</em></h2>
+        <p class="section-sub reveal" data-i18n="cy.sub">Mi foco principal: tanto el lado ofensivo (Red Team, pentesting) como el defensivo (SOC, detección y respuesta).</p>
+      </div>
+      <figure class="split-img reveal"><img src="img/cyber.webp" alt="" loading="lazy"></figure>
+    </div>
+
+    <ul class="skill-grid">
+      <li class="skill reveal"><span class="sk-i mono">01</span><b data-i18n="cy.1">Hacking ético y pentesting</b><small>Kali · Metasploit · eJPTv2</small></li>
+      <li class="skill reveal"><span class="sk-i mono">02</span><b data-i18n="cy.2">Seguridad defensiva y análisis SOC</b><small data-i18n="cy.2s">triage · detección · respuesta</small></li>
+      <li class="skill reveal"><span class="sk-i mono">03</span><b>EDR, SIEM, SOAR y Microsoft Defender</b><small data-i18n="cy.3s">telemetría y correlación</small></li>
+      <li class="skill reveal"><span class="sk-i mono">04</span><b>Active Directory</b><small data-i18n="cy.4s">enumeración · Kerberos · BloodHound</small></li>
+      <li class="skill reveal"><span class="sk-i mono">05</span><b data-i18n="cy.5">Seguridad web, redes y dispositivos</b><small>Web · Wi-Fi · Android</small></li>
+      <li class="skill reveal"><span class="sk-i mono">06</span><b data-i18n="cy.6">Detección de phishing</b><small data-i18n="cy.6s">ingeniería social · concienciación</small></li>
+      <li class="skill reveal"><span class="sk-i mono">07</span><b data-i18n="cy.7">OSINT, privacidad y anonimato</b><small data-i18n="cy.7s">reconocimiento · huella digital</small></li>
+      <li class="skill reveal"><span class="sk-i mono">08</span><b data-i18n="cy.8">Linux y escalada de privilegios</b><small>SUID · sudo · GTFOBins</small></li>
+      <li class="skill reveal"><span class="sk-i mono">09</span><b data-i18n="cy.9">Análisis de malware</b><small data-i18n="cy.9s">virus · troyanos · spyware</small></li>
+    </ul>
+
+    <div class="courses reveal" id="udemy">
+      <div class="courses-head">
+        <h3 class="h3"><span data-i18n="ud.h">Cursos de Udemy</span> <span class="badge mono">17</span></h3>
+        <div class="filters" role="group" aria-label="Filtrar cursos" data-i18n-aria="ud.filter">
+          <button class="chip is-on" data-f="all" data-i18n="ud.all">Todos</button>
+          <button class="chip" data-f="pentest">Pentesting</button>
+          <button class="chip" data-f="malware">Malware</button>
+          <button class="chip" data-f="net" data-i18n="ud.net">Redes y dispositivos</button>
+          <button class="chip" data-f="osint" data-i18n="ud.osint">OSINT y privacidad</button>
+          <button class="chip" data-f="ai" data-i18n="ud.ai">IA</button>
+        </div>
+      </div>
+      <ol class="course-list">
+        <li data-t="osint" data-i18n="ud.1">Seguridad Informática desde Cero: Aprende a Detectar y Defenderte del Phishing</li>
+        <li data-t="pentest" data-i18n="ud.2">Máster en Pentesting y Hacking Ético</li>
+        <li data-t="pentest" data-i18n="ud.3">Curso Completo de Hacking Ético y Ciberseguridad</li>
+        <li data-t="net" data-i18n="ud.4">Hacking Ético a Dispositivos Móviles Android</li>
+        <li data-t="osint" data-i18n="ud.5">Anonimato en la Red: Privacidad y Deep Web</li>
+        <li data-t="malware" data-i18n="ud.6">Hacking Ético: Virus, Troyanos, Spywares y Malware</li>
+        <li data-t="pentest" data-i18n="ud.7">Hacking Ético con Kali Linux</li>
+        <li data-t="pentest" data-i18n="ud.8">Escalada de Privilegios en Linux</li>
+        <li data-t="malware" data-i18n="ud.9">Hacking Ético a PC con Malware</li>
+        <li data-t="pentest" data-i18n="ud.10">Curso Completo de Hacking Ético: Aprende Todo</li>
+        <li data-t="pentest" data-i18n="ud.11">Hacking Ético con Metasploit Framework</li>
+        <li data-t="net" data-i18n="ud.12">Hacking Ético a Redes Wi-Fi</li>
+        <li data-t="ai" data-i18n="ud.13">ChatGPT para Hacking Ético</li>
+        <li data-t="net" data-i18n="ud.14">Hacking Ético desde Dispositivos Android</li>
+        <li data-t="osint" data-i18n="ud.15">Hacking Ético a Redes Sociales</li>
+        <li data-t="pentest" data-i18n="ud.16">Curso de Hacking Ético Web: Pentesting en Webs</li>
+        <li data-t="osint" data-i18n="ud.17">Curso de OSINT para Principiantes</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="section" id="proyectos">
+  <div class="wrap">
+    <p class="eyebrow reveal" data-i18n="pr.eye">03 — Proyectos destacados</p>
+    <h2 class="h2 reveal" data-i18n="pr.h2">Cuatro proyectos de ingeniería, <em>cada uno una pregunta real.</em></h2>
+    <p class="section-sub reveal" data-i18n="pr.sub">Capturas reales, uso real, sin maquetas. Todo se ejecuta en laboratorios aislados y autorizados. Pasa el cursor para ver la demo.</p>
+
+    <div class="projects">
+      <article class="project reveal">
+        <a class="shot" href="https://github.com/Ruby570bocadito/orquesta-rt" target="_blank" rel="noopener">
+          <span class="shot-bar mono"><i></i><i></i><i></i> orquesta-rt — <span data-i18n="pr.console">consola de operador</span></span>
+          <img src="../assets/orquesta-console.png" data-gif="../assets/orquesta-demo.gif" alt="Consola de operador de OrquestaRT" loading="lazy">
+        </a>
+        <div class="project-body">
+          <p class="tag mono"><span class="live"></span><span data-i18n="pr.active">Investigación activa</span></p>
+          <h3>OrquestaRT</h3>
+          <p class="role" data-i18n="orq.role">Plataforma de orquestación Red Team asistida por IA</p>
+          <p data-i18n="orq.desc">Orquesta operaciones Red Team autorizadas mediante flujos asistidos por IA — combinando automatización ofensiva con aprobación humana, control del alcance y auditoría completa.</p>
+          <ul class="metrics mono"><li><b>587</b><span data-i18n="m.tests">tests</span></li><li><b>F0→F7</b><span data-i18n="m.phases">fases</span></li><li><b>26+</b><span data-i18n="m.transports">transportes recon</span></li></ul>
+          <p class="stack mono">Python · FastAPI · LangGraph · Next.js</p>
+        </div>
+      </article>
+      <article class="project reveal">
+        <a class="shot" href="https://github.com/Ruby570bocadito/WorldC2" target="_blank" rel="noopener">
+          <span class="shot-bar mono"><i></i><i></i><i></i> WorldC2 — <span data-i18n="pr.dash">panel de operador</span></span>
+          <img src="../assets/worldc2-dashboard.png" data-gif="../assets/worldc2-demo.gif" alt="Panel de WorldC2" loading="lazy">
+        </a>
+        <div class="project-body">
+          <p class="tag mono"><span class="live"></span><span data-i18n="pr.active">Investigación activa</span></p>
+          <h3>WorldC2</h3>
+          <p class="role" data-i18n="wc2.role">Plataforma de mando y control para laboratorios autorizados</p>
+          <p data-i18n="wc2.desc">Proyecto de investigación para entender la arquitectura de mando y control: comunicaciones cifradas, gestión de sesiones, RBAC e infraestructura de operador.</p>
+          <ul class="metrics mono"><li><b>5</b><span data-i18n="m.fallbacks">transportes de respaldo</span></li><li><b>4</b><span data-i18n="m.rbac">roles RBAC</span></li><li><b>14</b><span data-i18n="m.e2e">tests E2E</span></li></ul>
+          <p class="stack mono">Go · Vue 3 · Networking · Cryptography</p>
+        </div>
+      </article>
+      <article class="project reveal">
+        <a class="shot" href="https://github.com/Ruby570bocadito/HiveMind" target="_blank" rel="noopener">
+          <span class="shot-bar mono"><i></i><i></i><i></i> HiveMind — <span data-i18n="pr.colony">consola de la colonia</span></span>
+          <img src="../assets/hivemind-console.png" data-gif="../assets/hivemind-demo.gif" alt="Consola de HiveMind" loading="lazy">
+        </a>
+        <div class="project-body">
+          <p class="tag mono"><span class="live"></span><span data-i18n="pr.active">Investigación activa</span></p>
+          <h3>HiveMind</h3>
+          <p class="role" data-i18n="hive.role">Investigación de seguridad multi-agente distribuida</p>
+          <p data-i18n="hive.desc">Proyecto experimental en Rust que explora coordinación multi-agente, sistemas distribuidos, concurrencia, consenso e investigación asistida por IA.</p>
+          <ul class="metrics mono"><li><b>282</b><span data-i18n="m.passing">tests superados</span></li><li><b>9</b><span data-i18n="m.crates">crates</span></li><li><b>0</b><span data-i18n="m.ports">puertos TCP entre agentes</span></li></ul>
+          <p class="stack mono">Rust · Distributed Systems · Concurrency · AI</p>
+        </div>
+      </article>
+      <article class="project reveal">
+        <a class="shot" href="https://github.com/Ruby570bocadito/Wormy-ML-Network-Worm" target="_blank" rel="noopener">
+          <span class="shot-bar mono"><i></i><i></i><i></i> Wormy — <span data-i18n="pr.prop">panel de propagación</span></span>
+          <img src="../assets/wormy-dashboard.png" data-gif="../assets/wormy-demo.gif" alt="Panel de Wormy" loading="lazy">
+        </a>
+        <div class="project-body">
+          <p class="tag mono done"><span class="live"></span><span data-i18n="pr.done">Investigación completada</span></p>
+          <h3>Wormy</h3>
+          <p class="role" data-i18n="worm.role">Investigación de malware y seguridad de redes</p>
+          <p data-i18n="worm.desc">Investigación experimental sobre comportamiento de malware, propagación por red y aprendizaje automático en entornos de laboratorio aislados.</p>
+          <ul class="metrics mono"><li><b>525</b><span data-i18n="m.tests">tests</span></li><li><b>44</b><span data-i18n="m.modules">módulos controlados</span></li><li><b>15</b><span data-i18n="m.services">servicios de lab</span></li></ul>
+          <p class="stack mono">Python · Machine Learning · Networking · Docker</p>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="h3 reveal more-title" data-i18n="pr.more">El resto del arsenal</h3>
+    <div class="repo-grid">
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/aura-soc" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#00add8"></span><b>aura-soc</b><span class="mono lg">Go</span><p data-i18n="mc9.p">Framework SOC de código abierto: Detección como Código + purple team + IA local.</p></a>
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/security-framework" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#00add8"></span><b>security-framework</b><span class="mono lg">Go</span><p data-i18n="mc1.p">Detección de amenazas en Windows en tiempo real: sensor ETW en Rust + motor conductual en Go + reglas MITRE ATT&amp;CK.</p></a>
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/Auto-Privilege" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#00add8"></span><b>Auto-Privilege</b><span class="mono lg">Go · ★ 7</span><p data-i18n="mc3.p">Escalada de privilegios en Linux automatizada: 15 escáneres de solo lectura y 75 técnicas de GTFOBins.</p></a>
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/charon" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#dea584"></span><b>charon</b><span class="mono lg">Rust</span><p data-i18n="mc6.p">Banco de trabajo del protocolo Kerberos: códec DER propio, cripto RFC 4120/3961, kerberoast y AS-REP roast.</p></a>
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/OSINT-EYE" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#3572a5"></span><b>OSINT-EYE</b><span class="mono lg">Python · ★ 1</span><p data-i18n="mc7.p">Inteligencia de superficie de ataque con IA local (Ollama): OSINT y recon sin claves API.</p></a>
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/T-100AI" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#3572a5"></span><b>T-100AI</b><span class="mono lg">Python · ★ 1</span><p data-i18n="mc8.p">Terminal de seguridad ofensiva con IA 100% offline: LLM local, ejecución aislada y control humano.</p></a>
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/REDHAVOC" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#3572a5"></span><b>REDHAVOC</b><span class="mono lg">Python · ★ 2</span><p data-i18n="mc5.p">Framework red team en Python puro: 79 módulos nativos, barridos multi-host e informes PDF.</p></a>
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/bluesky" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#3572a5"></span><b>bluesky</b><span class="mono lg">Python · ★ 4</span><p data-i18n="mc4.p">Framework de auditoría Bluetooth estilo Metasploit — 22 módulos, CLI + REPL + panel web, 100% offline.</p></a>
+      <a class="repo card reveal" href="https://github.com/Ruby570bocadito/Vault-Kernel" target="_blank" rel="noopener"><span class="lang-dot" style="--l:#3572a5"></span><b>Vault-Kernel</b><span class="mono lg">Python · ★ 5</span><p data-i18n="mc2.p">Motor de rootkit LKM para Linux en laboratorios red team autorizados — hooks de syscalls y técnicas de ocultación.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROGRAMMING ============ -->
+<section class="section accent-blue" id="programacion">
+  <div class="wrap">
+    <div class="split rev">
+      <figure class="split-img reveal"><img src="img/code.webp" alt="" loading="lazy"></figure>
+      <div>
+        <p class="eyebrow reveal" data-i18n="pg.eye">04 — Programación y desarrollo</p>
+        <h2 class="h2 reveal" data-i18n="pg.h2">De los videojuegos <em>a la seguridad.</em></h2>
+        <p class="section-sub reveal" data-i18n="pg.sub">Automatizo tareas con Python y Bash, construyo herramientas de seguridad y conozco el desarrollo de software desde dentro gracias a los videojuegos.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel reveal">
+        <h3 class="h3" data-i18n="pg.langs">Lenguajes y tecnologías</h3>
+        <div class="chips">
+          <span class="chip hot">Python</span><span class="chip hot">Bash</span><span class="chip hot">Linux</span>
+          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Active Directory</span>
+          <span class="chip" data-i18n="pg.netf">Fundamentos de redes</span>
+          <span class="chip">C# · Unity</span><span class="chip">Go</span><span class="chip">Rust</span><span class="chip">PowerShell</span><span class="chip">Docker</span><span class="chip">Git</span>
+        </div>
+        <p class="note" data-i18n="pg.note">Los proyectos de la sección anterior usan además Go, Rust y TypeScript — lo aprendo construyendo.</p>
+      </div>
+      <div class="panel reveal">
+        <h3 class="h3"><span data-i18n="pg.game">Desarrollo de videojuegos</span> <span class="badge mono" data-i18n="pg.years">~5 años</span></h3>
+        <ol class="path">
+          <li><span data-i18n="pg.g1">Curso básico</span></li>
+          <li><span data-i18n="pg.g2">Curso medio</span></li>
+          <li><span data-i18n="pg.g3">Avanzado 1</span></li>
+          <li><span data-i18n="pg.g4">Avanzado 2</span></li>
+          <li class="hl"><span data-i18n="pg.g5">Bootcamp de programación de videojuegos</span></li>
+        </ol>
+        <p class="note" data-i18n="pg.gnote">Unos cinco años de trayectoria formativa y práctica (EVAD, 2020 — 2024): C#, Unity y la disciplina de terminar software jugable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRAINING ============ -->
+<section class="section accent-purple" id="formacion">
+  <div class="wrap">
+    <p class="eyebrow reveal" data-i18n="tr.eye">05 — Certificaciones y formación</p>
+    <h2 class="h2 reveal" data-i18n="tr.h2">Obtenidas, en curso <em>y lo que viene.</em></h2>
+
+    <div class="cert-hero card reveal">
+      <canvas class="rive-icon big" data-area="IconCerts" aria-hidden="true"></canvas>
+      <div>
+        <p class="tag mono" data-i18n="tr.main">Certificación principal</p>
+        <h3>eJPTv2 — Junior Penetration Tester</h3>
+        <p data-i18n="tr.ejpt">INE Security · Certificación práctica de pentesting: reconocimiento, explotación, post-explotación y pivoting en un entorno real. (Caducó en julio de 2026 — renovación prevista junto a los próximos hitos.)</p>
+      </div>
+    </div>
+
+    <div class="cert-cols">
+      <div class="cert-col card reveal">
+        <h4 class="mono">Cisco Networking Academy</h4>
+        <ul>
+          <li>Ethical Hacker</li>
+          <li>Linux Unhatched</li>
+          <li>Python Essentials 1</li>
+          <li data-i18n="tr.c4">Conceptos básicos de redes</li>
+          <li data-i18n="tr.c5">Introducción a la Ciberseguridad</li>
+        </ul>
+      </div>
+      <div class="cert-col card reveal">
+        <h4 class="mono">Hack4u</h4>
+        <ul><li data-i18n="tr.h1">Introducción al Hacking</li></ul>
+        <h4 class="mono">BIG school</h4>
+        <ul>
+          <li data-i18n="tr.b1">Ciberseguridad y Hacking Ético (certificado de asistencia)</li>
+          <li data-i18n="tr.b2">Iniciación con Inteligencia Artificial</li>
+        </ul>
+      </div>
+      <div class="cert-col card reveal">
+        <h4 class="mono" data-i18n="tr.prep">En preparación</h4>
+        <ul>
+          <li><b>CRTO</b> — <span data-i18n="tr.crto">Red Team Operator</span></li>
+          <li><b>CPTES</b> — <span data-i18n="tr.cptes">pentesting profesional</span></li>
+        </ul>
+        <h4 class="mono" data-i18n="tr.edu">Educación formal</h4>
+        <ul>
+          <li><b>SMR</b> — DigitechFP <span class="dim" data-i18n="tr.now">(en curso, 2025 —)</span></li>
+          <li><b data-i18n="tr.game">Programación de videojuegos</b> — EVAD <span class="dim">(2020 — 2024)</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI & EVENTS ============ -->
+<section class="section accent-amber" id="eventos">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow reveal" data-i18n="ev.eye">06 — Inteligencia artificial y hackatones</p>
+        <h2 class="h2 reveal" data-i18n="ev.h2">La IA como multiplicador, <em>nunca como piloto automático.</em></h2>
+        <p class="section-sub reveal" data-i18n="ev.sub">Uso la IA como asistente de desarrollo e investigación, pero trato el código generado como algo que revisar, probar y entender. Formación: <b>ChatGPT aplicado al hacking ético</b> e <b>iniciación a la inteligencia artificial</b>.</p>
+      </div>
+      <figure class="split-img reveal"><img src="img/hackathon.webp" alt="" loading="lazy"></figure>
+    </div>
+
+    <ol class="timeline">
+      <li class="event reveal" data-date="">
+        <span class="ev-date mono" data-i18n="ev.e1d">Hackatón</span>
+        <div class="card ev-card">
+          <h3>Meta AI Developer Hackathon</h3>
+          <p data-i18n="ev.e1">Hackatón de desarrolladores de IA organizado con Meta y Cerebral Valley: construir productos con modelos de IA en tiempo récord.</p>
+          <a class="link mono" href="https://cerebralvalley.ai/e/meta-ai-developer-hackathon" target="_blank" rel="noopener">cerebralvalley.ai ↗</a>
+        </div>
+      </li>
+      <li class="event reveal" data-date="2026-11-04">
+        <span class="ev-date mono" data-i18n="ev.e2d">4 nov 2026</span>
+        <div class="card ev-card">
+          <h3>Megahackatón</h3>
+          <p data-i18n="ev.e2">Innovación, desarrollo y trabajo colaborativo en equipo.</p>
+          <span class="countdown mono"></span>
+        </div>
+      </li>
+      <li class="event reveal" data-date="2026-11-24" data-end="2026-11-26">
+        <span class="ev-date mono" data-i18n="ev.e3d">24 — 26 nov 2026</span>
+        <div class="card ev-card">
+          <h3>Talent Land</h3>
+          <p data-i18n="ev.e3">Tres días de tecnología, talento e innovación.</p>
+          <span class="countdown mono"></span>
+        </div>
+      </li>
+    </ol>
+    <p class="note reveal" data-i18n="ev.note">Estas actividades están destinadas a ampliar mi experiencia en desarrollo, innovación, inteligencia artificial y trabajo colaborativo.</p>
+  </div>
+</section>
+
+<!-- ============ ROBOTICS ============ -->
+<section class="section accent-green" id="robotica">
+  <div class="wrap">
+    <div class="robo card reveal">
+      <div class="robo-art">
+        <canvas id="rive-trophy" class="rive-canvas" aria-hidden="true"></canvas>
+      </div>
+      <div class="robo-copy">
+        <p class="eyebrow" data-i18n="rb.eye">07 — Robótica y liderazgo</p>
+        <h2 class="h2" data-i18n="rb.h2">ASTI Challenge — <em>finalista nacional.</em></h2>
+        <p data-i18n="rb.p">Líder de un equipo de robótica que quedó <b>primero en Málaga</b> y se clasificó para la <b>final nacional</b> en España. Trabajé en el desarrollo del robot, la resolución de problemas técnicos, la coordinación del equipo y la estrategia de competición — bajo presión real y contra los mejores equipos del país.</p>
+        <div class="chips">
+          <span class="chip hot" data-i18n="rb.c1">Liderazgo y coordinación</span>
+          <span class="chip" data-i18n="rb.c2">Trabajo en equipo</span>
+          <span class="chip" data-i18n="rb.c3">Resolución de problemas técnicos</span>
+          <span class="chip" data-i18n="rb.c4">Creatividad e innovación</span>
+        </div>
+        <ul class="robo-stats mono">
+          <li><b>1º</b><span>Málaga</span></li>
+          <li><b data-i18n="rb.final">Final</b><span data-i18n="rb.nat">nacional</span></li>
+          <li><b data-i18n="rb.cap">Líder</b><span data-i18n="rb.team">de equipo</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GOAL ============ -->
+<section class="section accent-orange" id="objetivo">
+  <div class="wrap goal">
+    <figure class="goal-img reveal"><img src="img/goal.webp" alt="" loading="lazy"></figure>
+    <div class="goal-copy">
+      <p class="eyebrow reveal" data-i18n="gl.eye">08 — Objetivo profesional</p>
+      <h2 class="h2 reveal" data-i18n="gl.h2">Hacia dónde <em>voy.</em></h2>
+      <p class="section-sub reveal" data-i18n="gl.sub">Seguir desarrollándome en el sector tecnológico, con especial interés en:</p>
+      <ul class="goal-list">
+        <li class="reveal"><span class="mono">→</span><span data-i18n="gl.1">Analista SOC y ciberseguridad defensiva</span></li>
+        <li class="reveal"><span class="mono">→</span><span data-i18n="gl.2">Pentesting y hacking ético</span></li>
+        <li class="reveal"><span class="mono">→</span><span data-i18n="gl.3">Automatización de tareas con Python y Bash</span></li>
+        <li class="reveal"><span class="mono">→</span><span data-i18n="gl.4">Seguridad de sistemas, redes y aplicaciones</span></li>
+        <li class="reveal"><span class="mono">→</span><span data-i18n="gl.5">Inteligencia artificial</span></li>
+        <li class="reveal"><span class="mono">→</span><span data-i18n="gl.6">Desarrollo de software y videojuegos</span></li>
+      </ul>
+      <blockquote class="quote reveal" data-i18n="gl.q">Mi perfil combina formación en ciberseguridad, programación, inteligencia artificial y robótica, junto con experiencia de liderazgo y participación en iniciativas tecnológicas. Mi objetivo es transformar estos conocimientos en proyectos prácticos y seguir creciendo profesionalmente.</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contacto">
+  <div class="wrap">
+    <div class="contact card reveal">
+      <canvas id="rive-signal" class="rive-canvas" aria-hidden="true"></canvas>
+      <p class="eyebrow" data-i18n="ct.eye">09 — Contacto</p>
+      <h2 class="h2 big" data-i18n="ct.h2">Vamos a <em>conectar.</em></h2>
+      <p class="section-sub" data-i18n="ct.sub">Me interesan prácticas, oportunidades junior en ciberseguridad (SOC, pentesting) y proyectos de IA y desarrollo. Suelo responder en menos de 24 horas.</p>
+      <button class="email magnetic" type="button" data-email="rafagasi09@gmail.com">
+        <span class="mono">rafagasi09@gmail.com</span><span class="copy mono" data-i18n="ct.copy">copiar</span>
+      </button>
+      <div class="contact-links">
+        <a class="btn btn-primary magnetic" href="mailto:rafagasi09@gmail.com" data-i18n="ct.mail">Escríbeme</a>
+        <a class="btn btn-ghost" href="https://github.com/Ruby570bocadito" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/rafael-g%C3%A1lvez-silipo-07445a409/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-ghost" href="../cv.pdf" download="CV Rafael Galvez Silipo.pdf" data-i18n="ct.cv">CV ↓</a>
+      </div>
+      <p class="clock mono"><span data-i18n="ct.time">Málaga — hora local</span> <b class="time">--:--</b></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot">
+    <p>© 2026 Rafael Gálvez Silipo</p>
+    <p class="dim" data-i18n="ft.made">Diseñado y construido a mano · animaciones con Rive · imágenes generadas con Muse Image.</p>
+    <p><a href="../" data-i18n="ft.classic">Versión clásica</a> · <a href="#top" data-i18n="ft.top">Volver arriba ↑</a></p>
+  </div>
+</footer>
+
+<div class="toast mono" role="status" aria-live="polite"></div>
+
+<script src="rive/rive.js" defer></script>
+<script src="js/i18n.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

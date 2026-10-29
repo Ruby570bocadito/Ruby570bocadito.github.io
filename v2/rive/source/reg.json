@@ -1,0 +1,4788 @@
+{
+"Drawable": {
+"typeKey": 13,
+"super": "Node",
+"props": {
+"23": [
+"blendModeValue",
+"Uint"
+],
+"450": [
+"additiveAmount",
+"Uint"
+],
+"129": [
+"drawableFlags",
+"Uint"
+]
+}
+},
+"DrawTarget": {
+"typeKey": 48,
+"super": "Component",
+"props": {
+"119": [
+"drawableId",
+null
+],
+"120": [
+"placementValue",
+"Uint"
+]
+}
+},
+"CustomPropertyColor": {
+"typeKey": 592,
+"super": "CustomProperty",
+"props": {
+"836": [
+"propertyValue",
+"Color"
+]
+}
+},
+"FocusData": {
+"typeKey": 653,
+"super": "Component",
+"props": {
+"1033": [
+"focusFlags",
+"Uint"
+],
+"953": [
+"canFocus",
+null
+],
+"954": [
+"canTouch",
+null
+],
+"955": [
+"canTraverse",
+null
+],
+"956": [
+"edgeBehaviorValue",
+"Uint"
+]
+}
+},
+"ScriptInputBoolean": {
+"typeKey": 631,
+"super": "CustomPropertyBoolean",
+"props": {}
+},
+"BitmapCache": {
+"typeKey": 136,
+"super": "Component",
+"props": {
+"417": [
+"resolution",
+"Double"
+],
+"418": [
+"cacheFlags",
+"Uint"
+],
+"419": [
+"cacheEnabled",
+null
+],
+"420": [
+"dither",
+null
+]
+}
+},
+"CustomPropertyString": {
+"typeKey": 130,
+"super": "CustomProperty",
+"props": {
+"246": [
+"propertyValue",
+"String"
+]
+}
+},
+"TransformComponent": {
+"typeKey": 38,
+"super": "WorldTransformComponent",
+"props": {
+"15": [
+"rotation",
+"Double"
+],
+"16": [
+"scaleX",
+"Double"
+],
+"17": [
+"scaleY",
+"Double"
+]
+}
+},
+"ScriptInputColor": {
+"typeKey": 626,
+"super": "CustomPropertyColor",
+"props": {}
+},
+"CustomPropertyBoolean": {
+"typeKey": 129,
+"super": "CustomProperty",
+"props": {
+"245": [
+"propertyValue",
+"Bool"
+]
+}
+},
+"CustomProperty": {
+"typeKey": 167,
+"super": "Component",
+"props": {
+"449": [
+"nameId",
+"Uint"
+]
+}
+},
+"ScriptInputTrigger": {
+"typeKey": 618,
+"super": "CustomPropertyTrigger",
+"props": {}
+},
+"CustomPropertyNumber": {
+"typeKey": 127,
+"super": "CustomProperty",
+"props": {
+"243": [
+"propertyValue",
+"Double"
+]
+}
+},
+"ComponentOrigin": {
+"typeKey": 1039,
+"super": "Component",
+"props": {
+"1040": [
+"originX",
+"Double"
+],
+"1041": [
+"originY",
+"Double"
+]
+}
+},
+"Component": {
+"typeKey": 10,
+"super": "Core",
+"props": {
+"4": [
+"name",
+"String"
+],
+"5": [
+"parentId",
+null
+]
+}
+},
+"ScriptInputViewModelProperty": {
+"typeKey": 612,
+"super": "CustomProperty",
+"props": {
+"866": [
+"dataBindPathIds",
+"Bytes"
+]
+}
+},
+"ForegroundLayoutDrawable": {
+"typeKey": 513,
+"super": "Drawable",
+"props": {}
+},
+"ScriptInputArtboard": {
+"typeKey": 621,
+"super": "CustomProperty",
+"props": {
+"876": [
+"artboardId",
+null
+]
+}
+},
+"ScriptInputString": {
+"typeKey": 627,
+"super": "CustomPropertyString",
+"props": {}
+},
+"OpenUrlEvent": {
+"typeKey": 131,
+"super": "Event",
+"props": {
+"248": [
+"url",
+"String"
+],
+"249": [
+"targetValue",
+"Uint"
+]
+}
+},
+"CustomPropertyTrigger": {
+"typeKey": 613,
+"super": "CustomProperty",
+"props": {
+"869": [
+"fire",
+null
+],
+"870": [
+"propertyValue",
+"Uint"
+]
+}
+},
+"Solo": {
+"typeKey": 147,
+"super": "Node",
+"props": {
+"296": [
+"activeComponentId",
+null
+]
+}
+},
+"LayerMask": {
+"typeKey": 154,
+"super": "Component",
+"props": {
+"459": [
+"sourceId",
+null
+],
+"460": [
+"maskFlags",
+"Uint"
+],
+"455": [
+"maskModeValue",
+null
+],
+"456": [
+"isVisible",
+null
+],
+"457": [
+"sourceDraws",
+null
+],
+"461": [
+"useCustomBounds",
+null
+],
+"458": [
+"resolution",
+"Double"
+],
+"462": [
+"boundsX",
+"Double"
+],
+"463": [
+"boundsY",
+"Double"
+],
+"464": [
+"boundsWidth",
+"Double"
+],
+"465": [
+"boundsHeight",
+"Double"
+]
+}
+},
+"ArtboardListMapRule": {
+"typeKey": 648,
+"super": "Component",
+"props": {
+"934": [
+"artboardId",
+null
+],
+"935": [
+"viewModelId",
+null
+]
+}
+},
+"Artboard": {
+"typeKey": 1,
+"super": "LayoutComponent",
+"props": {
+"11": [
+"originX",
+"Double"
+],
+"12": [
+"originY",
+"Double"
+],
+"236": [
+"defaultStateMachineId",
+null
+],
+"583": [
+"viewModelId",
+null
+]
+}
+},
+"Joystick": {
+"typeKey": 148,
+"super": "Component",
+"props": {
+"299": [
+"x",
+"Double"
+],
+"300": [
+"y",
+"Double"
+],
+"303": [
+"posX",
+"Double"
+],
+"304": [
+"posY",
+"Double"
+],
+"307": [
+"originX",
+"Double"
+],
+"308": [
+"originY",
+"Double"
+],
+"305": [
+"width",
+"Double"
+],
+"306": [
+"height",
+"Double"
+],
+"301": [
+"xId",
+null
+],
+"302": [
+"yId",
+null
+],
+"312": [
+"joystickFlags",
+"Uint"
+],
+"313": [
+"handleSourceId",
+null
+]
+}
+},
+"DrawRules": {
+"typeKey": 49,
+"super": "ContainerComponent",
+"props": {
+"121": [
+"drawTargetId",
+null
+]
+}
+},
+"ContainerComponent": {
+"typeKey": 11,
+"super": "Component",
+"props": {}
+},
+"NestedArtboard": {
+"typeKey": 92,
+"super": "Drawable",
+"props": {
+"197": [
+"artboardId",
+null
+],
+"582": [
+"dataBindPathIds",
+"Bytes"
+],
+"895": [
+"isPaused",
+"Bool"
+],
+"907": [
+"speed",
+"Double"
+],
+"908": [
+"quantize",
+"Double"
+],
+"1014": [
+"isStateful",
+"Bool"
+]
+}
+},
+"Event": {
+"typeKey": 128,
+"super": "CustomPropertyGroup",
+"props": {
+"395": [
+"trigger",
+null
+]
+}
+},
+"Backboard": {
+"typeKey": 23,
+"super": "Core",
+"props": {}
+},
+"NestedArtboardLeaf": {
+"typeKey": 451,
+"super": "NestedArtboard",
+"props": {
+"538": [
+"fit",
+"Uint"
+],
+"1098": [
+"fitToLayoutParent",
+"Bool"
+],
+"644": [
+"alignmentX",
+"Double"
+],
+"645": [
+"alignmentY",
+"Double"
+]
+}
+},
+"Node": {
+"typeKey": 2,
+"super": "TransformComponent",
+"props": {
+"13": [
+"x",
+"Double"
+],
+"9": [
+"xArtboard",
+null
+],
+"14": [
+"y",
+"Double"
+],
+"10": [
+"yArtboard",
+null
+],
+"806": [
+"computedLocalX",
+null
+],
+"807": [
+"computedLocalY",
+null
+],
+"808": [
+"computedWorldX",
+null
+],
+"809": [
+"computedWorldY",
+null
+],
+"864": [
+"computedRootX",
+null
+],
+"865": [
+"computedRootY",
+null
+],
+"810": [
+"computedWidth",
+null
+],
+"811": [
+"computedHeight",
+null
+]
+}
+},
+"CustomPropertyGroup": {
+"typeKey": 548,
+"super": "ContainerComponent",
+"props": {}
+},
+"SelectionStyle": {
+"typeKey": 153,
+"super": "Core",
+"props": {
+"447": [
+"highlightColor",
+"Color"
+],
+"448": [
+"cornerRadius",
+"Double"
+]
+}
+},
+"ScriptInputNumber": {
+"typeKey": 611,
+"super": "CustomPropertyNumber",
+"props": {}
+},
+"ArtboardComponentList": {
+"typeKey": 559,
+"super": "Drawable",
+"props": {
+"800": [
+"listSource",
+null
+]
+}
+},
+"CustomPropertyEnum": {
+"typeKey": 616,
+"super": "CustomProperty",
+"props": {
+"872": [
+"propertyValue",
+null
+],
+"873": [
+"enumId",
+null
+]
+}
+},
+"NestedArtboardLayout": {
+"typeKey": 452,
+"super": "NestedArtboard",
+"props": {
+"663": [
+"instanceWidth",
+"Double"
+],
+"664": [
+"instanceHeight",
+"Double"
+],
+"665": [
+"instanceWidthUnitsValue",
+"Uint"
+],
+"666": [
+"instanceHeightUnitsValue",
+"Uint"
+],
+"667": [
+"instanceWidthScaleType",
+"Uint"
+],
+"668": [
+"instanceHeightScaleType",
+"Uint"
+]
+}
+},
+"AudioEvent": {
+"typeKey": 407,
+"super": "Event",
+"props": {
+"408": [
+"assetId",
+null
+]
+}
+},
+"LayoutComponent": {
+"typeKey": 409,
+"super": "Drawable",
+"props": {
+"196": [
+"clip",
+"Bool"
+],
+"7": [
+"width",
+"Double"
+],
+"8": [
+"height",
+"Double"
+],
+"494": [
+"styleId",
+null
+],
+"706": [
+"fractionalWidth",
+"Double"
+],
+"707": [
+"fractionalHeight",
+"Double"
+]
+}
+},
+"WorldTransformComponent": {
+"typeKey": 91,
+"super": "ContainerComponent",
+"props": {
+"18": [
+"opacity",
+"Double"
+]
+}
+},
+"NestedAnimation": {
+"typeKey": 93,
+"super": "ContainerComponent",
+"props": {
+"198": [
+"animationId",
+null
+]
+}
+},
+"DataBind": {
+"typeKey": 446,
+"super": "Core",
+"props": {
+"586": [
+"propertyKey",
+"Uint"
+],
+"587": [
+"flags",
+"Uint"
+],
+"660": [
+"converterId",
+null
+]
+}
+},
+"BindablePropertyInteger": {
+"typeKey": 567,
+"super": "BindableProperty",
+"props": {
+"686": [
+"propertyValue",
+"Uint"
+]
+}
+},
+"BindablePropertyList": {
+"typeKey": 590,
+"super": "BindableProperty",
+"props": {
+"835": [
+"propertyValue",
+null
+]
+}
+},
+"BindablePropertyId": {
+"typeKey": 596,
+"super": "BindableProperty",
+"props": {
+"823": [
+"propertyValue",
+null
+]
+}
+},
+"BindablePropertyArtboard": {
+"typeKey": 597,
+"super": "BindablePropertyId",
+"props": {}
+},
+"BindablePropertyViewModel": {
+"typeKey": 662,
+"super": "BindablePropertyId",
+"props": {}
+},
+"BindableProperty": {
+"typeKey": 9,
+"super": "Core",
+"props": {}
+},
+"BindablePropertyString": {
+"typeKey": 471,
+"super": "BindableProperty",
+"props": {
+"635": [
+"propertyValue",
+"String"
+]
+}
+},
+"BindablePropertyNumber": {
+"typeKey": 473,
+"super": "BindableProperty",
+"props": {
+"636": [
+"propertyValue",
+"Double"
+]
+}
+},
+"DataBindPath": {
+"typeKey": 643,
+"super": "Core",
+"props": {
+"920": [
+"path",
+"Bytes"
+],
+"921": [
+"isRelative",
+"Bool"
+]
+}
+},
+"BindablePropertyAsset": {
+"typeKey": 588,
+"super": "BindablePropertyId",
+"props": {}
+},
+"BindablePropertyEnum": {
+"typeKey": 474,
+"super": "BindableProperty",
+"props": {
+"637": [
+"propertyValue",
+null
+]
+}
+},
+"BindablePropertyColor": {
+"typeKey": 475,
+"super": "BindableProperty",
+"props": {
+"638": [
+"propertyValue",
+"Color"
+]
+}
+},
+"BindablePropertyBoolean": {
+"typeKey": 472,
+"super": "BindableProperty",
+"props": {
+"634": [
+"propertyValue",
+"Bool"
+]
+}
+},
+"BindablePropertyTrigger": {
+"typeKey": 503,
+"super": "BindablePropertyInteger",
+"props": {}
+},
+"DataBindContext": {
+"typeKey": 447,
+"super": "DataBind",
+"props": {
+"588": [
+"sourcePathIds",
+"Bytes"
+]
+}
+},
+"DataConverterStringPad": {
+"typeKey": 530,
+"super": "DataConverter",
+"props": {
+"743": [
+"length",
+"Uint"
+],
+"744": [
+"text",
+"String"
+],
+"745": [
+"padType",
+"Uint"
+]
+}
+},
+"DataConverterSystemDegsToRads": {
+"typeKey": 514,
+"super": "DataConverterOperationValue",
+"props": {}
+},
+"DataConverterToString": {
+"typeKey": 490,
+"super": "DataConverter",
+"props": {
+"764": [
+"flags",
+"Uint"
+],
+"765": [
+"decimals",
+"Uint"
+],
+"766": [
+"colorFormat",
+"String"
+]
+}
+},
+"DataConverterBooleanNegate": {
+"typeKey": 535,
+"super": "DataConverter",
+"props": {}
+},
+"DataConverterGroup": {
+"typeKey": 499,
+"super": "DataConverter",
+"props": {}
+},
+"DataConverterOperationViewModel": {
+"typeKey": 517,
+"super": "DataConverterOperation",
+"props": {
+"711": [
+"sourcePathIds",
+"Bytes"
+]
+}
+},
+"DataConverterSystemNormalizer": {
+"typeKey": 515,
+"super": "DataConverterOperationValue",
+"props": {}
+},
+"DataConverterRangeMapper": {
+"typeKey": 519,
+"super": "DataConverter",
+"props": {
+"713": [
+"interpolationType",
+"Uint"
+],
+"714": [
+"interpolatorId",
+null
+],
+"715": [
+"flags",
+"Uint"
+],
+"716": [
+"minInput",
+"Double"
+],
+"717": [
+"maxInput",
+"Double"
+],
+"718": [
+"minOutput",
+"Double"
+],
+"719": [
+"maxOutput",
+"Double"
+]
+}
+},
+"DataConverterRounder": {
+"typeKey": 489,
+"super": "DataConverter",
+"props": {
+"669": [
+"decimals",
+"Uint"
+]
+}
+},
+"DataConverterInterpolator": {
+"typeKey": 534,
+"super": "DataConverter",
+"props": {
+"757": [
+"interpolationType",
+"Uint"
+],
+"758": [
+"interpolatorId",
+null
+],
+"756": [
+"duration",
+"Double"
+]
+}
+},
+"DataConverterGroupItem": {
+"typeKey": 498,
+"super": "Core",
+"props": {
+"679": [
+"converterId",
+null
+]
+}
+},
+"DataConverterStringTemplate": {
+"typeKey": 177,
+"super": "DataConverter",
+"props": {
+"485": [
+"openDelimiter",
+"String"
+],
+"486": [
+"closeDelimiter",
+"String"
+]
+}
+},
+"DataConverterToNumber": {
+"typeKey": 617,
+"super": "DataConverter",
+"props": {}
+},
+"DataConverterListToLength": {
+"typeKey": 591,
+"super": "DataConverter",
+"props": {}
+},
+"DataConverterNumberToList": {
+"typeKey": 568,
+"super": "DataConverter",
+"props": {
+"816": [
+"viewModelId",
+null
+]
+}
+},
+"DataConverter": {
+"typeKey": 488,
+"super": "Core",
+"props": {
+"662": [
+"name",
+"String"
+]
+}
+},
+"DataConverterFormula": {
+"typeKey": 536,
+"super": "DataConverter",
+"props": {
+"887": [
+"randomModeValue",
+"Uint"
+]
+}
+},
+"DataConverterStringTrim": {
+"typeKey": 532,
+"super": "DataConverter",
+"props": {
+"746": [
+"trimType",
+"Uint"
+]
+}
+},
+"DataConverterOperationValue": {
+"typeKey": 500,
+"super": "DataConverterOperation",
+"props": {
+"681": [
+"operationValue",
+"Double"
+]
+}
+},
+"DataConverterStringRemoveZeros": {
+"typeKey": 531,
+"super": "DataConverter",
+"props": {}
+},
+"DataConverterOperation": {
+"typeKey": 516,
+"super": "DataConverter",
+"props": {
+"682": [
+"operationType",
+"Uint"
+]
+}
+},
+"DataConverterTrigger": {
+"typeKey": 504,
+"super": "DataConverter",
+"props": {}
+},
+"FormulaTokenParenthesisClose": {
+"typeKey": 540,
+"super": "FormulaTokenParenthesis",
+"props": {}
+},
+"FormulaTokenValue": {
+"typeKey": 543,
+"super": "FormulaToken",
+"props": {
+"777": [
+"operationValue",
+"Double"
+]
+}
+},
+"FormulaTokenInput": {
+"typeKey": 545,
+"super": "FormulaToken",
+"props": {}
+},
+"FormulaTokenFunction": {
+"typeKey": 542,
+"super": "FormulaTokenParenthesis",
+"props": {
+"776": [
+"functionType",
+"Uint"
+]
+}
+},
+"FormulaToken": {
+"typeKey": 537,
+"super": "Core",
+"props": {}
+},
+"FormulaTokenParenthesisOpen": {
+"typeKey": 544,
+"super": "FormulaTokenParenthesis",
+"props": {}
+},
+"FormulaTokenOperation": {
+"typeKey": 541,
+"super": "FormulaToken",
+"props": {
+"775": [
+"operationType",
+"Uint"
+]
+}
+},
+"FormulaTokenArgumentSeparator": {
+"typeKey": 538,
+"super": "FormulaToken",
+"props": {}
+},
+"FormulaTokenParenthesis": {
+"typeKey": 539,
+"super": "FormulaToken",
+"props": {}
+},
+"StringTemplateArgumentString": {
+"typeKey": 157,
+"super": "StringTemplateArgument",
+"props": {
+"482": [
+"propertyValue",
+"String"
+]
+}
+},
+"StringTemplateArgument": {
+"typeKey": 156,
+"super": "Core",
+"props": {
+"481": [
+"name",
+"String"
+]
+}
+},
+"StringTemplateArgumentNumber": {
+"typeKey": 176,
+"super": "StringTemplateArgument",
+"props": {
+"483": [
+"propertyValue",
+"Double"
+]
+}
+},
+"CubicMirroredVertex": {
+"typeKey": 35,
+"super": "CubicVertex",
+"props": {
+"82": [
+"rotation",
+"Double"
+],
+"83": [
+"distance",
+"Double"
+]
+}
+},
+"PathVertex": {
+"typeKey": 14,
+"super": "Vertex",
+"props": {}
+},
+"PointsPath": {
+"typeKey": 16,
+"super": "PointsCommonPath",
+"props": {}
+},
+"Polygon": {
+"typeKey": 51,
+"super": "ParametricPath",
+"props": {
+"125": [
+"points",
+"Uint"
+],
+"126": [
+"cornerRadius",
+"Double"
+]
+}
+},
+"Vertex": {
+"typeKey": 107,
+"super": "ContainerComponent",
+"props": {
+"24": [
+"x",
+"Double"
+],
+"25": [
+"y",
+"Double"
+]
+}
+},
+"PointsCommonPath": {
+"typeKey": 620,
+"super": "Path",
+"props": {
+"32": [
+"isClosed",
+"Bool"
+]
+}
+},
+"StraightVertex": {
+"typeKey": 5,
+"super": "PathVertex",
+"props": {
+"26": [
+"radius",
+"Double"
+]
+}
+},
+"Rectangle": {
+"typeKey": 7,
+"super": "ParametricPath",
+"props": {
+"164": [
+"linkCornerRadius",
+"Bool"
+],
+"31": [
+"cornerRadiusTL",
+"Double"
+],
+"161": [
+"cornerRadiusTR",
+"Double"
+],
+"162": [
+"cornerRadiusBL",
+"Double"
+],
+"163": [
+"cornerRadiusBR",
+"Double"
+]
+}
+},
+"Shape": {
+"typeKey": 3,
+"super": "Drawable",
+"props": {
+"781": [
+"length",
+null
+]
+}
+},
+"Star": {
+"typeKey": 52,
+"super": "Polygon",
+"props": {
+"127": [
+"innerRadius",
+"Double"
+]
+}
+},
+"CubicDetachedVertex": {
+"typeKey": 6,
+"super": "CubicVertex",
+"props": {
+"84": [
+"inRotation",
+"Double"
+],
+"85": [
+"inDistance",
+"Double"
+],
+"86": [
+"outRotation",
+"Double"
+],
+"87": [
+"outDistance",
+"Double"
+]
+}
+},
+"Mesh": {
+"typeKey": 109,
+"super": "ContainerComponent",
+"props": {
+"223": [
+"triangleIndexBytes",
+"Bytes"
+]
+}
+},
+"ListPath": {
+"typeKey": 619,
+"super": "PointsCommonPath",
+"props": {
+"874": [
+"listSource",
+null
+]
+}
+},
+"CubicAsymmetricVertex": {
+"typeKey": 34,
+"super": "CubicVertex",
+"props": {
+"79": [
+"rotation",
+"Double"
+],
+"80": [
+"inDistance",
+"Double"
+],
+"81": [
+"outDistance",
+"Double"
+]
+}
+},
+"Path": {
+"typeKey": 12,
+"super": "Node",
+"props": {
+"128": [
+"pathFlags",
+"Uint"
+],
+"770": [
+"isHole",
+"Bool"
+]
+}
+},
+"CubicVertex": {
+"typeKey": 36,
+"super": "PathVertex",
+"props": {}
+},
+"Image": {
+"typeKey": 100,
+"super": "Drawable",
+"props": {
+"206": [
+"assetId",
+null
+],
+"380": [
+"originX",
+"Double"
+],
+"381": [
+"originY",
+"Double"
+],
+"974": [
+"fit",
+"Uint"
+],
+"975": [
+"alignmentX",
+"Double"
+],
+"976": [
+"alignmentY",
+"Double"
+],
+"1076": [
+"samplerFilter",
+"Uint"
+],
+"1077": [
+"samplerWrapX",
+"Uint"
+],
+"1078": [
+"samplerWrapY",
+"Uint"
+]
+}
+},
+"Triangle": {
+"typeKey": 8,
+"super": "ParametricPath",
+"props": {}
+},
+"MeshVertex": {
+"typeKey": 108,
+"super": "Vertex",
+"props": {
+"215": [
+"u",
+"Double"
+],
+"216": [
+"v",
+"Double"
+]
+}
+},
+"ParametricPath": {
+"typeKey": 15,
+"super": "Path",
+"props": {
+"20": [
+"width",
+"Double"
+],
+"21": [
+"height",
+"Double"
+],
+"123": [
+"originX",
+"Double"
+],
+"124": [
+"originY",
+"Double"
+]
+}
+},
+"ContourMeshVertex": {
+"typeKey": 111,
+"super": "MeshVertex",
+"props": {}
+},
+"Ellipse": {
+"typeKey": 4,
+"super": "ParametricPath",
+"props": {}
+},
+"ClippingShape": {
+"typeKey": 42,
+"super": "Component",
+"props": {
+"92": [
+"sourceId",
+null
+],
+"93": [
+"fillRule",
+"Uint"
+],
+"94": [
+"isVisible",
+"Bool"
+]
+}
+},
+"AngularGradient": {
+"typeKey": 1089,
+"super": "LinearGradient",
+"props": {}
+},
+"ColorChannels": {
+"typeKey": null,
+"super": null,
+"props": {
+"118": [
+"colorRed",
+null
+],
+"136": [
+"colorGreen",
+null
+],
+"210": [
+"colorBlue",
+null
+],
+"218": [
+"colorAlpha",
+null
+]
+}
+},
+"PaintImage": {
+"typeKey": 113,
+"super": "Component",
+"props": {
+"415": [
+"imageAssetId",
+null
+],
+"269": [
+"imageSamplerFilter",
+"Uint"
+],
+"270": [
+"imageSamplerWrapX",
+"Uint"
+],
+"271": [
+"imageSamplerWrapY",
+"Uint"
+],
+"416": [
+"imageScaleX",
+"Double"
+],
+"368": [
+"imageScaleY",
+"Double"
+],
+"369": [
+"imageOffsetX",
+"Double"
+],
+"410": [
+"imageOffsetY",
+"Double"
+],
+"411": [
+"imageRotation",
+"Double"
+],
+"412": [
+"imageSizeMode",
+"Uint"
+],
+"487": [
+"artboardId",
+null
+]
+}
+},
+"ShapePaint": {
+"typeKey": 21,
+"super": "ContainerComponent",
+"props": {
+"41": [
+"isVisible",
+"Bool"
+],
+"747": [
+"blendModeValue",
+"Uint"
+],
+"452": [
+"additiveAmount",
+"Uint"
+]
+}
+},
+"Fill": {
+"typeKey": 20,
+"super": "ShapePaint",
+"props": {
+"40": [
+"fillRule",
+"Uint"
+]
+}
+},
+"LinearGradient": {
+"typeKey": 22,
+"super": "ContainerComponent",
+"props": {
+"42": [
+"startX",
+"Double"
+],
+"33": [
+"startY",
+"Double"
+],
+"34": [
+"endX",
+"Double"
+],
+"35": [
+"endY",
+"Double"
+],
+"46": [
+"opacity",
+"Double"
+],
+"1103": [
+"transformX",
+"Double"
+],
+"1104": [
+"transformY",
+"Double"
+],
+"1105": [
+"transformRotation",
+"Double"
+],
+"1106": [
+"transformScaleX",
+"Double"
+],
+"1107": [
+"transformScaleY",
+"Double"
+]
+}
+},
+"RadialGradient": {
+"typeKey": 17,
+"super": "LinearGradient",
+"props": {}
+},
+"Feather": {
+"typeKey": 533,
+"super": "ContainerComponent",
+"props": {
+"748": [
+"spaceValue",
+"Uint"
+],
+"749": [
+"strength",
+"Double"
+],
+"750": [
+"offsetX",
+"Double"
+],
+"751": [
+"offsetY",
+"Double"
+],
+"752": [
+"inner",
+"Bool"
+]
+}
+},
+"SolidColor": {
+"typeKey": 18,
+"super": "Component",
+"props": {
+"37": [
+"colorValue",
+"Color"
+]
+}
+},
+"GradientStop": {
+"typeKey": 19,
+"super": "Component",
+"props": {
+"38": [
+"colorValue",
+"Color"
+],
+"39": [
+"position",
+"Double"
+]
+}
+},
+"GroupEffect": {
+"typeKey": 645,
+"super": "ContainerComponent",
+"props": {}
+},
+"TargetEffect": {
+"typeKey": 644,
+"super": "Component",
+"props": {
+"922": [
+"targetId",
+null
+]
+}
+},
+"Dash": {
+"typeKey": 507,
+"super": "Component",
+"props": {
+"692": [
+"length",
+"Double"
+],
+"693": [
+"lengthIsPercentage",
+"Bool"
+]
+}
+},
+"Stroke": {
+"typeKey": 24,
+"super": "ShapePaint",
+"props": {
+"47": [
+"thickness",
+"Double"
+],
+"48": [
+"cap",
+"Uint"
+],
+"49": [
+"join",
+"Uint"
+],
+"50": [
+"transformAffectsStroke",
+"Bool"
+],
+"470": [
+"position",
+"Uint"
+]
+}
+},
+"TrimPath": {
+"typeKey": 47,
+"super": "Component",
+"props": {
+"114": [
+"start",
+"Double"
+],
+"115": [
+"end",
+"Double"
+],
+"116": [
+"offset",
+"Double"
+],
+"117": [
+"modeValue",
+"Uint"
+]
+}
+},
+"DashPath": {
+"typeKey": 506,
+"super": "ContainerComponent",
+"props": {
+"690": [
+"offset",
+"Double"
+],
+"691": [
+"offsetIsPercentage",
+"Bool"
+]
+}
+},
+"TextInputCursor": {
+"typeKey": 571,
+"super": "TextInputDrawable",
+"props": {}
+},
+"TextStyleAxis": {
+"typeKey": 144,
+"super": "Component",
+"props": {
+"289": [
+"tag",
+"Uint"
+],
+"288": [
+"axisValue",
+"Double"
+]
+}
+},
+"TextTargetModifier": {
+"typeKey": 546,
+"super": "TextModifier",
+"props": {
+"778": [
+"targetId",
+null
+]
+}
+},
+"Text": {
+"typeKey": 134,
+"super": "Drawable",
+"props": {
+"281": [
+"alignValue",
+"Uint"
+],
+"284": [
+"sizingValue",
+"Uint"
+],
+"287": [
+"overflowValue",
+"Uint"
+],
+"285": [
+"width",
+"Double"
+],
+"286": [
+"height",
+"Double"
+],
+"366": [
+"originX",
+"Double"
+],
+"367": [
+"originY",
+"Double"
+],
+"371": [
+"paragraphSpacing",
+"Double"
+],
+"377": [
+"originValue",
+"Uint"
+],
+"683": [
+"wrapValue",
+"Uint"
+],
+"446": [
+"wordBreakValue",
+"Uint"
+],
+"685": [
+"verticalAlignValue",
+"Uint"
+],
+"703": [
+"fitFromBaseline",
+"Bool"
+],
+"315": [
+"fitFontSizeResizesBox",
+"Bool"
+],
+"932": [
+"textRunListSource",
+null
+],
+"1026": [
+"verticalTrimValue",
+"Uint"
+],
+"1027": [
+"verticalTrimTopValue",
+null
+],
+"1028": [
+"verticalTrimBottomValue",
+null
+]
+}
+},
+"TextStyle": {
+"typeKey": 573,
+"super": "TextStyleReference",
+"props": {
+"274": [
+"fontSize",
+"Double"
+],
+"370": [
+"lineHeight",
+"Double"
+],
+"390": [
+"letterSpacing",
+"Double"
+],
+"279": [
+"fontAssetId",
+null
+]
+}
+},
+"TextShapeModifier": {
+"typeKey": 161,
+"super": "TextModifier",
+"props": {}
+},
+"TextVariationModifier": {
+"typeKey": 162,
+"super": "TextShapeModifier",
+"props": {
+"320": [
+"axisTag",
+"Uint"
+],
+"321": [
+"axisValue",
+"Double"
+]
+}
+},
+"TextModifierRange": {
+"typeKey": 158,
+"super": "ContainerComponent",
+"props": {
+"327": [
+"modifyFrom",
+"Double"
+],
+"336": [
+"modifyTo",
+"Double"
+],
+"334": [
+"strength",
+"Double"
+],
+"316": [
+"unitsValue",
+"Uint"
+],
+"325": [
+"typeValue",
+"Uint"
+],
+"326": [
+"modeValue",
+"Uint"
+],
+"333": [
+"clamp",
+"Bool"
+],
+"317": [
+"falloffFrom",
+"Double"
+],
+"318": [
+"falloffTo",
+"Double"
+],
+"319": [
+"offset",
+"Double"
+],
+"378": [
+"runId",
+null
+]
+}
+},
+"TextInput": {
+"typeKey": 569,
+"super": "Drawable",
+"props": {
+"817": [
+"text",
+"String"
+],
+"818": [
+"selectionRadius",
+"Double"
+],
+"979": [
+"multiline",
+"Bool"
+],
+"222": [
+"alignValue",
+"Uint"
+],
+"1094": [
+"verticalAlignValue",
+"Uint"
+],
+"1095": [
+"obscured",
+"Bool"
+],
+"1099": [
+"selectAllOnFocus",
+"Bool"
+],
+"489": [
+"maxCharacters",
+"Uint"
+],
+"490": [
+"maxLines",
+"Uint"
+]
+}
+},
+"TextInputDrawable": {
+"typeKey": 570,
+"super": "Drawable",
+"props": {}
+},
+"TextInputSelectedText": {
+"typeKey": 575,
+"super": "TextInputDrawable",
+"props": {}
+},
+"TextStyleBackground": {
+"typeKey": 1069,
+"super": "ContainerComponent",
+"props": {
+"1071": [
+"cornerRadius",
+"Double"
+]
+}
+},
+"TextStyleGlobal": {
+"typeKey": 1101,
+"super": "TextStyleReference",
+"props": {
+"493": [
+"artboardId",
+null
+]
+}
+},
+"TextModifierGroup": {
+"typeKey": 159,
+"super": "ContainerComponent",
+"props": {
+"335": [
+"modifierFlags",
+"Uint"
+],
+"328": [
+"originX",
+"Double"
+],
+"329": [
+"originY",
+"Double"
+],
+"324": [
+"opacity",
+"Double"
+],
+"322": [
+"x",
+"Double"
+],
+"323": [
+"y",
+"Double"
+],
+"332": [
+"rotation",
+"Double"
+],
+"330": [
+"scaleX",
+"Double"
+],
+"331": [
+"scaleY",
+"Double"
+]
+}
+},
+"TextFollowPathModifier": {
+"typeKey": 547,
+"super": "TextTargetModifier",
+"props": {
+"779": [
+"radial",
+"Bool"
+],
+"782": [
+"orient",
+"Bool"
+],
+"783": [
+"start",
+"Double"
+],
+"784": [
+"end",
+"Double"
+],
+"785": [
+"strength",
+"Double"
+],
+"786": [
+"offset",
+"Double"
+]
+}
+},
+"TextModifier": {
+"typeKey": 160,
+"super": "Component",
+"props": {}
+},
+"TextStyleFeature": {
+"typeKey": 164,
+"super": "Component",
+"props": {
+"356": [
+"tag",
+"Uint"
+],
+"357": [
+"featureValue",
+"Uint"
+]
+}
+},
+"TextStyleReference": {
+"typeKey": 1100,
+"super": "ContainerComponent",
+"props": {}
+},
+"TextInputSelection": {
+"typeKey": 574,
+"super": "TextInputDrawable",
+"props": {}
+},
+"TextValueRun": {
+"typeKey": 135,
+"super": "Component",
+"props": {
+"272": [
+"styleId",
+null
+],
+"268": [
+"text",
+"String"
+]
+}
+},
+"TextStylePaint": {
+"typeKey": 137,
+"super": "TextStyle",
+"props": {}
+},
+"TextInputText": {
+"typeKey": 572,
+"super": "TextInputDrawable",
+"props": {}
+},
+"FileAsset": {
+"typeKey": 103,
+"super": "Asset",
+"props": {
+"204": [
+"assetId",
+"Uint"
+],
+"359": [
+"cdnUuid",
+"Bytes"
+],
+"362": [
+"cdnBaseUrl",
+"String"
+]
+}
+},
+"ScriptAsset": {
+"typeKey": 529,
+"super": "TextAsset",
+"props": {
+"893": [
+"generatorFunctionRef",
+"Uint"
+],
+"914": [
+"isModule",
+"Bool"
+],
+"1022": [
+"serializedImplementedMethods",
+"Uint"
+]
+}
+},
+"ScriptModuleAsset": {
+"typeKey": 1071,
+"super": "FileAsset",
+"props": {
+"1087": [
+"language",
+"Uint"
+]
+}
+},
+"AudioAsset": {
+"typeKey": 406,
+"super": "ExportAudio",
+"props": {}
+},
+"FontAsset": {
+"typeKey": 141,
+"super": "FileAsset",
+"props": {}
+},
+"ImageAsset": {
+"typeKey": 105,
+"super": "DrawableAsset",
+"props": {
+"1073": [
+"samplerFilter",
+"Uint"
+],
+"1074": [
+"samplerWrapX",
+"Uint"
+],
+"1075": [
+"samplerWrapY",
+"Uint"
+]
+}
+},
+"TextAsset": {
+"typeKey": 971,
+"super": "FileAsset",
+"props": {
+"926": [
+"folderPath",
+"String"
+]
+}
+},
+"Asset": {
+"typeKey": 99,
+"super": "Core",
+"props": {
+"203": [
+"name",
+"String"
+]
+}
+},
+"FileAssetContents": {
+"typeKey": 106,
+"super": "Core",
+"props": {
+"212": [
+"bytes",
+"Bytes"
+],
+"911": [
+"signature",
+"Bytes"
+]
+}
+},
+"DrawableAsset": {
+"typeKey": 104,
+"super": "FileAsset",
+"props": {
+"207": [
+"height",
+"Double"
+],
+"208": [
+"width",
+"Double"
+]
+}
+},
+"ShaderAsset": {
+"typeKey": 970,
+"super": "TextAsset",
+"props": {}
+},
+"BlobAsset": {
+"typeKey": 649,
+"super": "FileAsset",
+"props": {}
+},
+"ManifestAsset": {
+"typeKey": 642,
+"super": "FileAsset",
+"props": {}
+},
+"ExportAudio": {
+"typeKey": 422,
+"super": "FileAsset",
+"props": {
+"530": [
+"volume",
+"Double"
+]
+}
+},
+"ScriptedDataConverter": {
+"typeKey": 629,
+"super": "DataConverter",
+"props": {
+"892": [
+"scriptAssetId",
+null
+]
+}
+},
+"ScriptedPathEffect": {
+"typeKey": 640,
+"super": "ContainerComponent",
+"props": {
+"912": [
+"scriptAssetId",
+null
+]
+}
+},
+"ScriptedDrawable": {
+"typeKey": 603,
+"super": "Drawable",
+"props": {
+"848": [
+"scriptAssetId",
+null
+]
+}
+},
+"ScriptedLayout": {
+"typeKey": 637,
+"super": "ScriptedDrawable",
+"props": {}
+},
+"ScriptedInterpolator": {
+"typeKey": 972,
+"super": "KeyFrameInterpolator",
+"props": {
+"1015": [
+"scriptAssetId",
+null
+]
+}
+},
+"ScriptedTransition": {
+"typeKey": 110,
+"super": "ScriptedDrawable",
+"props": {
+"273": [
+"activeComponentId",
+null
+],
+"414": [
+"listSource",
+null
+]
+}
+},
+"SemanticData": {
+"typeKey": 668,
+"super": "Component",
+"props": {
+"982": [
+"role",
+"Uint"
+],
+"983": [
+"label",
+"String"
+],
+"984": [
+"value",
+"String"
+],
+"985": [
+"hint",
+"String"
+],
+"986": [
+"headingLevel",
+"Uint"
+],
+"987": [
+"traitFlags",
+"Uint"
+],
+"988": [
+"stateFlags",
+"Uint"
+],
+"989": [
+"isExpandable",
+null
+],
+"990": [
+"isSelectable",
+null
+],
+"991": [
+"isCheckable",
+null
+],
+"992": [
+"isToggleable",
+null
+],
+"993": [
+"isRequirable",
+null
+],
+"994": [
+"isEnablable",
+null
+],
+"995": [
+"isFocusable",
+null
+],
+"996": [
+"isExpanded",
+null
+],
+"997": [
+"isSelected",
+null
+],
+"998": [
+"isChecked",
+null
+],
+"1000": [
+"isToggled",
+null
+],
+"1001": [
+"isRequired",
+null
+],
+"1002": [
+"isDisabled",
+null
+],
+"1003": [
+"isFocused",
+null
+],
+"1004": [
+"isHidden",
+null
+],
+"1005": [
+"isLiveRegion",
+null
+],
+"1006": [
+"isReadOnly",
+null
+],
+"1007": [
+"isModal",
+null
+],
+"1008": [
+"isObscured",
+null
+],
+"1009": [
+"isMultiline",
+null
+]
+}
+},
+"IKConstraint": {
+"typeKey": 81,
+"super": "TargetedConstraint",
+"props": {
+"174": [
+"invertDirection",
+"Bool"
+],
+"175": [
+"parentBoneCount",
+"Uint"
+]
+}
+},
+"DistanceConstraint": {
+"typeKey": 82,
+"super": "TargetedConstraint",
+"props": {
+"177": [
+"distance",
+"Double"
+],
+"178": [
+"modeValue",
+"Uint"
+]
+}
+},
+"RotationConstraint": {
+"typeKey": 89,
+"super": "TransformComponentConstraint",
+"props": {}
+},
+"TransformSpaceConstraint": {
+"typeKey": 90,
+"super": "TargetedConstraint",
+"props": {
+"179": [
+"sourceSpaceValue",
+"Uint"
+],
+"180": [
+"destSpaceValue",
+"Uint"
+]
+}
+},
+"ScaleConstraint": {
+"typeKey": 88,
+"super": "TransformComponentConstraintY",
+"props": {}
+},
+"TransformComponentConstraintY": {
+"typeKey": 86,
+"super": "TransformComponentConstraint",
+"props": {
+"185": [
+"copyFactorY",
+"Double"
+],
+"186": [
+"minValueY",
+"Double"
+],
+"187": [
+"maxValueY",
+"Double"
+],
+"192": [
+"doesCopyY",
+"Bool"
+],
+"193": [
+"minY",
+"Bool"
+],
+"194": [
+"maxY",
+"Bool"
+]
+}
+},
+"Constraint": {
+"typeKey": 79,
+"super": "Component",
+"props": {
+"172": [
+"strength",
+"Double"
+]
+}
+},
+"TranslationConstraint": {
+"typeKey": 87,
+"super": "TransformComponentConstraintY",
+"props": {}
+},
+"TransformComponentConstraint": {
+"typeKey": 85,
+"super": "TransformSpaceConstraint",
+"props": {
+"195": [
+"minMaxSpaceValue",
+"Uint"
+],
+"182": [
+"copyFactor",
+"Double"
+],
+"183": [
+"minValue",
+"Double"
+],
+"184": [
+"maxValue",
+"Double"
+],
+"188": [
+"offset",
+"Bool"
+],
+"189": [
+"doesCopy",
+"Bool"
+],
+"190": [
+"min",
+"Bool"
+],
+"191": [
+"max",
+"Bool"
+]
+}
+},
+"TransformConstraint": {
+"typeKey": 83,
+"super": "TransformSpaceConstraint",
+"props": {
+"372": [
+"originX",
+"Double"
+],
+"373": [
+"originY",
+"Double"
+]
+}
+},
+"DraggableConstraint": {
+"typeKey": 520,
+"super": "Constraint",
+"props": {
+"722": [
+"directionValue",
+"Uint"
+]
+}
+},
+"FollowPathConstraint": {
+"typeKey": 165,
+"super": "TransformSpaceConstraint",
+"props": {
+"363": [
+"distance",
+"Double"
+],
+"364": [
+"orient",
+"Bool"
+],
+"365": [
+"offset",
+"Bool"
+]
+}
+},
+"ListFollowPathConstraint": {
+"typeKey": 625,
+"super": "FollowPathConstraint",
+"props": {
+"888": [
+"distanceEnd",
+"Double"
+],
+"889": [
+"distanceOffset",
+"Double"
+]
+}
+},
+"TargetedConstraint": {
+"typeKey": 80,
+"super": "Constraint",
+"props": {
+"173": [
+"targetId",
+null
+]
+}
+},
+"ClampedScrollPhysics": {
+"typeKey": 524,
+"super": "ScrollPhysics",
+"props": {}
+},
+"ScrollPhysics": {
+"typeKey": 523,
+"super": "Component",
+"props": {
+"731": [
+"constraintId",
+null
+]
+}
+},
+"ElasticScrollPhysics": {
+"typeKey": 525,
+"super": "ScrollPhysics",
+"props": {
+"728": [
+"friction",
+"Double"
+],
+"729": [
+"speedMultiplier",
+"Double"
+],
+"730": [
+"elasticFactor",
+"Double"
+]
+}
+},
+"ScrollBarConstraint": {
+"typeKey": 522,
+"super": "DraggableConstraint",
+"props": {
+"725": [
+"scrollConstraintId",
+null
+],
+"734": [
+"autoSize",
+"Bool"
+]
+}
+},
+"ScrollConstraint": {
+"typeKey": 521,
+"super": "DraggableConstraint",
+"props": {
+"759": [
+"scrollOffsetX",
+"Double"
+],
+"760": [
+"scrollOffsetY",
+"Double"
+],
+"761": [
+"scrollPercentX",
+null
+],
+"762": [
+"scrollPercentY",
+null
+],
+"763": [
+"scrollIndex",
+null
+],
+"724": [
+"snap",
+"Bool"
+],
+"727": [
+"physicsTypeValue",
+"Uint"
+],
+"726": [
+"physicsId",
+null
+],
+"850": [
+"virtualize",
+"Bool"
+],
+"221": [
+"virtualizeBuffer",
+"Uint"
+],
+"851": [
+"infinite",
+"Bool"
+],
+"891": [
+"interactive",
+"Bool"
+],
+"894": [
+"threshold",
+"Double"
+],
+"1023": [
+"velocityX",
+null
+],
+"1024": [
+"velocityY",
+null
+],
+"1025": [
+"scrollActive",
+null
+],
+"1029": [
+"dragMultiplier",
+"Double"
+],
+"1069": [
+"computedContentWidth",
+null
+],
+"1070": [
+"computedContentHeight",
+null
+],
+"466": [
+"scrollFlags",
+"Uint"
+],
+"467": [
+"wheelInteractive",
+null
+]
+}
+},
+"AxisY": {
+"typeKey": 494,
+"super": "Axis",
+"props": {}
+},
+"ArtboardComponentListOverride": {
+"typeKey": 606,
+"super": "Component",
+"props": {
+"858": [
+"artboardId",
+null
+],
+"859": [
+"instanceWidth",
+"Double"
+],
+"860": [
+"instanceHeight",
+"Double"
+],
+"856": [
+"instanceWidthUnitsValue",
+"Uint"
+],
+"861": [
+"instanceHeightUnitsValue",
+"Uint"
+],
+"862": [
+"instanceWidthScaleType",
+"Uint"
+],
+"863": [
+"instanceHeightScaleType",
+"Uint"
+]
+}
+},
+"GridItemPlacement": {
+"typeKey": 1068,
+"super": "Component",
+"props": {
+"1047": [
+"gridColumn",
+"Int"
+],
+"1048": [
+"gridRow",
+"Int"
+],
+"1049": [
+"gridColumnSpan",
+"Uint"
+],
+"1050": [
+"gridRowSpan",
+"Uint"
+]
+}
+},
+"LayoutParticipant": {
+"typeKey": 1066,
+"super": "LayoutNodeStyle",
+"props": {}
+},
+"NSlicedNode": {
+"typeKey": 508,
+"super": "Node",
+"props": {
+"697": [
+"initialWidth",
+"Double"
+],
+"698": [
+"initialHeight",
+"Double"
+],
+"699": [
+"width",
+"Double"
+],
+"700": [
+"height",
+"Double"
+]
+}
+},
+"NSlicer": {
+"typeKey": 493,
+"super": "ContainerComponent",
+"props": {}
+},
+"LayoutNodeStyle": {
+"typeKey": 1057,
+"super": "LayoutSizingStyle",
+"props": {
+"1066": [
+"width",
+"Double"
+],
+"1067": [
+"height",
+"Double"
+],
+"1057": [
+"fractionalWidth",
+"Double"
+],
+"1058": [
+"fractionalHeight",
+"Double"
+]
+}
+},
+"LayoutSizingStyle": {
+"typeKey": 1056,
+"super": "Component",
+"props": {
+"502": [
+"minWidth",
+"Double"
+],
+"500": [
+"maxWidth",
+"Double"
+],
+"503": [
+"minHeight",
+"Double"
+],
+"501": [
+"maxHeight",
+"Double"
+],
+"627": [
+"minWidthUnitsValue",
+"Uint"
+],
+"629": [
+"maxWidthUnitsValue",
+"Uint"
+],
+"628": [
+"minHeightUnitsValue",
+"Uint"
+],
+"630": [
+"maxHeightUnitsValue",
+"Uint"
+],
+"655": [
+"layoutWidthScaleType",
+"Uint"
+],
+"656": [
+"layoutHeightScaleType",
+"Uint"
+],
+"451": [
+"hugUnbounded",
+"Bool"
+],
+"607": [
+"widthUnitsValue",
+"Uint"
+],
+"608": [
+"heightUnitsValue",
+"Uint"
+],
+"1046": [
+"justifySelfValue",
+"Uint"
+],
+"596": [
+"displayValue",
+"Uint"
+]
+}
+},
+"LayoutComponentStyle": {
+"typeKey": 420,
+"super": "LayoutSizingStyle",
+"props": {
+"498": [
+"gapHorizontal",
+"Double"
+],
+"499": [
+"gapVertical",
+"Double"
+],
+"504": [
+"borderLeft",
+"Double"
+],
+"505": [
+"borderRight",
+"Double"
+],
+"506": [
+"borderTop",
+"Double"
+],
+"507": [
+"borderBottom",
+"Double"
+],
+"508": [
+"marginLeft",
+"Double"
+],
+"509": [
+"marginRight",
+"Double"
+],
+"510": [
+"marginTop",
+"Double"
+],
+"511": [
+"marginBottom",
+"Double"
+],
+"512": [
+"paddingLeft",
+"Double"
+],
+"513": [
+"paddingRight",
+"Double"
+],
+"514": [
+"paddingTop",
+"Double"
+],
+"515": [
+"paddingBottom",
+"Double"
+],
+"516": [
+"positionLeft",
+"Double"
+],
+"517": [
+"positionRight",
+"Double"
+],
+"518": [
+"positionTop",
+"Double"
+],
+"519": [
+"positionBottom",
+"Double"
+],
+"621": [
+"positionLeftUnitsValue",
+"Uint"
+],
+"622": [
+"positionRightUnitsValue",
+"Uint"
+],
+"623": [
+"positionTopUnitsValue",
+"Uint"
+],
+"624": [
+"positionBottomUnitsValue",
+"Uint"
+],
+"523": [
+"flexBasis",
+"Double"
+],
+"524": [
+"aspectRatio",
+"Double"
+],
+"546": [
+"aspectRatioAxisValue",
+"Uint"
+],
+"591": [
+"interpolatorId",
+null
+],
+"592": [
+"interpolationTime",
+"Double"
+],
+"705": [
+"flexBasisUnitsValue",
+"Uint"
+],
+"632": [
+"layoutAlignmentType",
+"Uint"
+],
+"589": [
+"animationStyleType",
+"Uint"
+],
+"590": [
+"interpolationType",
+"Uint"
+],
+"597": [
+"positionTypeValue",
+"Uint"
+],
+"598": [
+"flexDirectionValue",
+"Uint"
+],
+"599": [
+"directionValue",
+"Uint"
+],
+"604": [
+"flexWrapValue",
+"Uint"
+],
+"605": [
+"overflowValue",
+"Uint"
+],
+"606": [
+"intrinsicallySizedValue",
+"Bool"
+],
+"609": [
+"borderLeftUnitsValue",
+"Uint"
+],
+"610": [
+"borderRightUnitsValue",
+"Uint"
+],
+"611": [
+"borderTopUnitsValue",
+"Uint"
+],
+"612": [
+"borderBottomUnitsValue",
+"Uint"
+],
+"613": [
+"marginLeftUnitsValue",
+"Uint"
+],
+"614": [
+"marginRightUnitsValue",
+"Uint"
+],
+"615": [
+"marginTopUnitsValue",
+"Uint"
+],
+"616": [
+"marginBottomUnitsValue",
+"Uint"
+],
+"617": [
+"paddingLeftUnitsValue",
+"Uint"
+],
+"618": [
+"paddingRightUnitsValue",
+"Uint"
+],
+"619": [
+"paddingTopUnitsValue",
+"Uint"
+],
+"620": [
+"paddingBottomUnitsValue",
+"Uint"
+],
+"625": [
+"gapHorizontalUnitsValue",
+"Uint"
+],
+"626": [
+"gapVerticalUnitsValue",
+"Uint"
+],
+"1045": [
+"justifyItemsValue",
+"Uint"
+],
+"1059": [
+"layoutTypeValue",
+"Uint"
+],
+"639": [
+"linkCornerRadius",
+"Bool"
+],
+"640": [
+"cornerRadiusTL",
+"Double"
+],
+"641": [
+"cornerRadiusTR",
+"Double"
+],
+"642": [
+"cornerRadiusBL",
+"Double"
+],
+"643": [
+"cornerRadiusBR",
+"Double"
+]
+}
+},
+"Axis": {
+"typeKey": 492,
+"super": "Component",
+"props": {
+"675": [
+"offset",
+"Double"
+],
+"676": [
+"normalized",
+"Bool"
+]
+}
+},
+"GridTrack": {
+"typeKey": 1058,
+"super": "Component",
+"props": {
+"1063": [
+"trackValue",
+"Double"
+],
+"1065": [
+"trackMaxValue",
+"Double"
+],
+"1061": [
+"collection",
+"Uint"
+],
+"1062": [
+"trackType",
+"Uint"
+],
+"1064": [
+"trackMaxType",
+"Uint"
+]
+}
+},
+"NSlicerTileMode": {
+"typeKey": 491,
+"super": "Component",
+"props": {
+"672": [
+"patchIndex",
+"Uint"
+],
+"673": [
+"style",
+"Uint"
+]
+}
+},
+"AxisX": {
+"typeKey": 495,
+"super": "Axis",
+"props": {}
+},
+"ViewModelPropertyArtboard": {
+"typeKey": 598,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelPropertyAssetFont": {
+"typeKey": 1034,
+"super": "ViewModelPropertyAsset",
+"props": {}
+},
+"ViewModelPropertyAssetBlob": {
+"typeKey": 1043,
+"super": "ViewModelPropertyAsset",
+"props": {}
+},
+"DataEnumCustom": {
+"typeKey": 438,
+"super": "DataEnum",
+"props": {
+"572": [
+"name",
+"String"
+]
+}
+},
+"ViewModelInstanceAsset": {
+"typeKey": 586,
+"super": "ViewModelInstanceValue",
+"props": {
+"824": [
+"propertyValue",
+null
+]
+}
+},
+"ViewModelPropertyEnumSystem": {
+"typeKey": 511,
+"super": "ViewModelPropertyEnum",
+"props": {
+"708": [
+"enumType",
+"Uint"
+]
+}
+},
+"DataEnumValue": {
+"typeKey": 445,
+"super": "Core",
+"props": {
+"578": [
+"key",
+"String"
+],
+"579": [
+"value",
+"String"
+]
+}
+},
+"ViewModelComponent": {
+"typeKey": 429,
+"super": "Core",
+"props": {
+"557": [
+"name",
+"String"
+]
+}
+},
+"ViewModelPropertyEnumCustom": {
+"typeKey": 439,
+"super": "ViewModelPropertyEnum",
+"props": {
+"574": [
+"enumId",
+null
+]
+}
+},
+"ViewModelPropertyEnum": {
+"typeKey": 509,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelInstanceArtboard": {
+"typeKey": 599,
+"super": "ViewModelInstanceValue",
+"props": {
+"846": [
+"propertyValue",
+null
+]
+}
+},
+"ViewModelInstance": {
+"typeKey": 437,
+"super": "ContainerComponent",
+"props": {
+"566": [
+"viewModelId",
+null
+]
+}
+},
+"ViewModelInstanceTrigger": {
+"typeKey": 501,
+"super": "ViewModelInstanceValue",
+"props": {
+"687": [
+"propertyValue",
+"Uint"
+],
+"1016": [
+"fire",
+null
+]
+}
+},
+"ViewModelPropertyString": {
+"typeKey": 443,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelInstanceEnum": {
+"typeKey": 432,
+"super": "ViewModelInstanceValue",
+"props": {
+"560": [
+"propertyValue",
+null
+]
+}
+},
+"ViewModelPropertyViewModel": {
+"typeKey": 436,
+"super": "ViewModelProperty",
+"props": {
+"565": [
+"viewModelReferenceId",
+null
+]
+}
+},
+"ViewModelInstanceSymbolListIndex": {
+"typeKey": 566,
+"super": "ViewModelInstanceSymbol",
+"props": {
+"814": [
+"propertyValue",
+"Uint"
+]
+}
+},
+"ViewModelPropertyNumber": {
+"typeKey": 431,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelInstanceAssetFont": {
+"typeKey": 1035,
+"super": "ViewModelInstanceAsset",
+"props": {}
+},
+"ViewModelInstanceViewModel": {
+"typeKey": 444,
+"super": "ViewModelInstanceValue",
+"props": {
+"577": [
+"propertyValue",
+null
+]
+}
+},
+"ViewModel": {
+"typeKey": 435,
+"super": "ViewModelComponent",
+"props": {
+"981": [
+"viewModelType",
+"Uint"
+]
+}
+},
+"ViewModelPropertyList": {
+"typeKey": 434,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelInstanceColor": {
+"typeKey": 426,
+"super": "ViewModelInstanceValue",
+"props": {
+"555": [
+"propertyValue",
+"Color"
+]
+}
+},
+"DataEnumSystem": {
+"typeKey": 512,
+"super": "DataEnum",
+"props": {
+"709": [
+"enumType",
+"Uint"
+]
+}
+},
+"ViewModelInstanceListItem": {
+"typeKey": 427,
+"super": "Core",
+"props": {
+"549": [
+"viewModelId",
+null
+],
+"550": [
+"viewModelInstanceId",
+null
+]
+}
+},
+"ViewModelPropertyAsset": {
+"typeKey": 584,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelInstanceSymbol": {
+"typeKey": 565,
+"super": "ViewModelInstanceValue",
+"props": {}
+},
+"ViewModelPropertyAssetImage": {
+"typeKey": 585,
+"super": "ViewModelPropertyAsset",
+"props": {}
+},
+"ViewModelInstanceAssetImage": {
+"typeKey": 587,
+"super": "ViewModelInstanceAsset",
+"props": {}
+},
+"ViewModelInstanceString": {
+"typeKey": 433,
+"super": "ViewModelInstanceValue",
+"props": {
+"561": [
+"propertyValue",
+"String"
+]
+}
+},
+"ViewModelInstanceValue": {
+"typeKey": 428,
+"super": "Component",
+"props": {
+"554": [
+"viewModelPropertyId",
+null
+]
+}
+},
+"ViewModelInstanceNumber": {
+"typeKey": 442,
+"super": "ViewModelInstanceValue",
+"props": {
+"575": [
+"propertyValue",
+"Double"
+]
+}
+},
+"ViewModelInstanceAssetBlob": {
+"typeKey": 1044,
+"super": "ViewModelInstanceAsset",
+"props": {}
+},
+"ViewModelInstanceList": {
+"typeKey": 441,
+"super": "ViewModelInstanceValue",
+"props": {
+"966": [
+"listSource",
+null
+]
+}
+},
+"ViewModelPropertyTrigger": {
+"typeKey": 502,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelPropertySymbol": {
+"typeKey": 563,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelPropertyBoolean": {
+"typeKey": 448,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelPropertySymbolListIndex": {
+"typeKey": 564,
+"super": "ViewModelPropertySymbol",
+"props": {}
+},
+"ViewModelPropertyColor": {
+"typeKey": 440,
+"super": "ViewModelProperty",
+"props": {}
+},
+"ViewModelProperty": {
+"typeKey": 430,
+"super": "ViewModelComponent",
+"props": {
+"875": [
+"symbolTypeValue",
+"Uint"
+],
+"957": [
+"componentProps",
+"Uint"
+]
+}
+},
+"DataEnum": {
+"typeKey": 510,
+"super": "Core",
+"props": {}
+},
+"ViewModelInstanceBoolean": {
+"typeKey": 449,
+"super": "ViewModelInstanceValue",
+"props": {
+"593": [
+"propertyValue",
+"Bool"
+]
+}
+},
+"KeyboardInput": {
+"typeKey": 664,
+"super": "UserInput",
+"props": {
+"971": [
+"keyType",
+"Uint"
+],
+"972": [
+"keyPhase",
+"Uint"
+],
+"973": [
+"modifiers",
+"Uint"
+]
+}
+},
+"SemanticInput": {
+"typeKey": 670,
+"super": "UserInput",
+"props": {
+"1010": [
+"actionType",
+"Uint"
+]
+}
+},
+"GamepadInput": {
+"typeKey": 974,
+"super": "UserInput",
+"props": {
+"1021": [
+"kind",
+"Uint"
+],
+"1018": [
+"mapping",
+"Uint"
+],
+"1019": [
+"inputIndex",
+"Uint"
+],
+"1020": [
+"buttonPhase",
+"Uint"
+]
+}
+},
+"UserInput": {
+"typeKey": 663,
+"super": "Core",
+"props": {}
+},
+"StateMachineLayerComponent": {
+"typeKey": 66,
+"super": "Core",
+"props": {}
+},
+"EntryState": {
+"typeKey": 63,
+"super": "LayerState",
+"props": {}
+},
+"NestedNumber": {
+"typeKey": 124,
+"super": "NestedInput",
+"props": {
+"239": [
+"nestedValue",
+"Double"
+]
+}
+},
+"KeyFrameId": {
+"typeKey": 50,
+"super": "InterpolatingKeyFrame",
+"props": {
+"122": [
+"value",
+null
+]
+}
+},
+"InterpolatingKeyFrame": {
+"typeKey": 170,
+"super": "KeyFrame",
+"props": {
+"68": [
+"interpolationType",
+"Uint"
+],
+"69": [
+"interpolatorId",
+null
+]
+}
+},
+"NestedBool": {
+"typeKey": 123,
+"super": "NestedInput",
+"props": {
+"238": [
+"nestedValue",
+"Bool"
+]
+}
+},
+"KeyedProperty": {
+"typeKey": 26,
+"super": "Core",
+"props": {
+"53": [
+"propertyKey",
+"Uint"
+]
+}
+},
+"CubicInterpolatorComponent": {
+"typeKey": 163,
+"super": "Component",
+"props": {
+"337": [
+"x1",
+"Double"
+],
+"338": [
+"y1",
+"Double"
+],
+"339": [
+"x2",
+"Double"
+],
+"340": [
+"y2",
+"Double"
+]
+}
+},
+"StateMachineFireEvent": {
+"typeKey": 169,
+"super": "StateMachineFireAction",
+"props": {
+"392": [
+"eventId",
+null
+]
+}
+},
+"TransitionSelfComparator": {
+"typeKey": 593,
+"super": "TransitionComparator",
+"props": {}
+},
+"ScriptedTransitionCondition": {
+"typeKey": 647,
+"super": "TransitionCondition",
+"props": {
+"931": [
+"scriptAssetId",
+null
+]
+}
+},
+"StateMachineListenerSingle": {
+"typeKey": 114,
+"super": "StateMachineListener",
+"props": {
+"225": [
+"listenerTypeValue",
+"Uint"
+],
+"399": [
+"eventId",
+null
+],
+"868": [
+"viewModelPathIds",
+"Bytes"
+]
+}
+},
+"TransitionCondition": {
+"typeKey": 476,
+"super": "Core",
+"props": {}
+},
+"ListenerNumberChange": {
+"typeKey": 118,
+"super": "ListenerInputChange",
+"props": {
+"229": [
+"value",
+"Double"
+]
+}
+},
+"CubicValueInterpolator": {
+"typeKey": 138,
+"super": "CubicInterpolator",
+"props": {}
+},
+"BlendState1DViewModel": {
+"typeKey": 528,
+"super": "BlendState1D",
+"props": {}
+},
+"BlendAnimation1D": {
+"typeKey": 75,
+"super": "BlendAnimation",
+"props": {
+"166": [
+"value",
+"Double"
+]
+}
+},
+"TransitionArtboardCondition": {
+"typeKey": 497,
+"super": "TransitionViewModelCondition",
+"props": {}
+},
+"ListenerBoolChange": {
+"typeKey": 117,
+"super": "ListenerInputChange",
+"props": {
+"228": [
+"value",
+"Uint"
+]
+}
+},
+"NestedLinearAnimation": {
+"typeKey": 97,
+"super": "NestedAnimation",
+"props": {
+"200": [
+"mix",
+"Double"
+]
+}
+},
+"StateMachineComponent": {
+"typeKey": 54,
+"super": "Core",
+"props": {
+"138": [
+"name",
+"String"
+]
+}
+},
+"CubicEaseInterpolator": {
+"typeKey": 28,
+"super": "CubicInterpolator",
+"props": {}
+},
+"CubicInterpolator": {
+"typeKey": 139,
+"super": "KeyFrameInterpolator",
+"props": {
+"63": [
+"x1",
+"Double"
+],
+"64": [
+"y1",
+"Double"
+],
+"65": [
+"x2",
+"Double"
+],
+"66": [
+"y2",
+"Double"
+]
+}
+},
+"StateMachine": {
+"typeKey": 53,
+"super": "Animation",
+"props": {}
+},
+"KeyFrameDouble": {
+"typeKey": 30,
+"super": "InterpolatingKeyFrame",
+"props": {
+"70": [
+"value",
+"Double"
+]
+}
+},
+"TransitionValueArtboardComparator": {
+"typeKey": 630,
+"super": "TransitionValueIdComparator",
+"props": {}
+},
+"KeyFrameUint": {
+"typeKey": 450,
+"super": "InterpolatingKeyFrame",
+"props": {
+"631": [
+"value",
+"Uint"
+]
+}
+},
+"LayerState": {
+"typeKey": 60,
+"super": "StateMachineLayerComponent",
+"props": {
+"536": [
+"flags",
+"Uint"
+]
+}
+},
+"StateMachineListener": {
+"typeKey": 654,
+"super": "StateMachineComponent",
+"props": {
+"224": [
+"targetId",
+null
+],
+"535": [
+"phaseValue",
+"Uint"
+]
+}
+},
+"TransitionBoolCondition": {
+"typeKey": 71,
+"super": "TransitionValueCondition",
+"props": {}
+},
+"TransitionValueColorComparator": {
+"typeKey": 483,
+"super": "TransitionValueComparator",
+"props": {
+"651": [
+"value",
+"Color"
+]
+}
+},
+"KeyFrame": {
+"typeKey": 29,
+"super": "Core",
+"props": {
+"67": [
+"frame",
+"Uint"
+]
+}
+},
+"FocusActionClear": {
+"typeKey": 1037,
+"super": "FocusAction",
+"props": {}
+},
+"StateMachineNumber": {
+"typeKey": 56,
+"super": "StateMachineInput",
+"props": {
+"140": [
+"value",
+"Double"
+]
+}
+},
+"StateMachineTrigger": {
+"typeKey": 58,
+"super": "StateMachineInput",
+"props": {}
+},
+"Animation": {
+"typeKey": 27,
+"super": "Core",
+"props": {
+"55": [
+"name",
+"String"
+]
+}
+},
+"TransitionValueNumberComparator": {
+"typeKey": 484,
+"super": "TransitionValueComparator",
+"props": {
+"652": [
+"value",
+"Double"
+]
+}
+},
+"NestedInput": {
+"typeKey": 121,
+"super": "Component",
+"props": {
+"237": [
+"inputId",
+null
+]
+}
+},
+"BlendState1DInput": {
+"typeKey": 76,
+"super": "BlendState1D",
+"props": {
+"167": [
+"inputId",
+null
+]
+}
+},
+"NestedRemapAnimation": {
+"typeKey": 98,
+"super": "NestedLinearAnimation",
+"props": {
+"202": [
+"time",
+"Double"
+]
+}
+},
+"KeyFrameString": {
+"typeKey": 142,
+"super": "InterpolatingKeyFrame",
+"props": {
+"280": [
+"value",
+"String"
+]
+}
+},
+"ListenerTriggerChange": {
+"typeKey": 115,
+"super": "ListenerInputChange",
+"props": {}
+},
+"ListenerViewModelChange": {
+"typeKey": 487,
+"super": "ListenerAction",
+"props": {
+"453": [
+"inputValue",
+"Uint"
+],
+"454": [
+"inputValueIndex",
+"Uint"
+]
+}
+},
+"AnimationState": {
+"typeKey": 61,
+"super": "AdvanceableState",
+"props": {
+"149": [
+"animationId",
+null
+]
+}
+},
+"KeyedObject": {
+"typeKey": 25,
+"super": "Core",
+"props": {
+"51": [
+"objectId",
+null
+]
+}
+},
+"NestedSimpleAnimation": {
+"typeKey": 96,
+"super": "NestedLinearAnimation",
+"props": {
+"199": [
+"speed",
+"Double"
+],
+"201": [
+"isPlaying",
+"Bool"
+]
+}
+},
+"ListenerFireEvent": {
+"typeKey": 168,
+"super": "ListenerAction",
+"props": {
+"389": [
+"eventId",
+null
+]
+}
+},
+"FocusActionTarget": {
+"typeKey": 652,
+"super": "FocusAction",
+"props": {
+"952": [
+"targetId",
+null
+]
+}
+},
+"TransitionViewModelCondition": {
+"typeKey": 482,
+"super": "TransitionCondition",
+"props": {
+"650": [
+"opValue",
+"Uint"
+]
+}
+},
+"FocusActionTraversal": {
+"typeKey": 672,
+"super": "FocusAction",
+"props": {
+"1011": [
+"traversalKind",
+"Uint"
+]
+}
+},
+"ElasticInterpolator": {
+"typeKey": 174,
+"super": "KeyFrameInterpolator",
+"props": {
+"405": [
+"easingValue",
+"Uint"
+],
+"406": [
+"amplitude",
+"Double"
+],
+"407": [
+"period",
+"Double"
+]
+}
+},
+"ListenerAlignTarget": {
+"typeKey": 126,
+"super": "ListenerAction",
+"props": {
+"240": [
+"targetId",
+null
+],
+"541": [
+"preserveOffset",
+"Bool"
+]
+}
+},
+"KeyFrameBool": {
+"typeKey": 84,
+"super": "InterpolatingKeyFrame",
+"props": {
+"181": [
+"value",
+"Bool"
+]
+}
+},
+"StateMachineFireTrigger": {
+"typeKey": 614,
+"super": "StateMachineFireAction",
+"props": {
+"871": [
+"viewModelPathIds",
+"Bytes"
+]
+}
+},
+"FocusAction": {
+"typeKey": 671,
+"super": "ListenerAction",
+"props": {}
+},
+"TransitionFocusCondition": {
+"typeKey": 1038,
+"super": "TransitionViewModelCondition",
+"props": {}
+},
+"StateMachineBool": {
+"typeKey": 59,
+"super": "StateMachineInput",
+"props": {
+"141": [
+"value",
+"Bool"
+]
+}
+},
+"ScriptedListenerAction": {
+"typeKey": 646,
+"super": "ListenerAction",
+"props": {
+"930": [
+"scriptAssetId",
+null
+]
+}
+},
+"NestedStateMachine": {
+"typeKey": 95,
+"super": "NestedAnimation",
+"props": {}
+},
+"TransitionValueTriggerComparator": {
+"typeKey": 505,
+"super": "TransitionValueComparator",
+"props": {
+"689": [
+"value",
+"Uint"
+]
+}
+},
+"TransitionTriggerCondition": {
+"typeKey": 68,
+"super": "TransitionInputCondition",
+"props": {}
+},
+"KeyFrameColor": {
+"typeKey": 37,
+"super": "InterpolatingKeyFrame",
+"props": {
+"88": [
+"value",
+"Color"
+]
+}
+},
+"KeyFrameInterpolator": {
+"typeKey": 175,
+"super": "Core",
+"props": {}
+},
+"TransitionValueAssetComparator": {
+"typeKey": 602,
+"super": "TransitionValueIdComparator",
+"props": {}
+},
+"TransitionPropertyArtboardComparator": {
+"typeKey": 496,
+"super": "TransitionPropertyComparator",
+"props": {
+"677": [
+"propertyType",
+"Uint"
+]
+}
+},
+"BlendState1D": {
+"typeKey": 527,
+"super": "BlendState",
+"props": {}
+},
+"KeyFrameInt": {
+"typeKey": 1067,
+"super": "InterpolatingKeyFrame",
+"props": {
+"1068": [
+"value",
+"Int"
+]
+}
+},
+"TransitionValueBooleanComparator": {
+"typeKey": 481,
+"super": "TransitionValueComparator",
+"props": {
+"647": [
+"value",
+"Bool"
+]
+}
+},
+"TransitionPropertyComponentComparator": {
+"typeKey": 667,
+"super": "TransitionPropertyComparator",
+"props": {
+"977": [
+"objectId",
+null
+],
+"978": [
+"propertyKey",
+"Uint"
+]
+}
+},
+"ListenerInputChange": {
+"typeKey": 116,
+"super": "ListenerAction",
+"props": {
+"227": [
+"inputId",
+null
+],
+"400": [
+"nestedInputId",
+null
+]
+}
+},
+"TransitionValueEnumComparator": {
+"typeKey": 485,
+"super": "TransitionValueIdComparator",
+"props": {}
+},
+"AnyState": {
+"typeKey": 62,
+"super": "LayerState",
+"props": {}
+},
+"AdvanceableState": {
+"typeKey": 145,
+"super": "LayerState",
+"props": {
+"292": [
+"speed",
+"Double"
+]
+}
+},
+"TransitionComparator": {
+"typeKey": 477,
+"super": "Core",
+"props": {}
+},
+"TransitionValueComparator": {
+"typeKey": 480,
+"super": "TransitionComparator",
+"props": {}
+},
+"TransitionValueCondition": {
+"typeKey": 69,
+"super": "TransitionInputCondition",
+"props": {
+"156": [
+"opValue",
+"Uint"
+]
+}
+},
+"TransitionValueStringComparator": {
+"typeKey": 486,
+"super": "TransitionValueComparator",
+"props": {
+"654": [
+"value",
+"String"
+]
+}
+},
+"StateMachineInput": {
+"typeKey": 55,
+"super": "StateMachineComponent",
+"props": {}
+},
+"StateMachineLayer": {
+"typeKey": 57,
+"super": "StateMachineComponent",
+"props": {}
+},
+"TransitionInputCondition": {
+"typeKey": 67,
+"super": "TransitionCondition",
+"props": {
+"155": [
+"inputId",
+null
+]
+}
+},
+"BlendAnimation": {
+"typeKey": 74,
+"super": "Core",
+"props": {
+"165": [
+"animationId",
+null
+]
+}
+},
+"BlendState": {
+"typeKey": 72,
+"super": "LayerState",
+"props": {}
+},
+"NestedTrigger": {
+"typeKey": 122,
+"super": "NestedInput",
+"props": {
+"401": [
+"fire",
+null
+]
+}
+},
+"KeyFrameCallback": {
+"typeKey": 171,
+"super": "KeyFrame",
+"props": {}
+},
+"BlendAnimationDirect": {
+"typeKey": 77,
+"super": "BlendAnimation",
+"props": {
+"168": [
+"inputId",
+null
+],
+"297": [
+"mixValue",
+"Double"
+],
+"298": [
+"blendSource",
+"Uint"
+]
+}
+},
+"StateTransition": {
+"typeKey": 65,
+"super": "StateMachineLayerComponent",
+"props": {
+"151": [
+"stateToId",
+null
+],
+"152": [
+"flags",
+"Uint"
+],
+"158": [
+"duration",
+"Uint"
+],
+"160": [
+"exitTime",
+"Uint"
+],
+"349": [
+"interpolationType",
+"Uint"
+],
+"350": [
+"interpolatorId",
+null
+],
+"537": [
+"randomWeight",
+"Uint"
+]
+}
+},
+"BlendStateTransition": {
+"typeKey": 78,
+"super": "StateTransition",
+"props": {
+"171": [
+"exitBlendAnimationId",
+null
+]
+}
+},
+"TransitionValueIdComparator": {
+"typeKey": 601,
+"super": "TransitionValueComparator",
+"props": {
+"653": [
+"value",
+null
+]
+}
+},
+"ExitState": {
+"typeKey": 64,
+"super": "LayerState",
+"props": {}
+},
+"BlendStateDirect": {
+"typeKey": 73,
+"super": "BlendState",
+"props": {}
+},
+"TransitionPropertyComparator": {
+"typeKey": 478,
+"super": "TransitionComparator",
+"props": {}
+},
+"ListenerAction": {
+"typeKey": 125,
+"super": "Core",
+"props": {
+"980": [
+"flags",
+"Uint"
+]
+}
+},
+"StateMachineFireAction": {
+"typeKey": 615,
+"super": "Core",
+"props": {
+"393": [
+"occursValue",
+"Uint"
+]
+}
+},
+"LinearAnimation": {
+"typeKey": 31,
+"super": "Animation",
+"props": {
+"56": [
+"fps",
+"Uint"
+],
+"57": [
+"duration",
+"Uint"
+],
+"58": [
+"speed",
+"Double"
+],
+"59": [
+"loopValue",
+"Uint"
+],
+"60": [
+"workStart",
+"Uint"
+],
+"61": [
+"workEnd",
+"Uint"
+],
+"62": [
+"enableWorkArea",
+"Bool"
+],
+"376": [
+"quantize",
+"Bool"
+]
+}
+},
+"TransitionPropertyViewModelComparator": {
+"typeKey": 479,
+"super": "TransitionPropertyComparator",
+"props": {}
+},
+"TransitionNumberCondition": {
+"typeKey": 70,
+"super": "TransitionValueCondition",
+"props": {
+"157": [
+"value",
+"Double"
+]
+}
+},
+"ListenerInputTypeEvent": {
+"typeKey": 659,
+"super": "ListenerInputType",
+"props": {
+"962": [
+"eventId",
+null
+]
+}
+},
+"ListenerInputType": {
+"typeKey": 658,
+"super": "Core",
+"props": {
+"965": [
+"listenerTypeValue",
+"Uint"
+]
+}
+},
+"ListenerInputTypeText": {
+"typeKey": 666,
+"super": "ListenerInputType",
+"props": {}
+},
+"ListenerInputTypeViewModel": {
+"typeKey": 660,
+"super": "ListenerInputType",
+"props": {
+"963": [
+"viewModelPathIds",
+"Bytes"
+]
+}
+},
+"ListenerInputTypePointerButton": {
+"typeKey": 155,
+"super": "ListenerInputType",
+"props": {
+"468": [
+"pointerButtonValue",
+"Uint"
+]
+}
+},
+"ListenerInputTypeSemantic": {
+"typeKey": 669,
+"super": "ListenerInputType",
+"props": {}
+},
+"ListenerInputTypeKeyboard": {
+"typeKey": 665,
+"super": "ListenerInputType",
+"props": {}
+},
+"ListenerInputTypeGamepad": {
+"typeKey": 973,
+"super": "ListenerInputType",
+"props": {}
+},
+"RootBone": {
+"typeKey": 41,
+"super": "Bone",
+"props": {
+"90": [
+"x",
+"Double"
+],
+"91": [
+"y",
+"Double"
+]
+}
+},
+"Tendon": {
+"typeKey": 44,
+"super": "Component",
+"props": {
+"95": [
+"boneId",
+null
+],
+"96": [
+"xx",
+"Double"
+],
+"97": [
+"yx",
+"Double"
+],
+"98": [
+"xy",
+"Double"
+],
+"99": [
+"yy",
+"Double"
+],
+"100": [
+"tx",
+"Double"
+],
+"101": [
+"ty",
+"Double"
+]
+}
+},
+"Bone": {
+"typeKey": 40,
+"super": "SkeletalComponent",
+"props": {
+"89": [
+"length",
+"Double"
+]
+}
+},
+"Skin": {
+"typeKey": 43,
+"super": "ContainerComponent",
+"props": {
+"104": [
+"xx",
+"Double"
+],
+"105": [
+"yx",
+"Double"
+],
+"106": [
+"xy",
+"Double"
+],
+"107": [
+"yy",
+"Double"
+],
+"108": [
+"tx",
+"Double"
+],
+"109": [
+"ty",
+"Double"
+]
+}
+},
+"CubicWeight": {
+"typeKey": 46,
+"super": "Weight",
+"props": {
+"110": [
+"inValues",
+"Uint"
+],
+"111": [
+"inIndices",
+"Uint"
+],
+"112": [
+"outValues",
+"Uint"
+],
+"113": [
+"outIndices",
+"Uint"
+]
+}
+},
+"SkeletalComponent": {
+"typeKey": 39,
+"super": "TransformComponent",
+"props": {}
+},
+"Weight": {
+"typeKey": 45,
+"super": "Component",
+"props": {
+"102": [
+"values",
+"Uint"
+],
+"103": [
+"indices",
+"Uint"
+]
+}
+}
+}
