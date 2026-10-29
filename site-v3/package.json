@@ -1,0 +1,31 @@
+{
+  "name": "ruby570bocadito-portfolio-v3",
+  "private": true,
+  "version": "3.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "rive": "node scripts/build-riv.mjs",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run rive && tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/kanit": "5.3.0",
+    "@rive-app/react-canvas-lite": "4.38.0",
+    "framer-motion": "12.43.0",
+    "lucide-react": "0.577.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "5.2.0",
+    "autoprefixer": "10.6.2",
+    "postcss": "8.5.32",
+    "tailwindcss": "3.4.19",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  }
+}
