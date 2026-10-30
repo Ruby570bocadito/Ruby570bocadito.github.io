@@ -1,0 +1,45 @@
+{
+  "statuses": {
+    "obtained": { "seal": "取得", "en": "Obtained", "es": "Obtenida", "ja": "取得" },
+    "preparing": { "seal": "準備中", "en": "Preparing", "es": "Preparando", "ja": "準備中" },
+    "course": { "seal": "課程", "en": "Coursework", "es": "Curso", "ja": "課程" }
+  },
+  "items": [
+    {
+      "id": "ejpt", "title": "eJPTv2 — Junior Penetration Tester", "org": "INE Security", "status": "obtained",
+      "note": { "en": "Previously certified · expired July 2026, renewal planned.", "es": "Certificación previa · caducó en julio de 2026, renovación prevista.", "ja": "取得済み・2026年7月失効、更新予定。" }
+    },
+    {
+      "id": "cisco", "title": "Networking Fundamentals", "org": "Cisco Networking Academy", "status": "course",
+      "note": { "en": "Relevant coursework completed.", "es": "Formación relevante completada.", "ja": "関連課程修了。" }
+    },
+    {
+      "id": "hack4u", "title": "Offensive Security Training", "org": "Hack4u", "status": "course",
+      "note": { "en": "Red Team & pentesting coursework — the attacker's view I now use to defend.", "es": "Formación Red Team y pentesting — la mirada del atacante que ahora uso para defender.", "ja": "攻撃者の視点を学んだ課程。" }
+    },
+    {
+      "id": "htb", "title": "Hack The Box", "org": "Hack The Box", "status": "course",
+      "note": { "en": "Practical labs: active machines, AD paths and realistic scenarios.", "es": "Laboratorios prácticos: máquinas activas, rutas de AD y escenarios realistas.", "ja": "実践ラボ：AD攻略や現実的なシナリオ。" }
+    },
+    {
+      "id": "crto", "title": "CRTO", "org": "Red Team Operator path", "status": "preparing",
+      "note": { "en": "Adversary emulation, to test detections against real tradecraft.", "es": "Emulación de adversarios, para probar detecciones contra técnicas reales.", "ja": "実際の手口で検知を検証するための敵対者エミュレーション。" }
+    },
+    {
+      "id": "cptes", "title": "CPTES", "org": "Penetration Testing path", "status": "preparing",
+      "note": { "en": "Structured preparation for professional certification.", "es": "Preparación estructurada para certificación profesional.", "ja": "資格取得に向けた体系的な準備。" }
+    }
+  ],
+  "achievements": [
+    {
+      "id": "asti", "title": "ASTI Challenge", "status": "obtained", "seal": "決勝",
+      "subtitle": { "en": "National Robotics Finalist", "es": "Finalista nacional de robótica", "ja": "全国ロボット大会ファイナリスト" },
+      "note": { "en": "Team captain · 1st place Málaga · Spain national final.", "es": "Capitán del equipo · 1.º en Málaga · final nacional de España.", "ja": "チームキャプテン・マラガ1位・全国決勝進出。" }
+    },
+    {
+      "id": "meta", "title": "Meta Global AI Developer Hackathon", "status": "obtained", "seal": "参加",
+      "subtitle": { "en": "FriendlyPear", "es": "FriendlyPear", "ja": "FriendlyPear" },
+      "note": { "en": "Built an AI voice agent against phone scams for older people.", "es": "Construí un agente de voz con IA contra estafas telefónicas a mayores.", "ja": "高齢者向け詐欺対策AI音声エージェントを開発。" }
+    }
+  ]
+}

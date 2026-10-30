@@ -25,7 +25,9 @@ writeFileSync(resolve(site, '.client/index.html'), html);
 mkdirSync(repo, { recursive: true });
 rmSync(resolve(repo, 'static'), { recursive: true, force: true });
 cpSync(resolve(site, '.client/static'), resolve(repo, 'static'), { recursive: true });
-cpSync(resolve(site, '.client/index.html'), resolve(repo, 'index.html'));
+// El portfolio clásico vive ahora en /classic/ (la raíz es el castillo 3D de castle/).
+mkdirSync(resolve(repo, 'classic'), { recursive: true });
+cpSync(resolve(site, '.client/index.html'), resolve(repo, 'classic/index.html'));
 rmSync(resolve(site, '.client'), { recursive: true, force: true });
 rmSync(resolve(site, '.ssr'), { recursive: true, force: true });
-console.log(`✓ index.html + static/ escritos en ${repo}`);
+console.log(`✓ classic/index.html + static/ escritos en ${repo}`);

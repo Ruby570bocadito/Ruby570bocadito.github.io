@@ -1,0 +1,41 @@
+{
+  "scenes": [
+    {
+      "id": "unity", "kanji": "始", "year": "~10",
+      "title": { "en": "The kid with Unity", "es": "El niño con Unity", "ja": "Unityと少年" },
+      "text": { "en": "At ten I opened Unity and wrote my first C#. I wanted to know how games worked under the hood — and never stopped asking that about everything else.", "es": "Con diez años abrí Unity y escribí mi primer C#. Quería saber cómo funcionaban los juegos por dentro — y nunca dejé de preguntármelo sobre todo lo demás.", "ja": "10歳でUnityを開き、初めてC#を書いた。ゲームの仕組みを知りたかった。" }
+    },
+    {
+      "id": "offense", "kanji": "攻", "year": "→",
+      "title": { "en": "The offensive years", "es": "La etapa ofensiva", "ja": "攻撃の時代" },
+      "text": { "en": "C2 frameworks, Red Team orchestration, Active Directory attack paths. All in isolated labs. I learned how attackers think, move and hide.", "es": "Frameworks C2, orquestación Red Team, rutas de ataque en Active Directory. Todo en laboratorios aislados. Aprendí cómo piensan, se mueven y se esconden los atacantes.", "ja": "C2、レッドチーム、AD攻撃経路。すべて隔離ラボで。攻撃者の考え方を学んだ。" }
+    },
+    {
+      "id": "blue", "kanji": "守", "year": "→",
+      "title": { "en": "Turning to Blue Team", "es": "El giro al Blue Team", "ja": "ブルーチームへ" },
+      "text": { "en": "Knowing the attack made me want to catch it. Now I build sensors, rules and timelines: detect, investigate, respond.", "es": "Conocer el ataque me hizo querer detectarlo. Ahora construyo sensores, reglas y timelines: detectar, investigar, responder.", "ja": "攻撃を知り、それを捕まえたくなった。今はセンサー、ルール、タイムラインを作る。" }
+    },
+    {
+      "id": "smr", "kanji": "学", "year": "2025",
+      "title": { "en": "SMR — the formal backbone", "es": "SMR — la columna formal", "ja": "SMR — 基礎" },
+      "text": { "en": "Systems, networks and operating systems at DigitechFP. The structure behind my self-taught path.", "es": "Sistemas, redes y sistemas operativos en DigitechFP. La estructura detrás de mi camino autodidacta.", "ja": "DigitechFPでシステム・ネットワーク・OSを学ぶ。独学を支える骨組み。" }
+    },
+    {
+      "id": "hackathon", "kanji": "梨", "year": "2026",
+      "title": { "en": "Meta Hackathon", "es": "Meta Hackathon", "ja": "Metaハッカソン" },
+      "text": { "en": "FriendlyPear: a voice agent that protects older people from scams. 91 % of 200 unseen scams caught, 4 % false alarms.", "es": "FriendlyPear: un agente de voz que protege a personas mayores de estafas. 91 % de 200 estafas no vistas detectadas, 4 % de falsas alarmas.", "ja": "FriendlyPear：高齢者を詐欺から守る音声エージェント。検知率91%、誤警報4%。" }
+    }
+  ],
+  "learn": {
+    "title": { "en": "How I learn", "es": "Cómo aprendo", "ja": "学び方" },
+    "steps": [
+      { "kanji": "読", "name": "Study", "text": { "en": "Docs, papers, ATT&CK. Understand before touching.", "es": "Documentación, papers, ATT&CK. Entender antes de tocar.", "ja": "ドキュメントと論文。触る前に理解する。" } },
+      { "kanji": "作", "name": "Build", "text": { "en": "Turn the idea into a tool that runs and has tests.", "es": "Convertir la idea en una herramienta que funciona y tiene tests.", "ja": "アイデアを動くツールに。" } },
+      { "kanji": "験", "name": "Lab", "text": { "en": "Everything in isolated environments: AD domains, HTB, purple teaming.", "es": "Todo en entornos aislados: dominios AD, HTB, purple teaming.", "ja": "すべて隔離環境で検証。" } }
+    ]
+  },
+  "ai": {
+    "title": { "en": "AI as an assistant", "es": "La IA como asistente", "ja": "助手としてのAI" },
+    "text": { "en": "I use AI as an assistant whose output I review and understand — never something I trust blindly. If I can't explain a line, it doesn't ship.", "es": "Uso la IA como un asistente cuyo resultado reviso y entiendo — nunca como algo en lo que confío a ciegas. Si no puedo explicar una línea, no se publica.", "ja": "AIは出力を確認し理解する助手。盲信はしない。説明できない行は出さない。" }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "title": { "en": "Only what I have really used.", "es": "Solo lo que he usado de verdad.", "ja": "実際に使ったものだけ。" },
+  "categories": [
+    {
+      "id": "languages", "weapon": "bokken", "kanji": "言",
+      "name": { "en": "Languages", "es": "Lenguajes", "ja": "言語" },
+      "weaponName": { "en": "Bokken", "es": "Bokken", "ja": "木刀" },
+      "items": ["Python", "Go", "Rust", "C#", "Kotlin", "TypeScript", "Bash", "PowerShell"]
+    },
+    {
+      "id": "detection", "weapon": "bo", "kanji": "検",
+      "name": { "en": "Detection", "es": "Detección", "ja": "検知" },
+      "weaponName": { "en": "Bō staff", "es": "Bastón bō", "ja": "棒" },
+      "items": ["Sigma", "YARA", "Sysmon", "ETW", "MITRE ATT&CK", "Detection-as-code"]
+    },
+    {
+      "id": "dfir", "weapon": "naginata", "kanji": "証",
+      "name": { "en": "DFIR", "es": "DFIR", "ja": "フォレンジック" },
+      "weaponName": { "en": "Naginata", "es": "Naginata", "ja": "薙刀" },
+      "items": ["Windows artifacts", "Super-timelines", "Chain of custody", "STIX 2.1", "Triage"]
+    },
+    {
+      "id": "systems", "weapon": "yari", "kanji": "系",
+      "name": { "en": "Systems", "es": "Sistemas", "ja": "システム" },
+      "weaponName": { "en": "Yari spear", "es": "Lanza yari", "ja": "槍" },
+      "items": ["Linux", "Windows", "Active Directory", "Networking", "Docker", "Hardening"]
+    },
+    {
+      "id": "tools", "weapon": "yumi", "kanji": "具",
+      "name": { "en": "Tools", "es": "Herramientas", "ja": "道具" },
+      "weaponName": { "en": "Yumi bow", "es": "Arco yumi", "ja": "弓" },
+      "items": ["Git", "Wireshark", "BloodHound", "MISP", "Neo4j", "Next.js", "Unity"]
+    }
+  ]
+}

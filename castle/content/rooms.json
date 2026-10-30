@@ -1,0 +1,20 @@
+[
+  { "id": "about", "path": "/about/", "kanji": "物語", "name": "WHOAMI",
+    "label": { "en": "Who am I", "es": "Quién soy", "ja": "物語" },
+    "seo": { "title": "WHOAMI — Rafael Gálvez", "description": "My story as an emakimono scroll: from Unity at ten, through offensive security, to Blue Team and detection engineering." } },
+  { "id": "watchtower", "path": "/watchtower/", "kanji": "見張り台", "name": "THE WATCHTOWER",
+    "label": { "en": "Projects", "es": "Proyectos", "ja": "作品" },
+    "seo": { "title": "The Watchtower — Projects · Rafael Gálvez", "description": "FriendlyPear, bluetardigrade, SOC SHARK, Forense-Framework, ttpblast, Bastion and area·ai: Blue Team tools I built." } },
+  { "id": "dojo", "path": "/dojo/", "kanji": "道場", "name": "THE DOJO",
+    "label": { "en": "Skills", "es": "Habilidades", "ja": "技" },
+    "seo": { "title": "The Dojo — Skills · Rafael Gálvez", "description": "Only what I have really used: languages, detection, DFIR, systems and tools." } },
+  { "id": "archive", "path": "/archive/", "kanji": "巻物庫", "name": "THE ARCHIVE",
+    "label": { "en": "Certifications", "es": "Certificaciones", "ja": "資格" },
+    "seo": { "title": "The Archive — Certifications · Rafael Gálvez", "description": "Certifications, coursework and achievements, including the ASTI Challenge national robotics final and Hack The Box." } },
+  { "id": "harbor", "path": "/harbor/", "kanji": "港", "name": "THE HARBOR",
+    "label": { "en": "Contact", "es": "Contacto", "ja": "連絡" },
+    "seo": { "title": "The Harbor — Contact · Rafael Gálvez", "description": "Email, LinkedIn, GitHub, CV and a message form. Open to internships and junior Blue Team roles." } },
+  { "id": "kura", "path": "/kura/", "kanji": "蔵", "name": "KURA",
+    "label": { "en": "Offensive archive", "es": "Archivo ofensivo", "ja": "攻撃の記録" },
+    "seo": { "title": "Kura — Offensive archive · Rafael Gálvez", "description": "WorldC2, OrquestaRT, HiveMind and Wormy: where I learned how they attack, so I know how to defend." } }
+]

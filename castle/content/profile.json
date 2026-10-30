@@ -1,0 +1,35 @@
+{
+  "name": "Rafael Gálvez Silipo",
+  "short": "RAFAEL GÁLVEZ",
+  "katakana": "ラファエル",
+  "handle": "Ruby570bocadito",
+  "email": "rafagasi09@gmail.com",
+  "github": "https://github.com/Ruby570bocadito",
+  "linkedin": "https://www.linkedin.com/in/rafael-g%C3%A1lvez-silipo-07445a409/",
+  "cv": "/cv.pdf",
+  "motto": { "en": "I learn by building.", "es": "Aprendo construyendo.", "ja": "作って学ぶ" },
+  "mottoJa": "作って学ぶ",
+  "roles": ["Blue Team", "Detection Engineering", "DFIR", "Builder"],
+  "headline": {
+    "en": "Blue Team & Detection Engineer",
+    "es": "Blue Team & Detection Engineer",
+    "ja": "ブルーチーム・検知エンジニア"
+  },
+  "bio": {
+    "en": "SMR student focused on SOC, Blue Team and detection engineering. I started with C# and Unity at age 10, went through offensive security (C2, Red Team, Active Directory) and today I build tools to detect, investigate and respond.",
+    "es": "Estudiante de SMR enfocado en SOC, Blue Team y detection engineering. Empecé con C# y Unity a los 10 años, pasé por la seguridad ofensiva (C2, Red Team, Active Directory) y hoy construyo herramientas para detectar, investigar y responder.",
+    "ja": "SOC・ブルーチーム・検知エンジニアリングを専攻するSMRの学生。10歳でC#とUnityを始め、攻撃側のセキュリティ（C2・レッドチーム・Active Directory）を経て、今は検知・調査・対応のためのツールを作っています。"
+  },
+  "status": {
+    "en": "Open to internships and junior roles.",
+    "es": "Abierto a prácticas y puestos junior.",
+    "ja": "インターン・ジュニア職を募集中。"
+  },
+  "location": { "en": "Málaga, Spain", "es": "Málaga, España", "ja": "スペイン・マラガ" },
+  "focus": [
+    "SOC operations & alert triage",
+    "Detection engineering (Sigma, YARA, ETW, Sysmon)",
+    "DFIR on Windows: timelines, chain of custody",
+    "Mapping coverage to MITRE ATT&CK"
+  ]
+}

@@ -1,0 +1,159 @@
+[
+  {
+    "id": "friendlypear",
+    "name": "FriendlyPear",
+    "kanji": "梨",
+    "featured": true,
+    "band": "Meta Global AI Developer Hackathon",
+    "tagline": {
+      "en": "AI voice agent that protects older people from phone scams.",
+      "es": "Agente de voz con IA que protege a personas mayores de estafas.",
+      "ja": "高齢者を電話詐欺から守るAI音声エージェント。"
+    },
+    "description": {
+      "en": "An Android voice agent that listens alongside the user during calls and warns, in plain words, when a conversation follows a scam pattern. Built for the Meta Global AI Developer Hackathon with a focus on low false alarms, so people keep trusting it.",
+      "es": "Un agente de voz para Android que escucha junto al usuario durante las llamadas y avisa, con palabras sencillas, cuando la conversación sigue un patrón de estafa. Creado para el Meta Global AI Developer Hackathon priorizando pocas falsas alarmas, para que la gente siga confiando en él.",
+      "ja": "通話中にユーザーと一緒に聞き、会話が詐欺のパターンに沿うとやさしい言葉で警告するAndroid音声エージェント。Meta Global AI Developer Hackathonのために開発。"
+    },
+    "stack": ["Kotlin", "Android", "LLM", "Speech-to-text"],
+    "metrics": [
+      { "value": "91 %", "label": { "en": "of 200 unseen scams detected", "es": "de 200 estafas no vistas detectadas", "ja": "未知の詐欺200件中の検知率" } },
+      { "value": "4 %", "label": { "en": "false alarms", "es": "falsas alarmas", "ja": "誤警報" } }
+    ],
+    "github": "https://github.com/Ruby570bocadito",
+    "demo": null
+  },
+  {
+    "id": "bluetardigrade",
+    "name": "bluetardigrade",
+    "kanji": "守",
+    "tagline": {
+      "en": "Self-hosted SOC for Windows.",
+      "es": "SOC self-hosted para Windows.",
+      "ja": "Windows向けセルフホストSOC。"
+    },
+    "description": {
+      "en": "A self-hosted SOC: an ETW sensor written in Rust collects telemetry, a Go engine correlates it against detection rules mapped to MITRE ATT&CK, and a Next.js console lets an analyst triage alerts.",
+      "es": "Un SOC self-hosted: un sensor ETW en Rust recoge telemetría, un motor en Go la correlaciona con reglas de detección mapeadas a MITRE ATT&CK y una consola Next.js permite al analista triar alertas.",
+      "ja": "RustのETWセンサーがテレメトリを収集し、GoのエンジンがMITRE ATT&CKに対応した検知ルールで相関分析、Next.jsのコンソールでアラートをトリアージ。"
+    },
+    "stack": ["Rust", "ETW", "Go", "Next.js", "MITRE ATT&CK"],
+    "metrics": [
+      { "value": "125", "label": { "en": "rules mapped to ATT&CK", "es": "reglas mapeadas a ATT&CK", "ja": "ATT&CK対応ルール" } },
+      { "value": "3", "label": { "en": "components: sensor · engine · console", "es": "componentes: sensor · motor · consola", "ja": "構成要素" } }
+    ],
+    "github": "https://github.com/Ruby570bocadito",
+    "demo": null
+  },
+  {
+    "id": "socshark",
+    "name": "SOC SHARK",
+    "kanji": "鮫",
+    "tagline": {
+      "en": "A friendly Wireshark alternative in Rust.",
+      "es": "Alternativa amigable a Wireshark en Rust.",
+      "ja": "Rust製のやさしいWireshark代替。"
+    },
+    "description": {
+      "en": "Network analysis for people who are not packet wizards: it groups traffic into conversations instead of packets and tells alerts as short stories — who talked to whom, what looked wrong and why.",
+      "es": "Análisis de red para quien no es un mago de los paquetes: agrupa el tráfico en conversaciones en vez de paquetes y cuenta las alertas como historias cortas — quién habló con quién, qué parecía raro y por qué.",
+      "ja": "パケットではなく会話単位で通信をまとめ、アラートを短い物語として伝えるネットワーク解析ツール。"
+    },
+    "stack": ["Rust", "pcap", "Networking"],
+    "metrics": [
+      { "value": "会話", "label": { "en": "conversations, not packets", "es": "conversaciones, no paquetes", "ja": "パケットより会話" } },
+      { "value": "物語", "label": { "en": "alerts told as stories", "es": "alertas como historias", "ja": "物語としてのアラート" } }
+    ],
+    "github": "https://github.com/Ruby570bocadito",
+    "demo": null
+  },
+  {
+    "id": "forense",
+    "name": "Forense-Framework",
+    "kanji": "証",
+    "tagline": {
+      "en": "DFIR for Windows with chain of custody.",
+      "es": "DFIR para Windows con cadena de custodia.",
+      "ja": "証拠保全付きWindows向けDFIR。"
+    },
+    "description": {
+      "en": "A Windows DFIR framework that keeps chain of custody from acquisition to report, scans evidence with Sigma and YARA, builds a super-timeline and exports findings as STIX 2.1.",
+      "es": "Un framework DFIR para Windows que mantiene la cadena de custodia desde la adquisición hasta el informe, analiza evidencias con Sigma y YARA, construye una súper-timeline y exporta hallazgos en STIX 2.1.",
+      "ja": "取得から報告まで証拠保全を維持し、Sigma/YARAで解析、スーパータイムラインを構築しSTIX 2.1で出力。"
+    },
+    "stack": ["Python", "Sigma", "YARA", "STIX 2.1"],
+    "metrics": [
+      { "value": "STIX 2.1", "label": { "en": "export format", "es": "formato de exportación", "ja": "出力形式" } },
+      { "value": "鎖", "label": { "en": "chain of custody end to end", "es": "cadena de custodia de punta a punta", "ja": "一貫した証拠保全" } }
+    ],
+    "github": "https://github.com/Ruby570bocadito",
+    "demo": null
+  },
+  {
+    "id": "ttpblast",
+    "name": "ttpblast",
+    "kanji": "跡",
+    "badge": "v0.1 · research",
+    "tagline": {
+      "en": "BLAST-style alignment over Sysmon telemetry.",
+      "es": "Alineamiento tipo BLAST sobre telemetría Sysmon.",
+      "ja": "Sysmonテレメトリ上のBLAST型アラインメント。"
+    },
+    "description": {
+      "en": "A research prototype that borrows sequence alignment from bioinformatics: attacker behaviour becomes a sequence of events, and ttpblast scores how closely Sysmon telemetry matches known TTPs with an E-value.",
+      "es": "Un prototipo de investigación que toma prestado el alineamiento de secuencias de la bioinformática: el comportamiento del atacante es una secuencia de eventos y ttpblast puntúa con un E-value cuánto se parece la telemetría Sysmon a TTPs conocidas.",
+      "ja": "バイオインフォマティクスの配列アラインメントを応用し、SysmonテレメトリとTTPの類似度をE値で評価する研究プロトタイプ。"
+    },
+    "stack": ["Python", "Sysmon", "Bioinformatics"],
+    "metrics": [
+      { "value": "E-value", "label": { "en": "statistical match score", "es": "puntuación estadística", "ja": "統計スコア" } },
+      { "value": "v0.1", "label": { "en": "research stage", "es": "fase de investigación", "ja": "研究段階" } }
+    ],
+    "github": "https://github.com/Ruby570bocadito",
+    "demo": null
+  },
+  {
+    "id": "bastion",
+    "name": "Bastion",
+    "kanji": "砦",
+    "tagline": {
+      "en": "Audit and hardening in Go, with automatic rollback.",
+      "es": "Auditoría y hardening en Go con rollback automático.",
+      "ja": "自動ロールバック付きGo製の監査・堅牢化ツール。"
+    },
+    "description": {
+      "en": "Bastion audits a system against 155 hardening controls, applies the fixes you approve and rolls them back automatically if something breaks.",
+      "es": "Bastion audita un sistema contra 155 controles de hardening, aplica las correcciones que apruebas y las revierte automáticamente si algo se rompe.",
+      "ja": "155項目の堅牢化コントロールで監査し、承認した修正を適用、問題があれば自動でロールバック。"
+    },
+    "stack": ["Go", "Hardening", "CIS-style controls"],
+    "metrics": [
+      { "value": "155", "label": { "en": "controls", "es": "controles", "ja": "コントロール" } },
+      { "value": "復元", "label": { "en": "automatic rollback", "es": "rollback automático", "ja": "自動ロールバック" } }
+    ],
+    "github": "https://github.com/Ruby570bocadito",
+    "demo": null
+  },
+  {
+    "id": "areaai",
+    "name": "area·ai",
+    "kanji": "陣",
+    "tagline": {
+      "en": "Red vs Blue AI agent lab.",
+      "es": "Laboratorio de agentes IA Red vs Blue.",
+      "ja": "レッド対ブルーのAIエージェント実験場。"
+    },
+    "description": {
+      "en": "A lab where AI agents play attacker and defender in an isolated environment, so detections can be tested against an adversary that adapts.",
+      "es": "Un laboratorio donde agentes de IA hacen de atacante y defensor en un entorno aislado, para probar detecciones contra un adversario que se adapta.",
+      "ja": "隔離環境でAIエージェントが攻撃者と防御者を演じ、適応する敵に対して検知を試す実験場。"
+    },
+    "stack": ["Python", "LLM agents", "Docker"],
+    "metrics": [
+      { "value": "514", "label": { "en": "tests", "es": "tests", "ja": "テスト" } },
+      { "value": "攻防", "label": { "en": "Red vs Blue", "es": "Red vs Blue", "ja": "攻防" } }
+    ],
+    "github": "https://github.com/Ruby570bocadito",
+    "demo": null
+  }
+]

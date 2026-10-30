@@ -1,0 +1,38 @@
+{
+  "motto": { "en": "Where I learned how they attack, so I know how to defend.", "es": "Donde aprendí cómo atacan, para saber defender.", "ja": "攻撃を学んだ場所。守るために。" },
+  "disclaimer": { "en": "Research and learning projects, built and run only in isolated, authorized labs.", "es": "Proyectos de investigación y aprendizaje, construidos y ejecutados solo en laboratorios aislados y autorizados.", "ja": "隔離・許可された環境でのみ実行した研究プロジェクト。" },
+  "items": [
+    {
+      "id": "worldc2", "name": "WorldC2", "kanji": "令",
+      "tagline": { "en": "Command & control platform for authorized labs.", "es": "Plataforma de mando y control para laboratorios autorizados.", "ja": "許可されたラボ向けC2基盤。" },
+      "lesson": { "en": "Taught me what C2 beacons look like on the wire — the patterns I now hunt.", "es": "Me enseñó cómo se ven los beacons de C2 en la red — los patrones que ahora cazo.", "ja": "C2通信の特徴を学び、今はそれを狩る。" },
+      "stack": ["Go", "Vue 3", "Cryptography"],
+      "image": "/assets/worldc2-dashboard.png",
+      "github": "https://github.com/Ruby570bocadito/WorldC2"
+    },
+    {
+      "id": "orquestart", "name": "OrquestaRT", "kanji": "奏",
+      "tagline": { "en": "AI-assisted Red Team orchestration with human approval.", "es": "Orquestación Red Team asistida por IA con aprobación humana.", "ja": "人の承認付きAIレッドチーム運用。" },
+      "lesson": { "en": "Scope enforcement and full audit trails — the same discipline a SOC needs.", "es": "Control del alcance y auditoría completa — la misma disciplina que necesita un SOC.", "ja": "範囲制御と監査証跡 — SOCにも必要な規律。" },
+      "stack": ["Python", "FastAPI", "LangGraph", "Next.js"],
+      "image": "/assets/orquesta-console.png",
+      "github": "https://github.com/Ruby570bocadito/orquesta-rt"
+    },
+    {
+      "id": "hivemind", "name": "HiveMind", "kanji": "群",
+      "tagline": { "en": "Distributed multi-agent security research in Rust.", "es": "Investigación de seguridad multi-agente distribuida en Rust.", "ja": "Rust製の分散マルチエージェント研究。" },
+      "lesson": { "en": "Concurrency and coordination — how distributed threats behave.", "es": "Concurrencia y coordinación — cómo se comportan las amenazas distribuidas.", "ja": "分散した脅威の振る舞いを理解。" },
+      "stack": ["Rust", "Distributed systems"],
+      "image": "/assets/hivemind-console.png",
+      "github": "https://github.com/Ruby570bocadito/HiveMind"
+    },
+    {
+      "id": "wormy", "name": "Wormy", "kanji": "虫",
+      "tagline": { "en": "ML-driven network propagation research, lab only.", "es": "Investigación de propagación en red con ML, solo en laboratorio.", "ja": "ML駆動の拡散研究（ラボのみ）。" },
+      "lesson": { "en": "Seeing propagation from the inside makes lateral movement easy to spot.", "es": "Ver la propagación desde dentro hace fácil detectar el movimiento lateral.", "ja": "内側から拡散を見ると横展開を見抜ける。" },
+      "stack": ["Python", "Machine Learning", "Docker"],
+      "image": "/assets/wormy-dashboard.png",
+      "github": "https://github.com/Ruby570bocadito/Wormy-ML-Network-Worm"
+    }
+  ]
+}
