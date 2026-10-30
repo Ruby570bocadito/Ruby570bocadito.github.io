@@ -17,11 +17,15 @@ const SCENES = {
 
 /** ?stats en la URL: registra llamadas de dibujo y triángulos (diagnóstico de rendimiento). */
 function Stats() {
-  const { gl } = useThree();
-  const t = useRef(0);
+  const { gl, camera } = useThree();
+  const t = useRef(0), frames = useRef(0);
   useFrame((_, dt) => {
     t.current += dt;
-    if (t.current > 3) { t.current = 0; console.info('[stats]', JSON.stringify({ calls: gl.info.render.calls, tris: gl.info.render.triangles, geos: gl.info.memory.geometries, tex: gl.info.memory.textures })); }
+    frames.current++;
+    if (t.current > 3) {
+      console.info('[stats]', JSON.stringify({ fps: +(frames.current / t.current).toFixed(1), cam: camera.position.toArray().map((v) => +v.toFixed(2)), calls: gl.info.render.calls, tris: gl.info.render.triangles, geos: gl.info.memory.geometries, tex: gl.info.memory.textures }));
+      t.current = 0; frames.current = 0;
+    }
   });
   return null;
 }

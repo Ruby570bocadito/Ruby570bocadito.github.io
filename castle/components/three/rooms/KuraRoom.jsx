@@ -125,8 +125,8 @@ export default function KuraRoom() {
       lock.current.position.y = THREE.MathUtils.damp(lock.current.position.y, open ? -0.5 : 2.6, 2, dt);
       lock.current.visible = lock.current.position.y > 0;
     }
-    pos.set(0, open ? 3.2 : 3, open ? 0.6 : 13);
-    look.set(0, open ? 0.9 : 3, open ? -5.5 : 0);
+    pos.set(0, open ? 4.1 : 3, open ? 1.0 : 13);
+    look.set(0, open ? 0.6 : 3, open ? -6 : 0);
     camera.position.lerp(pos, 1 - Math.exp(-dt * 2.5));
     camera.lookAt(look);
   });
