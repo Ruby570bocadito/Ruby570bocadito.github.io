@@ -5,11 +5,12 @@ import { useFrame, useThree } from '@react-three/fiber';
 import gsap from 'gsap';
 
 const EASE = gsap.parseEase('power2.inOut');
-import { Sky, Water, Layer, Pine, Sakura, Petals, StoneLantern, Box } from './kit';
-import { Keep, Wall, Otemon, Bridge } from './Castle';
-import { Engawa, NorenDoor, Kura, Pond, Avatar, Ninja, Cranes } from './Grounds';
-import { canvasTexture, PALETTE as P } from './textures';
-import { mountainSVG, cloudSVG, waveSVG } from './art';
+import { Sky, Water, Layer, Pine, Sakura, Petals, StoneLantern, Ink, toon } from './kit';
+import { MBox } from './Castle';
+import { Keep, Wall, Otemon, Bridge, Hill, Turret, HillPines } from './Castle';
+import { Engawa, NorenDoor, Kura, Pond, Avatar, Ninja, Cranes, Garden, SteppingStones, Moss } from './Grounds';
+import { canvasTexture, earthTexture, PALETTE as P } from './textures';
+import { mountainSVG, cloudSVG, waveSVG, sunSVG, sailboatSVG } from './art';
 import { useStore } from '@/lib/store';
 import { pick } from '@/lib/i18n';
 import { useNav } from '@/lib/nav';
@@ -18,8 +19,8 @@ import rooms from '@/content/rooms.json';
 export const DOOR_Z = [-8, -16.5, -25, -33.5, -42];
 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
-const introPos = new THREE.CatmullRomCurve3([V(-3, 5.5, 44), V(-1, 3.4, 22), V(0, 2.4, 12), V(0, 1.9, 6.2)]);
-const introLook = new THREE.CatmullRomCurve3([V(5, 10, -20), V(0, 4, 4), V(0, 2.2, 0), V(0, 1.55, 0)]);
+const introPos = new THREE.CatmullRomCurve3([V(-4, 6.2, 46), V(-1, 3.4, 22), V(0, 2.4, 12), V(0, 1.9, 6.2)]);
+const introLook = new THREE.CatmullRomCurve3([V(7, 11, -20), V(0, 4, 4), V(0, 2.2, 0), V(0, 1.55, 0)]);
 const walkPos = new THREE.CatmullRomCurve3([V(0, 1.9, 6.2), V(0.4, 2.3, 0), V(1.2, 2.5, -6), V(1.4, 2.5, -20), V(1.4, 2.5, -36), V(0.6, 2.5, -44), V(-0.6, 2.6, -48.5)]);
 
 const AVATAR = V(0, 1.55, 0), KURA = V(-1, 3, -60);
@@ -81,6 +82,15 @@ function CameraRig() {
   return null;
 }
 
+function MBoxGround() {
+  const mats = useMemo(() => {
+    const top = toon('#efe3c8', { map: earthTexture(), repeat: [140 / 6, 100 / 6] });
+    const side = toon(P.stone);
+    return [side, side, top, side, side, side];
+  }, []);
+  return <MBox args={[140, 0.6, 100]} mats={mats} outline={0} position={[0, 0.3, -40]} />;
+}
+
 export default function HomeWorld() {
   const lang = useStore((s) => s.lang);
   const phase = useStore((s) => s.phase);
@@ -93,6 +103,8 @@ export default function HomeWorld() {
     cloudO: canvasTexture('cloudO', 1024, 180, { svg: cloudSVG(P.ochre, 7) }),
     cloudW2: canvasTexture('cloudW2', 1024, 180, { svg: cloudSVG(P.washi, 11) }),
     wave: canvasTexture('wave', 1024, 256, { svg: waveSVG }),
+    sun: canvasTexture('sun', 256, 256, { svg: sunSVG }),
+    boat: canvasTexture('sailboat', 256, 256, { svg: sailboatSVG }),
   }), []);
 
   return (
@@ -103,7 +115,8 @@ export default function HomeWorld() {
       <CameraRig />
       <Sky top={P.ai} mid={P.ochre} bottom={P.washi} midAt={0.62} />
 
-      {/* fondo: monte, nubes en bandas y grullas */}
+      {/* fondo: monte, sol, nubes en bandas y grullas */}
+      <Layer map={tex.sun} w={26} h={26} position={[10, 62, -240]} />
       <Layer map={tex.mountain} w={300} h={150} position={[-40, 50, -230]} />
       <Layer map={tex.cloudW} w={180} h={32} position={[-70, 22, -180]} />
       <Layer map={tex.cloudO} w={160} h={28} position={[80, 34, -170]} opacity={0.95} />
@@ -112,28 +125,38 @@ export default function HomeWorld() {
       <Layer map={tex.cloudW} w={70} h={11} position={[40, 52, -110]} />
       <Cranes count={5} y={30} z={-80} />
 
-      {/* mar con olas estilizadas */}
+      {/* mar con olas estilizadas y veleros */}
       <Water size={[900, 900]} position={[0, 0, 0]} />
       {[[-26, 28, 28], [24, 26, 26], [-40, 50, 34], [42, 48, 34], [-14, 36, 20], [16, 38, 22]].map(([x, z, w], i) => (
         <Layer key={i} map={tex.wave} w={w} h={w / 4} position={[x, w / 9 - 0.6, z]} bob={0.4} bobSpeed={0.9} phase={i * 1.7} />
       ))}
+      <Layer map={tex.boat} w={7} h={7} position={[-30, 2.6, 20]} bob={0.25} bobSpeed={1.1} />
+      <Layer map={tex.boat} w={5} h={5} position={[36, 1.9, 16]} bob={0.2} bobSpeed={0.8} phase={2} />
 
       {/* recinto */}
-      <Box args={[140, 0.6, 100]} color={P.washiDark} outline={0} position={[0, 0.3, -40]} />
-      <Wall length={60} position={[-34, 0.6, 10]} />
-      <Wall length={60} position={[34, 0.6, 10]} />
+      <MBoxGround />
+      <Wall length={56} position={[-34, 0.6, 10]} />
+      <Wall length={56} position={[34, 0.6, 10]} />
       <Wall length={90} position={[-62, 0.6, -40]} rotation-y={Math.PI / 2} />
+      <Turret position={[-17, 0.6, 9.6]} />
+      <Turret position={[17, 0.6, 9.6]} />
       <Bridge from={10.5} to={46} />
       <Otemon position={[0, 0.6, 10]} open={phase !== 'intro'} onEnter={enterCastle} />
-      <Keep position={[16, 0.6, -44]} scale={1.5} />
+      <group position={[25, 0.6, -60]}>
+        <Hill r={17} h={6.5} />
+        <HillPines />
+        <Keep position={[0, 6.2, 0]} scale={1.18} />
+      </group>
       <Pine position={[-14, 0.6, 4]} scale={1.6} seed={2} />
-      <Pine position={[9, 0.6, 3]} scale={1.3} seed={5} />
-      <Pine position={[24, 0.6, -14]} scale={1.8} seed={9} />
-      <Pine position={[-20, 0.6, -30]} scale={2} seed={4} />
+      <Pine position={[9, 0.6, 4]} scale={1.3} seed={5} />
+      <Pine position={[-22, 0.6, -24]} scale={2} seed={4} />
 
-      {/* patio y pasarela */}
+      {/* patio, jardín y pasarela */}
       <group position={[0, 0.6, 0]}>
         <Avatar position={[0, 0, 0]} />
+        <SteppingStones points={[[0.2, 8.4], [-0.3, 7.1], [0.25, 5.8], [-0.2, 4.5], [0.3, 3.2], [-1.2, 0.2, 0.4], [-2.2, -0.9, 0.4], [-3.3, -1.7, 0.42]]} />
+        <Moss patches={[[-12.4, 3.4, 1.6], [7.6, 3.2, 1.3], [2.6, -9.6, 1.2], [5.6, -31, 1.4], [2.6, -47.6, 1.5], [9.4, -14.6, 1.1]]} />
+        <Garden x0={2.6} x1={13} z0={-3} z1={-50} />
         <Engawa from={-2} to={-50} />
         {rooms.slice(0, 5).map((r, i) => (
           <NorenDoor
@@ -146,15 +169,17 @@ export default function HomeWorld() {
             onOpen={() => nav(r.path)}
           />
         ))}
+        <SteppingStones points={DOOR_Z.map((z) => [-3.5, z, 0.5])} />
         <Kura position={[-1, 0, -62]} onOpen={() => nav('/kura/')} />
-        <Ninja position={[-8.6, 7.1, -29.4]} rotation-y={Math.PI / 2.6} caught={caught} onCaught={() => useStore.getState().award('hunter')} />
-        <Pond position={[4.2, 0, -22]} />
-        {[-4, -14, -30, -40, -48].map((z, i) => <StoneLantern key={z} position={[0.8 + (i % 2) * 0.6, 0, z]} />)}
-        <Sakura position={[3.5, 0, -10]} scale={1.3} />
-        <Sakura position={[6.5, 0, -32]} scale={1.5} />
-        <Sakura position={[-3, 0, 2.5]} scale={1.1} />
-        <Pine position={[8, 0, -16]} scale={1.2} seed={7} />
-        <Pine position={[4, 0, -48]} scale={1.4} seed={12} />
+        <Ninja position={[-8.6, 7.6, -29.4]} rotation-y={Math.PI / 2.6} caught={caught} onCaught={() => useStore.getState().award('hunter')} />
+        <Pond position={[4.6, 0.03, -22]} />
+        {[-6, -14, -30, -40, -48].map((z, i) => <StoneLantern key={z} position={[3.4 + (i % 2) * 0.8, 0, z]} />)}
+        <Sakura position={[4.6, 0, -9]} scale={1.25} seed={3} />
+        <Sakura position={[7.6, 0, -33]} scale={1.45} seed={8} />
+        <Sakura position={[-3.2, 0, 3.6]} scale={1.05} seed={5} />
+        <Pine position={[9.6, 0, -15]} scale={1.2} seed={7} />
+        <Pine position={[5.6, 0, -46]} scale={1.4} seed={12} />
+        <Pine position={[11.5, 0, -40]} scale={1.1} seed={15} />
         <Petals count={160} area={[14, 8, 60]} center={[1, 0, -24]} />
       </group>
     </>

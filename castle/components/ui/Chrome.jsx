@@ -6,11 +6,25 @@ import { useT, pick } from '@/lib/i18n';
 import { useNav, roomFromPath } from '@/lib/nav';
 import { initAudio, setVolumes, sfx } from '@/lib/audio';
 import { Hanko, WoodButton } from './bits';
+import { IconBack, IconMap, IconTerminal, IconSound, IconSeal } from './icons';
 import rooms from '@/content/rooms.json';
 
 const LANGS = [['es', 'ES'], ['en', 'EN'], ['ja', '日本語']];
 
-/** Barra superior: volver, mapa, terminal, audio, sellos, idioma, 2D. */
+function IconButton({ label, active, children, className = '', ...p }) {
+  return (
+    <button
+      {...p}
+      aria-label={label}
+      title={label}
+      className={`hud-btn ${active ? 'is-active' : ''} ${className}`}
+    >
+      {children}
+    </button>
+  );
+}
+
+/** Barra superior: volver, marca, mapa, terminal, audio, sellos, idioma y modo. */
 export function TopBar() {
   const t = useT();
   const nav = useNav();
@@ -22,32 +36,36 @@ export function TopBar() {
     if (room !== 'home') return nav('/');
     if (phase === 'walk') { window.scrollTo({ top: 0 }); useStore.setState({ phase: 'intro', walkT: 0 }); }
   };
+  const showBack = (room !== 'home' || phase === 'walk') && mode === '3d';
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-start justify-between gap-2 p-2 md:p-3">
+    <header className="hud-top pointer-events-none fixed inset-x-0 top-0 z-40 flex items-start justify-between gap-2">
       <div className="pointer-events-auto flex items-center gap-2">
-        {(room !== 'home' || phase === 'walk') && mode === '3d' ? (
-          <WoodButton onClick={() => { sfx('wood'); back(); }} aria-label={t('back')}>← <span className="hidden sm:inline">{t('back')}</span></WoodButton>
+        {showBack ? (
+          <IconButton label={t('back')} onClick={() => { sfx('wood'); back(); }}><IconBack /></IconButton>
         ) : null}
-        <a href="/" onClick={(e) => { e.preventDefault(); nav('/'); }} className="flex items-center gap-2" aria-label="見張りの城 — home">
-          <Hanko size="text-sm">見張</Hanko>
-          <span className="hidden font-serif text-sm font-extrabold text-sumi drop-shadow-[0_1px_0_#F2E8D5] md:inline">{pick(rooms.find((r) => r.id === room)?.kanji, lang) || '見張りの城'}</span>
+        <a href="/" onClick={(e) => { e.preventDefault(); nav('/'); }} className="hud-brand" aria-label="見張りの城 — inicio">
+          <span className="hanko text-[11px] leading-none" aria-hidden="true">見張</span>
+          <span className="hidden flex-col leading-tight sm:flex">
+            <span className="font-serif text-[13px] font-extrabold">見張りの城</span>
+            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase opacity-70">Rafael Gálvez</span>
+          </span>
         </a>
       </div>
-      <nav className="pointer-events-auto flex flex-wrap items-center justify-end gap-1.5" aria-label="UI">
-        <WoodButton active={panel === 'map'} onClick={() => { sfx('paper'); togglePanel('map'); }} aria-expanded={panel === 'map'}>地図 <span className="hidden lg:inline">{t('map')}</span></WoodButton>
-        <WoodButton onClick={() => useStore.setState({ terminal: true })} aria-label={t('terminal')} title={t('terminalHint')}>~ <span className="hidden lg:inline">{t('terminal')}</span></WoodButton>
-        <WoodButton active={panel === 'audio'} onClick={() => togglePanel('audio')} aria-expanded={panel === 'audio'} aria-label={t('audio')}>{muted ? '音✕' : '音♪'} <span className="hidden lg:inline">{t('audio')}</span></WoodButton>
-        <WoodButton active={panel === 'book'} onClick={() => { sfx('paper'); togglePanel('book'); }} aria-expanded={panel === 'book'} aria-label={t('stamps')}>
-          印 <span className="font-mono text-xs">{count}/6</span>
-        </WoodButton>
-        <div className="ink flex bg-washi" role="group" aria-label="Language">
+      <nav className="pointer-events-auto flex flex-wrap items-center justify-end gap-1.5" aria-label="Herramientas">
+        <IconButton label={t('map')} active={panel === 'map'} aria-expanded={panel === 'map'} onClick={() => { sfx('paper'); togglePanel('map'); }}><IconMap /></IconButton>
+        <IconButton label={t('terminalHint')} onClick={() => useStore.setState({ terminal: true })}><IconTerminal /></IconButton>
+        <IconButton label={muted ? t('unmute') : t('audio')} active={panel === 'audio'} aria-expanded={panel === 'audio'} onClick={() => togglePanel('audio')}><IconSound muted={muted} /></IconButton>
+        <IconButton label={t('stamps')} active={panel === 'book'} aria-expanded={panel === 'book'} onClick={() => { sfx('paper'); togglePanel('book'); }} className="hud-btn-wide">
+          <IconSeal /><span className="font-mono text-[11px] font-semibold tabular-nums">{count}/6</span>
+        </IconButton>
+        <div className="hud-seg" role="group" aria-label="Idioma / Language">
           {LANGS.map(([k, l]) => (
-            <button key={k} onClick={() => setLang(k)} aria-pressed={lang === k} className={`px-2 py-1.5 font-serif text-xs font-bold ${lang === k ? 'bg-ai text-washi' : 'hover:bg-washi-dark'}`}>{l}</button>
+            <button key={k} onClick={() => setLang(k)} aria-pressed={lang === k} className={lang === k ? 'is-on' : ''} lang={k}>{l}</button>
           ))}
         </div>
-        <WoodButton onClick={() => useStore.getState().setMode(mode === '3d' ? '2d' : '3d')} className="hidden md:inline-flex">
-          {mode === '3d' ? t('to2d') : t('to3d')}
-        </WoodButton>
+        <IconButton label={mode === '3d' ? t('to2d') : t('to3d')} onClick={() => useStore.getState().setMode(mode === '3d' ? '2d' : '3d')} className="hud-btn-wide">
+          <span className="font-serif text-[12px] font-extrabold">{mode === '3d' ? '2D' : '3D'}</span>
+        </IconButton>
       </nav>
     </header>
   );

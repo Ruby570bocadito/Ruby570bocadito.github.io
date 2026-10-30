@@ -40,6 +40,9 @@ export default function Loader() {
             <rect x="204" y="214" width="40" height="40" rx="4" fill="#C8402A" />
             <text x="224" y="242" textAnchor="middle" fontSize="26" fontWeight="800" fill="#F2E8D5" fontFamily="Shippori Mincho, serif">城</text>
           </g>
+          {/* marcas de registro kentō: el ángulo y la línea que alinean cada plancha */}
+          <path d="M226 252 L250 252 L250 238" fill="none" stroke="#1A1A1A" strokeWidth="2.5" opacity=".55" />
+          <path d="M150 252 L176 252" fill="none" stroke="#1A1A1A" strokeWidth="2.5" opacity=".55" />
           <g style={show(3)} fill="none" stroke="#1A1A1A" strokeWidth="4" strokeLinejoin="round">
             <path d="M80 130 L180 130 L166 118 L94 118 Z M90 102 L170 102 L154 88 L106 88 Z M110 80 L130 66 L150 80" />
             <path d="M96 128 L96 168 L164 168 L164 128 M106 100 L106 124 M154 100 L154 124" />
@@ -53,6 +56,13 @@ export default function Loader() {
       <div className="text-center">
         <p className="font-serif text-5xl font-extrabold text-ai" aria-hidden="true">{toKanji(progress)}</p>
         <p className="mt-1 font-mono text-sm text-sumi/70">{Math.round(progress)}%</p>
+        <ol className="mt-3 flex justify-center gap-1.5" aria-hidden="true">
+          {[['藍', '#1F3A5F'], ['黄土', '#D9A441'], ['朱', '#C8402A'], ['墨', '#1A1A1A']].map(([k, c], i) => (
+            <li key={k} className="flex items-center gap-1 border-2 border-sumi px-1.5 py-0.5 font-serif text-xs font-bold transition-opacity" style={{ opacity: layers > i ? 1 : 0.3 }}>
+              <span className="inline-block h-2.5 w-2.5" style={{ background: c }} />{k}
+            </li>
+          ))}
+        </ol>
         <p className="mt-3 font-serif text-lg font-bold">{t('loading')}</p>
       </div>
       <style>{`@keyframes press{0%{opacity:0;transform:translateY(-40px)}35%{opacity:1;transform:translateY(0)}60%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-50px)}}`}</style>

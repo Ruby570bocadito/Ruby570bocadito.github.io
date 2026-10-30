@@ -2,9 +2,11 @@
 import * as THREE from 'three';
 import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Ink, Box, Sky, Water, PaperLantern, Layer } from '../kit';
-import { canvasTexture, PALETTE as P } from '../textures';
-import { mountainSVG } from '../art';
+import { Ink, Box, Sky, Water, PaperLantern, Layer, StoneLantern, toon } from '../kit';
+import { canvasTexture, plankTexture, woodTexture, PALETTE as P } from '../textures';
+import { mountainSVG, castleNightSVG, moonPathSVG } from '../art';
+import { paperBoatGeometry } from '../geom';
+import { MBox } from '../Castle';
 import { StaticCam } from './common';
 import { useStore } from '@/lib/store';
 import { useT } from '@/lib/i18n';
@@ -32,8 +34,10 @@ function Label({ text, y = 1.6 }) {
   );
 }
 
+let BOAT;
 function PaperBoat({ ch, position, phase }) {
   const t = useT();
+  const boatGeo = useMemo(() => (BOAT ??= paperBoatGeometry()), []);
   const [hover, setHover] = useState(false);
   const ref = useRef();
   useFrame(({ clock }) => {
@@ -52,14 +56,9 @@ function PaperBoat({ ch, position, phase }) {
       onPointerOver={(e) => { e.stopPropagation(); setHover(true); document.body.style.cursor = 'pointer'; }}
       onPointerOut={() => { setHover(false); document.body.style.cursor = ''; }}
     >
-      <Ink color={P.washi} paper {...glow} rotation-y={Math.PI / 4} scale={[1.4, 1, 1.4]} position={[0, 0.15, 0]}>
-        <cylinderGeometry args={[0.75, 0.38, 0.45, 4]} />
-      </Ink>
-      <Ink color={P.washi} paper {...glow} position={[0, 0.85, 0]} scale={[1.1, 1, 0.25]}>
-        <coneGeometry args={[0.6, 1.0, 3]} />
-      </Ink>
-      {ch.id === 'message' ? <Box args={[0.5, 0.32, 0.04]} color={P.washi} position={[0, 0.8, 0.22]} rotation-z={0.2} /> : null}
-      <Label text={t(ch.label)} y={2.0} />
+      <Ink geometry={boatGeo} color={P.washi} paper {...glow} side={THREE.DoubleSide} scale={1.25} outline={2.2} />
+      {ch.id === 'message' ? <Box args={[0.46, 0.3, 0.04]} color={P.washi} outline={1.6} position={[0.1, 0.62, 0.3]} rotation={[0.2, 0, 0.25]} /> : null}
+      <Label text={t(ch.label)} y={2.05} />
     </group>
   );
 }
@@ -87,6 +86,13 @@ export default function HarborRoom() {
   const moon = useMemo(() => canvasTexture('moon', 256, 256, {
     draw: (c) => { c.fillStyle = P.washi; c.beginPath(); c.arc(128, 128, 110, 0, 7); c.fill(); c.lineWidth = 8; c.strokeStyle = P.sumi; c.stroke(); },
   }), []);
+  const castle = useMemo(() => canvasTexture('castle-night', 600, 520, { svg: castleNightSVG }), []);
+  const moonPath = useMemo(() => canvasTexture('moon-path', 256, 512, { svg: moonPathSVG }), []);
+  const pier = useMemo(() => {
+    const top = toon('#9a7a52', { map: plankTexture(9), repeat: [4 / 1.2, 16 / 5] });
+    const side = toon(P.woodDark, { map: woodTexture(5) });
+    return [side, side, top, side, side, side];
+  }, []);
   const boats = CHANNELS.filter((c) => c.kind === 'boat');
   const lanterns = CHANNELS.filter((c) => c.kind === 'lantern');
   return (
@@ -97,9 +103,13 @@ export default function HarborRoom() {
       <Sky top="#0b1626" mid={P.ai} bottom={P.aiSoft} midAt={0.5} />
       <Layer map={moon} w={14} h={14} position={[30, 38, -150]} />
       <Layer map={mountain} w={240} h={120} position={[-60, 30, -200]} opacity={0.55} />
+      <Layer map={castle} w={22} h={19} position={[46, 8.6, -120]} opacity={0.95} />
+      <Layer map={moonPath} w={14} h={90} position={[19, 0.12, -86]} rotation={[-Math.PI / 2, 0, -0.17]} opacity={0.7} />
       <Water size={[600, 600]} deep="#0d1a2c" light={P.ai} lines={P.ochre} speed={0.6} />
       {/* muelle */}
-      <Box args={[4, 0.4, 16]} color={P.wood} wood={3} position={[-3.5, 0.9, -2]} />
+      <MBox args={[4, 0.4, 16]} mats={pier} position={[-3.5, 0.9, -2]} />
+      <Box args={[4.2, 0.18, 0.3]} color={P.woodDark} position={[-3.5, 1.05, 6]} />
+      <StoneLantern position={[-3.5, 1.1, -9.2]} scale={0.9} />
       {[-9, -5, -1, 3].map((z) => [-5.3, -1.7].map((x) => <Box key={x + '' + z} args={[0.3, 2.2, 0.3]} color={P.woodDark} position={[x, 0.2, z]} />))}
       {lanterns.map((ch, i) => <LanternPost key={ch.id} ch={ch} position={[-2.1, 1.1, -7 + i * 5]} />)}
       {boats.map((ch, i) => <PaperBoat key={ch.id} ch={ch} position={[1.4 + i * 2.8, 0.05, -3.5 - (i % 2) * 2.4]} phase={i * 1.3} />)}

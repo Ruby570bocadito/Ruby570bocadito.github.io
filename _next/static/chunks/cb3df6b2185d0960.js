@@ -1,0 +1,155 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,69234,t=>{"use strict";let e="#1A1A1A",o="#1F3A5F",i="#3c5a80",r="#D9A441",l="#4A6B4F",s="#F2E8D5",n=`<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="512" viewBox="0 0 1024 512">
+<defs>
+ <linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${o}"/><stop offset=".55" stop-color="${i}"/><stop offset="1" stop-color="${i}" stop-opacity="0"/></linearGradient>
+ <linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="${s}"/></linearGradient>
+</defs>
+<path d="M0 512 L120 420 C230 330 330 250 430 150 C462 118 478 96 500 92 L536 92 C560 98 580 120 610 150 C720 260 830 350 1024 470 L1024 512 Z" fill="url(#b)"/>
+<path d="M0 512 L120 420 C230 330 330 250 430 150 C462 118 478 96 500 92 L536 92 C560 98 580 120 610 150 C720 260 830 350 1024 470" fill="none" stroke="${e}" stroke-width="7" stroke-linejoin="round"/>
+<path d="M430 150 C462 118 478 96 500 92 L536 92 C560 98 580 120 610 150 L590 168 L566 150 L548 192 L522 160 L500 210 L478 162 L456 190 L446 162 Z" fill="url(#s)" stroke="${e}" stroke-width="6" stroke-linejoin="round"/>
+<path d="M500 210 L470 300 M548 192 L560 280 M456 190 L400 290 M590 168 L650 260" stroke="${e}" stroke-width="3" opacity=".45" fill="none"/>
+</svg>`;function a(t=s,o=1){let i=[],r=60,l=o,n=()=>(l=(9301*l+49297)%233280)/233280;for(;r<940;){let t=70+110*n();i.push([r,t,26+30*n()]),r+=.8*t}let h="M40 150 C20 150 10 120 40 108 ";return i.forEach(([t,e,o])=>{h+=`C${t+.2*e} ${108-o} ${t+.8*e} ${108-o} ${t+e} 104 `}),h+="C1010 104 1016 150 984 150 Z",`<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="180" viewBox="0 0 1024 180">
+<path d="${h}" fill="${t}" stroke="${e}" stroke-width="6" stroke-linejoin="round"/>
+<path d="M90 132 L930 132" stroke="${e}" stroke-width="2.5" opacity=".25"/>
+</svg>`}let h=(()=>{let t="",r="",l="";for(let e=0;e<4;e++){let o=256*e;t+=`M${o} 256 L${o} 150 C${o+40} 80 ${o+120} 40 ${o+190} 70 C${o+225} 85 ${o+240} 110 ${o+256} 150 L${o+256} 256 Z `,r+=`M${o+120} 52 C${o+160} 30 ${o+210} 50 ${o+228} 92 C${o+214} 80 ${o+204} 84 ${o+206} 96 C${o+194} 82 ${o+182} 86 ${o+184} 98 C${o+172} 84 ${o+160} 88 ${o+160} 100 C${o+148} 82 ${o+132} 72 ${o+120} 52 Z `,l+=`M${o+20} 170 C${o+70} 110 ${o+130} 90 ${o+190} 110 M${o+30} 205 C${o+80} 150 ${o+150} 140 ${o+220} 160 `}return`<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="256" viewBox="0 0 1024 256">
+<defs><linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${i}"/><stop offset=".6" stop-color="${o}"/></linearGradient></defs>
+<path d="${t}" fill="url(#w)" stroke="${e}" stroke-width="6" stroke-linejoin="round"/>
+<path d="${l}" fill="none" stroke="${s}" stroke-width="4" opacity=".7"/>
+<path d="${r}" fill="${s}" stroke="${e}" stroke-width="4.5" stroke-linejoin="round"/>
+</svg>`})(),d=`<svg xmlns="http://www.w3.org/2000/svg" width="256" height="160" viewBox="0 0 256 160">
+<g stroke="${e}" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<path d="M70 86 C110 70 150 72 180 84 L236 66 L240 72 L186 94 C150 104 108 104 70 96 Z" fill="${s}"/>
+<path d="M236 66 L252 64 L240 72 Z" fill="${e}"/>
+<circle cx="233" cy="64" r="4" fill="${r}"/>
+<path d="M110 84 C90 50 70 22 30 6 C58 30 70 54 84 86 Z" fill="${s}"/>
+<path d="M30 6 C46 18 56 28 64 40 L52 44 C46 30 40 20 30 6 Z" fill="${e}"/>
+<path d="M120 90 C100 120 70 140 24 150 C60 128 80 110 96 92 Z" fill="${s}"/>
+<path d="M24 150 C40 140 52 132 62 124 L70 132 C58 140 44 146 24 150 Z" fill="${e}"/>
+<path d="M70 92 L16 100 M72 96 L20 108" fill="none"/>
+</g></svg>`,p=`<svg xmlns="http://www.w3.org/2000/svg" width="512" height="1024" viewBox="0 0 512 1024">
+<g stroke="${e}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+ <!-- piernas y zapatillas -->
+ <path d="M190 640 L176 930 L236 930 L250 690 L268 930 L328 930 L320 640 Z" fill="#26303d"/>
+ <path d="M160 930 L240 930 L244 962 L150 962 Z M262 930 L344 930 L352 962 L258 962 Z" fill="${s}"/>
+ <path d="M150 962 L244 962 M258 962 L352 962" stroke-width="10"/>
+ <!-- sudadera -->
+ <path d="M150 360 C170 320 210 304 256 304 C302 304 342 320 362 360 L380 560 L360 660 L152 660 L132 560 Z" fill="${o}"/>
+ <path d="M200 310 C210 350 240 370 256 372 C272 370 302 350 312 310" fill="${i}"/>
+ <path d="M230 372 L226 450 M282 372 L286 450" stroke-width="5"/>
+ <path d="M196 560 L316 560 L310 620 L202 620 Z" fill="${i}"/>
+ <path d="M160 640 L352 640" stroke-width="5" opacity=".6"/>
+ <!-- brazo izquierdo con port\xe1til -->
+ <path d="M150 360 C128 420 118 500 130 560 L176 566 C172 510 178 450 190 400 Z" fill="${o}"/>
+ <path d="M96 520 L250 470 L262 500 L108 552 Z" fill="#9aa3ad"/>
+ <path d="M96 520 L108 552" stroke-width="5"/>
+ <path d="M150 506 L188 494" stroke="${r}" stroke-width="6"/>
+ <path d="M130 556 C126 540 140 530 156 534 C168 538 170 556 160 566 Z" fill="${s}"/>
+ <!-- cuello y cabeza -->
+ <path d="M236 270 L236 306 L276 306 L276 270 Z" fill="${s}"/>
+ <path d="M188 196 C188 130 220 100 256 100 C296 100 326 130 326 196 C326 252 296 286 256 286 C216 286 188 252 188 196 Z" fill="${s}"/>
+ <!-- pelo negro estilizado -->
+ <path d="M180 200 C170 120 210 76 262 78 C320 80 344 128 334 196 C320 168 300 150 270 146 C284 160 286 170 282 178 C262 156 236 150 210 158 C214 168 210 182 200 190 Z" fill="${e}"/>
+ <path d="M240 98 C246 88 254 84 262 84" fill="none" stroke="${s}" stroke-width="3" opacity=".5"/>
+ <!-- rostro: trazos finos ukiyo-e -->
+ <path d="M220 206 C228 200 238 200 244 206 M270 206 C276 200 286 200 294 206" fill="none" stroke-width="5"/>
+ <path d="M222 192 C232 186 240 186 246 190 M268 190 C276 186 284 186 292 192" fill="none" stroke-width="4"/>
+ <path d="M256 214 C254 228 252 236 258 240" fill="none" stroke-width="4"/>
+ <path d="M240 256 C250 262 262 262 272 256" fill="none" stroke-width="5"/>
+ <path d="M188 210 C180 210 178 232 192 236 M326 210 C334 210 336 232 322 236" fill="${s}" stroke-width="5"/>
+</g></svg>`,f=`<svg xmlns="http://www.w3.org/2000/svg" width="256" height="512" viewBox="0 0 256 512">
+<g stroke="${e}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M60 470 C70 380 96 280 130 190 L176 206 C150 290 128 380 112 480 Z" fill="${o}"/>
+ <path d="M112 470 L64 462" stroke-width="5" opacity=".5"/>
+ <path d="M130 190 C118 160 116 120 128 96 L142 70 C148 62 156 66 152 76 L146 100 L160 56 C164 46 176 50 172 60 L162 96 L178 60 C182 50 194 54 190 64 L176 104 L194 78 C200 70 210 76 204 86 L180 140 C178 170 172 196 176 206 Z" fill="${s}"/>
+</g></svg>`,c=`<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<g stroke="${e}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M60 236 C50 190 64 150 96 130 L160 130 C192 150 206 190 196 236 Z" fill="#14202f"/>
+ <path d="M84 120 C80 70 104 44 130 44 C158 44 178 70 172 120 C160 134 96 134 84 120 Z" fill="#14202f"/>
+ <path d="M96 84 L164 84 L162 104 L98 104 Z" fill="${s}"/>
+ <circle cx="116" cy="94" r="5" fill="${e}" stroke="none"/><circle cx="146" cy="94" r="5" fill="${e}" stroke="none"/>
+ <path d="M172 60 C196 50 214 62 226 48 M172 70 C194 70 206 82 222 76" fill="none" stroke-width="5"/>
+ <path d="M196 150 L236 108" stroke="#9aa3ad" stroke-width="7"/>
+</g></svg>`;function x(t){let n=(t,o=s)=>`<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="512" viewBox="0 0 1024 512">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${r}" stop-opacity=".35"/><stop offset=".5" stop-color="${o}" stop-opacity="0"/></linearGradient></defs>
+<rect width="1024" height="512" fill="${s}"/>
+<rect width="1024" height="512" fill="url(#g)"/>
+<g stroke="${e}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">${t}</g>
+<path d="M-10 60 C120 30 240 70 380 48 C520 26 640 64 780 44 C900 28 980 46 1040 40 L1040 -10 L-10 -10 Z" fill="${r}" stroke="${e}" stroke-width="5"/>
+<path d="M-10 470 C140 440 300 486 460 462 C620 438 760 486 1040 456 L1040 522 L-10 522 Z" fill="${r}" stroke="${e}" stroke-width="5"/>
+</svg>`,a=(t,o,i=1)=>`<g transform="translate(${t} ${o}) scale(${i})">
+   <path d="M-40 160 L-30 60 C-28 40 28 40 30 60 L40 160 Z" fill="${l}"/>
+   <circle cx="0" cy="20" r="34" fill="${s}"/><path d="M-36 14 C-34 -20 34 -24 36 10 C20 -2 -10 -4 -36 14 Z" fill="${e}"/>
+   <path d="M-14 26 L-6 26 M8 26 L16 26" stroke-width="4"/></g>`;switch(t){case"unity":return n(`
+   <path d="M120 420 L900 420" stroke-width="5"/>
+   <rect x="380" y="250" width="300" height="160" fill="${s}"/>
+   <rect x="400" y="268" width="260" height="120" fill="${o}"/>
+   <path d="M530 290 L580 318 L580 370 L530 398 L480 370 L480 318 Z" fill="${s}" stroke-width="5"/>
+   <path d="M530 290 L530 340 L480 318 M530 340 L580 318 M530 340 L530 398" stroke-width="4"/>
+   <path d="M440 410 L620 410 L640 440 L420 440 Z" fill="${e}"/>
+   <path d="M415 300 L440 300 M415 316 L452 316 M415 332 L436 332" stroke="${r}" stroke-width="4"/>
+   ${a(260,250,1.1)}
+   <path d="M720 380 C740 330 790 320 820 350 C850 320 900 340 880 390 Z" fill="${l}"/>
+   <path d="M800 390 L800 420" stroke-width="8"/>`);case"offense":return n(`
+   <path d="M80 420 L940 420" stroke-width="5"/>
+   <path d="M160 420 L160 250 L360 250 L360 420" fill="${i}"/>
+   <path d="M140 250 L260 180 L380 250 Z" fill="${e}"/>
+   <rect x="220" y="320" width="80" height="100" fill="${e}"/>
+   <path d="M600 410 C600 330 640 300 680 300 C720 300 760 330 760 410 Z" fill="${e}"/>
+   <circle cx="680" cy="270" r="40" fill="${e}"/>
+   <path d="M654 266 L706 266" stroke="${s}" stroke-width="8"/>
+   <path d="M420 200 C480 160 540 160 600 200" fill="none" stroke-dasharray="14 12"/>
+   <path d="M590 186 L604 204 L580 206" fill="none"/>
+   <rect x="780" y="300" width="120" height="80" fill="${s}"/><path d="M790 316 L860 316 M790 334 L880 334 M790 352 L840 352" stroke="${o}" stroke-width="5"/>`);case"blue":return n(`
+   <path d="M80 420 L940 420" stroke-width="5"/>
+   <path d="M420 420 L440 180 L580 180 L600 420 Z" fill="${s}"/>
+   <path d="M400 190 L510 110 L620 190 Z" fill="${o}"/>
+   <path d="M380 120 L510 50 L640 120 L620 128 L510 74 L400 128 Z" fill="${o}"/>
+   <rect x="470" y="220" width="80" height="60" fill="${e}"/>
+   <path d="M510 300 C470 300 460 330 460 350 C460 390 500 410 510 414 C520 410 560 390 560 350 C560 330 550 300 510 300 Z" fill="${o}"/>
+   <path d="M488 352 L506 372 L536 336" stroke="${s}" stroke-width="8" fill="none"/>
+   <path d="M600 230 C700 210 800 230 900 200 M600 260 C700 250 800 270 900 250" fill="none" stroke="${r}" stroke-width="5"/>
+   ${a(250,260,1)}`);case"smr":return n(`
+   <path d="M80 420 L940 420" stroke-width="5"/>
+   <rect x="300" y="210" width="420" height="210" fill="${s}"/>
+   <path d="M280 214 L510 120 L740 214 Z" fill="${l}"/>
+   ${[0,1,2,3].map(t=>`<rect x="${330+96*t}" y="250" width="60" height="60" fill="${o}"/>`).join("")}
+   <rect x="470" y="330" width="80" height="90" fill="${e}"/>
+   <path d="M140 420 L140 300 M100 330 L140 300 L180 330" fill="none" stroke-width="5"/>
+   <circle cx="140" cy="290" r="18" fill="${r}"/>
+   <path d="M800 420 L800 330 M800 330 L880 330 L880 420 M760 330 L840 280 L920 330" fill="none" stroke-width="5"/>`);case"hackathon":return n(`
+   <path d="M80 420 L940 420" stroke-width="5"/>
+   <rect x="430" y="170" width="150" height="250" rx="22" fill="${e}"/>
+   <rect x="446" y="196" width="118" height="190" fill="${s}"/>
+   <path d="M505 230 C470 230 466 290 480 320 C492 346 518 346 530 320 C544 290 540 230 505 230 Z" fill="${r}"/>
+   <path d="M505 230 L510 210 C520 204 532 210 530 220" fill="${l}"/>
+   <path d="M620 260 C650 240 650 300 620 280 M660 240 C710 210 710 330 660 300 M700 220 C770 180 770 350 700 320" fill="none" stroke="${o}" stroke-width="6"/>
+   <path d="M150 410 L150 300 C150 270 200 270 200 300 L200 410 Z" fill="${s}"/>
+   <circle cx="175" cy="250" r="36" fill="${s}"/><path d="M140 246 C140 210 210 206 212 244 C190 232 160 232 140 246 Z" fill="${s}"/>
+   <path d="M160 254 L168 254 M182 254 L190 254" stroke-width="4"/>
+   ${a(300,260,1)}`);default:return n("")}}let w=`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="520" viewBox="0 0 600 520">
+<g stroke="${e}" stroke-width="6" stroke-linejoin="round">
+ <path d="M110 520 L150 380 L450 380 L490 520 Z" fill="#9d9584"/>
+ <path d="M135 430 L465 430 M122 476 L478 476" stroke-width="3" opacity=".5"/>
+ <rect x="170" y="300" width="260" height="80" fill="${s}"/>
+ <path d="M120 312 C180 296 220 270 300 262 C380 270 420 296 480 312 L470 296 C420 286 380 250 300 244 C220 250 180 286 130 296 Z" fill="${o}"/>
+ <rect x="205" y="200" width="190" height="62" fill="${s}"/>
+ <path d="M160 214 C210 200 250 176 300 170 C350 176 390 200 440 214 L430 198 C390 188 350 158 300 152 C250 158 210 188 170 198 Z" fill="${o}"/>
+ <path d="M262 208 L300 178 L338 208 Z" fill="${o}"/>
+ <rect x="240" y="110" width="120" height="48" fill="${s}"/>
+ <path d="M200 124 C240 112 270 92 300 88 C330 92 360 112 400 124 L390 108 C360 98 330 70 300 66 C270 70 240 98 210 108 Z" fill="${o}"/>
+ <path d="M272 70 L300 30 L328 70 Z" fill="${o}"/>
+ <path d="M282 34 L270 14 L290 26 Z M318 34 L330 14 L310 26 Z" fill="${r}"/>
+ ${[0,1,2,3].map(t=>`<rect x="${196+56*t}" y="324" width="28" height="30" fill="${e}"/>`).join("")}
+ ${[0,1,2].map(t=>`<rect x="${226+56*t}" y="218" width="24" height="26" fill="${e}"/>`).join("")}
+ <rect x="268" y="122" width="22" height="22" fill="${e}"/><rect x="310" y="122" width="22" height="22" fill="${e}"/>
+</g></svg>`,L=`<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<circle cx="128" cy="128" r="112" fill="${r}" opacity=".35"/>
+<circle cx="128" cy="128" r="86" fill="${s}" stroke="${e}" stroke-width="6"/>
+</svg>`,u=`<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<g stroke="${e}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M126 22 L126 196" stroke-width="6"/>
+ <path d="M64 40 L188 40 L182 178 L70 178 Z" fill="${s}"/>
+ <path d="M68 74 L186 74 M69 108 L185 108 M70 142 L184 142" stroke-width="3" opacity=".6"/>
+ <path d="M94 40 L96 178 M156 40 L154 178" stroke-width="2.5" opacity=".45"/>
+ <path d="M30 192 L226 192 C214 214 190 226 160 228 L92 228 C62 226 42 214 30 192 Z" fill="#5e4429"/>
+ <path d="M40 204 L216 204" stroke-width="3" opacity=".5"/>
+</g></svg>`,g=w.replace(/fill="#F2E8D5"/g,'fill="#2b4466"').replace(/fill="#9d9584"/g,'fill="#1a2c45"').replace(/fill="#1A1A1A"/g,'fill="#D9A441"').replace(/fill="#1F3A5F"/g,'fill="#13263f"'),M=(()=>{let t="";for(let e=0;e<26;e++){let o=8+19*e,i=120-3.2*e+37*e%23,r=128-i/2+53*e%17-8;t+=`<rect x="${r.toFixed(1)}" y="${o}" width="${i.toFixed(1)}" height="${(5-.12*e).toFixed(1)}" rx="3"/>`}return`<svg xmlns="http://www.w3.org/2000/svg" width="256" height="512" viewBox="0 0 256 512"><g fill="${s}" opacity=".85">${t}</g></svg>`})();t.s(["armSVG",0,f,"avatarSVG",0,p,"castle2dSVG",0,w,"castleNightSVG",0,g,"cloudSVG",()=>a,"craneSVG",0,d,"moonPathSVG",0,M,"mountainSVG",0,n,"ninjaSVG",0,c,"sailboatSVG",0,u,"scrollSceneSVG",()=>x,"sunSVG",0,L,"waveSVG",0,h])},21030,t=>{"use strict";var e=t.i(43476),o=t.i(90072),i=t.i(71645),r=t.i(49774),l=t.i(95585),s=t.i(52961),n=t.i(73965),a=t.i(81600);function h({args:t,mats:o,outline:i=2.4,...r}){return(0,e.jsxs)("mesh",{...r,material:o,children:[(0,e.jsx)("boxGeometry",{args:t}),i?(0,e.jsx)(l.Outlines,{thickness:i,color:n.PALETTE.sumi}):null]})}function d({hw:t,hd:o,h:r,bay:l=1.7,windows:a=!0,...d}){let p=(0,i.useMemo)(()=>{let e=(0,n.bayTexture)(a),i=Math.max(1,Math.round(2*t/l)),r=Math.max(1,Math.round(2*o/l)),h=(0,s.toon)("#ffffff",{map:e,repeat:[r,1]}),d=(0,s.toon)("#ffffff",{map:e,repeat:[i,1]}),p=(0,s.toon)(n.PALETTE.plaster);return[h,h,p,p,d,d]},[t,o,l,a]);return(0,e.jsx)(h,{args:[2*t,r,2*o],mats:p,position:[0,r/2,0],...d})}function p({w:t=2.6,h:o=1.3,depth:r=1.6,...l}){let h=(0,i.useMemo)(()=>(0,a.gableGeometry)(t,o,r),[t,o,r]),d=Math.atan2(o,t/2),p=Math.hypot(t/2,o)+.35;return(0,e.jsxs)("group",{...l,children:[(0,e.jsx)(s.Ink,{geometry:h,color:n.PALETTE.plaster,paper:!0}),(0,e.jsx)(s.Box,{args:[.7*t,.07,.04],color:n.PALETTE.woodDark,outline:0,position:[0,.32*o,.02]}),[-1,1].map(i=>(0,e.jsx)(s.Box,{args:[p,.16,r+.5],color:n.PALETTE.ai,position:[i*t/4,o/2+.08,-r/2+.2],"rotation-z":-i*d},i)),(0,e.jsx)(s.Box,{args:[.22,.24,r+.5],color:n.PALETTE.aiDeep,position:[0,o+.1,-r/2+.2]}),(0,e.jsx)(s.Ink,{color:n.PALETTE.ochre,outline:1.2,position:[0,.62*o,.05],"rotation-x":Math.PI/2,children:(0,e.jsx)("cylinderGeometry",{args:[.16,.16,.06,12]})})]})}function f({w:t=3.4,h:r=1.05,depth:l=1.6,...h}){let d=(0,i.useMemo)(()=>(0,a.karaHafuGeometry)(t,r,.24,l),[t,r,l]),p=(0,i.useMemo)(()=>{let e=new o.Shape;e.moveTo(-t/2,0);for(let o=0;o<=24;o++){let i=(o/24-.5)*t,l=Math.abs(i)/(t/2);e.lineTo(i,r*Math.cos(l*Math.PI*.5)**1.6+.12*r*Math.max(0,l-.82)*5-.2)}e.lineTo(t/2,0),e.closePath();let i=new o.ExtrudeGeometry(e,{depth:.4,bevelEnabled:!1});return i.translate(0,0,-.5),i},[t,r]);return(0,e.jsxs)("group",{...h,children:[(0,e.jsx)(s.Ink,{geometry:p,color:n.PALETTE.plaster,paper:!0}),(0,e.jsx)(s.Ink,{geometry:d,color:n.PALETTE.ai}),(0,e.jsx)(s.Ink,{color:n.PALETTE.ochre,outline:1.2,position:[0,.45*r,-.08],"rotation-x":Math.PI/2,children:(0,e.jsx)("cylinderGeometry",{args:[.2,.2,.06,14]})})]})}function c(t){let o=(0,i.useMemo)(()=>(0,s.toon)("#ffffff",{map:(0,n.stoneTexture)()}),[]),r=(0,i.useMemo)(()=>(0,a.ishigakiGeometry)({bw:8.4,bd:7.6,tw:6,td:5.3,h:6.5,tile:3.2}),[]),h=[{hw:5.6,hd:4.9,h:3,roof:{w:7.1,d:6.4,h:1.7}},{hw:4.4,hd:3.8,h:2.7,roof:{w:5.8,d:5.2,h:1.6}},{hw:3.3,hd:2.8,h:2.5,roof:{w:4.6,d:4.1,h:1.5}},{hw:2.3,hd:1.9,h:2.4,roof:{w:3.7,d:3.3,h:2.1}}],c=6.5,x=h.map((t,e)=>{let o=h[e+1],i={...t,y:c,roofY:c+t.h};return c+=t.h+t.roof.h,i.tw=o?o.hw:1.5,i.td=o?o.hd:.07,i});return(0,e.jsxs)("group",{...t,children:[(0,e.jsx)("mesh",{geometry:r,material:o,children:(0,e.jsx)(l.Outlines,{thickness:2.6,color:n.PALETTE.sumi})}),x.map((t,o)=>(0,e.jsxs)("group",{children:[(0,e.jsx)(d,{hw:t.hw,hd:t.hd,h:t.h,position:[0,t.y+t.h/2,0],windows:!0}),(0,e.jsx)(s.TileRoof,{w:t.roof.w,d:t.roof.d,h:t.roof.h,tw:t.tw,td:t.td,wi:t.hw,di:t.hd,lift:.55-.06*o,ridge:o===h.length-1,shachi:o===h.length-1,position:[0,t.roofY,0]}),0===o?(0,e.jsx)(f,{position:[0,t.roofY+.25,t.roof.d-.15]}):null,1===o?[[0,0],[Math.PI/2,1],[-Math.PI/2,1]].map(([o,i],r)=>(0,e.jsx)("group",{"rotation-y":o,children:(0,e.jsx)(p,{w:i?2.2:2.8,h:i?1.1:1.35,position:[0,t.roofY+.2,(i?t.roof.w:t.roof.d)-.55]})},r)):null,2===o?(0,e.jsx)(p,{w:2.2,h:1.15,position:[0,t.roofY+.2,t.roof.d-.5]}):null]},o))]})}function x({r:t=16,h:r=6,...l}){let a=(0,i.useMemo)(()=>{let e=[[0,r],[.25*t,.98*r],[.5*t,.86*r],[.72*t,.58*r],[.88*t,.26*r],[t,0]],i=new o.LatheGeometry(e.map(([t,e])=>new o.Vector2(t,e)),28),l=i.attributes.position,s=new o.Vector3;for(let t=0;t<l.count;t++){s.fromBufferAttribute(l,t);let e=Math.atan2(s.z,s.x),o=1+.06*Math.sin(3*e)+.04*Math.sin(5*e+1);l.setXYZ(t,s.x*o,s.y,s.z*o)}return i.computeVertexNormals(),i},[t,r]);return(0,e.jsx)(s.Ink,{geometry:a,color:n.PALETTE.pine,...l})}function w({length:t=20,...o}){let r=(0,i.useMemo)(()=>{let e=(0,s.toon)("#ffffff",{map:(0,n.stoneTexture)(),repeat:[t/3.2,.7]}),o=(0,s.toon)("#ffffff",{map:(0,n.stoneTexture)(),repeat:[.5,.7]}),i=(0,s.toon)(n.PALETTE.stone),r=(0,s.toon)("#ffffff",{map:(0,n.loopholeTexture)(),repeat:[Math.round(t/2.6),1]}),l=(0,s.toon)(n.PALETTE.plaster);return{stone:[o,o,i,i,e,e],wall:[l,l,l,l,r,r]}},[t]);return(0,e.jsxs)("group",{...o,children:[(0,e.jsx)(h,{args:[t,2.2,1.7],mats:r.stone,position:[0,1.1,0]}),(0,e.jsx)(h,{args:[t,1.6,.8],mats:r.wall,position:[0,3,0]}),(0,e.jsx)(s.TileRoof,{w:t/2+.35,d:.85,h:.7,tw:t/2-.2,td:.06,wi:t/2,di:.4,lift:.12,position:[0,3.8,0]})]})}function L(t){let o=(0,i.useMemo)(()=>(0,s.toon)("#ffffff",{map:(0,n.stoneTexture)()}),[]),r=(0,i.useMemo)(()=>(0,a.ishigakiGeometry)({bw:3.6,bd:3.6,tw:2.9,td:2.9,h:3.4,tile:3.2}),[]);return(0,e.jsxs)("group",{...t,children:[(0,e.jsx)("mesh",{geometry:r,material:o,children:(0,e.jsx)(l.Outlines,{thickness:2.4,color:n.PALETTE.sumi})}),(0,e.jsx)(d,{hw:2.5,hd:2.5,h:2.4,position:[0,4.6,0],bay:1.6}),(0,e.jsx)(s.TileRoof,{w:3.4,d:3.4,h:1.2,tw:1.8,td:1.8,wi:2.5,di:2.5,lift:.35,position:[0,5.8,0]}),(0,e.jsx)(d,{hw:1.8,hd:1.8,h:1.8,position:[0,7.9,0],bay:1.6}),(0,e.jsx)(s.TileRoof,{w:2.8,d:2.8,h:1.4,tw:1.1,td:.06,wi:1.8,di:1.8,lift:.35,position:[0,8.8,0]})]})}function u(t){let o=(0,i.useMemo)(()=>(0,n.canvasTexture)("plaque2",512,192,{text:"見張りの城",draw:(t,e,o)=>{t.fillStyle=n.PALETTE.sumi,t.fillRect(0,0,e,o),t.strokeStyle=n.PALETTE.ochre,t.lineWidth=8,t.strokeRect(12,12,e-24,o-24),t.lineWidth=2,t.strokeRect(24,24,e-48,o-48),t.fillStyle=n.PALETTE.ochre,t.font='800 92px "Shippori Mincho"',t.textAlign="center",t.textBaseline="middle",t.fillText("見張りの城",e/2,o/2+6)}}),[]);return(0,e.jsxs)("mesh",{...t,children:[(0,e.jsx)("planeGeometry",{args:[2.6,.98]}),(0,e.jsx)("meshBasicMaterial",{map:o,toneMapped:!1})]})}function g({side:t,glow:o}){let r=(0,i.useMemo)(()=>(0,n.crestTexture)(n.PALETTE.ochre),[]);return(0,e.jsxs)(e.Fragment,{children:[(0,e.jsx)(s.Box,{args:[2.3,5.2,.26],color:n.PALETTE.wood,wood:t<0?5:6,emissive:o,emissiveIntensity:.35,position:[-(1.15*t),2.6,0]}),[.7,2.6,4.5].map(o=>(0,e.jsx)(s.Box,{args:[2.3,.2,.34],color:n.PALETTE.sumi,outline:1.2,position:[-(1.15*t),o,0]},o)),[.35,1.15,1.95].map(o=>[.7,2.6,4.5].map(i=>(0,e.jsx)(s.Ink,{color:n.PALETTE.ochre,outline:0,position:[-t*o,i,.2],"rotation-x":Math.PI/2,children:(0,e.jsx)("cylinderGeometry",{args:[.07,.07,.06,8]})},o+"-"+i))),(0,e.jsxs)("mesh",{position:[-(1.15*t),3.55,.14],children:[(0,e.jsx)("planeGeometry",{args:[1.1,1.1]}),(0,e.jsx)("meshBasicMaterial",{map:r,transparent:!0,toneMapped:!1})]})]})}function M({open:t=!1,onEnter:l,...a}){let[h,d]=(0,i.useState)(!1),p=(0,i.useRef)(),f=(0,i.useRef)();(0,r.useFrame)((e,i)=>{p.current&&(p.current.rotation.y=o.MathUtils.damp(p.current.rotation.y,1.75*!!t,3,i),f.current.rotation.y=-p.current.rotation.y)});let c=h&&!t?n.PALETTE.ochre:void 0;return(0,e.jsxs)("group",{...a,onClick:t=>{t.stopPropagation(),l?.()},onPointerOver:t=>{t.stopPropagation(),d(!0),document.body.style.cursor="pointer"},onPointerOut:()=>{d(!1),document.body.style.cursor=""},children:[[-2.75,2.75].map(t=>(0,e.jsxs)("group",{position:[t,0,0],children:[(0,e.jsx)(s.Box,{args:[.85,6.2,.85],color:n.PALETTE.woodDark,wood:!0,position:[0,3.1,0]}),[.4,5.8].map(t=>(0,e.jsx)(s.Box,{args:[.92,.22,.92],color:n.PALETTE.sumi,outline:1.2,position:[0,t,0]},t)),(0,e.jsx)(s.Box,{args:[.6,4.8,.6],color:n.PALETTE.woodDark,wood:!0,position:[0,2.4,-1.7]}),(0,e.jsx)(s.Box,{args:[.3,.3,1.8],color:n.PALETTE.woodDark,position:[0,4.6,-.9]})]},t)),(0,e.jsx)(s.Box,{args:[7.2,.7,.9],color:n.PALETTE.woodDark,wood:!0,position:[0,5.75,0]}),(0,e.jsx)(s.Box,{args:[7.6,.3,2.6],color:n.PALETTE.sumi,position:[0,6.25,-.6]}),(0,e.jsx)(s.TileRoof,{w:4.9,d:2.7,h:2.1,tw:3,td:.07,wi:4,di:1.6,lift:.55,position:[0,6.4,-.6]}),(0,e.jsx)(u,{position:[0,6.62,.48]}),[-1,1].map(t=>(0,e.jsxs)("group",{position:[4.3*t,0,-.3],children:[(0,e.jsx)(s.Box,{args:[2.4,3.4,.6],color:n.PALETTE.plaster,paper:!0,position:[0,1.7,0]}),(0,e.jsx)(s.Box,{args:[2.4,1.2,.66],color:n.PALETTE.sumi,position:[0,.6,0]}),(0,e.jsx)(s.TileRoof,{w:1.5,d:.7,h:.55,tw:1.1,td:.06,lift:.1,position:[0,3.4,0]})]},t)),(0,e.jsx)("group",{ref:p,position:[-2.3,0,.1],children:(0,e.jsx)(g,{side:-1,glow:c})}),(0,e.jsx)("group",{ref:f,position:[2.3,0,.1],children:(0,e.jsx)(g,{side:1,glow:c})})]})}let m={};function T({from:t=10.5,to:r=40,...l}){let a=r-t,d=(m.post||(m.post=new o.BoxGeometry(.24,1.55,.24),m.ball=new o.SphereGeometry(.15,10,8),m.tip=new o.ConeGeometry(.07,.22,8),m.pile=new o.BoxGeometry(.3,1.4,.3)),m),p=(0,i.useMemo)(()=>{let e=Array.from({length:Math.floor(a/3)+1},(e,o)=>t+3*o),o=e.flatMap(t=>[-1.6,1.6].map(e=>[e,t]));return{posts:o.map(([t,e])=>({p:[t,.78,e]})),balls:o.map(([t,e])=>({p:[t,1.66,e]})),tips:o.map(([t,e])=>({p:[t,1.86,e]})),piles:e.map(t=>({p:[0,-.2,t]}))}},[t,a]),f=(0,i.useMemo)(()=>{let t=(0,s.toon)("#b08a5c",{map:(0,n.plankTexture)(3),repeat:[3.4/1.2,a/6]}),e=(0,s.toon)(n.PALETTE.woodDark,{map:(0,n.woodTexture)(2)});return{deck:[e,e,t,e,e,e],wood:(0,s.toon)(n.PALETTE.woodDark,{map:(0,n.woodTexture)(2)}),bronze:(0,s.toon)(n.PALETTE.ochre)}},[a]);return(0,e.jsxs)("group",{...l,children:[(0,e.jsx)(h,{args:[3.4,.35,a],mats:f.deck,position:[0,.7,t+a/2]}),(0,e.jsx)(s.InstancedParts,{geometry:d.post,material:f.wood,transforms:p.posts}),(0,e.jsx)(s.InstancedParts,{geometry:d.ball,material:f.bronze,transforms:p.balls,outline:1.2}),(0,e.jsx)(s.InstancedParts,{geometry:d.tip,material:f.bronze,transforms:p.tips,outline:1.2}),(0,e.jsx)(s.InstancedParts,{geometry:d.pile,material:f.wood,transforms:p.piles}),[-1.6,1.6].map(o=>(0,e.jsx)(s.Box,{args:[.16,.16,a],color:n.PALETTE.woodDark,wood:!0,position:[o,1.42,t+a/2]},o)),[-1.6,1.6].map(o=>(0,e.jsx)(s.Box,{args:[.1,.1,a],color:n.PALETTE.woodDark,outline:1.2,position:[o,1.02,t+a/2]},"m"+o))]})}function $(){return(0,e.jsxs)(e.Fragment,{children:[(0,e.jsx)(s.Pine,{position:[-9,2.2,6],scale:1.3,seed:21}),(0,e.jsx)(s.Pine,{position:[10,2.4,5],scale:1.2,seed:23}),(0,e.jsx)(s.Pine,{position:[-11,1.2,-6],scale:1.4,seed:25})]})}t.s(["Bridge",()=>T,"Hill",()=>x,"HillPines",()=>$,"Keep",()=>c,"MBox",()=>h,"Otemon",()=>M,"Turret",()=>L,"Wall",()=>w])},20239,t=>{"use strict";var e=t.i(43476),o=t.i(90072),i=t.i(71645),r=t.i(49774),l=t.i(73949),s=t.i(52961),n=t.i(73965),a=t.i(21030),h=t.i(81600),d=t.i(69234),p=t.i(87006),f=t.i(16166),c=t.i(62437);function x(t){return(0,i.useMemo)(()=>[...c.default.scenes.map(e=>(0,n.canvasTexture)(`scroll-${e.id}-${t}`,1024,512,{svg:(0,d.scrollSceneSVG)(e.id),text:e.kanji+(0,f.pick)(e.title,t),draw:(o,i)=>{o.fillStyle=n.PALETTE.sumi,o.textAlign="left",o.textBaseline="alphabetic",o.font='800 46px "Shippori Mincho"',o.fillText((0,f.pick)(e.title,t),40,120),o.fillStyle=n.PALETTE.shu,o.fillRect(i-120,80,80,80),o.fillStyle=n.PALETTE.washi,o.font='800 58px "Shippori Mincho"',o.textAlign="center",o.fillText(e.kanji,i-80,142),o.fillStyle=n.PALETTE.sumi,o.font='600 26px "Inter", sans-serif',o.textAlign="left",o.fillText(e.year,42,160)}})),(0,n.canvasTexture)(`scroll-learn-${t}`,1024,512,{svg:(0,d.scrollSceneSVG)("none"),text:"読作験"+(0,f.pick)(c.default.learn.title,t),draw:e=>{e.fillStyle=n.PALETTE.sumi,e.font='800 46px "Shippori Mincho"',e.textAlign="left",e.fillText((0,f.pick)(c.default.learn.title,t),40,120),c.default.learn.steps.forEach((t,o)=>{let i=220+300*o;e.fillStyle=[n.PALETTE.ai,n.PALETTE.pine,n.PALETTE.ochre][o],e.beginPath(),e.arc(i,290,92,0,7),e.fill(),e.lineWidth=7,e.strokeStyle=n.PALETTE.sumi,e.stroke(),e.fillStyle=n.PALETTE.washi,e.textAlign="center",e.font='800 96px "Shippori Mincho"',e.fillText(t.kanji,i,322),e.fillStyle=n.PALETTE.sumi,e.font='700 34px "Inter", sans-serif',e.fillText(t.name,i,430),o<2&&(e.lineWidth=6,e.beginPath(),e.moveTo(i+110,290),e.lineTo(i+186,290),e.lineTo(i+170,278),e.stroke())})}}),(0,n.canvasTexture)(`scroll-ai-${t}`,1024,512,{svg:(0,d.scrollSceneSVG)("none"),text:"確認"+(0,f.pick)(c.default.ai.title,t),draw:e=>{e.fillStyle=n.PALETTE.sumi,e.font='800 46px "Shippori Mincho"',e.textAlign="left",e.fillText((0,f.pick)(c.default.ai.title,t),40,120),e.lineWidth=8,e.strokeStyle=n.PALETTE.sumi,e.fillStyle=n.PALETTE.washi,e.beginPath(),e.moveTo(300,290),e.quadraticCurveTo(470,150,640,290),e.quadraticCurveTo(470,430,300,290),e.fill(),e.stroke(),e.fillStyle=n.PALETTE.ai,e.beginPath(),e.arc(470,290,62,0,7),e.fill(),e.stroke(),e.fillStyle=n.PALETTE.sumi,e.beginPath(),e.arc(470,290,26,0,7),e.fill(),e.fillStyle=n.PALETTE.shu,e.fillRect(720,210,170,170),e.fillStyle=n.PALETTE.washi,e.textAlign="center",e.font='800 70px "Shippori Mincho"',e.fillText("確",805,288),e.fillText("認",805,360)}})],[t])}function w(){let t=(0,i.useMemo)(()=>(0,h.taperedTube)([[0,0,0],[.9,.02,0],[1.6,.03,0]],.045,.04,6,6),[]),o=(0,i.useMemo)(()=>(0,s.toon)("#c9a46a"),[]);return(0,e.jsxs)("group",{position:[-2.6,0,-3.1],children:[(0,e.jsx)(s.Box,{args:[1.1,.16,.7],color:n.PALETTE.sumi,position:[-.4,.08,0]}),(0,e.jsx)(s.Box,{args:[.7,.04,.42],color:"#2c2f36",outline:0,position:[-.5,.17,0]}),(0,e.jsx)(s.Box,{args:[.28,.05,.12],color:"#0b0b0b",outline:0,position:[-.05,.17,0]}),(0,e.jsx)(s.Box,{args:[.14,.5,.14],color:n.PALETTE.sumi,position:[.35,.26,.28],"rotation-z":.3}),(0,e.jsx)(s.Box,{args:[.14,.14,.5],color:n.PALETTE.woodDark,position:[.8,.07,-.1]}),(0,e.jsx)(s.Box,{args:[.14,.14,.5],color:n.PALETTE.woodDark,position:[1.9,.07,-.1]}),(0,e.jsxs)("group",{position:[.6,.2,-.1],children:[(0,e.jsx)("mesh",{geometry:t,material:o}),(0,e.jsx)(s.Ink,{color:n.PALETTE.sumi,position:[-.12,0,0],"rotation-z":Math.PI/2,children:(0,e.jsx)("coneGeometry",{args:[.06,.28,10]})})]}),(0,e.jsx)(s.Box,{args:[.24,.16,3.6],color:n.PALETTE.sumi,position:[3.3,.18,3.1]})]})}function L(){let t=(0,p.useStore)(t=>t.lang),h=(0,i.useMemo)(()=>{let t=(0,s.toon)("#ffffff",{map:(0,n.tatamiTexture)()}),e=(0,s.toon)("#9c8c5c");return[e,e,t,e,e,e]},[]),d=x(t),f=d.length,c=(0,i.useRef)([]),L=(0,i.useRef)(),u=(0,i.useRef)(0),{camera:g}=(0,l.useThree)(),M=(0,i.useMemo)(()=>new o.Vector3,[]),m=(0,i.useMemo)(()=>new o.Vector3,[]);return(0,i.useMemo)(()=>d.forEach(t=>{t.wrapS=o.ClampToEdgeWrapping}),[d]),(0,r.useFrame)((t,e)=>{let i=p.useStore.getState().scrollT;u.current=o.MathUtils.damp(u.current,i,5,e);let r=.6+u.current*(8*f-.6);d.forEach((t,e)=>{let i=c.current[e];if(!i)return;let l=o.MathUtils.clamp((r-8*e)/8,0,1);i.visible=l>.001,i.scale.x=Math.max(l,.001),i.position.x=8*e+8*l/2,t.repeat.x=l,t.offset.x=0}),L.current&&(L.current.position.x=r+.25),m.set(r-4.5,6.2,6.4),M.set(r-4,0,-.6),g.position.lerp(m,1-Math.exp(-(5*e))),g.lookAt(M),i>.985&&p.useStore.getState().award("story")}),(0,e.jsxs)(e.Fragment,{children:[(0,e.jsx)("color",{attach:"background",args:[n.PALETTE.washiDark]}),(0,e.jsx)("fog",{attach:"fog",args:[n.PALETTE.washiDark,14,40]}),(0,e.jsx)("ambientLight",{intensity:1.7}),(0,e.jsx)("directionalLight",{position:[5,10,6],intensity:1.2}),Array.from({length:16},(t,o)=>(0,e.jsx)(a.MBox,{args:[3.96,.2,7.9],mats:h,outline:1.2,position:[-6+4*o,-.1,0]},o)),(0,e.jsx)(w,{}),(0,e.jsx)(s.Ink,{color:n.PALETTE.woodDark,position:[-.2,.25,0],"rotation-x":Math.PI/2,children:(0,e.jsx)("cylinderGeometry",{args:[.18,.18,4.8,12]})}),d.map((t,o)=>(0,e.jsxs)("mesh",{ref:t=>c.current[o]=t,"rotation-x":-Math.PI/2,position:[8*o+4,.08,0],children:[(0,e.jsx)("planeGeometry",{args:[8,4]}),(0,e.jsx)("meshBasicMaterial",{map:t,toneMapped:!1})]},o)),(0,e.jsxs)("group",{ref:L,children:[(0,e.jsx)(s.Ink,{color:n.PALETTE.washi,paper:!0,position:[0,.42,0],"rotation-x":Math.PI/2,children:(0,e.jsx)("cylinderGeometry",{args:[.42,.42,4,20]})}),(0,e.jsx)(s.Ink,{color:n.PALETTE.woodDark,position:[0,.42,0],"rotation-x":Math.PI/2,children:(0,e.jsx)("cylinderGeometry",{args:[.16,.16,4.8,10]})})]})]})}t.s(["PANEL_H",0,4,"PANEL_W",0,8,"default",()=>L,"usePanels",()=>x])}]);

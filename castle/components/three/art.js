@@ -205,3 +205,39 @@ export const castle2dSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="600" 
  ${[0, 1, 2].map((i) => `<rect x="${226 + i * 56}" y="218" width="24" height="26" fill="${S}"/>`).join('')}
  <rect x="268" y="122" width="22" height="22" fill="${S}"/><rect x="310" y="122" width="22" height="22" fill="${S}"/>
 </g></svg>`;
+
+/** Sol bajo de atardecer (crema con halo ocre). */
+export const sunSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<circle cx="128" cy="128" r="112" fill="${OC}" opacity=".35"/>
+<circle cx="128" cy="128" r="86" fill="${WA}" stroke="${S}" stroke-width="6"/>
+</svg>`;
+
+/** Velero de pesca con vela de esteras (original). */
+export const sailboatSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<g stroke="${S}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M126 22 L126 196" stroke-width="6"/>
+ <path d="M64 40 L188 40 L182 178 L70 178 Z" fill="${WA}"/>
+ <path d="M68 74 L186 74 M69 108 L185 108 M70 142 L184 142" stroke-width="3" opacity=".6"/>
+ <path d="M94 40 L96 178 M156 40 L154 178" stroke-width="2.5" opacity=".45"/>
+ <path d="M30 192 L226 192 C214 214 190 226 160 228 L92 228 C62 226 42 214 30 192 Z" fill="#5e4429"/>
+ <path d="M40 204 L216 204" stroke-width="3" opacity=".5"/>
+</g></svg>`;
+
+/** Silueta nocturna del castillo con ventanas encendidas (puerto). */
+export const castleNightSVG = castle2dSVG
+  .replace(/fill="#F2E8D5"/g, 'fill="#2b4466"')
+  .replace(/fill="#9d9584"/g, 'fill="#1a2c45"')
+  .replace(/fill="#1A1A1A"/g, 'fill="#D9A441"')
+  .replace(/fill="#1F3A5F"/g, 'fill="#13263f"');
+
+/** Reflejo de luna: trazos horizontales que se estrechan hacia abajo. */
+export const moonPathSVG = (() => {
+  let d = '';
+  for (let i = 0; i < 26; i++) {
+    const y = 8 + i * 19;
+    const w = 120 - i * 3.2 + ((i * 37) % 23);
+    const x = 128 - w / 2 + ((i * 53) % 17) - 8;
+    d += `<rect x="${x.toFixed(1)}" y="${y}" width="${w.toFixed(1)}" height="${(5 - i * 0.12).toFixed(1)}" rx="3"/>`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="512" viewBox="0 0 256 512"><g fill="${WA}" opacity=".85">${d}</g></svg>`;
+})();

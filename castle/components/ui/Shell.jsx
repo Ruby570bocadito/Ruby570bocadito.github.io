@@ -21,6 +21,7 @@ export default function Shell({ children }) {
   const pathname = usePathname();
   const room = roomFromPath(pathname);
   const mode = useStore((s) => s.mode);
+  const loaderDone = useStore((s) => s.loaderDone);
   const lang = useStore((s) => s.lang);
   const t = useT();
 
@@ -75,6 +76,13 @@ export default function Shell({ children }) {
       <Loader />
       {mode === '3d' ? <Experience room={room} /> : null}
       {mode === '3d' ? <div className="washi-overlay" aria-hidden="true" /> : null}
+      {mode === '3d' ? <div className="print-vignette" aria-hidden="true" /> : null}
+      {mode === '3d' && loaderDone ? (
+        <div className={`signature ${room === 'harbor' || room === 'kura' ? 'on-dark' : ''}`} aria-hidden="true">
+          <span className="sig" lang="ja">ラファエル画</span>
+          <span className="hanko text-[10px] leading-tight" style={{ padding: '3px 4px' }}>見<br />張</span>
+        </div>
+      ) : null}
       {mode ? <TopBar /> : null}
       <AudioPanel />
       <StampBook />

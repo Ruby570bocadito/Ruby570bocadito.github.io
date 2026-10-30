@@ -7,7 +7,8 @@ import { useT, pick } from '@/lib/i18n';
 import { useNav } from '@/lib/nav';
 import { sfx } from '@/lib/audio';
 import { CHANNELS, runChannel } from '@/lib/channels';
-import { Hanko, PrintModal, WoodButton } from './bits';
+import { Hanko, PrintModal } from './bits';
+import { DOOR_T } from '@/lib/walk';
 import { ProjectDetail, CertDetail, KuraDetail, LetterForm } from './Details';
 import profile from '@/content/profile.json';
 import projects from '@/content/projects.json';
@@ -32,27 +33,65 @@ function ScrollDriver({ vh, field }) {
   return <div ref={ref} style={{ height: `${vh}vh` }} aria-hidden="true" />;
 }
 
-const Hint = ({ children }) => (
-  <p className="washi ink pointer-events-none fixed bottom-4 left-1/2 z-20 -translate-x-1/2 px-4 py-2 font-serif text-sm font-bold">{children}</p>
-);
-
-const RoomTitle = ({ id, sub }) => {
+/** Cartucho de título vertical (dai) + rótulo con el nombre de la sala. */
+function Cartouche({ id, kanji, name, label }) {
   const lang = useStore((s) => s.lang);
   const r = rooms.find((x) => x.id === id);
   return (
-    <div className="pointer-events-none fixed left-3 top-16 z-20 md:left-6 md:top-20">
-      <h1 className="font-serif text-3xl font-extrabold text-sumi drop-shadow-[2px_2px_0_#F2E8D5] md:text-5xl">
-        <span className="mr-3 text-ai">{r.kanji}</span>{r.name}
-      </h1>
-      <p className="mt-1 font-serif text-base font-bold text-sumi drop-shadow-[1px_1px_0_#F2E8D5]">{sub || pick(r.label, lang)}</p>
+    <div className="cartouche fade-up">
+      <h1 className="cartouche-main" lang="ja" aria-label={`${r?.kanji || kanji} ${r?.name || name}`}>{kanji || r.kanji}</h1>
+      <p className="cartouche-sub">
+        <span className="name">{name || r.name}</span>
+        <span className="label">{label || pick(r.label, lang)}</span>
+      </p>
     </div>
   );
-};
+}
+
+/** Barra inferior unificada: lista de elementos de la sala + pista. */
+function Dock({ items, active, onPick, hint, label }) {
+  return (
+    <div className="dock">
+      {items?.length ? (
+        <nav className="dock-bar" aria-label={label}>
+          {items.map((x) => (
+            <button key={x.id} className={`dock-item ${active === x.id ? 'is-on' : ''}`} onClick={() => onPick(x.id)} onMouseEnter={x.onHover} aria-pressed={active === x.id}>
+              {x.k ? <span className="k" lang="ja">{x.k}</span> : null}{x.name}
+            </button>
+          ))}
+        </nav>
+      ) : null}
+      {hint ? <p className="dock-hint">{hint}</p> : null}
+    </div>
+  );
+}
 
 function Roles() {
   const [i, setI] = useState(0);
   useEffect(() => { const id = setInterval(() => setI((x) => (x + 1) % profile.roles.length), 1800); return () => clearInterval(id); }, []);
-  return <span key={i} className="fade-up inline-block text-ai">{profile.roles[i]}</span>;
+  return <span key={i} className="role-in inline-block text-ai">{profile.roles[i]}</span>;
+}
+
+/** Raíl lateral: posición en la pasarela y salto a cada puerta. */
+function WalkRail() {
+  const { walkT, nearDoor, lang } = useStore();
+  const t = useT();
+  const go = (k) => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    window.scrollTo({ top: k * max, behavior: useStore.getState().reduced ? 'auto' : 'smooth' });
+  };
+  return (
+    <nav className="rail hidden md:block" aria-label={t('rooms')}>
+      <div className="rail-line" />
+      {rooms.map((r, i) => (
+        <button key={r.id} className={`rail-mark ${nearDoor === i ? 'is-near' : ''}`} style={{ top: `${DOOR_T[i] * 100}%` }} onClick={() => go(DOOR_T[i])} aria-label={`${r.kanji} ${r.name}`}>
+          <span className="lbl">{pick(r.label, lang)}</span>
+          <span className="k" lang="ja">{r.kanji.length > 2 ? r.kanji.slice(0, 2) : r.kanji}</span>
+        </button>
+      ))}
+      <span className="rail-dot" style={{ top: `${walkT * 100}%` }} aria-hidden="true" />
+    </nav>
+  );
 }
 
 function HomeOverlay() {
@@ -77,14 +116,14 @@ function HomeOverlay() {
             </div>
             <div className="mx-auto h-10 w-3 border-x-2 border-sumi bg-[#5e4429]" />
           </div>
-          <div className="fixed bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2">
+          <div className="dock">
             <button
               onClick={() => { sfx('wood'); useStore.setState({ phase: 'crossing' }); }}
-              className="ink inkshadow bg-ai px-6 py-3 font-serif text-lg font-extrabold text-washi hover:-translate-y-0.5"
+              className="hud-btn !h-14 !bg-ai !px-7 font-serif text-xl font-extrabold !text-washi"
             >
-              入城 · {t('enter')}
+              <span lang="ja">入城</span><span className="text-ochre">·</span>{t('enter')}
             </button>
-            <p className="washi ink px-3 py-1 font-serif text-sm font-bold">{t('gateHint')}</p>
+            <p className="dock-hint">{t('gateHint')}</p>
           </div>
         </>
       ) : null}
@@ -99,30 +138,21 @@ function HomeOverlay() {
                 <p className="mt-1 text-xs tracking-widest text-sumi/60" aria-hidden="true">{profile.roles.join(' · ')}</p>
                 <p className="mt-3 text-sm">“{profile.motto.en}” / <span lang="ja">{profile.mottoJa}</span> · <Hanko size="text-xs">{pick(profile.status, lang)}</Hanko></p>
               </div>
-              <p className="mt-3 inline-block washi ink px-3 py-1 font-serif text-sm font-bold">↓ {t('scrollHint')}</p>
+              <p className="dock-hint mt-3">↓ {t('scrollHint')}</p>
             </div>
           ) : null}
           {door || nearDoor === 5 ? (
-            <div className="fade-up fixed bottom-6 left-1/2 z-20 -translate-x-1/2" key={nearDoor}>
+            <div className="dock fade-up" key={nearDoor}>
               <button
                 onClick={() => nav((door || rooms[5]).path)}
-                className="ink inkshadow flex items-center gap-3 bg-ai px-5 py-3 font-serif text-washi hover:-translate-y-0.5"
+                className="hud-btn !h-auto !justify-start gap-3 !bg-ai !px-5 !py-3 font-serif !text-washi"
               >
                 <span className="text-3xl font-extrabold">{(door || rooms[5]).kanji}</span>
                 <span className="text-left"><span className="block text-lg font-extrabold">{(door || rooms[5]).name}</span><span className="block text-sm">{t('enter')} · {pick((door || rooms[5]).label, lang)} →</span></span>
               </button>
             </div>
           ) : null}
-          {/* índice lateral de la pasarela */}
-          <ol className="fixed right-3 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-1 md:flex" aria-label={t('rooms')}>
-            {rooms.map((r, i) => (
-              <li key={r.id}>
-                <button onClick={() => nav(r.path)} className={`ink w-full px-2 py-1 text-right font-serif text-xs font-extrabold ${nearDoor === i ? 'bg-ochre' : 'bg-washi/90 hover:bg-washi-dark'}`}>
-                  {r.kanji} <span className="font-sans font-semibold">{pick(r.label, lang)}</span>
-                </button>
-              </li>
-            ))}
-          </ol>
+          <WalkRail />
         </>
       ) : null}
     </>
@@ -145,14 +175,13 @@ function AboutOverlay() {
   }
   return (
     <>
-      <RoomTitle id="about" />
+      <Cartouche id="about" />
       <ScrollDriver vh={800} field="scrollT" />
       <div key={idx + lang} className="washi woodframe fade-up fixed bottom-6 right-3 z-20 w-[min(92vw,420px)] p-5 md:right-8">
         {card}
         <div className="mt-3 flex gap-1" aria-hidden="true">{Array.from({ length: n }, (_, i) => <span key={i} className={`h-1.5 flex-1 ${i <= idx ? 'bg-ai' : 'bg-sumi/15'}`} />)}</div>
       </div>
-      {scrollT < 0.02 ? <Hint>↓ {t('scrollRead')}</Hint> : null}
-      {stamps.story && scrollT > 0.98 ? <Hint>物語 ✓</Hint> : null}
+      {scrollT < 0.02 ? <Dock hint={'↓ ' + t('scrollRead')} /> : null}
     </>
   );
 }
@@ -163,15 +192,14 @@ function WatchtowerOverlay() {
   const p = projects.find((x) => x.id === project);
   return (
     <>
-      <RoomTitle id="watchtower" />
-      <Hint>⟷ {t('dragHint')}</Hint>
-      <nav className="fixed bottom-16 left-1/2 z-20 flex max-w-[95vw] -translate-x-1/2 flex-wrap justify-center gap-1" aria-label="Projects">
-        {projects.map((x) => (
-          <button key={x.id} onClick={() => { useStore.setState({ project: x.id }); useStore.getState().award('analyze'); }} className="ink bg-washi/90 px-2 py-1 font-serif text-xs font-bold hover:bg-ochre">
-            {x.kanji} {x.name}
-          </button>
-        ))}
-      </nav>
+      <Cartouche id="watchtower" />
+      <Dock
+        label="Projects"
+        items={projects.map((x) => ({ id: x.id, k: x.kanji, name: x.name }))}
+        active={project}
+        onPick={(id) => { useStore.setState({ project: id }); useStore.getState().award('analyze'); }}
+        hint={'⟷ ' + t('dragHint')}
+      />
       <PrintModal open={!!p} onClose={() => useStore.setState({ project: null })} label={p?.name}>
         {p ? <ProjectDetail p={p} /> : null}
       </PrintModal>
@@ -185,26 +213,25 @@ function DojoOverlay() {
   const cat = skills.categories.find((c) => c.id === hovered);
   return (
     <>
-      <RoomTitle id="dojo" sub={pick(skills.title, lang)} />
-      <div className="fixed bottom-4 left-1/2 z-20 w-[min(94vw,760px)] -translate-x-1/2">
-        <div className="mb-2 flex flex-wrap justify-center gap-1" role="tablist" aria-label="Skills">
-          {skills.categories.map((c) => (
-            <button key={c.id} role="tab" aria-selected={hovered === c.id} onClick={() => useStore.setState({ hovered: c.id })} onMouseEnter={() => useStore.setState({ hovered: c.id })}
-              className={`ink px-3 py-1.5 font-serif text-sm font-bold ${hovered === c.id ? 'bg-ochre' : 'bg-washi/90'}`}>
-              {c.kanji} {pick(c.name, lang)}
-            </button>
-          ))}
-        </div>
-        <div className="washi woodframe min-h-28 p-4" role="tabpanel" aria-live="polite">
+      <Cartouche id="dojo" label={pick(skills.title, lang)} />
+      <div className="dock">
+        <div className="washi woodframe w-full max-w-3xl p-4" role="region" aria-live="polite" aria-label={pick(skills.title, lang)}>
           {cat ? (
             <div key={cat.id} className="fade-up">
-              <p className="font-serif text-lg font-extrabold">{cat.kanji} {pick(cat.name, lang)} <span className="text-sm font-bold text-sumi/60">· {pick(cat.weaponName, lang)}</span></p>
+              <p className="font-serif text-lg font-extrabold"><span className="text-ai" lang="ja">{cat.kanji}</span> {pick(cat.name, lang)} <span className="text-sm font-bold text-sumi/60">· {pick(cat.weaponName, lang)}</span></p>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {cat.items.map((s, i) => <li key={s} className="stamp-in" style={{ animationDelay: `${i * 60}ms` }}><Hanko size="text-sm">{s}</Hanko></li>)}
               </ul>
             </div>
           ) : <p className="font-serif font-bold text-sumi/70">{t('hoverHint')}</p>}
         </div>
+        <nav className="dock-bar" aria-label="Skills" role="tablist">
+          {skills.categories.map((c) => (
+            <button key={c.id} role="tab" aria-selected={hovered === c.id} className={`dock-item ${hovered === c.id ? 'is-on' : ''}`} onClick={() => useStore.setState({ hovered: c.id })} onMouseEnter={() => useStore.setState({ hovered: c.id })}>
+              <span className="k" lang="ja">{c.kanji}</span>{pick(c.name, lang)}
+            </button>
+          ))}
+        </nav>
       </div>
     </>
   );
@@ -212,20 +239,19 @@ function DojoOverlay() {
 
 function ArchiveOverlay() {
   const t = useT();
-  const { cert, lang } = useStore();
+  const { cert } = useStore();
   const items = [...certs.items, ...certs.achievements];
   const c = items.find((x) => x.id === cert);
   return (
     <>
-      <RoomTitle id="archive" />
-      <nav className="fixed bottom-14 left-1/2 z-20 flex max-w-[95vw] -translate-x-1/2 flex-wrap justify-center gap-1" aria-label="Certifications">
-        {items.map((x) => (
-          <button key={x.id} onClick={() => useStore.setState({ cert: x.id })} className="ink flex items-center gap-1 bg-washi/90 px-2 py-1 font-serif text-xs font-bold hover:bg-ochre">
-            <span className="hanko text-[10px]">{x.seal || certs.statuses[x.status].seal}</span> {x.title.split(' —')[0]}
-          </button>
-        ))}
-      </nav>
-      <Hint>{t('clickScroll')}</Hint>
+      <Cartouche id="archive" />
+      <Dock
+        label="Certifications"
+        items={items.map((x) => ({ id: x.id, k: x.seal || certs.statuses[x.status].seal, name: x.title.split(' —')[0] }))}
+        active={cert}
+        onPick={(id) => useStore.setState({ cert: id })}
+        hint={t('clickScroll')}
+      />
       <PrintModal open={!!c} onClose={() => useStore.setState({ cert: null })} label={c?.title} wide={false}>
         {c ? <CertDetail c={c} /> : null}
       </PrintModal>
@@ -238,15 +264,8 @@ function HarborOverlay() {
   const { letter, lang } = useStore();
   return (
     <>
-      <div className="pointer-events-none fixed left-3 top-16 z-20 md:left-6 md:top-20">
-        <h1 className="font-serif text-3xl font-extrabold text-washi drop-shadow-[2px_2px_0_#1A1A1A] md:text-5xl"><span className="mr-3 text-ochre">港</span>THE HARBOR</h1>
-        <p className="mt-1 font-serif text-base font-bold text-washi">{pick(profile.status, lang)}</p>
-      </div>
-      <nav className="fixed bottom-4 left-1/2 z-20 flex max-w-[95vw] -translate-x-1/2 flex-wrap justify-center gap-2" aria-label="Contact">
-        {CHANNELS.map((c) => (
-          <WoodButton key={c.id} onClick={() => runChannel(c.id)}>{c.kind === 'boat' ? '舟' : '灯'} {pick(c.label, lang)}</WoodButton>
-        ))}
-      </nav>
+      <Cartouche id="harbor" label={pick(profile.status, lang)} />
+      <Dock label="Contact" items={CHANNELS.map((c) => ({ id: c.id, k: c.kind === 'boat' ? '舟' : '灯', name: pick(c.label, lang) }))} onPick={runChannel} hint={profile.email} />
       <PrintModal open={letter} onClose={() => useStore.setState({ letter: false })} label={t('sendMsg')} wide={false}>
         <div className="p-4 pt-14"><LetterForm onSent={() => setTimeout(() => useStore.setState({ letter: false }), 1200)} /></div>
       </PrintModal>
@@ -260,19 +279,14 @@ function KuraOverlay() {
   const k = offensive.items.find((x) => x.id === kuraItem);
   return (
     <>
-      <div className="pointer-events-none fixed left-3 top-16 z-20 max-w-xl md:left-6 md:top-20">
-        <h1 className="font-serif text-3xl font-extrabold text-washi drop-shadow-[2px_2px_0_#1A1A1A] md:text-5xl"><span className="mr-3 text-ochre">蔵</span>KURA</h1>
-        <p className="mt-1 font-serif text-lg font-bold text-washi">{pick(offensive.motto, lang)}</p>
-        <p className="mt-1 text-sm text-washi/80">{pick(offensive.disclaimer, lang)}</p>
-      </div>
+      <Cartouche id="kura" label={pick(offensive.motto, lang)} />
       {!kuraOpen ? (
-        <div className="fixed bottom-6 left-1/2 z-20 -translate-x-1/2">
-          <button onClick={() => { sfx('wood'); useStore.setState({ kuraOpen: true }); }} className="ink inkshadow bg-ochre px-5 py-3 font-serif text-lg font-extrabold">鍵 · {t('unlock')}</button>
+        <div className="dock">
+          <button onClick={() => { sfx('wood'); useStore.setState({ kuraOpen: true }); }} className="hud-btn hud-btn-wide !h-12 !bg-ochre !px-5 font-serif text-lg font-extrabold">鍵 · {t('unlock')}</button>
+          <p className="dock-hint">{pick(offensive.disclaimer, lang)}</p>
         </div>
       ) : (
-        <nav className="fixed bottom-4 left-1/2 z-20 flex -translate-x-1/2 flex-wrap justify-center gap-1" aria-label="Offensive archive">
-          {offensive.items.map((x) => <WoodButton key={x.id} onClick={() => useStore.setState({ kuraItem: x.id })}>{x.kanji} {x.name}</WoodButton>)}
-        </nav>
+        <Dock label="Offensive archive" items={offensive.items.map((x) => ({ id: x.id, k: x.kanji, name: x.name }))} active={kuraItem} onPick={(id) => useStore.setState({ kuraItem: id })} hint={pick(offensive.disclaimer, lang)} />
       )}
       <PrintModal open={!!k} onClose={() => useStore.setState({ kuraItem: null })} label={k?.name}>
         {k ? <KuraDetail k={k} /> : null}

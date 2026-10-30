@@ -15,10 +15,10 @@ export const metadata = {
   icons: { icon: '/castle-icon.svg' },
   openGraph: {
     type: 'website', siteName: '見張りの城 — Rafael Gálvez', title: TITLE, description: DESC, url: SITE,
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Castillo japonés al atardecer en estilo ukiyo-e' }],
+    images: [{ url: '/og.jpg', width: 1200, height: 630, alt: 'Castillo japonés al atardecer en estilo ukiyo-e' }],
     locale: 'es_ES', alternateLocale: ['en_US', 'ja_JP'],
   },
-  twitter: { card: 'summary_large_image', title: TITLE, description: DESC, images: ['/og.png'] },
+  twitter: { card: 'summary_large_image', title: TITLE, description: DESC, images: ['/og.jpg'] },
 };
 
 export const viewport = { themeColor: '#1F3A5F', width: 'device-width', initialScale: 1 };

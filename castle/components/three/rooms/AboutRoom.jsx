@@ -2,8 +2,10 @@
 import * as THREE from 'three';
 import { useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Ink, Box } from '../kit';
-import { canvasTexture, PALETTE as P } from '../textures';
+import { Ink, Box, toon } from '../kit';
+import { canvasTexture, tatamiTexture, PALETTE as P } from '../textures';
+import { MBox } from '../Castle';
+import { taperedTube } from '../geom';
 import { scrollSceneSVG } from '../art';
 import { useStore } from '@/lib/store';
 import { pick } from '@/lib/i18n';
@@ -70,8 +72,34 @@ export function usePanels(lang) {
   }, [lang]);
 }
 
+/** Piedra de tinta, pincel en su soporte y pisapapeles: el taller del pintor. */
+function Desk() {
+  const brush = useMemo(() => taperedTube([[0, 0, 0], [0.9, 0.02, 0], [1.6, 0.03, 0]], 0.045, 0.04, 6, 6), []);
+  const bamboo = useMemo(() => toon('#c9a46a'), []);
+  return (
+    <group position={[-2.6, 0, -3.1]}>
+      {/* suzuri */}
+      <Box args={[1.1, 0.16, 0.7]} color={P.sumi} position={[-0.4, 0.08, 0]} />
+      <Box args={[0.7, 0.04, 0.42]} color="#2c2f36" outline={0} position={[-0.5, 0.17, 0]} />
+      <Box args={[0.28, 0.05, 0.12]} color="#0b0b0b" outline={0} position={[-0.05, 0.17, 0]} />
+      {/* barra de tinta */}
+      <Box args={[0.14, 0.5, 0.14]} color={P.sumi} position={[0.35, 0.26, 0.28]} rotation-z={0.3} />
+      {/* pincel en su soporte */}
+      <Box args={[0.14, 0.14, 0.5]} color={P.woodDark} position={[0.8, 0.07, -0.1]} />
+      <Box args={[0.14, 0.14, 0.5]} color={P.woodDark} position={[1.9, 0.07, -0.1]} />
+      <group position={[0.6, 0.2, -0.1]}>
+        <mesh geometry={brush} material={bamboo} />
+        <Ink color={P.sumi} position={[-0.12, 0, 0]} rotation-z={Math.PI / 2}><coneGeometry args={[0.06, 0.28, 10]} /></Ink>
+      </group>
+      {/* pisapapeles sobre el inicio del pergamino */}
+      <Box args={[0.24, 0.16, 3.6]} color={P.sumi} position={[3.3, 0.18, 3.1]} />
+    </group>
+  );
+}
+
 export default function AboutRoom() {
   const lang = useStore((s) => s.lang);
+  const tatami = useMemo(() => { const t = toon('#ffffff', { map: tatamiTexture() }), side = toon('#9c8c5c'); return [side, side, t, side, side, side]; }, []);
   const panels = usePanels(lang);
   const n = panels.length;
   const meshes = useRef([]);
@@ -110,10 +138,11 @@ export default function AboutRoom() {
       <fog attach="fog" args={[P.washiDark, 14, 40]} />
       <ambientLight intensity={1.7} />
       <directionalLight position={[5, 10, 6]} intensity={1.2} />
-      {/* tatami bajo el pergamino */}
+      {/* tatami bajo el pergamino y útiles de caligrafía */}
       {Array.from({ length: 16 }, (_, i) => (
-        <Box key={i} args={[3.9, 0.2, 7.8]} color={i % 2 ? '#c9b98c' : '#cdbf93'} outline={1.2} position={[-6 + i * 4, -0.1, 0]} />
+        <MBox key={i} args={[3.96, 0.2, 7.9]} mats={tatami} outline={1.2} position={[-6 + i * 4, -0.1, 0]} />
       ))}
+      <Desk />
       {/* varilla inicial (jiku) */}
       <Ink color={P.woodDark} position={[-0.2, 0.25, 0]} rotation-x={Math.PI / 2}><cylinderGeometry args={[0.18, 0.18, PANEL_H + 0.8, 12]} /></Ink>
       {panels.map((tex, i) => (

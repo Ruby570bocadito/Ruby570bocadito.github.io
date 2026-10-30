@@ -7,7 +7,7 @@ export const metadata = {
   title: room.seo.title,
   description: room.seo.description,
   alternates: { canonical: room.path },
-  openGraph: { title: room.seo.title, description: room.seo.description, url: room.path, images: ['/og.png'] },
+  openGraph: { title: room.seo.title, description: room.seo.description, url: room.path, images: ['/og.jpg'] },
   twitter: { title: room.seo.title, description: room.seo.description },
 };
 

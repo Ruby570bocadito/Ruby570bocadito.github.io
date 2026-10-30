@@ -2,9 +2,10 @@
 import * as THREE from 'three';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Ink, Box, Sky, Water, Roof, Layer } from '../kit';
-import { canvasTexture, PALETTE as P } from '../textures';
-import { cloudSVG } from '../art';
+import { Ink, Box, Sky, Water, TileRoof, Layer, toon } from '../kit';
+import { canvasTexture, plankTexture, PALETTE as P } from '../textures';
+import { cloudSVG, mountainSVG, sailboatSVG } from '../art';
+import { taperedTube } from '../geom';
 import { useStore } from '@/lib/store';
 import { pick } from '@/lib/i18n';
 import { sfx } from '@/lib/audio';
@@ -91,10 +92,62 @@ function Ema({ p, angle, radius, dragging }) {
   );
 }
 
+const BRONZE = '#a8813a';
+
+/** Campana de vigía (hanshō) con su mazo: la alarma de la torre. */
+function Bell(p) {
+  const ref = useRef();
+  const geo = useMemo(() => {
+    const prof = [[0, 0.08], [0.32, 0.06], [0.4, -0.04], [0.44, 0.0], [0.38, 0.12], [0.34, 0.5], [0.3, 0.86], [0.18, 0.98], [0, 1.0]];
+    return new THREE.LatheGeometry(prof.map(([x, y]) => new THREE.Vector2(x, y)), 24);
+  }, []);
+  useFrame(({ clock }) => { if (ref.current) ref.current.rotation.z = Math.sin(clock.elapsedTime * 0.9) * 0.025; });
+  return (
+    <group ref={ref} {...p}>
+      <mesh position={[0, -0.55, 0]}><cylinderGeometry args={[0.02, 0.02, 1.1, 4]} /><meshBasicMaterial color={P.sumi} /></mesh>
+      <Ink geometry={geo} color={BRONZE} position={[0, -1.95, 0]} scale={1.1} />
+      {[0.3, 0.55, 0.8].map((y) => (
+        <mesh key={y} position={[0, -1.95 + y * 1.1, 0]}><torusGeometry args={[0.34 + (0.8 - y) * 0.05, 0.015, 4, 24]} /><meshBasicMaterial color={P.sumi} /></mesh>
+      ))}
+      <Ink color={BRONZE} position={[0, -0.85, 0]} rotation-z={Math.PI / 2}><torusGeometry args={[0.1, 0.035, 6, 12]} /></Ink>
+      {/* mazo de madera */}
+      <group position={[0.75, -1.4, 0]} rotation-z={0.2}>
+        <mesh position={[0, 0.5, 0]}><cylinderGeometry args={[0.012, 0.012, 1, 4]} /><meshBasicMaterial color={P.sumi} /></mesh>
+        <Box args={[0.08, 0.5, 0.08]} color={P.wood} wood />
+        <Ink color={P.woodDark} position={[0, -0.3, 0]} rotation-z={Math.PI / 2}><cylinderGeometry args={[0.09, 0.09, 0.28, 10]} /></Ink>
+      </group>
+    </group>
+  );
+}
+
+/** Catalejo de latón sobre trípode, apuntando al mar. */
+function Telescope(p) {
+  const legs = useMemo(() => [0, 1, 2].map((k) => {
+    const a = (k / 3) * Math.PI * 2;
+    return taperedTube([[0, 1.5, 0], [Math.cos(a) * 0.32, 0.75, Math.sin(a) * 0.32], [Math.cos(a) * 0.6, 0, Math.sin(a) * 0.6]], 0.035, 0.03, 8, 5);
+  }), []);
+  const wood = useMemo(() => toon(P.woodDark), []);
+  return (
+    <group {...p}>
+      {legs.map((g, i) => <mesh key={i} geometry={g} material={wood} />)}
+      <group position={[0, 1.55, 0]} rotation={[0, 0, 0.18]}>
+        <Ink color={BRONZE} rotation-z={Math.PI / 2}><cylinderGeometry args={[0.07, 0.11, 1.5, 12]} /></Ink>
+        <Ink color={P.sumi} position={[-0.78, 0, 0]} rotation-z={Math.PI / 2}><cylinderGeometry args={[0.08, 0.08, 0.1, 12]} /></Ink>
+        <Ink color={BRONZE} position={[0.35, 0, 0]} rotation-z={Math.PI / 2}><cylinderGeometry args={[0.12, 0.12, 0.08, 12]} /></Ink>
+        <Ink color={BRONZE} position={[0.72, 0, 0]} rotation-z={Math.PI / 2}><cylinderGeometry args={[0.13, 0.13, 0.08, 12]} /></Ink>
+      </group>
+    </group>
+  );
+}
+
 export default function WatchtowerRoom() {
   const { camera, gl } = useThree();
   const yaw = useRef(0), target = useRef(0), dragging = useRef(0);
   const cloud = useMemo(() => canvasTexture('cloudW', 1024, 180, { svg: cloudSVG(P.washi, 3) }), []);
+  const mountain = useMemo(() => canvasTexture('mountain', 1024, 512, { svg: mountainSVG }), []);
+  const boat = useMemo(() => canvasTexture('sailboat', 256, 256, { svg: sailboatSVG }), []);
+  const floor = useMemo(() => toon(P.wood, { map: plankTexture(7), repeat: [4, 2] }), []);
+  const ceiling = useMemo(() => toon(P.woodDark, { map: plankTexture(8), repeat: [5, 2] }), []);
   const list = useMemo(() => [...projects].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)), []);
   // FriendlyPear al frente y el resto alternando a izquierda y derecha
   const angles = useMemo(() => list.map((_, i) => (i === 0 ? 0 : (Math.ceil(i / 2) * (i % 2 ? 1 : -1)) * 0.52)), [list]);
@@ -142,8 +195,11 @@ export default function WatchtowerRoom() {
       <Water size={[900, 900]} position={[0, -30, 0]} />
       <Layer map={cloud} w={160} h={28} position={[-30, -6, -140]} />
       <Layer map={cloud} w={120} h={20} position={[80, 4, -100]} rotation-y={-0.6} />
+      <Layer map={mountain} w={220} h={110} position={[-90, 8, -190]} rotation-y={0.3} />
+      <Layer map={boat} w={9} h={9} position={[18, -26, -70]} bob={0.3} />
+      <Layer map={boat} w={7} h={7} position={[-40, -26.5, -60]} bob={0.25} phase={1.5} rotation-y={0.4} />
       {/* suelo y muro curvo de la torre con vanos */}
-      <Ink color={P.wood} wood={4} position={[0, -0.1, 0]}><cylinderGeometry args={[R + 1.5, R + 1.5, 0.2, 24]} /></Ink>
+      <mesh material={floor} position={[0, -0.1, 0]}><cylinderGeometry args={[R + 1.5, R + 1.5, 0.2, 24]} /></mesh>
       {Array.from({ length: 14 }, (_, i) => {
         const a = (i / 14) * Math.PI * 2;
         return (
@@ -154,7 +210,10 @@ export default function WatchtowerRoom() {
           </group>
         );
       })}
-      <Roof w={17} d={17} h={2.6} color={P.ai} position={[0, 6.6, 0]} />
+      <TileRoof w={9.2} d={9.2} h={2.8} tw={0.5} td={0.5} wi={6.6} di={6.6} lift={0.9} position={[0, 5.25, 0]} ridge={false} />
+      <mesh material={ceiling} position={[0, 5.22, 0]}><cylinderGeometry args={[R + 1.6, R + 1.6, 0.14, 24]} /></mesh>
+      <Bell position={[Math.sin(-0.3) * 6.9, 5.6, -Math.cos(-0.3) * 6.9]} />
+      <Telescope position={[-3.4, 0, 2.6]} rotation-y={2.3} />
       {/* barra de la que cuelgan las tablillas */}
       <Ink color={P.woodDark} position={[0, 4.0, 0]} rotation-x={Math.PI / 2}><torusGeometry args={[R, 0.06, 6, 48]} /></Ink>
       {list.map((p, i) => <Ema key={p.id} p={p} angle={angles[i]} radius={R} dragging={dragging} />)}

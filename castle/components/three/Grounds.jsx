@@ -1,10 +1,13 @@
 'use client';
 import * as THREE from 'three';
-import { useMemo, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Ink, Box, Roof, PaperLantern } from './kit';
-import { canvasTexture, PALETTE as P } from './textures';
+import { Outlines } from '@react-three/drei';
+import { Ink, Box, TileRoof, PaperLantern, InstancedParts, toon } from './kit';
+import { MBox } from './Castle';
+import { canvasTexture, plankTexture, bayTexture, namakoTexture, gravelTexture, crestTexture, woodTexture, PALETTE as P } from './textures';
 import { avatarSVG, armSVG, ninjaSVG, craneSVG } from './art';
+import { mergeParts } from './geom';
 
 const hoverable = (set) => ({
   onPointerOver: (e) => { e.stopPropagation(); set(true); document.body.style.cursor = 'pointer'; },
@@ -42,8 +45,18 @@ export function norenTexture(room, label) {
 }
 
 /** Puerta de sala con noren; clic para entrar. */
+const DOOR_BARS = mergeParts([
+  ...[-0.75, 0, 0.75].map((x) => ({ geo: new THREE.BoxGeometry(0.06, 4, 0.06), p: [x, 2, -0.08] })),
+  ...[0.8, 1.6, 2.4, 3.2].map((y) => ({ geo: new THREE.BoxGeometry(3.05, 0.06, 0.06), p: [0, y, -0.08] })),
+]);
+const WINDOW_BARS = mergeParts([
+  ...[-0.6, 0, 0.6].map((dz) => ({ geo: new THREE.BoxGeometry(0.14, 1.6, 0.06), p: [0, 0, dz] })),
+  ...[-0.4, 0.2].map((dy) => ({ geo: new THREE.BoxGeometry(0.14, 0.06, 2.4), p: [0, dy, 0] })),
+]);
+
 export function NorenDoor({ room, label, onOpen, active, ...p }) {
   const [hover, setHover] = useState(false);
+  const barMat = useMemo(() => toon(P.woodDark), []);
   const cloth = useRef();
   const tex = useMemo(() => norenTexture(room, label), [room, label]);
   useFrame(({ clock }) => {
@@ -57,8 +70,7 @@ export function NorenDoor({ room, label, onOpen, active, ...p }) {
       <Box args={[3.8, 0.4, 0.45]} color={P.woodDark} wood position={[0, 4.2, 0]} />
       <Box args={[3.05, 4, 0.1]} color={P.washi} paper emissive={lit ? P.ochre : undefined} emissiveIntensity={0.5} position={[0, 2, -0.15]} />
       {/* celosía shōji */}
-      {[-0.75, 0, 0.75].map((x) => <Box key={x} args={[0.06, 4, 0.06]} color={P.woodDark} outline={0} position={[x, 2, -0.08]} />)}
-      {[0.8, 1.6, 2.4, 3.2].map((y) => <Box key={y} args={[3.05, 0.06, 0.06]} color={P.woodDark} outline={0} position={[0, y, -0.08]} />)}
+      <mesh geometry={DOOR_BARS} material={barMat} />
       <group ref={cloth} position={[0, 4.0, 0.18]}>
         <mesh position={[0, -1.25, 0]}>
           <planeGeometry args={[3.2, 2.5 * 1.25]} />
@@ -69,60 +81,156 @@ export function NorenDoor({ room, label, onOpen, active, ...p }) {
   );
 }
 
-/** Edificio largo con pasarela (engawa) y puertas. */
+/** Edificio largo con pasarela (engawa): zócalos de piedra, tablas, aleros con vigas y tejado de tejas. */
 export function Engawa({ from = -2, to = -50 }) {
   const len = from - to;
   const mid = (from + to) / 2;
   const posts = useMemo(() => Array.from({ length: Math.floor(len / 4) + 1 }, (_, i) => from - i * 4), [from, len]);
+  const rafters = useRef();
+  const nR = Math.floor((len + 1.6) / 0.6);
+  const mats = useMemo(() => {
+    const top = toon('#a37e52', { map: plankTexture(5), repeat: [3.4 / 1.0, len / 8] });
+    const side = toon(P.woodDark, { map: woodTexture(3) });
+    const front = toon('#ffffff', { map: bayTexture(false), repeat: [len / 1.8, 1] });
+    const pl = toon(P.plaster);
+    return { deck: [side, side, top, side, side, side], wall: [front, front, pl, pl, pl, pl], stone: toon(P.stone), post: toon(P.woodDark, { map: woodTexture(6) }) };
+  }, [len]);
+  const footGeo = useMemo(() => new THREE.BoxGeometry(0.6, 0.35, 0.6), []);
+  const postGeo = useMemo(() => new THREE.BoxGeometry(0.3, 4.9, 0.3), []);
+  const postT = useMemo(() => ({ feet: posts.map((z) => ({ p: [-4.35, 0.17, z] })), posts: posts.map((z) => ({ p: [-4.35, 2.8, z] })) }), [posts]);
+  useLayoutEffect(() => {
+    const m = rafters.current;
+    if (!m) return;
+    const o = new THREE.Object3D();
+    for (let i = 0; i < nR; i++) {
+      o.position.set(-5.7, 5.12, from + 0.8 - i * 0.6);
+      o.updateMatrix();
+      m.setMatrixAt(i, o.matrix);
+    }
+    m.instanceMatrix.needsUpdate = true;
+  }, [from, nR]);
+  const rafterGeo = useMemo(() => new THREE.BoxGeometry(3.6, 0.09, 0.12), []);
+  const darkWood = useMemo(() => toon(P.woodDark), []);
+  const rafterMat = useMemo(() => toon(P.woodDark), []);
   return (
     <group>
-      {/* suelo de la pasarela */}
-      <Box args={[3.4, 0.5, len]} color={P.wood} wood={2} position={[-5.9, 0.25, mid]} />
+      {/* zócalos de piedra y suelo de tablas */}
+      <InstancedParts geometry={footGeo} material={mats.stone} transforms={postT.feet} outline={1.6} />
+      <MBox args={[3.4, 0.22, len]} mats={mats.deck} position={[-5.9, 0.46, mid]} />
+      <Box args={[0.16, 0.2, len]} color={P.sumi} outline={0} position={[-4.18, 0.4, mid]} />
       {/* edificio */}
-      <Box args={[4, 5.2, len]} color={P.plaster} paper position={[-9.6, 2.6, mid]} />
-      <Box args={[0.2, 0.4, len]} color={P.woodDark} wood position={[-7.55, 4.6, mid]} />
-      {posts.map((z) => (
-        <group key={z}>
-          <Box args={[0.3, 5.2, 0.3]} color={P.woodDark} wood position={[-4.35, 2.6, z]} />
-          <PaperLantern position={[-4.35, 4.2, z - 2]} scale={0.7} glow={1.1} />
-        </group>
-      ))}
+      <MBox args={[4, 5.2, len]} mats={mats.wall} position={[-9.6, 2.6, mid]} />
+      <Box args={[0.2, 0.36, len]} color={P.woodDark} wood position={[-7.55, 4.62, mid]} />
+      <Box args={[0.2, 0.2, len]} color={P.woodDark} outline={1.4} position={[-7.55, 0.62, mid]} />
+      <InstancedParts geometry={postGeo} material={mats.post} transforms={postT.posts} />
+      {posts.map((z) => <PaperLantern key={z} position={[-4.35, 4.15, z - 2]} scale={0.7} glow={1.1} mark="見" />)}
+      <Box args={[0.26, 0.3, len]} color={P.woodDark} wood position={[-4.35, 5.05, mid]} />
       {/* ventanas shōji entre puertas */}
       {[-3.5, -12.2, -20.7, -29.2, -37.7, -46.2].map((z) => (
-        <group key={z} position={[-7.56, 2.4, z]}>
-          <Box args={[0.12, 1.8, 2.4]} color={P.washi} paper />
-          {[-0.6, 0, 0.6].map((dz) => <Box key={dz} args={[0.14, 1.8, 0.06]} color={P.woodDark} outline={0} position={[0, 0, dz]} />)}
-          {[-0.45, 0.15].map((dy) => <Box key={dy} args={[0.14, 0.06, 2.4]} color={P.woodDark} outline={0} position={[0, dy, 0]} />)}
+        <group key={z} position={[-7.56, 2.7, z]}>
+          <Box args={[0.12, 1.6, 2.4]} color={P.washi} paper />
+          <mesh geometry={WINDOW_BARS} material={darkWood} />
         </group>
       ))}
-      {/* tejado */}
-      <Ink color={P.ai} position={[-8, 6.0, mid]} rotation-x={Math.PI / 2} scale={[1, 1, 0.42]}>
-        <cylinderGeometry args={[4.9, 4.9, len + 2, 3, 1, false, Math.PI / 2]} />
-      </Ink>
+      {/* aleros con vigas vistas y tejado de tejas */}
+      <instancedMesh ref={rafters} args={[rafterGeo, rafterMat, nR]} frustumCulled={false} />
+      <TileRoof w={4.3} d={len / 2 + 1.2} h={2.4} tw={0.06} td={len / 2 - 2.4} wi={2.2} di={len / 2} lift={0.5} position={[-8, 5.3, mid]} />
     </group>
   );
 }
 
-/** Kura: almacén cerrado con llave al fondo. */
+/** Jardín seco: grava rastrillada con bordillo de piedra. */
+export function Garden({ x0 = 0.8, x1 = 13, z0 = 1, z1 = -50 }) {
+  const w = x1 - x0, d = z0 - z1;
+  const mat = useMemo(() => toon('#ffffff', { map: gravelTexture(), repeat: [w / 4, d / 4] }), [w, d]);
+  const curb = useRef();
+  const stones = useMemo(() => {
+    const out = [];
+    for (let z = z0; z > z1; z -= 0.62) out.push([x0, z]);
+    for (let x = x0 + 0.62; x < x1; x += 0.62) out.push([x, z0]);
+    return out;
+  }, [x0, x1, z0, z1]);
+  useLayoutEffect(() => {
+    const m = curb.current;
+    if (!m) return;
+    const o = new THREE.Object3D();
+    stones.forEach(([x, z], i) => {
+      o.position.set(x, 0.06, z); o.rotation.set(0, (i * 1.7) % 3, 0); o.scale.set(0.3 + (i % 3) * 0.04, 0.11, 0.26 + (i % 2) * 0.05);
+      o.updateMatrix(); m.setMatrixAt(i, o.matrix);
+    });
+    m.instanceMatrix.needsUpdate = true;
+  }, [stones]);
+  const geo = useMemo(() => new THREE.DodecahedronGeometry(1, 0), []);
+  const smat = useMemo(() => toon(P.stone), []);
+  return (
+    <group>
+      <mesh material={mat} rotation-x={-Math.PI / 2} position={[x0 + w / 2, 0.02, z0 - d / 2]}>
+        <planeGeometry args={[w, d]} />
+      </mesh>
+      <instancedMesh ref={curb} args={[geo, smat, stones.length]} frustumCulled={false}>
+        <Outlines thickness={1.4} color={P.sumi} />
+      </instancedMesh>
+    </group>
+  );
+}
+
+const SLAB = new THREE.CylinderGeometry(1, 1, 1, 7);
+const PAD = new THREE.CylinderGeometry(1, 1, 1, 9);
+
+/** Piedras de paso (tobi-ishi), instanciadas. */
+export function SteppingStones({ points }) {
+  const mat = useMemo(() => toon(P.stone), []);
+  const t = useMemo(() => points.map(([x, z, r = 0.45], i) => ({ p: [x, 0.05, z], r: [0, i * 1.3, 0], s: [r, 0.1, r * 0.82] })), [points]);
+  return <InstancedParts geometry={SLAB} material={mat} transforms={t} outline={1.6} />;
+}
+
+/** Manchas de musgo, instanciadas en dos tonos. */
+export function Moss({ patches }) {
+  const a = useMemo(() => toon(P.pine), []), b = useMemo(() => toon(P.pineDark), []);
+  const t = (k) => patches.filter((_, i) => i % 2 === k).map(([x, z, r], i) => ({ p: [x, 0.03, z], r: [0, i, 0], s: [r, 0.04, r * 0.7] }));
+  const ta = useMemo(() => t(0), [patches]), tb = useMemo(() => t(1), [patches]);
+  return (
+    <>
+      <InstancedParts geometry={PAD} material={a} transforms={ta} outline={1.2} />
+      {tb.length ? <InstancedParts geometry={PAD} material={b} transforms={tb} outline={1.2} /> : null}
+    </>
+  );
+}
+
+/** Kura: almacén de muro namako, cerrado con llave al fondo. */
 export function Kura({ onOpen, ...p }) {
   const [hover, setHover] = useState(false);
+  const mats = useMemo(() => {
+    const nf = toon('#ffffff', { map: namakoTexture(), repeat: [6.3 / 1.6, 2.2 / 1.6] });
+    const ns = toon('#ffffff', { map: namakoTexture(), repeat: [5.3 / 1.6, 2.2 / 1.6] });
+    const dark = toon('#2f323a');
+    return [ns, ns, dark, dark, nf, nf];
+  }, []);
+  const crest = useMemo(() => crestTexture(P.sumi), []);
   return (
     <group {...p} onClick={(e) => { e.stopPropagation(); onOpen?.(); }} {...hoverable(setHover)}>
-      <Box args={[7, 0.8, 6]} color={P.stone} position={[0, 0.4, 0]} />
+      <Box args={[7.2, 0.8, 6.2]} color={P.stone} position={[0, 0.4, 0]} />
       <Box args={[6.2, 5, 5.2]} color={P.plaster} paper position={[0, 3.3, 0]} />
-      {/* muro namako: sumi con retícula crema */}
-      <Box args={[6.3, 2, 5.3]} color={P.sumi} position={[0, 1.8, 0]} />
-      {Array.from({ length: 7 }, (_, i) => (
-        <Box key={i} args={[0.08, 2.6, 0.02]} color={P.washi} outline={0} rotation-z={Math.PI / 4} position={[-2.7 + i * 0.9, 1.8, 2.67]} />
-      ))}
-      <Roof w={8} d={7} h={2} color={P.ai} position={[0, 6.6, 0]} />
-      <Box args={[2.4, 3.2, 0.3]} color={P.woodDark} wood emissive={hover ? P.ochre : undefined} emissiveIntensity={0.3} position={[0, 2.4, 2.7]} />
-      <Box args={[2.8, 0.3, 0.4]} color={P.sumi} position={[0, 4.1, 2.75]} />
-      <Ink color={P.ochre} emissive={hover ? P.ochre : undefined} emissiveIntensity={0.4} position={[0, 2.4, 2.95]} rotation-x={Math.PI / 2}>
-        <torusGeometry args={[0.32, 0.09, 8, 16]} />
+      <MBox args={[6.32, 2.2, 5.32]} mats={mats} position={[0, 1.9, 0]} />
+      <Box args={[6.5, 0.28, 5.5]} color={P.plaster} paper position={[0, 3.05, 0]} />
+      <Box args={[6.6, 0.5, 5.6]} color={P.plaster} paper position={[0, 5.75, 0]} />
+      <TileRoof w={4.1} d={3.6} h={2.3} tw={2.5} td={0.07} wi={3.2} di={2.7} lift={0.32} position={[0, 6.0, 0]} />
+      {/* puerta gruesa con herrajes */}
+      <Box args={[2.6, 3.4, 0.4]} color={P.plaster} paper emissive={hover ? P.ochre : undefined} emissiveIntensity={0.3} position={[0, 2.5, 2.72]} />
+      <Box args={[2.2, 3.0, 0.2]} color={P.woodDark} wood position={[0, 2.45, 2.86]} />
+      {[1.4, 2.45, 3.5].map((y) => <Box key={y} args={[2.2, 0.14, 0.26]} color={P.sumi} outline={0} position={[0, y, 2.9]} />)}
+      <Ink color={P.ochre} emissive={hover ? P.ochre : undefined} emissiveIntensity={0.5} position={[0, 2.55, 3.05]} rotation-x={Math.PI / 2}>
+        <torusGeometry args={[0.3, 0.08, 8, 18, Math.PI]} />
       </Ink>
-      <Box args={[0.6, 0.5, 0.2]} color={P.ochre} position={[0, 2.0, 2.95]} />
-      <KuraSign position={[0, 5.0, 2.72]} />
+      <Box args={[0.62, 0.48, 0.22]} color={P.ochre} emissive={hover ? P.ochre : undefined} emissiveIntensity={0.4} position={[0, 2.25, 3.05]} />
+      {/* ventanuco con contraventanas */}
+      <Box args={[1.0, 0.8, 0.2]} color={P.sumi} position={[-1.9, 4.45, 2.62]} />
+      <Box args={[0.48, 0.8, 0.12]} color={P.plaster} paper position={[-2.65, 4.45, 2.7]} />
+      <mesh position={[1.9, 4.45, 2.62]}>
+        <circleGeometry args={[0.55, 32]} />
+        <meshBasicMaterial map={crest} transparent toneMapped={false} />
+      </mesh>
+      <KuraSign position={[0, 4.65, 2.66]} />
     </group>
   );
 }
@@ -139,38 +247,61 @@ function KuraSign(p) {
   }), []);
   return (
     <mesh {...p}>
-      <circleGeometry args={[0.8, 32]} />
+      <circleGeometry args={[0.62, 32]} />
       <meshBasicMaterial map={tex} toneMapped={false} />
     </mesh>
   );
 }
 
-/** Estanque con kois (sin rojo: ocre, crema y sumi). */
+/** Estanque: agua con ondas de tinta, bordillo de piedras, nenúfares y kois (ocre, crema y sumi). */
 export function Pond(p) {
   const kois = useRef([]);
-  const fish = useMemo(() => Array.from({ length: 6 }, (_, i) => ({ r: 1.2 + (i % 3) * 0.9, s: 0.25 + Math.random() * 0.3, ph: i * 1.1, c: i % 3 === 0 ? P.ochre : i % 3 === 1 ? P.washi : '#e9b866' })), []);
-  useFrame(({ clock }) => {
+  const fish = useMemo(() => Array.from({ length: 6 }, (_, i) => ({ r: 1.2 + (i % 3) * 0.9, s: 0.25 + ((i * 37) % 10) * 0.03, ph: i * 1.1, c: i % 3 === 0 ? P.ochre : i % 3 === 1 ? P.washi : '#e9b866' })), []);
+  const water = useMemo(() => new THREE.ShaderMaterial({
+    uniforms: { t: { value: 0 }, a: { value: new THREE.Color(P.ai) }, b: { value: new THREE.Color(P.aiSoft) }, l: { value: new THREE.Color(P.washi) } },
+    vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+    fragmentShader: `uniform float t; uniform vec3 a; uniform vec3 b; uniform vec3 l; varying vec2 vUv;
+      void main(){
+        vec2 q = vUv - 0.5; float d = length(q * vec2(1.0, 1.4));
+        vec3 c = mix(a, b, smoothstep(0.5, 0.0, d) * 0.5);
+        float ring = smoothstep(0.035, 0.0, abs(fract(d * 5.0 - t * 0.25) - 0.5) - 0.44);
+        c = mix(c, l, ring * 0.55 * smoothstep(0.5, 0.15, d));
+        gl_FragColor = vec4(c, 1.0);
+        #include <colorspace_fragment>
+      }`,
+  }), []);
+  const stones = useMemo(() => Array.from({ length: 26 }, (_, i) => {
+    const a = (i / 26) * Math.PI * 2;
+    return { p: [Math.cos(a) * 4.35, 0.12, Math.sin(a) * 3.05], r: [0, i * 1.7, 0], s: [0.36 + (i % 3) * 0.06, 0.2, 0.3 + (i % 2) * 0.05] };
+  }), []);
+  const stoneGeo = useMemo(() => new THREE.DodecahedronGeometry(1, 0), []);
+  const stoneMat = useMemo(() => toon(P.stone), []);
+  const padGeo = useMemo(() => new THREE.CircleGeometry(1, 16, 0.35, Math.PI * 2 - 0.35), []);
+  useFrame(({ clock }, dt) => {
+    water.uniforms.t.value += dt;
     fish.forEach((f, i) => {
       const k = kois.current[i];
       if (!k) return;
-      const a = clock.elapsedTime * f.s + f.ph;
-      k.position.set(Math.cos(a) * f.r, 0.12, Math.sin(a) * f.r * 0.7);
-      k.rotation.y = -a;
+      const an = clock.elapsedTime * f.s + f.ph;
+      k.position.set(Math.cos(an) * f.r, 0.1, Math.sin(an) * f.r * 0.7);
+      k.rotation.y = -an;
     });
   });
   return (
     <group {...p}>
-      <Ink color={P.ai} position={[0, 0.05, 0]} scale={[1, 1, 0.7]} outline={2}>
-        <cylinderGeometry args={[4.2, 4.2, 0.1, 32]} />
-      </Ink>
-      {Array.from({ length: 16 }, (_, i) => {
-        const a = (i / 16) * Math.PI * 2;
-        return <Ink key={i} color={P.stone} position={[Math.cos(a) * 4.4, 0.2, Math.sin(a) * 3.1]} scale={[0.6, 0.35, 0.5]}><dodecahedronGeometry args={[0.8, 0]} /></Ink>;
-      })}
+      <mesh material={water} rotation-x={-Math.PI / 2} position={[0, 0.06, 0]} scale={[4.3, 3.0, 1]}>
+        <circleGeometry args={[1, 40]} />
+      </mesh>
+      <InstancedParts geometry={stoneGeo} material={stoneMat} transforms={stones} outline={1.5} />
+      {[[-2.1, 0.9, 0.42], [-1.5, 1.5, 0.3], [2.3, -1.1, 0.38]].map(([x, z, r], i) => (
+        <mesh key={i} geometry={padGeo} rotation-x={-Math.PI / 2} rotation-z={i * 2} position={[x, 0.09, z]} scale={r}>
+          <meshBasicMaterial color={i % 2 ? P.pine : P.pineDark} />
+        </mesh>
+      ))}
       {fish.map((f, i) => (
         <group key={i} ref={(el) => (kois.current[i] = el)}>
-          <Ink color={f.c} outline={1.5} scale={[0.14, 0.08, 0.5]}><sphereGeometry args={[1, 10, 8]} /></Ink>
-          <Ink color={P.sumi} outline={0} position={[0, 0.05, 0.12]} scale={[0.07, 0.05, 0.1]}><sphereGeometry args={[1, 6, 6]} /></Ink>
+          <Ink color={f.c} outline={1.5} scale={[0.14, 0.06, 0.5]}><sphereGeometry args={[1, 10, 8]} /></Ink>
+          <Ink color={P.sumi} outline={0} position={[0, 0.04, 0.12]} scale={[0.07, 0.05, 0.1]}><sphereGeometry args={[1, 6, 6]} /></Ink>
         </group>
       ))}
     </group>

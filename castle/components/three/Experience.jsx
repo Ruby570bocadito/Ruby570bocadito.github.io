@@ -1,6 +1,6 @@
 'use client';
 import { Suspense, lazy, useEffect, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { PerformanceMonitor, AdaptiveDpr } from '@react-three/drei';
 import { useStore } from '@/lib/store';
 
@@ -14,6 +14,17 @@ const SCENES = {
   harbor: lazy(() => import('./rooms/HarborRoom')),
   kura: lazy(() => import('./rooms/KuraRoom')),
 };
+
+/** ?stats en la URL: registra llamadas de dibujo y triángulos (diagnóstico de rendimiento). */
+function Stats() {
+  const { gl } = useThree();
+  const t = useRef(0);
+  useFrame((_, dt) => {
+    t.current += dt;
+    if (t.current > 3) { t.current = 0; console.info('[stats]', JSON.stringify({ calls: gl.info.render.calls, tris: gl.info.render.triangles, geos: gl.info.memory.geometries, tex: gl.info.memory.textures })); }
+  });
+  return null;
+}
 
 function Ready() {
   const n = useRef(0);
@@ -39,6 +50,7 @@ export default function Experience({ room }) {
         <Suspense fallback={null}>
           <Scene key={room} />
           <Ready key={'r' + room} />
+          {typeof window !== 'undefined' && window.location.search.includes('stats') ? <Stats /> : null}
         </Suspense>
       </Canvas>
     </div>

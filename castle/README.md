@@ -32,9 +32,16 @@ Si se entra directo a una sala, se salta la intro. El portfolio anterior sigue d
 ### Look ukiyo-e
 
 - `MeshToonMaterial` con rampa de 3 tonos (colores planos) + contornos sumi (`<Outlines>` de drei, casco invertido en píxeles).
-- Veta de madera y papel washi procedurales (`components/three/textures.js`); washi en `multiply` sobre el canvas.
+- Arquitectura procedural (`components/three/geom.js`): tejados de tejas con curvatura *sori*, esquinas levantadas y sofito;
+  murallas *ishigaki* en abanico; frontones *chidori-hafu* y *kara-hafu*; *shachihoko* en la cumbrera; troncos y ramas que se estrechan.
+- Torre del homenaje de 4 pisos, torreones, muros *dobei* con troneras, portón con blasón original, pasarela con aleros y vigas,
+  kura con muro *namako*, jardín de grava rastrillada, estanque con ondas y kois.
+- Texturas procedurales (`components/three/textures.js`): tejas, piedra, ventanas de barrotes con zócalo negro, tablas, tatami,
+  grava, agujas de pino, papel de farolillo con kanji. Washi en `multiply` y viñeta *bokashi* sobre el canvas.
 - Cielos y agua con degradado **bokashi** (shaders en `components/three/kit.jsx`).
-- Capas 2D en planos (parallax): monte, nubes kasumi, olas, grullas, avatar y ninja — arte SVG **100 % original** en `components/three/art.js`.
+- Capas 2D en planos (parallax): monte, sol, nubes kasumi, olas, veleros, grullas, avatar y ninja — arte SVG **100 % original** en `components/three/art.js`.
+- Interfaz de grabado: cartucho de título vertical (*dai*), firma del artista (ラファエル画) con sello, puertas shōji con kumiko
+  y loader con marcas de registro *kentō*.
 - Paleta: índigo `#1F3A5F`, bermellón `#C8402A` (solo alertas y sellos hanko), ocre `#D9A441`, pino `#4A6B4F`, sumi `#1A1A1A`, washi `#F2E8D5`.
 
 ### Audio
@@ -78,7 +85,7 @@ npm run deploy     # next build + scripts/deploy.mjs
 para limpiarlo en el siguiente despliegue. Nunca toca `classic/`, `static/`, `assets/`, `projects/`, `fonts/`,
 `cv.pdf` ni `site/` (el portfolio clásico). Después, haz commit y push a `main`.
 
-Imagen Open Graph: `public/og.png` (1200×630). Se puede regenerar con `node scripts/og.mjs` sirviendo `out/` en el puerto 4321.
+Imagen Open Graph: `public/og.jpg` (1200×630), una captura de la entrada del castillo en 3D. Se puede regenerar con `node scripts/og.mjs` sirviendo `out/` en el puerto 4321.
 
 ## Interacciones
 
@@ -93,3 +100,5 @@ Imagen Open Graph: `public/og.png` (1200×630). Se puede regenerar con `node scr
 - Todo lo clicable en 3D tiene también un botón HTML equivalente (navegable con teclado).
 - Carga diferida por sala (cada escena es un chunk), texturas procedurales (sin descargas de imágenes),
   `dpr` limitado a 1.6 con `AdaptiveDpr` / `PerformanceMonitor`.
+- Geometría estática fusionada (pinos, linternas, celosías) y piezas repetidas instanciadas (postes, piedras, vigas, pergaminos)
+  para mantener pocas llamadas de dibujo. Añade `?stats` a la URL para ver llamadas, triángulos y texturas en la consola.
