@@ -1,0 +1,319 @@
+<p>
+  <img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/icon.png" width="112" alt="FriendlyPear's icon: Peri, a smiling clay pear with a little green shield, on soft green" />
+</p><h1>FriendlyPear</h1><p>
+  <b>Peri, a friendly clay pear who lives in your phone, stops scams before money moves<br />
+  and checks with your family before anything risky happens.</b>
+</p><p>
+  <a href="https://youtu.be/RylxfEh_EoI"><b>▶ Watch the 3-minute demo</b></a>  · 
+  <a href="https://ruby570bocadito.github.io/FriendlyPear/"><b>Website</b></a>  · 
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear/releases/latest"><b>Download the app</b></a>  · 
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/INSTALL.md"><b>Install in 5 minutes</b></a>  · 
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/FEATURES.md"><b>Every feature</b></a>  · 
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/SECURITY.md"><b>Security</b></a>
+</p><p><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/banner.jpg" width="860" alt="Peri, a clay pear, waving on a green hill among little clay houses, trees and clouds" /></p><p><sub>Built for the <b>Meta Global AI Developer Hackathon</b> · Indie track · <i>Build for Your World</i> · all product code written Oct 27 – Nov 4, 2026 (concept and design documents were drafted before)</sub></p><p>
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#scams-win-by-isolating-people-and-rushing-them">The problem</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#see-it-work">See it work</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#the-family-without-spying">The family</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#six-meta-models-each-with-one-job">Meta models</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#how-peri-decides">How Peri decides</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#does-it-work-measured-not-promised">Measured</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#safe-by-design">Safe by design</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#a-friend-people-want-to-keep">Peri</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#try-it">Try it</a> ·
+  <a href="https://github.com/Ruby570bocadito/FriendlyPear#under-the-hood">Under the hood</a>
+</p><h2>Scams win by isolating people and rushing them</h2>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/web/public/img/grandma.webp" width="380" alt="An older woman in an armchair looking at her phone, with Peri on the armrest pointing at the screen" /><p><em>"Mum, I broke my phone, this is my new number, can you send me money?"</em> <em>"Your bank here: read me the code you just got."</em></p>
+<p>In 2025, Americans aged 60 and over reported losing <strong>$7.7 billion</strong> to online crime, more than any other age group (<a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf">FBI IC3 2025</a>, via <a href="https://www.aarp.org/money/scams-fraud/fbi-ftc-report-2025-losses.html">AARP</a>). Spam filters warn about everything or nothing; voice assistants call and read messages but don't judge them.</p>
+<p><strong>FriendlyPear breaks the isolation.</strong> Before anything risky happens, Peri checks through a second channel: the real family member, at the number already saved. And she does it as a friend the person wants to keep (she reads messages aloud, calls whoever they ask, keeps them company) rather than as a watchdog.</p>
+<br /><table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/web/public/img/check.webp" width="170" alt="Peri looking through a magnifying glass at a letter with a fishing hook" /><br /><b>She catches the trap</b><br /><sub>Texts, WhatsApp, email and browser notices are checked on the phone the moment they arrive. A stranger's call is flagged before pickup, and a code arriving during a call is a scam, full stop.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/web/public/img/family.webp" width="220" alt="Peri and a girl on the phone, linked by little hearts" /><br /><b>She asks the family first</b><br /><sub>Risky actions wait for a guardian's one-time link (<i>No</i> · <i>Call me first</i> · <i>Yes</i>), marked <b>URGENT</b> after a stranger's call. If the guardian has FriendlyPear too, it opens in their own Peri.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/web/public/img/privacy.webp" width="170" alt="Peri hugging a big green padlock" /><br /><b>She never spies</b><br /><sub>The family never reads messages, calls, location or apps. Only doubtful messages leave the phone, and Peri never hears a call.</sub></td>
+  </tr>
+</table><h2>At a glance</h2>
+<table>
+<thead>
+<tr>
+<th>Judging criterion</th>
+<th>Where FriendlyPear stands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Impact</strong></td>
+<td>Any Android 12+ phone, English and Spanish, made for older adults first: big type in Atkinson Hyperlegible, 7:1 contrast, a voice to talk to, and the family one tap away.</td>
+</tr>
+<tr>
+<td><strong>Use of Meta AI</strong></td>
+<td>Six Meta models, each with one job: an open-weight second opinion, an investigator agent with tools, pictures read with Muse Spark and SAM 3.1, ears for voice orders, every picture of Peri, and a red team that attacks the rules.</td>
+</tr>
+<tr>
+<td><strong>Technical depth</strong></td>
+<td>Rules on the phone that no model can override, a model's vote capped at ±2, 401 tests, a held-out evaluation with confidence intervals, per-phone keys paired in person, encrypted storage, and dependencies pinned by SHA-256.</td>
+</tr>
+<tr>
+<td><strong>Demo</strong></td>
+<td>Every clip below is the real app recorded on the Android emulator with Peri's server, two phones side by side for the family, and the same 40 features are checked end to end by a script.</td>
+</tr>
+</tbody></table>
+<h2>See it work</h2>
+<p><a href="https://youtu.be/RylxfEh_EoI"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/video-thumbnail.jpg" width="640" alt="Watch the 3-minute demo, Peri's Diary: on the left the crook on the phone saying 'Hi Mum, it's me!', on the right Peri the detective with her magnifying glass" /></a><br /><sub><b>▶ Peri's Diary</b>, the 3-minute demo: a crook tries four scams on Rosa in one day, and every app scene is the real app.</sub></p><p><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/screens.png" width="860" alt="Four screens of the app today: Peri's home in her meadow; Peri under her umbrella warning about a fake Correos text, with buttons to see the trap, report it or block the number; Learn with Peri, with the Scam or not game and the traps she knows; and Peri's diary of what she did" /></p><p>Each clip is the phone's own screen recording of the current build, with Peri's server running: texts arrive by SMS, calls ring, and voice orders go in through the debug build's stand-in for the microphone (<a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/demo/tools/gifs.py"><code>docs/demo/tools/gifs.py</code></a> records them all again).</p>
+<h3>Peri catches the trap</h3>
+<table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/new-number.gif" width="240" alt="A text from an unknown number says it's Ana with a new number and asks for 380; Peri puts up her umbrella and offers to call Ana's saved number" /><br /><b>"It's Ana, new number"</b><br /><sub>A stranger claims to be the daughter and asks for money. Peri warns and offers to call the real Ana: one "yes" dials her saved number.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/code-during-call.gif" width="240" alt="During a call with an unknown number, a text with a bank code arrives; Peri says to hang up now, without reading the code" /><br /><b>A code during a call</b><br /><sub>A hard rule no model can override: hang up now. The code is never read aloud.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/stranger-call.gif" width="240" alt="A call from a number not in the contacts; Peri reminds the person not to give codes, and after the call asks who they said they were" /><br /><b>A stranger's call</b><br /><sub>A word before pickup. After it, <i>"Who did they say they were?"</i>, and what to do about what they asked for.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/safety-pause.gif" width="240" alt="On a call with a stranger, the bank app opens and Peri covers it with a safety pause: hang up, leave the app or carry on" /><br /><b>The safety pause</b><br /><sub>A bank app opened during a stranger's call: wait a moment, hang up, leave, or carry on.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/website-notice.gif" width="240" alt="A website's notice says the phone has 5 viruses; Peri says it isn't the phone talking and offers to silence that website" /><br /><b>A scary website notice</b><br /><sub><i>"It isn't your phone talking"</i>, and that one site silenced in one tap.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/remote-app.gif" width="240" alt="AnyDesk is installed and Peri asks whether someone on the phone told them to install it" /><br /><b>"Are they guiding you?"</b><br /><sub>A remote-control app installed: Peri asks who asked for it, and offers to tell the family.</sub></td>
+  </tr>
+</table><h3>After a scam: see it, report it, put it right</h3>
+<table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/trap-card.gif" width="240" alt="A fake Correos text; Peri's card shows how the trap worked in comic panels, then the number is blocked for the whole family" /><br /><b>See it, report it, block it</b><br /><sub>Comic panels of how the trap works, a report for the police in one tap, and the number blocked for the whole family.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/first-aid.gif" width="240" alt="The person says they gave them the code; Peri opens calm steps to take the account back" /><br /><b>First aid</b><br /><sub><i>"I gave them the code"</i>: no reproach, the urgent steps in order, each one tap away.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/chat.gif" width="240" alt="In the chat, a parcel text is pasted in and Peri says it's a trap and why" /><br /><b>"I got this…"</b><br /><sub>A message pasted in the chat goes through the same shield as a text, with its verdict and what to do.</sub></td>
+  </tr>
+</table><h2>The family, without spying</h2>
+<p><strong>No app the family must install, and nothing to watch.</strong> A guardian is a saved contact who answers when something risky comes up: an SMS with their own one-time link (<i>No</i> · <i>Call me first</i> · <i>Yes</i>), valid once for 15 minutes, where silence counts as no. If the guardian has FriendlyPear too, the request opens in their own Peri, checked with Peri's server rather than trusted from the SMS. With the person's OK, guardians also see Peri's week: only the kind of event, never messages, numbers, names, calls, location or apps.</p>
+<p><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/family-approval.gif" width="560" alt="Two phones side by side. Mum asks Peri to send Ana a code; Peri stops and asks her guardians. Dad's Peri, in Spanish, shows the request with Mum's pear and three answers; he taps Call Mum now, his phone gets her number ready, and Mum's Peri says he'd rather talk first and offers to call him" /><br /><b>A yes needs the family.</b> <sub>Mum asks Peri to send a code. Peri sends nothing and asks her guardians. Dad's own Peri shows the request with Mum's pear; he answers <i>"Call me first"</i>, and Mum's Peri offers to call him.</sub></p><p><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/was-it-you.gif" width="560" alt="Two phones side by side. Mum gets a text from a new number claiming to be her grandson Pablo; Pablo's Peri asks him whether he wrote it, he taps no, and Mum's Peri says Pablo says it wasn't him, so it's a trap" /><br /><b>"Was it you?"</b> <sub>A new number claims to be the grandson. His own Peri asks him in silence; one tap, and Grandma's Peri says it's a trap.</sub></p><p><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/hang-up-theirs.gif" width="560" alt="Two phones side by side. Pablo picks up a call from an unknown number; Mum's Peri shows he's on a call with a stranger, she taps Hang up their call, and Pablo's Peri ends the call" /><br /><b>Hang up their call.</b> <sub>A relative on a stranger's call shows on the family's Peris. One tap, and their Peri ends it after a few seconds' notice.</sub></p><p><sub>The family's pears, the same trap reaching several of them, numbers blocked for everyone and the weekly summary are in <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/FEATURES.md#2-the-family-without-spying"><code>docs/FEATURES.md</code></a>.</sub></p>
+<h2>Six Meta models, each with one job</h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>What it does in FriendlyPear</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Muse Spark Open</strong> (open weights, on Baseten)</td>
+<td>The <strong>second opinion</strong>: only messages the rules left doubtful are sent, and the model's verdict becomes a vote of at most ±2 on the rules' score. Peri always speaks her own sentence, never the model's, so a message can't talk the model into saying something unsafe.</td>
+</tr>
+<tr>
+<td><strong>Muse Spark</strong></td>
+<td>An <strong>investigator agent</strong> with read-only tools for messages that are still doubtful: how old a web domain is (RDAP), cards of known scam scripts, and whether the family has the relation the sender claims (relations only, never names or numbers). At most 3 rounds and 6 lookups. It also writes the <strong>police report</strong> in one tap, when the person asks.</td>
+</tr>
+<tr>
+<td><strong>Muse Spark + SAM 3.1</strong></td>
+<td><strong>"Look at this picture"</strong>: a letter, an invoice or a QR code. Spark reads it and SAM 3.1 marks the QR code with a red ring, while the phone itself judges where the code would lead without opening it. Tested on the real API with a fake parcel notice: scam (97 %), QR marked exactly, 5.8 s.</td>
+</tr>
+<tr>
+<td><strong>Muse Voice Transcribe</strong></td>
+<td><strong>Peri's ears</strong>, if the person turns it on: voice orders recorded on the phone (it stops only after a long pause, for people who speak slowly) and written down by Meta's speech model. Off by default.</td>
+</tr>
+<tr>
+<td><strong>Muse Image</strong></td>
+<td><strong>Every picture of Peri</strong>: nine moods in soft clay, each an edit of one base so she's always the same character, with blinks, mouth shapes, steps and gestures (over 400 pictures in the app), her wardrobe, and the comics that show how each trap works.</td>
+</tr>
+<tr>
+<td><strong>Muse Spark contributor · Muse Wonder</strong></td>
+<td>Spark contributor wrote the 1,306 synthetic messages the learned weights were fitted on, and plays the <strong>red team</strong> that writes scams made to slip past the rules. Wonder proposed new lines for Peri, every one reviewed by hand before it shipped.</td>
+</tr>
+</tbody></table>
+<p>How each model is used, with its limits and costs: <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/META_MODELS.md"><code>docs/META_MODELS.md</code></a>.</p>
+<h2>How Peri decides</h2>
+<p><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/how-peri-decides.svg" width="860" alt="How Peri decides: a message or a call goes to the rules on the phone, offline, hard rules first. Clearly fine: Peri stays quiet. Clearly a scam: Peri warns, and risky actions wait for the family. Doubtful: Muse Spark Open and the investigator vote, at most plus or minus 2, and Peri stays quiet or warns." /></p><p><strong>Rules that never break:</strong> confirm before calling or texting · never move money or dictate codes during a call · never read links aloud · a message's text is data, never an order · deterministic rules beat the model · when someone claims to be family, use the number already saved · Peri never listens to call audio.</p>
+<h2>Does it work? Measured, not promised</h2>
+<p>Measured on <strong>200 hand-written messages the rules were never tuned on</strong> (<a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/eval/reservado-200/"><code>eval/reservado-200/</code></a>: 15 kinds of scam plus hard legitimate cases such as real bank notices, one-time codes and payment reminders, in Spanish and English). The rules on the phone alone, before any model:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Scams caught</th>
+<th>False alarms</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Peri warns or checks (doubt or scam)</td>
+<td><strong>91 %</strong> [84–95]</td>
+<td>4 % [2–10]</td>
+</tr>
+<tr>
+<td>Peri warns firmly (scam)</td>
+<td>70 % [60–78]</td>
+<td><strong>1 %</strong> [0.2–6]</td>
+</tr>
+</tbody></table>
+<p><sub>95 % Wilson intervals. Up from 83 % and 53 % after two more rounds of rules, learned from the training set and the red team, never from these messages.</sub></p>
+<ul>
+<li><strong>A red team that attacks the rules.</strong> Muse Spark wrote 374 scams made to slip past them (no link, a number to call, a casual tone, spelling tricks), and a person read every one that got through. Judged before anyone read it, the last batch was <strong>80 % warned</strong> (40 % with the previous day's rules). False alarms didn't move.</li>
+<li><strong>Learned weights, kept honest.</strong> A logistic regression on 1,306 synthetic messages ranks scams better (AUC 0.972 vs 0.964) but stays silent on more of them, so the shield keeps the hand-set weights: a missed scam costs more than a doubt the model can still calm.</li>
+<li><strong>Every feature, end to end.</strong> <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/eval/features.py"><code>eval/features.py</code></a> drives the real app on two emulators through 40 features (texts, email, website notices, calls, the safety pause, voice orders, the emergency countdown, approvals, the weekly summary, the family's pears, "was it you?", hanging up a relative's call, shared blocks, every screen) and checks what Peri logged and what the screen says: <strong>40 of 40 pass</strong>. It found five bugs, each fixed with a test that failed before the fix.</li>
+<li><strong>The server under load and abuse.</strong> <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/eval/load.ts"><code>eval/load.ts</code></a>: 20 phones at once (about 3,000 requests a second), 15,000 different IPs, junk, oversized bodies and a restart. No 5xx, and every limit held.</li>
+</ul>
+<p>Full method, numbers and reasoning: <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/eval/REPORT.md"><code>eval/REPORT.md</code></a>.</p>
+<h2>Safe by design</h2>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/web/public/img/code.webp" width="230" alt="Peri holding a coral umbrella over a small clay phone that shows six dots like a secret code" /><ul>
+<li><strong>Hard rules no model can override:</strong> a code arriving during a call, and a brand on a lookalike domain, are scams whatever any model says.</li>
+<li><strong>A yes needs the family:</strong> sending a code (even spelled out in words) or changing the guardians waits for a guardian's yes, and the riskiest ones for two when the family has two. Silence counts as no.</li>
+<li><strong>Nobody can press "yes" for the person:</strong> a guardian's yes needs the phone's own lock, and the deciding buttons ignore taps that come through another app drawn on top.</li>
+<li><strong>Screens a scammer wants stay private:</strong> pairing, the family's decision and the police report are kept out of screenshots and screen sharing, so remote-control apps see black.</li>
+<li><strong>Every phone has its own key</strong>, paired in person with a QR code and kept in Android's Keystore. A QR for any other server is refused.</li>
+<li><strong>Fake "Peri" texts are caught</strong>, and a sender who only <em>names</em> a contact (an SMS from letters, an email's display name) is still treated as a stranger.</li>
+<li><strong>The server keeps nothing personal:</strong> one-time links stored only as hashes, data sealed with AES-256-GCM, a log with no names, numbers or messages, and limits per IP and per phone.</li>
+<li><strong>Dependencies pinned by SHA-256</strong>, and a release build with no test token, no logs and a clipboard marked sensitive (checked by <code>eval/release_check.py</code>).</li>
+</ul>
+<br /><p><strong>What Peri can see, and what she can't</strong> (the same list is in the app, under <em>Settings › What Peri can do</em>):</p>
+<table>
+<thead>
+<tr>
+<th>Peri sees, on the phone</th>
+<th>Peri never sees</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The texts (SMS) you receive, as they arrive</td>
+<td>What is said in a call: she never listens to its sound</td>
+</tr>
+<tr>
+<td>What WhatsApp, email and other apps show in their notifications, never the whole chat</td>
+<td>Your WhatsApp chats, their photos or voice notes, beyond a notification</td>
+</tr>
+<tr>
+<td>Who is calling (the number), and whether you're on a call</td>
+<td>What you type in other apps, your passwords or your bank account</td>
+</tr>
+<tr>
+<td>Which app is open during a call, to warn about your bank or a remote-control app</td>
+<td>Where you are, except to send it to your family when you ask or in an emergency</td>
+</tr>
+<tr>
+<td>Your contacts, to know who is family; the pictures you choose to show her</td>
+<td>Anything you switch off</td>
+</tr>
+</tbody></table>
+<p>Only doubtful messages ever leave the phone, plus what the person chooses to send (a picture, a voice order if Muse Voice Transcribe is on, a report they ask for); none of it is stored. Threats, mitigations and what is still open: <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/SECURITY.md"><code>docs/SECURITY.md</code></a>.</p>
+<h2>A friend people want to keep</h2>
+<table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/opening.gif" width="240" alt="Opening FriendlyPear: Peri's launch screen, then her hello in her meadow" /></td>
+    <td><p>Nobody wants an app <em>"to control your phone"</em>. Peri is presented, truthfully, as a friend who reads your messages aloud, calls whoever you ask and keeps you company, and who also spots scams. She works for the person, not for the family, and the app never says "control", "monitor" or "watch".</p>
+<ul>
+<li><strong>Alive:</strong> nine moods drawn by layers (her face over every pose), blinks, glances and little hops; she giggles when you hold her, gets dizzy when you shake the phone and bounces home when you drag her.</li>
+<li><strong>Her wardrobe:</strong> a hat, glasses and something below her smile, chosen by the person; she wears them in every pose, in Mini Peri and on the family's pears.</li>
+<li><strong>Her own world:</strong> the sky follows the hour, the place changes every day with the season, all drawn in code at 30 frames a second.</li>
+<li><strong>Mini Peri</strong> floats over other apps and comes out by herself beside a stranger's call.</li>
+<li><strong>Learn and play:</strong> the game <em>Scam or not?</em>, comics of how each trap works, badges for her milestones.</li>
+<li><strong>For everyone:</strong> big type, 7:1 contrast, text at 200 %, TalkBack, and still with "remove animations" on.</li>
+</ul>
+</td>
+  </tr>
+</table><table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/playing.gif" width="150" alt="Tapping Peri's leaf, tummy and feet, dragging her, and five quick taps for a burst of stars" /><br /><b>Play with her</b><br /><sub>Her leaf, her tummy and her feet each answer differently.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/wardrobe.gif" width="150" alt="Peri's wardrobe: she tries on a crown, heart glasses and a neckerchief, then a straw hat, round glasses and a bow tie, hopping at each, and back home she says she loves it" /><br /><b>Dress her up</b><br /><sub>Hats, glasses, bow ties: she wears them everywhere.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/mini-peri.gif" width="150" alt="Outside the app, a stranger's call is picked up and Mini Peri floats beside the call screen" /><br /><b>Mini Peri</b><br /><sub>Beside a stranger's call, outside the app.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/scam-or-not.gif" width="150" alt="The Scam or not game: a message, the buttons It's a trap and It's fine, and Peri explaining the answer" /><br /><b>Scam or not?</b><br /><sub>Six messages, trap or fine, and why.</sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/features/checkup.gif" width="150" alt="The security checkup: how many items are in order, with a picture of Peri for each and a fix one tap away" /><br /><b>Check my phone</b><br /><sub>Each risky setting, with its fix.</sub></td>
+  </tr>
+</table><p><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/moods.png" width="860" alt="Peri's nine moods: calm, listening, thinking, worried, protective, calling, waiting for family, happy and sleeping" /></p><p><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/docs/media/reactions.png" width="860" alt="Peri's reactions: an idea, a thumbs up, laughing, holding a heart, dizzy with spiral eyes, yawning and reading a letter" /></p><h2>Try it</h2>
+<table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/assets/ui/ui_update.webp" width="110" alt="Peri opening a coral gift box" /><br /><b>1. Download</b><br /><a href="https://github.com/Ruby570bocadito/FriendlyPear/releases/latest"><code>FriendlyPear.apk</code></a><br />from the latest release</td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/assets/ui/ui_install_usb.webp" width="110" alt="Peri plugging a small clay phone into a laptop" /><br /><b>2. Install over USB</b><br /><code>adb install -r FriendlyPear.apk</code><br /><sub>Android blocks scam guards installed from a browser; USB is exempt. <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/INSTALL.md">The 5-minute steps</a></sub></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/Ruby570bocadito/FriendlyPear/HEAD/assets/ui/ui_welcome_home.webp" width="110" alt="Peri waving beside a little clay house shaped like a phone" /><br /><b>3. Meet Peri</b><br />She asks for each permission when it's needed.<br />Then tap <b>Check my phone</b>.</td>
+  </tr>
+</table><table>
+<thead>
+<tr>
+<th>On the phone alone</th>
+<th>With Peri's server too</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The rules on texts and notifications · strangers' calls · a code during a call · the safety pause · Mini Peri · the chat and the game</td>
+<td>The Meta models: second opinion, investigator, "look at a picture", voice · The family: approvals, "was it you?", Peri to Peri</td>
+</tr>
+</tbody></table>
+<p><sub>To run it on the emulator and watch her catch a scam: <a href="https://github.com/Ruby570bocadito/FriendlyPear#build-and-test">Build and test</a>. What works where, in detail: <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/INSTALL.md#what-works-where"><code>docs/INSTALL.md</code></a>.</sub></p>
+<h2>Under the hood</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/core/"><code>core/</code></a></td>
+<td>Kotlin/JVM library: the shield, voice orders, the agent, trust and alerts. Tested without a phone (266 tests).</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/android/"><code>android/</code></a></td>
+<td>The Android app (Kotlin, Android 12+), with <code>core/</code> as a composite build. Peri drawn by layers, her world drawn in code, small animations in Rive.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/backend/"><code>backend/</code></a></td>
+<td>Bun + TypeScript, no packages: guardian approvals and pages, the investigator agent, model clients, device pairing with its own QR encoder (135 tests).</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/eval/"><code>eval/</code></a> · <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/training/"><code>training/</code></a></td>
+<td>The held-out set, the red team, metrics, the end-to-end and load tests, and release checks; the scam knowledge base, synthetic data and learned weights.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/assets/"><code>assets/</code></a></td>
+<td>Peri's illustrations with the prompts that made them, and the app's Rive animations written in code.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/video/"><code>video/</code></a> · <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/web/"><code>web/</code></a></td>
+<td>The demo video, made as code with Remotion; the <a href="https://ruby570bocadito.github.io/FriendlyPear/">website</a>, made with Next.js.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/"><code>docs/</code></a></td>
+<td>Concept, architecture, design, security, the demo script and the multi-agent protocol the project was built with (mostly in Spanish).</td>
+</tr>
+</tbody></table>
+<h3>Build and test</h3>
+<pre><code>cd core &amp;&amp; ./gradlew test                                    # JDK 17+
+cd backend &amp;&amp; bun test                                       # Bun &gt;= 1.1
+cd android &amp;&amp; ./gradlew :app:assembleDebug :app:lintDebug    # Android SDK 35 (sdk.dir in android/local.properties)
+bun eval/load.ts                                             # the server under load and abuse, on its own throwaway instance
+python eval/features.py out/                                 # every feature on two emulators (Mum on 5556, a relative on 5560)
+</code></pre>
+<p>On the emulator, save a contact as "Laura daughter" (or "Laura hija") with any number, then:</p>
+<pre><code>adb emu sms send 7700900333 "Hi Mum, I broke my phone, this is my new number. Can you send me money?"
+adb shell am broadcast -a app.friendlypear.debug.HEAR --es text "yes"
+</code></pre>
+<p>The broadcast stands in for the microphone in debug builds only.</p>
+<details>
+<summary><b>Run the whole thing yourself: the server, keys and permissions</b></summary><ol>
+<li><strong>SDK path</strong>: in <code>android/local.properties</code>, <code>sdk.dir=C:/Users/you/AppData/Local/Android/Sdk</code> (forward slashes work on Windows too).</li>
+<li><strong>Backend</strong> (optional: without it Peri still protects with the rules on the phone):<pre><code>cd backend &amp;&amp; cp .env.example .env    # set DEVICE_TOKEN to 32+ random characters, plus the API keys you have
+bun src/main.ts                       # prints which layers are on: second opinion, investigator, pictures
+</code></pre>
+For the emulator, set <code>PUBLIC_BASE_URL=http://10.0.2.2:8787</code> so guardian links open from the phone.</li>
+<li><strong>Point the app at it</strong>, in <code>~/.gradle/gradle.properties</code> (outside the repo):<pre><code>friendlypear.backendUrl=http://10.0.2.2:8787
+friendlypear.deviceToken=&lt;the same DEVICE_TOKEN&gt;
+</code></pre>
+</li>
+<li><strong>Install and grant</strong> (debug build): <code>adb install -r android/app/build/outputs/apk/debug/app-debug.apk</code>, open FriendlyPear and accept what Peri asks for. Notification access, usage access and "appear on top" are granted from the setup card, or with <code>adb shell cmd notification allow_listener app.friendlypear/app.friendlypear.services.MessageListener</code>, <code>adb shell appops set app.friendlypear GET_USAGE_STATS allow</code> and <code>adb shell appops set app.friendlypear SYSTEM_ALERT_WINDOW allow</code>.</li>
+<li><strong>Give the phone its own key</strong> (recommended): with the backend running, <code>cd backend &amp;&amp; bun pair</code> and point the phone's camera at the QR, or type the code in <em>Settings → Connect this phone</em>. Set <code>ALLOW_SHARED_TOKEN=0</code> in <code>.env</code> once every phone is paired.</li>
+</ol>
+<p>Secrets never go in the repo: the backend reads <code>backend/.env</code> (see <code>.env.example</code>), the app reads <code>~/.gradle/gradle.properties</code>.</p>
+</details><h2>Limits</h2>
+<ul>
+<li><strong>Android only.</strong> On iPhone, apps can't read texts or other apps' notifications. <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/IPHONE.md"><code>docs/IPHONE.md</code></a> (in Spanish) maps each feature to its iOS equivalent: the shared Kotlin core through Kotlin Multiplatform, an SMS filter extension, the safety pause with the Screen Time API, Peri in a Live Activity, and "Share it with Peri".</li>
+<li><strong>Peri never hears a call.</strong> She knows a call is on, who is calling and what happens during it (a code arriving, a bank or remote-control app opened), not what is said. A scammer who asks for nothing she can see is caught by her question after the call, not during it.</li>
+<li><strong>From Android 15, codes in notifications are hidden from Peri.</strong> With texts allowed she still sees the ones sent by SMS; <em>Check my phone</em> says when they aren't.</li>
+<li><strong>Installing from a file keeps getting harder:</strong> Play Protect's fraud protection, restricted settings, and developer verification from September 2026 in four countries (<a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/INSTALL.md#why-the-phone-may-block-it">why</a>). USB works today; a store listing is the lasting answer.</li>
+<li><strong>Some phone makers stop background apps</strong> beyond Android's own battery saving. Peri asks for Android's exemption; a maker's extra switch still has to be found by hand.</li>
+<li><strong>The numbers come from hand-written and synthetic messages</strong>, not from real people's phones: 91 % on 200 unseen messages measures the rules; it doesn't promise them.</li>
+<li><strong>The family features need Peri's server</strong>, on a computer during the hackathon: phones reach it on the same Wi-Fi, or anywhere once it has a public HTTPS address.</li>
+</ul>
+<h2>Built during the hackathon</h2>
+<p>Every line of product code, from the first commit on Oct 27: over 470 commits by Nov 2, 266 tests in <code>core/</code> and 135 in <code>backend/</code>, all green in CI, and 40 features checked end to end on emulators.</p>
+<ul>
+<li><strong>The shield:</strong> signals and hard rules on the phone, weights and their evaluation on 200 unseen messages, the red team with Muse Spark, a code during a call, strangers' calls before pickup, the pause over a bank app, QR codes judged without opening them.</li>
+<li><strong>The models:</strong> Muse Spark Open as second opinion, the Muse Spark investigator with tools, "look at a picture" with SAM 3.1, the police report in one tap, Muse Voice Transcribe, Muse Image for every picture of Peri and the trap comics.</li>
+<li><strong>The family:</strong> guardian approvals with one-time links, URGENT after a stranger's call, Peri to Peri between two phones, "was it you?", hanging up a relative's call, numbers blocked for the whole family, pairing each phone in person with its own key.</li>
+<li><strong>Peri:</strong> over 400 clay pictures drawn by layers, her moves, moods and moments, Mini Peri over other apps, a chat that understands what people really write, her diary, milestones with badges, and her world with its seasons.</li>
+<li><strong>A real phone:</strong> the signed release APK without test secrets, text at 200 %, TalkBack headings, and Android's obstacles found and guided one by one.</li>
+</ul>
+<p>Every feature, how it decides and how it was tested: <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/FEATURES.md"><code>docs/FEATURES.md</code></a>. What's next: <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/docs/agentes/ROADMAP.md"><code>docs/agentes/ROADMAP.md</code></a> (in Spanish).</p>
+<h2>Credits</h2>
+<p>Icons in the app's buttons: <a href="https://fonts.google.com/icons">Material Icons</a> (Apache License 2.0). QR codes in pictures are read on the phone with <a href="https://github.com/zxing/zxing">ZXing</a> core (Apache License 2.0). The small animations on buttons, tabs and screens play with <a href="https://rive.app">Rive</a>'s Android runtime (MIT License); the animations themselves are written in code in <code>assets/rive</code>. Type: <a href="https://fonts.google.com/specimen/Fredoka">Fredoka</a> and <a href="https://fonts.google.com/specimen/Atkinson+Hyperlegible">Atkinson Hyperlegible</a> (SIL Open Font License). Everything else, including Peri, was made during the event.</p>
+<h2>License</h2>
+<p>FriendlyPear is open source under the <a href="https://github.com/Ruby570bocadito/FriendlyPear/blob/HEAD/LICENSE">MIT License</a>. The fonts, icons and libraries above keep their own licenses.</p>

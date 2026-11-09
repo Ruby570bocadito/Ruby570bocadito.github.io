@@ -1,0 +1,242 @@
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/HEAD/docs/img/logo.svg" width="112" alt="SOC SHARK logo: a shark fin cutting through a wave" /><h1>SOC SHARK</h1>
+<p><strong>Your network, explained in plain language.</strong><br />
+A modern, friendly alternative to Wireshark for SOC / Blue Team analysts — and for everyone else.</p>
+<p><strong>English</strong> · <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/README.es.md">Español</a></p>
+
+<p><a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/media/demo.mp4"><img src="https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/HEAD/docs/media/demo.webp" width="900" alt="35-second tour: open a capture, read what happened, inspect packets, statistics, the network map and dark mode" /></a></p>
+<p><sub>▶ 35-second tour of the app · <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/media/demo.mp4">watch it as MP4</a></sub></p>
+<hr />
+<h2>⚡ Install in one line</h2>
+<blockquote>
+<p>Downloads the ready-to-run binary for your system from the
+<a href="https://github.com/Ruby570bocadito/soc-shark/releases/latest">latest release</a>,
+checks its SHA-256, puts <code>socshark</code> on your <code>PATH</code> and tests it with a demo
+capture. <strong>No compiler needed: it takes seconds.</strong> Run it again any time to
+update.</p>
+</blockquote>
+<h3>Windows · PowerShell</h3>
+<pre><code>irm https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/main/install.ps1 | iex
+</code></pre>
+<h3>Linux / macOS · bash</h3>
+<pre><code>curl -fsSL https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/main/install.sh | bash
+</code></pre>
+<p>Then open the app:</p>
+<pre><code>socshark gui
+</code></pre>
+<details>
+<summary>What each installer does, live capture permissions and options</summary><ul>
+<li><strong>Windows</strong> (<a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/install.ps1"><code>install.ps1</code></a>): installs <code>socshark.exe</code> into
+<code>%USERPROFILE%\.socshark\bin</code> and adds it to your user <code>PATH</code>. For <strong>live
+capture</strong> install <a href="https://npcap.com">Npcap</a> (already there if you have
+Wireshark) with <em>WinPcap API-compatible Mode</em> ticked.</li>
+<li><strong>Linux</strong> (<a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/install.sh"><code>install.sh</code></a>): installs into <code>~/.local/bin</code>, adds
+<code>libpcap</code> if it is missing and grants the binary the capture capabilities
+(<code>setcap cap_net_raw,cap_net_admin=ep</code>), so <strong>live capture works without
+sudo</strong>. Be aware that, unlike Wireshark (where only the small <code>dumpcap</code>
+helper holds them), these capabilities apply to the <strong>whole <code>socshark</code>
+binary</strong>, parsers and GUI included; a separate privileged capture helper is
+planned (see <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/security.md">docs/security.md</a>). If you prefer not to,
+use <code>SOCSHARK_NO_SETCAP=1</code> and capture with <code>sudo</code> or open <code>.pcap</code> files.
+The binary runs on any distribution with glibc 2.17 or newer (x86_64 and
+ARM64).</li>
+<li><strong>macOS</strong>: same script, one universal binary (Apple Silicon and Intel); live
+capture needs <code>sudo</code> (or Wireshark's ChmodBPF).</li>
+<li><strong>No binary for your system, or it fails to start?</strong> The installer builds
+from source instead, installing what that needs (Git, Rust, a C linker; on
+Windows, the Visual Studio C++ Build Tools).</li>
+<li>Options (environment variables): <code>SOCSHARK_VERSION</code> (e.g. <code>0.9.2</code>; default:
+the latest), <code>SOCSHARK_FROM_SOURCE=1</code> (build instead of downloading),
+<code>SOCSHARK_BIN</code> (Linux/macOS install folder), <code>SOCSHARK_NO_SETCAP=1</code>.</li>
+</ul>
+</details><p><strong>Prefer to download it yourself?</strong> Every
+<a href="https://github.com/Ruby570bocadito/soc-shark/releases/latest">release</a> has
+<code>socshark</code> for Windows (<code>.zip</code>), Linux x86_64 and ARM64, and macOS (<code>.tar.gz</code>),
+plus <code>SHA256SUMS</code> to check them: unpack it and run <code>socshark gui</code>.</p>
+<h2>Why SOC SHARK</h2>
+<p>Wireshark answers <em>"what is inside this packet?"</em>. <strong>SOC SHARK answers <em>"what
+is happening on my network, and what should I worry about?"</em></strong> Conversations
+instead of packets, meaning instead of hex, alerts instead of endless
+scrolling:</p>
+<ul>
+<li>every conversation is <strong>one sentence</strong> — <em>"The computer «DESKTOP-AB12» used
+Telnet with the router"</em> — with a ✓ / ! / ✕ status;</li>
+<li>alerts are grouped into <strong>stories</strong> with <strong>what to do</strong> and the
+MITRE ATT&amp;CK technique;</li>
+<li>and when you need the detail, it is all there, Wireshark-style: every
+packet, its layers explained field by field, and its bytes.</li>
+</ul>
+<h2>Features</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🪟 <strong>GUI</strong></td>
+<td>Conversations in plain language, stories with <em>what to do</em>, packet list with layers and highlighted bytes, <em>Follow stream</em>, statistics, right-click filters, filter language, light/dark theme. Opens <strong>pcap and pcapng</strong>, saves <code>.pcap</code>.</td>
+</tr>
+<tr>
+<td>🔴 <strong>Live</strong></td>
+<td>Watch your network in real time: pick Wi-Fi or cable (with its IP and status), the window refreshes every second, <em>Stop</em> is instant. Windows (Npcap), Linux and macOS.</td>
+</tr>
+<tr>
+<td>🏷️ <strong>Who is who</strong></td>
+<td>Devices by name (<em>iPhone-de-Ana</em>, <em>HP OfficeJet</em>, <em>the router</em>) learned from DHCP, mDNS, LLMNR and NetBIOS; vendor by MAC; your own nicknames; live, <strong>which program</strong> on your computer opened each connection.</td>
+</tr>
+<tr>
+<td>🗺️ <strong>Network map</strong></td>
+<td>Your devices, the router and the Internet, and who talks to whom; danger in red; click to filter.</td>
+</tr>
+<tr>
+<td>🔔 <strong>Alerts &amp; report</strong></td>
+<td>System notification when something dangerous or odd shows up; a plain-language HTML report to save, print or send.</td>
+</tr>
+<tr>
+<td>💻 <strong>TUI</strong></td>
+<td>Flow-First terminal interface (Ratatui): one line per conversation, alerts panel, live DSL filter.</td>
+</tr>
+<tr>
+<td>🛡️ <strong>SOC engine</strong></td>
+<td>Mini-IDS: DNS tunnelling, port and network scans, beaconing (T1071), disguised files (T1036), non-DNS or non-HTTP traffic on ports 53 and 80 (T1571), insecure services; JA4 fingerprints and SNI; HTTP file carving with SHA-256; offline threat intel (Feodo, Tor); TCP stream reassembly; full IPv6.</td>
+</tr>
+<tr>
+<td>📤 <strong>SIEM export</strong></td>
+<td>JSONL, <strong>Elastic ECS 8.x</strong> and <strong>Wazuh</strong>, with MITRE ATT&amp;CK mapping.</td>
+</tr>
+</tbody></table>
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/HEAD/docs/img/gui-explicacion.png" alt="Stories and conversations explained in plain language" /><br /><sub><b>What happened</b>: stories, conversations and what to do</sub></td>
+    <td><img src="https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/HEAD/docs/img/gui-mapa.png" alt="Map of a home network" /><br /><sub><b>Network map</b>: devices by name, the router and the Internet</sub></td>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/HEAD/docs/img/gui-paquetes.png" alt="Packet list with layers and bytes" /><br /><sub><b>Packets</b>: every packet, layers explained, bytes highlighted</sub></td>
+    <td><img src="https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/HEAD/docs/img/gui-estadisticas.png" alt="Statistics" /><br /><sub><b>Statistics</b>: activity over time, protocols and services</sub></td>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/Ruby570bocadito/soc-shark/HEAD/docs/img/tui.png" alt="The terminal interface (TUI)" /><br /><sub><b>TUI</b>: the same analysis in the terminal — <code>socshark tui -r capture.pcap</code></sub></td>
+  </tr>
+</table><blockquote>
+<p>The GUI speaks English and Spanish (switch with the <strong>ES / EN</strong> buttons in the toolbar; it follows your
+browser the first time). The TUI, the CLI messages and the detailed documentation are in Spanish for now.</p>
+</blockquote>
+<h2>Usage</h2>
+<pre><code># Graphical interface: live network, or open / drag a capture (pcap or pcapng)
+socshark gui
+socshark gui -r capture.pcapng
+
+# Terminal interface
+socshark tui -r capture.pcap
+
+# Plain-language report in English (one HTML file to save, print or send)
+socshark report -r capture.pcap --lang en
+
+# Summary table, JSONL and the filter language (docs/filter-dsl.md)
+socshark capture -r capture.pcap
+socshark capture -r capture.pcap --json - | jq '.risk_score'
+socshark capture -r capture.pcap -f "tcp.port == 443 || flow.risk &gt;= 50"
+
+# Carve HTTP files and detect disguised ones (T1036); offline threat intel
+socshark capture -r capture.pcap --carve-files
+socshark capture -r capture.pcap --intel-feodo feodo.txt --intel-tor tor-exits.txt
+
+# Follow a reassembled TCP stream
+socshark follow -r capture.pcap --flow "93.184.216.34:443"
+
+# Export to a SIEM
+socshark export -r capture.pcap -F ecs -o ecs.jsonl
+socshark export -r capture.pcap -F wazuh -o wazuh.jsonl
+
+# Live capture from the command line (BPF pushed down to the kernel)
+socshark daemon --list
+socshark daemon -i eth0 --bpf "tcp port 443" --json flows.jsonl
+
+# No capture at hand? Generate one: an attack demo, or a home network
+socshark dev sample-pcap -o demo.pcap
+socshark dev sample-pcap --escenario casa -o home.pcap
+</code></pre>
+<h2>Build from source</h2>
+<p>Requirements: <a href="https://rustup.rs">Rust 1.88+</a> and a C linker. Live capture
+also needs libpcap (Linux; built into macOS) or <a href="https://npcap.com">Npcap</a>
+(Windows) at run time — it is loaded on the fly, nothing to link at build
+time.</p>
+<pre><code>git clone https://github.com/Ruby570bocadito/soc-shark.git
+cd soc-shark
+./install.sh                     # builds this copy and installs it; or: cargo build --release
+./target/release/socshark gui -r examples/demo.pcap
+</code></pre>
+<p>Live capture on Linux without the installer: grant the permission once with
+<code>sudo setcap cap_net_raw,cap_net_admin=ep "$(command -v socshark)"</code>, or run
+it with <code>sudo</code>.</p>
+<h2>Project status</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Capture (files + live), dissectors, flow aggregation, filter DSL</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>SOC engine: mini-IDS, JA4, beaconing, file carving, threat intel, SIEM export</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>GUI (live, who is who, map, alerts, report) and TUI</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>Process attribution with eBPF (today: the system socket table, Linux/Windows)</td>
+<td>🟡 Designed — <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/ebpf-design.md">ebpf-design.md</a></td>
+</tr>
+<tr>
+<td>Transparent TLS 1.3 decryption (uprobes on <code>SSL_read/SSL_write</code>)</td>
+<td>🔵 Planned</td>
+</tr>
+<tr>
+<td>Sandboxed WASM plugins · CyberChef-style decoder · GeoIP/ASN · TheHive</td>
+<td>🔵 Planned — <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/roadmap.md">roadmap.md</a></td>
+</tr>
+</tbody></table>
+<p>Quality: 300+ unit and integration tests, a corpus of real captures with
+expected results, deterministic and coverage-guided fuzzing in CI,
+<code>clippy -D warnings</code> and <code>rustfmt</code> with no exceptions, panic-free parsers
+(malformed or hostile packets yield <code>None</code>, never a crash) and a minimal set
+of dependencies.</p>
+<details>
+<summary>Repository layout</summary><pre><code>soc-shark/
+├── crates/
+│   ├── socshark-core/         # EnrichedFlow, raw packets, configuration
+│   ├── socshark-capture/      # pcap/pcapng reader + live capture (libpcap/Npcap FFI, dlopen)
+│   ├── socshark-dissectors/   # Ethernet, IPv4/6, TCP, UDP, DNS, TLS, DHCP… + concurrent pool
+│   ├── socshark-flow/         # Bidirectional flow aggregator
+│   ├── socshark-filter/       # Filter DSL (lexer, parser, evaluator)
+│   ├── socshark-soc/          # Noise, passive DNS, risk, plain language, carving, intel, SIEM export
+│   ├── socshark-ebpf-common/  # Types shared between eBPF probes and user space
+│   ├── socshark-testgen/      # Frame builders, demo scenarios, fuzzing primitives
+│   └── socshark-cli/          # The `socshark` binary: gui, tui, capture, report, daemon…
+├── docs/                      # Documentation (Spanish) — start at docs/index.md
+├── examples/demo.pcap         # Demo capture
+├── install.ps1 · install.sh   # One-line installers
+└── .github/workflows/
+    ├── ci.yml                 # fmt + clippy + tests (Linux/Windows/macOS) + MSRV + fuzzing
+    └── release.yml            # Release binaries (Windows, Linux, macOS) + SHA256SUMS
+</code></pre>
+</details><p><strong>Documentation</strong> (Spanish): <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/index.md">index</a> · <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/gui.md">GUI</a> ·
+<a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/tui.md">TUI</a> · <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/architecture.md">architecture</a> ·
+<a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/filter-dsl.md">filter DSL</a> · <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/soc-mitre-mapping.md">MITRE ATT&amp;CK mapping</a> ·
+<a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/siem-export.md">SIEM export</a> · <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/docs/security.md">security model</a> ·
+<a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/CHANGELOG.md">changelog</a></p>
+<h2>Responsible use</h2>
+<p>SOC SHARK is a <strong>defensive</strong> tool for SOC and Blue Team analysts, researchers
+and anyone who wants to understand their own network. Capturing traffic on
+networks you do not manage may be illegal where you live: use it only on your
+own networks or with explicit permission and, at work, according to your
+monitoring policy.</p>
+<h2>License</h2>
+<p>MIT — see <a href="https://github.com/Ruby570bocadito/soc-shark/blob/HEAD/LICENSE">LICENSE</a>.</p>

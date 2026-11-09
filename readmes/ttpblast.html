@@ -1,0 +1,811 @@
+<p>
+  <img src="https://raw.githubusercontent.com/Ruby570bocadito/ttpblast/HEAD/docs/banner.svg" width="820" alt="ttpblast: una cadena de ataque alineada con la variante que ejecutó el atacante, E = 1,8 × 10⁻⁴" />
+</p><p>
+  <b>Statistical threat hunting para telemetría de endpoint.</b><br />
+  Busca <b>variantes</b> de una cadena de ataque conocida en los eventos de tus máquinas<br />
+  y, con un E-value heredado de BLAST, dice si el parecido es azar o merece revisión humana.
+</p><p>
+  
+  
+  
+  · <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/README.en.md">English</a>
+</p><p><strong>Estado: demo de investigación (v0.2).</strong> Funciona de principio a fin sobre telemetría
+sintética, en español e inglés, y genera un informe HTML para compartir. Dónde están los
+límites, sin letra pequeña: la matriz de puntuación es inicial, no aprendida de datos; la
+calibración sobre datos reales está por demostrar; y ya sabemos cómo ocultarle una cadena,
+intercalando comandos corrientes entre sus pasos, algo que <code>--mask</code> contrarresta sobre los
+datos sintéticos. Lee <a href="https://github.com/Ruby570bocadito/ttpblast#limitaciones">Limitaciones</a> antes de fiarte de un E-value.</p>
+<h2>Pruébalo en 30 segundos</h2>
+<pre><code>ttpblast demo
+</code></pre>
+<p>La demo esconde cuatro cadenas de ataque en dos semanas de telemetría sintética (40 hosts,
+32.080 eventos), las busca como lo haría un analista y se puntúa contra la verdad conocida.
+Esto es lo que ve al buscar la cadena de un documento de Office malicioso:</p>
+<p>
+  <img src="https://raw.githubusercontent.com/Ruby570bocadito/ttpblast/HEAD/docs/terminal.svg" width="820" alt="Salida de ttpblast search: tres hosts muy por encima del azar y el alineamiento de la variante con sus pruebas" />
+</p><p>La búsqueda exacta solo encuentra la copia idéntica de la cadena (ws-legal-02). <code>ttpblast</code>
+encuentra además la variante (ws-finance-04: cmd en vez de PowerShell, tarea programada en
+vez de clave Run, WinRM en vez de SMB y dos pasos de más) y la cadena cortada a medias
+(ws-sales-03). Las tres destacan muy por encima del resto; el host siguiente tiene E = 2,59,
+lo esperable por azar, y ahí <code>ttpblast</code> se calla.</p>
+<h2>El problema</h2>
+<p>Para buscar una cadena de ataque en la telemetría hay dos opciones habituales, y ninguna
+es buena:</p>
+<ul>
+<li><strong>Consulta exacta</strong> (pasos concretos, en orden). Basta con que el atacante cambie
+PowerShell por cmd, use una tarea programada en lugar de la clave Run o meta un paso de
+más para que la consulta ya no coincida.</li>
+<li><strong>Consulta relajada</strong> (algunos pasos, en cualquier orden). Aparecen falsas alarmas, y no
+hay forma de saber si "5 de 9 pasos" en este host es raro o es lo normal.</li>
+</ul>
+<p>La bioinformática resolvió ese mismo problema hace décadas para el ADN y las proteínas: el
+<strong>alineamiento local</strong> (Smith-Waterman) tolera sustituciones y huecos, y la <strong>estadística de
+Karlin-Altschul</strong> dice cuántos aciertos así esperarías por azar (el E-value de BLAST).
+<code>ttpblast</code> hereda las dos ideas y las aplica a la telemetría de endpoint: cada host tiene su
+«genoma» de técnicas ATT&amp;CK y una consulta se alinea contra todos. El E-value es la pieza que
+faltaba arriba: pone número a si un parecido es raro o normal en el host; con él, <code>ttpblast</code>
+señala lo improbable y calla el resto.</p>
+<h2>Inicio rápido</h2>
+<p>Las versiones etiquetadas publican binarios para Windows, Linux y macOS en
+<a href="https://github.com/Ruby570bocadito/ttpblast/releases">Releases</a>: no hace falta nada más,
+las consultas de la demo van dentro. Para compilarlo hace falta Rust (edición 2024), que se
+instala desde <a href="https://rustup.rs">rustup.rs</a>; en Windows, el instalador pide además las
+herramientas de compilación de C++ de Visual Studio. La única dependencia es <code>serde_json</code>.</p>
+<pre><code>git clone https://github.com/Ruby570bocadito/ttpblast &amp;&amp; cd ttpblast
+./demo.sh                 # Linux, macOS o WSL; en Windows: demo (cmd) o .\demo.cmd (PowerShell)
+</code></pre>
+<pre><code>ttpblast demo                                      # demo guiada: telemetría sintética, dos búsquedas y su nota
+ttpblast search --query queries/phishing-lateral.txt --events data/demo/events.ndjson
+ttpblast hunt --events data/demo/events.ndjson     # las 8 consultas de la biblioteca de una vez
+ttpblast hunt --events registros/                  # una carpeta de .evtx o NDJSON, tal cual
+ttpblast search ... --html informe.html            # informe visual: un solo fichero, sin conexiones externas
+ttpblast search ... --json                         # para scripts y otras herramientas
+ttpblast search ... --mask                         # se salta la rutina de cada host: contra el relleno
+ttpblast search ... --lang en                      # en inglés (también TTPBLAST_LANG=en)
+ttpblast encode --events data/demo/events.ndjson --host ws-finance-04   # el "genoma" de un host
+ttpblast alphabet                                  # los 31 símbolos
+ttpblast help search                               # todas las opciones de una orden
+</code></pre>
+<p>La salida usa colores en una terminal (y nunca en un fichero o una tubería; <code>NO_COLOR</code> y
+<code>--color</code> mandan) y habla el idioma del sistema: español o inglés.</p>
+<h2>El informe HTML</h2>
+<p><code>--html FICHERO</code> escribe, además, un informe autocontenido para abrir en el navegador,
+guardar con el caso o adjuntar a un ticket: un solo fichero, sin conexiones externas, con
+modo claro y oscuro.</p>
+<p>
+  <img src="https://raw.githubusercontent.com/Ruby570bocadito/ttpblast/HEAD/docs/informe.png" width="760" alt="Informe HTML de ttpblast: veredicto, vista general de los alineamientos y la cadena frente al azar" />
+</p><ul>
+<li><strong>Veredicto</strong> en una frase, con los hosts que se alejan del azar.</li>
+<li><strong>Vista general</strong> al estilo BLAST: cada paso de la consulta, coloreado según lo que
+encontró en cada host (idéntico, misma táctica, otra táctica, falta).</li>
+<li><strong>La cadena frente al azar:</strong> las puntuaciones de los barajados del propio host en escala
+logarítmica, la cola exponencial ajustada (una recta en esa escala) y dónde cae la cadena
+real. Es el E-value hecho dibujo.</li>
+<li><strong>Cronología y pruebas:</strong> cada paso con su hora y el evento que lo respalda.</li>
+<li>La telemetría la puede manipular un atacante (una ruta de fichero puede decir
+cualquier cosa), así que los datos van escapados y la página solo los escribe como texto.
+Hay un test que lo comprueba.</li>
+</ul>
+<h2>Biblioteca de consultas</h2>
+<table>
+<thead>
+<tr>
+<th>Consulta</th>
+<th>La historia</th>
+<th>En la demo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/phishing-lateral.txt"><code>phishing-lateral</code></a></td>
+<td>Documento de Office → PowerShell → descarga → clave Run → descubrimiento → LSASS → SMB</td>
+<td>exacta, variante y parcial</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/exfiltracion.txt"><code>exfiltracion</code></a></td>
+<td>¿Quién soy? → cuentas → máquinas → comprimir → subir con rclone</td>
+<td>un viernes a las 17:31 en ws-hr-02</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/ransomware-preludio.txt"><code>ransomware-preludio</code></a></td>
+<td>nltest → net group → LSASS → PsExec → Defender → copias de sombra → registros</td>
+<td>nada: para datos reales</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/credenciales-rdp.txt"><code>credenciales-rdp</code></a></td>
+<td>¿Quién soy? → cuentas → máquinas → LSASS → escritorio remoto</td>
+<td>se parece a trozos de tres cadenas</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/psexec-destino.txt"><code>psexec-destino</code></a></td>
+<td>servicio nuevo → PsExec lanza un intérprete → reconocimiento, visto desde el destino</td>
+<td>nada</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/lolbins-persistencia.txt"><code>lolbins-persistencia</code></a></td>
+<td>mshta o regsvr32 → conexión → ejecutable en disco → BITS → clave Run</td>
+<td>se parece a dos cadenas</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/ntds-robo.txt"><code>ntds-robo</code></a></td>
+<td>cuentas → copia de sombra → ntdsutil → comprimir → subir</td>
+<td>nada</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/acceso-remoto.txt"><code>acceso-remoto</code></a></td>
+<td>¿Quién soy? → sistema → Defender → AnyDesk o similar → servicio</td>
+<td>nada</td>
+</tr>
+</tbody></table>
+<p>Una consulta es una lista de códigos de símbolo o IDs de técnica, en orden, con
+comentarios <code>#</code>. Escribir la tuya es copiar una y cambiar las líneas.</p>
+<p><strong><code>ttpblast hunt</code> pasa todas de una vez</strong> por la misma telemetría, leída una sola vez, y da
+un veredicto por consulta: la vista de triaje antes de mirar ninguna en detalle. Los hosts
+que señalan varias consultas salen aparte. En la demo son justo los cuatro atacados,
+porque las consultas emparentadas encajan en trozos de sus cadenas:</p>
+<pre><code>ttpblast hunt · 8 consultas contra data/demo/events.ndjson
+32.080 eventos · 40 hosts · 0,68 s
+
+  ● phishing-lateral      3 hosts muy por encima del azar  ws-legal-02 2.3e-6 · ws-finance-04 1.8e-4 · ws-sales-03 4.0e-4
+  ● exfiltracion          1 host muy por encima del azar   ws-hr-02 6.4e-3
+  ○ ransomware-preludio   nada se aleja del azar           (el mejor, ws-ops-02, tiene E = 1,40)
+  ◐ credenciales-rdp      4 hosts a revisar                ws-finance-04 0,03 · ws-hr-02 0,41 · ws-legal-02 0,52 · it-admin-02 0,60
+  ...
+
+Hosts que señalan varias consultas (lo primero que miraría):
+  ◆ ws-finance-04: phishing-lateral, credenciales-rdp
+  ◆ ws-hr-02: exfiltracion, credenciales-rdp
+  ◆ ws-legal-02: phishing-lateral, credenciales-rdp, lolbins-persistencia
+  ◆ ws-sales-03: phishing-lateral, lolbins-persistencia
+</code></pre>
+<p>Con ocho consultas, algún «a revisar» suelto en un administrador (E entre 0,1 y 1) es lo
+esperable por azar. <code>--json</code> da lo mismo para scripts y <code>--html CARPETA</code>, un informe por
+consulta.</p>
+<p><strong>Cada host se compara consigo mismo.</strong> La consulta de exfiltración tiene una trampa:
+srv-backup-01 comprime y sube copias con rclone todas las noches. Su parecido con la
+consulta (puntuación 12) es mayor que el del segundo de la tabla, pero para ese host es lo
+normal: E = 40. El portátil de recursos humanos que hace lo mismo un viernes por la tarde,
+después de mirar cuentas y máquinas, sale con E = 6,4·10⁻³.</p>
+<h2>Con tu propia telemetría</h2>
+<p><code>--events</code> acepta un fichero <code>.evtx</code> de Windows, un NDJSON o una carpeta con varios de
+ellos (por ejemplo, los registros recogidos de varios equipos en una respuesta a
+incidentes). Los <code>.evtx</code> se leen directamente, sin dependencias y sin pasar por PowerShell.
+El lector da exactamente lo mismo que el de Windows (<code>Get-WinEvent</code>) en 8.240 registros
+reales de cuatro registros distintos, y un test lo compara con cualquier <code>.evtx</code> que le
+des (ver <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/CONTRIBUTING.md">CONTRIBUTING</a>). Un fichero dañado o manipulado no lo tumba: los
+registros ilegibles se saltan y se cuentan.</p>
+<h3>Con Sysmon</h3>
+<p><a href="https://learn.microsoft.com/es-es/sysinternals/downloads/sysmon">Sysmon</a> es una
+herramienta gratuita de Microsoft Sysinternals que registra lo que pasa en el equipo
+(procesos, conexiones, ficheros, registro). La versión actual funciona en Windows 11 o
+posterior y en Windows Server 2019 o posterior.</p>
+<p>En una PowerShell abierta <strong>como administrador</strong>, instálalo con la configuración de
+<a href="https://github.com/SwiftOnSecurity/sysmon-config">SwiftOnSecurity</a>:</p>
+<pre><code>$ProgressPreference = 'SilentlyContinue'
+New-Item -ItemType Directory -Force C:\Tools\Sysmon | Out-Null
+Invoke-WebRequest https://download.sysinternals.com/files/Sysmon.zip -OutFile C:\Tools\Sysmon\Sysmon.zip
+Expand-Archive C:\Tools\Sysmon\Sysmon.zip -DestinationPath C:\Tools\Sysmon -Force
+Invoke-WebRequest https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml -OutFile C:\Tools\Sysmon\sysmonconfig.xml
+C:\Tools\Sysmon\Sysmon64.exe -accepteula -i C:\Tools\Sysmon\sysmonconfig.xml
+</code></pre>
+<p>Usa el equipo con normalidad unos días. Después, desde la carpeta de <code>ttpblast</code> (y también
+como administrador):</p>
+<pre><code>cargo build --release
+powershell -ExecutionPolicy Bypass -File .\scripts\export-sysmon.ps1 -Days 7
+.\target\release\ttpblast.exe encode --events data\sysmon\events.ndjson --unmatched 15
+.\target\release\ttpblast.exe search --query queries\phishing-lateral.txt --events data\sysmon\events.ndjson --html data\sysmon\informe.html
+</code></pre>
+<p>O, sin el script, con el registro entero tal cual (también como administrador):</p>
+<pre><code>New-Item -ItemType Directory -Force data\evtx | Out-Null
+wevtutil epl Microsoft-Windows-Sysmon/Operational data\evtx\sysmon.evtx
+.\target\release\ttpblast.exe hunt --events data\evtx --html data\evtx\informes
+</code></pre>
+<ul>
+<li><strong>Privacidad.</strong> <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/scripts/export-sysmon.ps1"><code>scripts/export-sysmon.ps1</code></a> solo exporta
+rutas de procesos, ficheros y claves de registro, y destinos de red. No exporta líneas
+de comandos, usuarios ni hashes. El resultado queda en <code>data\</code>, que git ignora.
+Tampoco exporta los eventos de sus propias ejecuciones (la de ahora y las anteriores),
+para no contaminar la medición. El <code>.evtx</code> entero, en cambio, sí lleva líneas de
+comandos, usuarios y hashes: ttpblast no los usa, pero no lo compartas sin mirarlo.</li>
+<li><strong>Otros formatos.</strong> También se leen los eventos de Sysmon enviados por Winlogbeat 6 o 7
+y las exportaciones planas con los campos de Sysmon en la raíz (<code>EventID</code>, <code>Hostname</code>,
+<code>Image</code>…), el formato de los Security Datasets de OTRF. Y cualquier NDJSON con campos al
+estilo ECS (ver <a href="https://github.com/Ruby570bocadito/ttpblast#formatos">Formatos</a>).</li>
+<li><strong>Qué esperar.</strong> En un equipo limpio, lo normal es que ningún resultado tenga un E-value
+pequeño. Si alguno lo tiene, es una falsa alarma que merece la pena mirar: es justo lo que
+hay que medir.</li>
+<li><strong>Un solo equipo.</strong> Con un único host, <code>E = p</code>.</li>
+<li><strong>Accesos a procesos.</strong> La configuración de SwiftOnSecurity no registra accesos a otros
+procesos (evento 10), así que el paso <code>LSA</code> nunca aparecerá.</li>
+<li><strong>Conexiones.</strong> Solo se traducen las conexiones salientes.</li>
+<li><strong>Espacio.</strong> Sysmon escribe en el registro de eventos, que tiene un tamaño máximo; si se
+llena, se pierden los eventos más antiguos.</li>
+<li><strong>Desinstalar.</strong> <code>C:\Tools\Sysmon\Sysmon64.exe -u</code>.</li>
+</ul>
+<h3>Sin Sysmon: los registros de Windows</h3>
+<p>Muchos equipos no tienen Sysmon, pero Windows ya registra parte de lo mismo si se activa su
+auditoría. ttpblast traduce:</p>
+<table>
+<thead>
+<tr>
+<th>Registro</th>
+<th>Evento</th>
+<th>Qué es</th>
+<th>Para qué símbolos</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Seguridad</td>
+<td>4688</td>
+<td>proceso creado (con su padre desde Windows 10)</td>
+<td>casi todos: PSH, CMD, USR, SID, TSK, UEX…</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>4657</td>
+<td>valor del registro escrito (con una SACL en la clave)</td>
+<td>RUN, SVC, DEF</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>5156</td>
+<td>conexión permitida por el firewall (solo salientes)</td>
+<td>SMB, WRM, RDP, C2W, EXF</td>
+</tr>
+<tr>
+<td>Sistema</td>
+<td>7045</td>
+<td>servicio instalado</td>
+<td>SVC</td>
+</tr>
+</tbody></table>
+<p>Para la creación de procesos, en una PowerShell como administrador (el GUID es la
+subcategoría «Creación de procesos», con cualquier idioma de Windows):</p>
+<pre><code>auditpol /set /subcategory:"{0CCE922B-69AE-11D9-BED3-505054503030}" /success:enable
+# … días después:
+New-Item -ItemType Directory -Force data\evtx | Out-Null
+wevtutil epl Security data\evtx\security.evtx
+wevtutil epl System data\evtx\system.evtx
+.\target\release\ttpblast.exe hunt --events data\evtx
+</code></pre>
+<p>El laboratorio de la CI lo comprueba en una máquina real: <code>whoami</code>, <code>hostname</code> y <code>schtasks</code>
+salen codificados igual desde el registro de Seguridad que desde Sysmon. Los accesos a
+LSASS no tienen equivalente sin Sysmon, así que el paso <code>LSA</code> no aparecerá.</p>
+<h2>Cómo funciona</h2>
+<ol>
+<li><strong>Alfabeto.</strong> Cada evento relevante se convierte en un símbolo, una técnica de MITRE
+ATT&amp;CK (<code>PSH</code> = T1059.001 PowerShell, <code>LSA</code> = T1003.001 acceso a LSASS…). Hay 31, con
+nombre en español y en inglés; las reglas están en
+<a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/alphabet/default.json"><code>alphabet/default.json</code></a>, con sintaxis al estilo Sigma
+(<code>campo</code>, <code>campo|contains</code>, <code>campo|endswith</code>). Solo miran nombres de procesos, rutas y
+destinos de red, nunca líneas de comandos. En la demo, el 95 % de los eventos no encaja
+con ninguna regla y se descarta.</li>
+<li><strong>Secuencias.</strong> Una por host, ordenada en el tiempo y cortada en tramos cuando pasa más
+de una hora sin actividad (<code>--max-gap</code>), para que una cadena no tome prestado un paso
+del día siguiente.</li>
+<li><strong>Puntuación.</strong><ul>
+<li>Un paso idéntico puntúa según lo raro que es el símbolo en los datos: <code>log2(1/q)</code>,
+redondeado y acotado a 3–10, donde <code>q</code> es su frecuencia. Acertar un acceso a LSASS
+pesa más que acertar un PowerShell.</li>
+<li>Una sustitución dentro de la misma táctica puntúa +2; entre tácticas distintas, −3.</li>
+<li>Un hueco cuesta −4, y −1 por cada paso más. Los pasos que faltan y los pasos de más
+pueden costar distinto (<code>--gap-open</code>/<code>--gap-extend</code> y <code>--extra-open</code>/<code>--extra-extend</code>).</li>
+</ul>
+</li>
+<li><strong>Alineamiento local</strong> de la consulta contra cada tramo: Smith-Waterman con huecos
+afines (variante de Gotoh), con <em>traceback</em> para enseñar qué paso corresponde a qué
+evento. Los hosts se reparten entre todos los núcleos, con el mismo resultado que con
+uno solo.</li>
+<li><strong>Significación.</strong><ul>
+<li>Se barajan 200 veces los símbolos del propio host, manteniendo la longitud de los
+tramos, y se alinea la consulta contra cada barajado.</li>
+<li>Se baraja por bloques de 3 símbolos (<code>--block</code>), para conservar las ráfagas de
+actividad. La región del mejor alineamiento, en cambio, se baraja símbolo a símbolo:
+así la propia cadena no queda entera, en trozos, dentro de su modelo de azar.</li>
+<li>A la cola de esas puntuaciones se le ajusta una exponencial (la forma de
+Karlin-Altschul): <code>P(S ≥ s) ≈ P(S ≥ u) · e^(−λ(s−u))</code>, donde <code>u</code> es el umbral de la
+cola (justo por encima de la mediana) y <code>λ</code> la tasa de caída.</li>
+<li><code>E = p × número de hosts</code> es el número de hosts que esperarías ver con una
+puntuación así por puro azar.</li>
+<li>Cada host se compara consigo mismo: un administrador hace descubrimiento todo el día,
+así que sus parecidos parciales no sorprenden; en un portátil de ventas, sí.</li>
+<li>La salida enseña el diagnóstico del ajuste (si la cola no parece exponencial, lo marca
+con ⚠) y, en dos líneas, dónde cae la cadena entre los barajados.</li>
+</ul>
+</li>
+<li><strong>Máscara de rutina (opcional, <code>--mask</code>)</strong>, contra el relleno entre pasos, como SEG y DUST
+enmascaran en BLAST las regiones de baja complejidad. Para cada host y cada consulta es
+rutina lo que la consulta no usa y las técnicas de la consulta que el host repite (2 veces
+o más, <code>--routine</code>): un paso de una cadena aparece una vez; una técnica que se repite es
+costumbre del host o relleno.<ul>
+<li>La rutina se salta gratis, sin abrir un hueco ni cortar una racha de pasos de más, pero
+se puede seguir emparejando con un paso de la consulta (cmd por PowerShell sigue
+valiendo).</li>
+<li>La rutina que el alineamiento se salta dentro de la cadena sale también de los
+barajados de ese host. Si no, alargaría el tramo de la cadena, y los barajados, que lo
+rellenan al azar, se parecerían más a la consulta.</li>
+<li>Un host cuyo mejor alineamiento no se salta nada se juzga como sin <code>--mask</code>: saltar
+gratis solo subiría la puntuación de sus barajados.</li>
+</ul>
+</li>
+</ol>
+<h2>Resultados en datos sintéticos</h2>
+<p>La demo genera 40 hosts Windows durante 14 días (32.080 eventos). Incluye actividad
+rutinaria, tres administradores cuyo trabajo diario se parece a trozos de una intrusión, un
+servidor de copias que comprime y sube datos cada noche, y cuatro cadenas inyectadas.
+<code>truth.json</code> guarda la verdad para evaluar, y <code>ttpblast demo</code> se evalúa con ella.</p>
+<table>
+<thead>
+<tr>
+<th>Escenario</th>
+<th>Consulta</th>
+<th>Qué cambia respecto a la consulta</th>
+<th>Búsqueda exacta</th>
+<th>ttpblast</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>exacta</code></td>
+<td>phishing-lateral</td>
+<td>nada</td>
+<td>sí</td>
+<td>puesto 1, E = 2,3·10⁻⁶</td>
+</tr>
+<tr>
+<td><code>variante</code></td>
+<td>phishing-lateral</td>
+<td>4 técnicas sustituidas y 2 pasos de más</td>
+<td>no</td>
+<td>puesto 2, E = 1,8·10⁻⁴</td>
+</tr>
+<tr>
+<td><code>parcial</code></td>
+<td>phishing-lateral</td>
+<td>solo los 4 primeros pasos</td>
+<td>no</td>
+<td>puesto 3, E = 4,0·10⁻⁴</td>
+</tr>
+<tr>
+<td><code>exfiltración</code></td>
+<td>exfiltracion</td>
+<td>nada, pero el servidor de copias hace los dos últimos pasos cada noche</td>
+<td>sí</td>
+<td>puesto 1, E = 6,4·10⁻³</td>
+</tr>
+</tbody></table>
+<p><strong>Calibración</strong> (<code>python experiments/calibracion.py --seeds 20</code>, y <code>--extra="--block 1"</code> o
+<code>--extra="--mask"</code> para las otras filas): 20 conjuntos de datos con semillas distintas, las
+dos consultas de la demo, 36 hosts benignos (sin ninguna cadena) en cada búsqueda; 1.440
+búsquedas de hosts benignos en total. Si los E-values estuvieran bien calibrados, ~36
+tendrían E ≤ 1 y ~3,6, E ≤ 0,1. Cada celda de las cadenas es su E mediano y, entre
+paréntesis, en cuántos de los 20 conjuntos sale con E ≤ 0,01.</p>
+<table>
+<thead>
+<tr>
+<th>Barajado</th>
+<th>Modelo nulo</th>
+<th>Benignos E ≤ 1</th>
+<th>Benignos E ≤ 0,1</th>
+<th>Exacta</th>
+<th>Variante</th>
+<th>Parcial</th>
+<th>Exfiltración</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bloques de 3 (por defecto)</td>
+<td><code>cola</code> (por defecto)</td>
+<td>12</td>
+<td>0</td>
+<td>1,4·10⁻⁶ (20)</td>
+<td>4,0·10⁻⁴ (19)</td>
+<td>2,1·10⁻² (8)</td>
+<td>2,0·10⁻³ (18)</td>
+</tr>
+<tr>
+<td>bloques de 3 (por defecto)</td>
+<td><code>gumbel</code></td>
+<td>30</td>
+<td>1</td>
+<td>4,0·10⁻⁹ (20)</td>
+<td>2,0·10⁻⁵ (19)</td>
+<td>2,0·10⁻³ (16)</td>
+<td>7,4·10⁻⁷ (20)</td>
+</tr>
+<tr>
+<td>bloques de 1</td>
+<td><code>cola</code></td>
+<td>13</td>
+<td>0</td>
+<td>7,1·10⁻⁶ (20)</td>
+<td>1,1·10⁻³ (16)</td>
+<td>2,1·10⁻² (5)</td>
+<td>5,3·10⁻⁴ (19)</td>
+</tr>
+<tr>
+<td>bloques de 1</td>
+<td><code>gumbel</code></td>
+<td>19</td>
+<td>5</td>
+<td>1,9·10⁻⁸ (20)</td>
+<td>5,4·10⁻⁵ (20)</td>
+<td>8,9·10⁻⁴ (18)</td>
+<td>3,3·10⁻⁸ (20)</td>
+</tr>
+<tr>
+<td>bloques de 3, <code>--mask</code></td>
+<td><code>cola</code></td>
+<td>17</td>
+<td>1</td>
+<td>1,4·10⁻⁶ (20)</td>
+<td>9,1·10⁻⁴ (20)</td>
+<td>2,1·10⁻² (8)</td>
+<td>2,0·10⁻³ (18)</td>
+</tr>
+<tr>
+<td>bloques de 3, <code>--mask</code></td>
+<td><code>gumbel</code></td>
+<td>36</td>
+<td>3</td>
+<td>4,0·10⁻⁹ (20)</td>
+<td>7,4·10⁻⁵ (19)</td>
+<td>2,0·10⁻³ (16)</td>
+<td>7,4·10⁻⁷ (20)</td>
+</tr>
+<tr>
+<td>bloques de 1, <code>--mask</code></td>
+<td><code>cola</code></td>
+<td>16</td>
+<td>1</td>
+<td>7,1·10⁻⁶ (20)</td>
+<td>1,2·10⁻³ (20)</td>
+<td>2,1·10⁻² (5)</td>
+<td>5,3·10⁻⁴ (19)</td>
+</tr>
+<tr>
+<td>bloques de 1, <code>--mask</code></td>
+<td><code>gumbel</code></td>
+<td>22</td>
+<td>7</td>
+<td>1,9·10⁻⁸ (20)</td>
+<td>1,2·10⁻⁴ (20)</td>
+<td>8,9·10⁻⁴ (18)</td>
+<td>3,3·10⁻⁸ (20)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Con el modelo por defecto, las cuatro cadenas quedan entre los 3 primeros puestos en los
+20 conjuntos (la de exfiltración, siempre la primera); con la Gumbel, entre los 4.</li>
+<li><strong>La cola exponencial es conservadora:</strong> da menos falsas alarmas de las que promete. La
+Gumbel con bloques de 3 queda cerca de lo calibrado; con bloques de 1 se pasa un poco en
+la cola (5 con E ≤ 0,1 de ~3,6 esperados).<ul>
+<li>La cola sigue por defecto porque se equivoca hacia el lado seguro y describe mejor la
+forma de la cola que se observa. La Gumbel completa no modela el "suelo" que se forma
+cuando un símbolo raro aparece en todos los barajados.</li>
+<li>Con telemetría real habrá que volver a elegir.</li>
+</ul>
+</li>
+<li><strong>Con <code>--mask</code> hay algo más de falsas alarmas</strong> (17 frente a 12 con la cola; 36 frente a
+30 con la Gumbel, justo lo calibrado), por cómo elige su modelo nulo (ver
+<a href="https://github.com/Ruby570bocadito/ttpblast#cu%C3%A1nto-cuesta-esconderse">Cuánto cuesta esconderse</a>). Las cadenas sin relleno salen
+igual, y la variante algo mejor. La Gumbel con bloques de 1 se pasa en la cola, con
+máscara (7 con E ≤ 0,1 de ~3,6) o sin ella (5).</li>
+<li><strong>Lo que se probó y no funcionó:</strong><ul>
+<li><em>Bloques de 3 sin desordenar la región alineada.</em> La cadena queda en trozos dentro de
+su propio modelo de azar y se penaliza: la E mediana de la exacta subía a 4·10⁻² con la
+cola (medido en la v0.1).</li>
+<li><em>Excluir la región alineada del barajado.</em> 135 hosts benignos con E ≤ 1, de ~18,5
+esperados (v0.1). Al quitarle a cualquier host su mejor región, su modelo de azar se
+queda sin los símbolos con los que se forma la puntuación, y todo parece significativo.</li>
+</ul>
+</li>
+<li><strong>En Windows real.</strong> El flujo <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/.github/workflows/sysmon-lab.yml"><code>Sysmon lab</code></a> instala
+Sysmon en una máquina Windows desechable de GitHub con los comandos de este README. Genera
+actividad benigna (compilar, <code>whoami</code>, <code>hostname</code>, <code>systeminfo</code>, <code>schtasks</code>, <code>net user</code>,
+<code>ipconfig</code>, <code>tasklist</code>, una descarga desde PowerShell), exporta con el script y analiza.<ul>
+<li>Primera ejecución (v0.1): 46 eventos, 6 con símbolo (<code>PSH ACD SID SID TSK C2W</code>; desde la
+v0.2, <code>whoami</code> es <code>USR</code>), justo los comandos lanzados.</li>
+<li>El mejor parecido con la cadena tuvo E = 0,54: ninguna falsa alarma, aunque esos
+comandos se parecen al descubrimiento de una intrusión.</li>
+<li>Comprueba la cadena de Sysmon de principio a fin. No mide la calibración: son unos
+minutos de actividad de una máquina de compilación.</li>
+</ul>
+</li>
+<li><strong>Esto demuestra que el mecanismo funciona, no que funcione en tu red.</strong> Los datos los
+genera el propio proyecto, con el mismo alfabeto que luego los busca, y la actividad
+benigna sintética es más aleatoria que la real.</li>
+</ul>
+<h2>Cuánto cuesta esconderse</h2>
+<p>Quien conozca el método puede intercalar comandos corrientes (cmd, schtasks, ipconfig…)
+entre los pasos de su cadena. <code>ttpblast synth --padding N</code> mete N entre cada dos pasos de
+cada cadena inyectada, y <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/experiments/evasion.py"><code>experiments/evasion.py</code></a> mide qué queda
+(<code>--seeds 20 --gaps 4/1,4/1:0/0 --mask</code>): 20 semillas, 80 cadenas por fila.</p>
+<table>
+<thead>
+<tr>
+<th>Relleno entre pasos</th>
+<th>Costes por defecto: cadenas con E ≤ 0,01</th>
+<th>E mediano de la exacta</th>
+<th>Pasos de más gratis (<code>--extra-open 0</code>)</th>
+<th>E mediano de la exacta</th>
+<th><strong>Con <code>--mask</code></strong></th>
+<th>E mediano de la exacta</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>65/80</td>
+<td>1,4·10⁻⁶</td>
+<td>58/80</td>
+<td>9,0·10⁻⁵</td>
+<td><strong>66/80</strong></td>
+<td>1,4·10⁻⁶</td>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>0/80</strong></td>
+<td>0,89</td>
+<td>18/80</td>
+<td>4,8·10⁻³</td>
+<td><strong>60/80</strong></td>
+<td>9,1·10⁻⁵</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0/80</td>
+<td>20</td>
+<td>5/80</td>
+<td>1,6·10⁻²</td>
+<td><strong>60/80</strong></td>
+<td>9,1·10⁻⁵</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0/80</td>
+<td>26</td>
+<td>2/80</td>
+<td>3,5·10⁻²</td>
+<td><strong>61/80</strong></td>
+<td>9,1·10⁻⁵</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0/80</td>
+<td>29</td>
+<td>0/80</td>
+<td>7,0·10⁻²</td>
+<td><strong>60/80</strong></td>
+<td>1,1·10⁻⁴</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Sin <code>--mask</code>, basta un comando intercalado entre cada dos pasos para esconder las cuatro
+cadenas.</strong> Con los costes por defecto, cada uno abre un hueco (−4) o se empareja mal, y la
+puntuación se hunde: en la demo, la exacta pasa de 45 a 18. Las falsas alarmas no cambian
+(0,34 hosts benignos con E ≤ 1 de cada 40, frente a ~1 si estuviera calibrado): el
+relleno solo toca los hosts atacados.</li>
+<li>Abaratar los pasos de más ayuda poco y cuesta detección sin relleno (58/80 frente a
+65/80). Si los pasos de más son gratis, la puntuación se mantiene, pero sube la del azar:
+la ventana de la cadena es más larga y, en los barajados, una ventana larga encuentra los
+símbolos de la consulta en un orden parecido con más facilidad.</li>
+<li><strong>Con <code>--mask</code>, el relleno deja de esconderlas: 60 de 80 con 1 a 4 comandos entre pasos</strong>,
+casi como sin relleno. Es el equivalente a enmascarar las regiones de baja complejidad en
+BLAST (SEG, DUST): la rutina de cada host se salta gratis (punto 6 de
+<a href="https://github.com/Ruby570bocadito/ttpblast#c%C3%B3mo-funciona">Cómo funciona</a>). En la demo con dos comandos entre pasos, la exacta
+vuelve a puntuar 45, con 16 eventos de rutina saltados, y su E pasa de 5,1 a 4,9·10⁻⁴.<ul>
+<li>Por escenario, con relleno: la exacta en las 20 semillas, la variante en 19 o 20, la
+exfiltración en 15 y la parcial en 5 o 6 (sin relleno: 20, 19, 18 y 8).</li>
+<li>Sin relleno no pierde nada (66/80 frente a 65/80): una cadena compacta no se salta nada
+y se juzga como sin máscara. La variante gana un poco, porque sus dos pasos de más son
+rutina.</li>
+<li><strong>El precio, en falsas alarmas:</strong> 0,46–0,49 hosts benignos con E ≤ 1 de cada 40, frente
+a 0,34 sin máscara; en el experimento de calibración, 17 de 1.440 frente a 12 (~36 si
+estuviera calibrado). Vienen de elegir el modelo nulo después de alinear: un host que no
+se salta rutina se juzga sin máscara, que da E-values menores. En el peor caso eso
+podría duplicar las falsas alarmas; medido, suben un 40 % y siguen por debajo de lo
+calibrado.</li>
+<li>Con la rutina gratis, un alineamiento puede abarcar horas de actividad: en la demo con
+relleno, un administrador sale con E = 0,88 y un alineamiento de 2,1 h. Mira la duración
+antes de dar un resultado por bueno.</li>
+</ul>
+</li>
+<li><strong>Qué no arregla.</strong> Cambiar el orden de los pasos, separarlos más de una hora
+(<code>--max-gap</code>) o repartirlos entre hosts sigue escondiendo la cadena, con máscara o sin
+ella. Y el relleno sintético sale de ocho comandos fijos: con telemetría real hay que medir
+cuánta rutina se cuela de verdad entre los pasos de una intrusión. Por eso, de momento,
+<code>--mask</code> es una opción y no lo normal.</li>
+</ul>
+<p><strong>Lo que se probó y no funcionó</strong> (las mismas 20 semillas; cadenas con E ≤ 0,01 de 80, con
+0/1/2/3/4 comandos de relleno entre pasos):</p>
+<table>
+<thead>
+<tr>
+<th>Variante</th>
+<th>Detectadas</th>
+<th>Por qué falla</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Borrar del host, antes de alinear, lo que repite 3 veces o más</td>
+<td>9/1/0/4/5</td>
+<td>Se lleva pasos de la cadena (PowerShell, la conexión web e incluso <code>UEX</code>, porque imprimir desde Word también lo es) y las sustituciones de la variante. Y lo que queda está tan lleno de símbolos de la consulta que los barajados la reproducen con facilidad.</td>
+</tr>
+<tr>
+<td>Lo mismo, sin borrar nunca las técnicas de la consulta</td>
+<td>35/8/8/16/11</td>
+<td>El mismo problema en los barajados, y la variante pierde igual sus sustituciones.</td>
+</tr>
+<tr>
+<td>Saltar gratis (sin borrar) lo que el host repite 3 veces o más</td>
+<td>61/9/5/7/3</td>
+<td>5 de los 8 comandos de relleno (ipconfig, tasklist, wscript, mstsc, 7z) salen una vez cada dos semanas en un puesto de trabajo: para ese host no son rutina, aunque en la red sean corrientes.</td>
+</tr>
+<tr>
+<td>Saltar gratis todo lo que no es de la consulta</td>
+<td>61/32/15/8/4</td>
+<td>El relleno alarga el tramo de la cadena, y los barajados, que lo llenan al azar, meten en él más símbolos de la consulta.</td>
+</tr>
+<tr>
+<td>… con la rutina fija en su sitio en los barajados</td>
+<td>32/19/12/10/6</td>
+<td>Los barajados solo mueven símbolos de la consulta: la cadena compite con copias de sí misma.</td>
+</tr>
+<tr>
+<td>… quitando de los barajados la rutina saltada</td>
+<td>62/51/34/25/19</td>
+<td>El relleno con técnicas de la propia consulta (PowerShell, 7z) sigue costando.</td>
+</tr>
+<tr>
+<td><code>--mask</code> juzgando siempre con el modelo nulo enmascarado</td>
+<td>60 sin relleno; con relleno, igual</td>
+<td>Si no hay nada que saltar, saltar gratis solo sube la cola de los barajados: en la exfiltración de la demo, λ baja de 0,44 a 0,40 y la E se duplica al extrapolar.</td>
+</tr>
+<tr>
+<td>Quitar la rutina saltada y puntuar luego con los costes normales</td>
+<td>66/65/63/61/64</td>
+<td>45 a 49 benignos con E ≤ 1, más de los ~36 calibrados: los barajados no ven la ventaja de elegir qué quitar.</td>
+</tr>
+<tr>
+<td>Buscar con y sin máscara y quedarse con la mejor (E × 2)</td>
+<td>63/54/52/51/53</td>
+<td>Pagar por hacer dos pruebas cuesta más de lo que gana.</td>
+</tr>
+<tr>
+<td><code>--routine</code> 3, 4 o 6 en vez de 2</td>
+<td>60/57/55/57, 58/54/52/54 y 58/51/47/47 (relleno 1–4)</td>
+<td>Cuanto más alto, más relleno con técnicas de la consulta sigue costando.</td>
+</tr>
+</tbody></table>
+<h2>Comparación honesta</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ttpblast</th>
+<th>Consulta de secuencia exacta (p. ej. <code>sequence</code> de EQL)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Variantes (técnica sustituida, paso extra o que falta)</td>
+<td>sí</td>
+<td>no</td>
+</tr>
+<tr>
+<td>¿Es raro este parecido en este host?</td>
+<td>E-value por host</td>
+<td>no lo dice</td>
+</tr>
+<tr>
+<td>Relleno deliberado entre pasos</td>
+<td>sin <code>--mask</code>, lo esconde con un solo comando; con <code>--mask</code>, 60 de 80 cadenas siguen saliendo (datos sintéticos)</td>
+<td>no le afecta si cabe en <code>maxspan</code></td>
+</tr>
+<tr>
+<td>Coste</td>
+<td>alineamiento + 200 barajados por host (~0,15 s en la demo, con todos los núcleos)</td>
+<td>muy bajo</td>
+</tr>
+<tr>
+<td>Madurez</td>
+<td>demo de investigación</td>
+<td>herramientas maduras en producción</td>
+</tr>
+<tr>
+<td>Explicación</td>
+<td>alineamiento paso a paso con sus eventos e informe HTML</td>
+<td>eventos que coinciden</td>
+</tr>
+</tbody></table>
+<p>No sustituye a las reglas exactas: sirve para cazar (<em>hunting</em>) variantes de cadenas
+conocidas y para priorizar.</p>
+<h2>Limitaciones</h2>
+<ul>
+<li><strong>Solo se ha probado con datos sintéticos.</strong> La pregunta abierta número uno es si los
+E-values siguen calibrados con telemetría real.</li>
+<li><strong>Sin <code>--mask</code>, se esconde con relleno.</strong> Un comando corriente entre cada dos pasos basta
+para que una cadena no destaque. <code>--mask</code> lo contrarresta en los datos sintéticos (60 de
+80 cadenas con relleno, frente a 0) a cambio de algo más de falsas alarmas, y no resiste
+cambiar el orden de los pasos ni repartirlos en el tiempo o entre hosts (ver
+<a href="https://github.com/Ruby570bocadito/ttpblast#cu%C3%A1nto-cuesta-esconderse">Cuánto cuesta esconderse</a>).</li>
+<li><strong>La matriz de puntuación es a mano:</strong> rareza del símbolo más una regla por tácticas. La
+idea de fondo es aprenderla de cadenas reales, como se aprendió BLOSUM de bloques de
+proteínas.</li>
+<li><strong>Sin líneas de comandos.</strong> Las reglas solo ven nombres de procesos y rutas: <code>net.exe</code>
+cuenta entero como descubrimiento de cuentas y <code>vssadmin.exe</code> como herramienta de copias
+de sombra, se usen para lo que se usen.</li>
+<li><strong>Barajar destruye parte de la estructura temporal.</strong> Los bloques de 3 conservan las
+ráfagas cortas. Si la actividad real tiene una estructura más larga, el modelo de azar
+será demasiado aleatorio y los E-values saldrán optimistas. Hay que medirlo con datos
+reales. Usar hosts parecidos como referencia está en la hoja de ruta.</li>
+<li><strong>Los tramos usan un hueco de tiempo fijo.</strong> Una cadena lenta, con horas entre pasos, se
+corta (<code>--max-gap</code> lo ajusta). Además, el alineamiento no usa los tiempos dentro de un
+tramo.</li>
+<li><strong>Un host cada vez.</strong> No sigue el movimiento lateral de un host a otro.</li>
+<li><strong>El alineamiento es el óptimo según la puntuación,</strong> no siempre el que elegiría una
+persona. En la variante de arriba empareja SID con RSD y deja el SID real como paso
+extra, porque los huecos afines prefieren un hueco largo a dos cortos.</li>
+<li><strong>Escala.</strong> El coste es O(m·n) por tramo, más los barajados, repartido entre los núcleos.
+Para millones de eventos hará falta un índice de semillas, como hace BLAST.</li>
+<li><strong>Formato de entrada.</strong> <code>.evtx</code> o NDJSON con campos al estilo ECS. El acceso a procesos
+usa <code>process.target.name</code>, que no es estándar. Sysmon (en <code>.evtx</code>, exportado con el
+script, por Winlogbeat 6 o 7, o plano como en OTRF) y los eventos 4688, 4657, 5156 y 7045
+de Windows se traducen solos; otras fuentes (Linux, EDR) necesitan mapear campos o un
+adaptador.</li>
+</ul>
+<h2>Hoja de ruta</h2>
+<ol>
+<li>Probar el alfabeto con datos públicos de ataques simulados (Security Datasets de OTRF,
+que ya se leen): ¿se alinean dos ejecuciones del mismo escenario mejor que con el ruido?</li>
+<li><strong>Decidir si <code>--mask</code> pasa a ser lo normal</strong>, con telemetría real: cuánta rutina se cuela
+entre los pasos de una intrusión de verdad, y cuántas falsas alarmas añade.</li>
+<li>Aprender la matriz de sustitución de cadenas reales.</li>
+<li>Calibración con telemetría real, y decidir el modelo nulo: cola o Gumbel, tamaño de
+bloque, hosts parecidos como referencia.</li>
+<li>Más fuentes de entrada: salidas NDJSON de EDR abiertos y telemetría de Linux.</li>
+<li>Índice de semillas (k-mers) para volúmenes grandes.</li>
+<li>Huecos que dependan del tiempo, cadenas entre hosts y pasos en otro orden.</li>
+</ol>
+<p>Hecho: medir el coste de evasión (y el resultado está arriba), leer Winlogbeat 6 y el
+formato plano de OTRF (v0.2); enmascarar la rutina de cada host (<code>--mask</code>) y volver a medir
+ese coste, leer <code>.evtx</code> directamente, los registros de Windows sin Sysmon y carpetas
+enteras, y pasar toda la biblioteca con <code>hunt</code> (aún sin publicar). El detalle, en el
+<a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/CHANGELOG.md">CHANGELOG</a>.</p>
+<h2>Formatos</h2>
+<ul>
+<li><strong>Eventos:</strong> un JSON por línea, o ficheros <code>.evtx</code> de Windows (se distinguen por sus
+primeros bytes, no por la extensión), o una carpeta, de la que se leen los <code>.evtx</code>,
+<code>.ndjson</code>, <code>.jsonl</code> y <code>.json</code>. En JSON, los objetos anidados y las claves con puntos son
+equivalentes, y los valores se comparan sin distinguir mayúsculas. El host sale de
+<code>host.name</code> (o <code>host.hostname</code>, <code>agent.hostname</code>, <code>winlog.computer_name</code>,
+<code>computer_name</code>, <code>Hostname</code>) y la hora de <code>@timestamp</code> (o <code>timestamp</code>, <code>UtcTime</code>).
+Campos que usan las reglas: <code>process.name</code>, <code>process.parent.name</code>,
+<code>process.target.name</code>, <code>destination.port</code>, <code>destination.address</code>, <code>file.path</code>,
+<code>file.extension</code>, <code>registry.path</code>, <code>event.category</code> y <code>event.action</code>. Un registro de un
+<code>.evtx</code> da <code>EventID</code>, <code>Channel</code>, <code>EventRecordID</code>, <code>SourceName</code> (el proveedor),
+<code>Hostname</code>, <code>@timestamp</code>, el resto de <code>System</code> como <code>System.*</code> y cada valor de
+<code>EventData</code> por su nombre.</li>
+<li><strong>Consultas:</strong> códigos de símbolo o IDs de técnica, separados por espacios, comas o
+flechas; <code>#</code> inicia un comentario. Ver <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/queries/"><code>queries/</code></a>.</li>
+<li><strong>Alfabeto:</strong> JSON con <code>symbols</code>. Cada símbolo tiene <code>code</code>, <code>technique</code>, <code>tactic</code>,
+<code>name</code> (un texto, o uno por idioma: <code>{"es": …, "en": …}</code>) y una lista <code>rules</code>. Gana el
+primer símbolo que encaja. Se carga otro con <code>--alphabet</code>.</li>
+<li><strong>Salida JSON</strong> (<code>--json</code>): la consulta, la telemetría, los ajustes, el veredicto
+(<code>summary</code>), cada resultado con su alineamiento, sus pruebas y el histograma de sus
+barajados, y la línea base exacta. Con <code>--mask</code>, la rutina que se salta un alineamiento
+aparece en él como pasos <code>"kind": "masked"</code>, y cada resultado dice cuántos (<code>masked</code>).
+<code>hunt --json</code> da, por consulta, los hosts muy por encima del azar (<code>strong</code>), los que
+merecen otra mirada (<code>weak</code>) y el mejor, y aparte los hosts que señalan varias consultas
+(<code>repeated</code>).</li>
+</ul>
+<h2>Contribuir</h2>
+<p>Ideas, datos reales (anonimizados) que pongan a prueba la calibración y nuevas consultas son
+especialmente bienvenidas. <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/CONTRIBUTING.md">CONTRIBUTING.md</a> explica cómo añadir un
+símbolo o una consulta y cómo comprobar que nada se rompe.</p>
+<h2>Uso responsable</h2>
+<p>Es una herramienta defensiva: busca en tu propia telemetría. Los datos sintéticos de la
+demo son eventos inventados con dominios de ejemplo (<code>*.example.*</code>) y direcciones privadas.
+No contienen código ni muestras de malware. Las consultas describen patrones genéricos que
+publican los informes de respuesta a incidentes.</p>
+<h2>Licencia</h2>
+<p>A tu elección, <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/LICENSE-MIT">MIT</a> o <a href="https://github.com/Ruby570bocadito/ttpblast/blob/HEAD/LICENSE-APACHE">Apache-2.0</a>, como es habitual en Rust.
+Salvo que digas lo contrario, cualquier contribución que envíes para incluirla en el
+proyecto se licencia de esa misma doble forma, sin condiciones adicionales.</p>

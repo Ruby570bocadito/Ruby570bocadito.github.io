@@ -1,0 +1,835 @@
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/logo.svg" width="104" alt="bluetardigrade logo" /><h1>bluetardigrade</h1>
+<p><strong>A self-hosted SOC for Windows endpoints: detect, investigate and respond from one console.</strong></p>
+<p>Rust ETW sensor · single-binary Go detection engine · live web console.<br />
+Named after the most resilient animal on Earth.</p>
+
+<p><a href="https://github.com/Ruby570bocadito/bluetardigrade#see-it-in-action"><strong>Watch the demo</strong></a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade#quickstart"><strong>Quickstart</strong></a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade#what-you-get">Features</a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade#console-tour">Console tour</a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade#on-your-phone"><strong>On your phone</strong></a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade#notifications">Notifications</a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade#security-model">Security</a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade#architecture">Architecture</a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade#documentation">Docs</a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/GUIA-INICIO.md"><strong>Guía en español</strong></a></p>
+<p>
+  <img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/hero.webp" alt="The bluetardigrade SOC console: operations panel in the dark theme, with the light theme laid over it" width="100%" />
+</p><p>
+  <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/assets/demo/bluetardigrade-demo.mp4"><b>▶  Full tour in video (MP4, 2 min 12 s)</b></a>
+</p><p>A sensor on each Windows machine streams process, network, DNS, registry and
+file telemetry to a <strong>single static Go engine</strong>. The engine matches it against
+readable YAML rules mapped to <strong>MITRE ATT&amp;CK</strong>, correlates kill chains, scores
+host risk and freezes a forensic bundle for every alert. Analysts triage,
+investigate and respond from a <strong>live web console</strong>, in Spanish or English,
+dark or light.</p>
+<blockquote>
+<p>[!NOTE]
+<strong>Pre-1.0 (<code>v1.0.0-rc1</code>): built for labs, research and small SOC teams.</strong>
+Product builds contain no demo telemetry generator: an empty or disconnected
+console stays empty. The clips and screenshots below use the repository's
+contract-true fixtures (LAB-* hosts), and the console labels that window as
+demo data.</p>
+</blockquote>
+<hr />
+<h2>See it in action</h2>
+<p>Every clip is a real run of the console, driven by a script you can replay
+(<a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/assets/src/record_demo.mjs"><code>record_demo.mjs</code></a>). The interface shown is
+the Spanish one; a toggle in the header switches it to English.</p>
+<h3>1 · Sign in</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/login.webp" alt="Signing in to the console with a local account; the domain account switch next to it" width="100%" /><p>Local accounts with roles (viewer, analyst, administrator), <strong>Active Directory
+accounts</strong> whose groups grant the role, optional or per-role <strong>two-step
+sign-in</strong> (TOTP + recovery codes) and secure sessions. Every attempt lands in
+the audit trail.</p>
+<h3>2 · Triage the alert queue</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/triage.webp" alt="From the operations panel to the alert queue: opening an alert's detail and selecting several alerts for a bulk action" width="100%" /><p>The panel says what needs attention now. The queue filters by severity,
+lifecycle and owner; each alert opens its detail, entity graph and forensic
+bundle; several alerts can be <strong>acknowledged, closed, assigned, suppressed or
+added to an incident</strong> in one go.</p>
+<h3>3 · Work an incident</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/incidents.webp" alt="An incident with its status, owner, affected hosts, alerts, graph and timeline" width="100%" /><p>Incidents group alerts across machines, with status, severity, owner, summary,
+an <strong>incident graph</strong> and a timeline of every change and note — exportable as
+Markdown or a printable report.</p>
+<h3>4 · Know every host</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/hosts.webp" alt="The fleet view and one host's page: sensor and connection, process tree, graph and timeline" width="100%" /><p>The fleet at a glance (online, silent, idle) from sensor heartbeats, guided
+<strong>enrollment</strong> of new machines, and a page per host: risk, sensor health, the
+<strong>live process tree</strong>, entity graph, timeline and network destinations.</p>
+<h3>5 · Engineer detections</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/detection.webp" alt="Rule coverage by ATT&amp;CK tactic, kill chains drawn step by step, suppressions and the rule tester" width="100%" /><p>Rule coverage by <strong>ATT&amp;CK tactic</strong>, severity and event type; <strong>kill chains</strong>
+drawn as flows with per-step alerts; suppressions with a reason and an expiry;
+and a <strong>rule tester</strong> that dry-runs an event against the live rules.</p>
+<h3>6 · Watch telemetry and platform health</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/telemetry.webp" alt="The live telemetry feed and the platform health view" width="100%" /><p>The live feed with pause, search, type filters and JSONL/CSV export, and the
+health of every stage: engine, ingest, queues, store and external delivery.
+Metrics the engine does not publish show <code>—</code>, never a fake zero.</p>
+<h3>7 · Respond, on your terms</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/respond.webp" alt="The active response view: arming state and the audit of executed and denied attempts" width="100%" /><p>Active response is <strong>off until you arm it</strong>, needs per-operator credentials,
+refuses protected processes, and every attempt — executed or denied — is
+audited.</p>
+<h3>8 · Move fast: keyboard, themes and NOC mode</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/navigation.webp" alt="The command palette jumping to a view, the light theme and the NOC wall mode" width="100%" /><p><code>Ctrl+K</code> reaches any view or action, <code>g</code> + a letter jumps between views, deep
+links survive a refresh, and <strong>NOC mode</strong> turns a wall monitor into a rotating
+situation board.</p>
+<h3>9 · Get alerts by mail, chat and on your phone</h3>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/notify.webp" alt="Ajustes, Avisos externos: notification channels with their minimum severity, a test message delivered and a new channel added" width="100%" /><p>Email, Telegram, Slack and <strong>ntfy</strong> push channels, each with its minimum
+severity, edited in <strong>Ajustes → Avisos externos</strong> and applied without
+restarting the engine. <strong>Enviar prueba</strong> asks each channel to answer, and
+every message links to its alert. <a href="https://github.com/Ruby570bocadito/bluetardigrade#notifications">More below</a>.</p>
+<h3>10 · On call from your phone</h3>
+<table>
+<tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/demo/mobile.webp" alt="The phone view: filtering critical alerts, closing one from its card, then the open incidents and the hosts" width="100%" /></td>
+<td><p><code>/movil</code> is the console built for a phone, and it <strong>installs as an app</strong>:</p>
+<ul>
+<li>the open alerts at or above a severity, with <strong>Reconocer</strong> and
+<strong>Cerrar</strong> on each card;</li>
+<li>the open incidents, most severe first;</li>
+<li>the machines, the silent ones first;</li>
+<li>one tap opens the same record in the full console.</li>
+</ul>
+<p>Same sign-in, same roles, same audit trail as the desktop.
+<a href="https://github.com/Ruby570bocadito/bluetardigrade#on-your-phone">How to connect it</a>.</p>
+</td>
+</tr>
+</table><hr />
+<h2>Why bluetardigrade</h2>
+<table>
+<tr>
+<td><p><strong>🧱 One binary, no runtime dependencies</strong><br />
+The engine is a static Go executable: ingest, detection, correlation, API,
+SQLite history and delivery in one process.</p>
+</td>
+<td><p><strong>📖 Detections you can read</strong><br />
+Every rule is YAML mapped to MITRE ATT&amp;CK, hot-reloaded and testable from the
+console. Sigma rules can be imported. Nothing is a black box.</p>
+</td>
+</tr>
+<tr>
+<td><p><strong>🧾 From alert to evidence</strong><br />
+Every alert freezes a forensic bundle: the triggering event plus a
+five-minute timeline of the host, with its process tree.</p>
+</td>
+<td><p><strong>🔒 Safe by default</strong><br />
+Loopback-only listeners, authenticated ingest, append-only evidence, audited
+access and active response that stays off until you arm it.</p>
+</td>
+</tr>
+</table><h2>What you get</h2>
+<table>
+<tr>
+<td><h3>🎯 Detect</h3>
+<ul>
+<li><strong>125 YAML rules</strong> across 13 of the 14 ATT&amp;CK tactics: initial access,
+LOLBAS, privilege escalation, credential access, lateral movement,
+collection, exfiltration, ransomware, hack tools, phishing and Active
+Directory attacks (DCSync, Kerberoasting, privileged groups).</li>
+<li><strong>13 kill-chain correlations</strong>: 11 within a host, 2 that follow one account
+across machines.</li>
+<li><strong>YARA</strong> in the sensor: written files, on demand and <strong>process memory</strong>,
+with a rule pack the engine distributes.</li>
+<li>Offline <strong>threat-intel lists</strong>, per-host <strong>process baseline</strong>, <strong>C2
+beaconing</strong>, volumetric <strong>thresholds</strong> and decaying <strong>risk scores</strong>.</li>
+<li><strong>Sigma import</strong> and 17 rule operators.</li>
+</ul>
+</td>
+<td><h3>🔎 Investigate</h3>
+<ul>
+<li>Live console with <strong>13 views</strong>, command palette, deep links and <strong>ES/EN</strong>.</li>
+<li><strong>Forensic bundles</strong> with JSON/JSONL export.</li>
+<li>Paged <strong>history</strong> backed by SQLite, plus a read-only <strong>SQL view</strong> for
+administrators.</li>
+<li>Alert lifecycle, <strong>assignment</strong>, notes and saved searches.</li>
+<li><strong>Incidents</strong> with graph, timeline and Markdown or printable reports.</li>
+<li><strong>Active Directory</strong> directory and posture, read-only.</li>
+<li>A <strong>phone view</strong> that installs as an app (<code>/movil</code>).</li>
+<li>Optional <strong>AI analyst</strong> with your own model.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><h3>⚡ Respond</h3>
+<ul>
+<li>Opt-in <strong><code>kill_process</code></strong>, armed per engine.</li>
+<li>Per-operator credentials: every action has an owner.</li>
+<li>Every request, executed or denied, in a forensic <strong>audit log</strong>.</li>
+<li><strong>Host groups</strong> limit what each account sees and touches.</li>
+</ul>
+</td>
+<td><h3>🔌 Integrate</h3>
+<ul>
+<li><strong>Webhooks</strong>, <strong>Elasticsearch</strong>, <strong>Splunk HEC</strong>, <strong>Slack</strong>, <strong>Telegram</strong>,
+<strong>email</strong> and <strong>ntfy</strong> phone push, the channels edited from the console.</li>
+<li><strong>REST + SSE</strong> API with an OpenAPI contract checked in CI; <strong>Prometheus</strong>
+metrics.</li>
+<li>Imports <strong>Suricata, Zeek, osquery, Cowrie</strong>, Windows firewall logs,
+offline <strong>EML</strong> mail and DC Security logs over <strong>WEF</strong>.</li>
+</ul>
+</td>
+</tr>
+</table><h2>Quickstart</h2>
+<blockquote>
+<p>[!IMPORTANT]
+Use a <strong>normal PowerShell</strong> to install and run, and an <strong>Administrator
+PowerShell</strong> only when a step says so (kernel ETW tracing needs elevation).</p>
+</blockquote>
+<p><strong>1. Install</strong> (user-level, no admin):</p>
+<pre><code>irm https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/main/install.ps1 | iex
+</code></pre>
+<p>To build the Rust ETW sensor too, pass <code>-WithSensor</code>:</p>
+<pre><code>&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/main/install.ps1))) -WithSensor
+</code></pre>
+<p><strong>2. Open a new terminal</strong> so the <code>PATH</code> change applies, and check it:</p>
+<pre><code>sf-engine version
+</code></pre>
+<p><strong>3. Install a sensor once</strong>: the Rust ETW sensor with <code>sf-etw -Install</code> (one
+UAC prompt), or Sysmon with <code>sf-sensor -SetupSysmon</code>.</p>
+<p><strong>4. Start everything.</strong> The browser opens at <a href="http://localhost:3000">http://localhost:3000</a> (when
+another program holds that port, the console moves to the next free one and
+remembers it):</p>
+<pre><code>sf-start      # engine, console, AI hub and the sensor service
+sf-status     # what is running
+sf-stop       # stops it all (-KeepSensor keeps the sensor capturing)
+</code></pre>
+<p><strong>5. Verify the pipeline and fire a harmless detection</strong> (the download target
+is a closed local port, so nothing is fetched):</p>
+<pre><code>sf-engine doctor
+certutil -urlcache -f http://127.0.0.1:9/prueba.txt "$env:TEMP\prueba.txt"
+</code></pre>
+<p>The console raises <strong>"Descarga con certutil o bitsadmin"</strong> (MITRE T1105)
+within seconds.</p>
+<details>
+<summary><b>All commands</b></summary><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sf-start</code></td>
+<td>Starts everything: engine, console and the ETW sensor service</td>
+</tr>
+<tr>
+<td><code>sf-stop</code></td>
+<td>Stops everything (<code>-KeepSensor</code> keeps the sensor capturing)</td>
+</tr>
+<tr>
+<td><code>sf-status</code></td>
+<td>Shows what is running</td>
+</tr>
+<tr>
+<td><code>sf-engine</code></td>
+<td>The detection engine (<code>doctor</code>, <code>version</code>, <code>report</code>, <code>sigma</code>…)</td>
+</tr>
+<tr>
+<td><code>sf-console</code></td>
+<td>Engine + console without the sensor; manages console accounts (<code>-Restart</code> applies a new one)</td>
+</tr>
+<tr>
+<td><code>sf-etw</code></td>
+<td>Installs and manages the ETW sensor service</td>
+</tr>
+<tr>
+<td><code>sf-sensor</code></td>
+<td>Sysmon sensor</td>
+</tr>
+<tr>
+<td><code>sf-collector</code></td>
+<td>Log and mail importer</td>
+</tr>
+<tr>
+<td><code>sf-update</code></td>
+<td>Updates the install</td>
+</tr>
+<tr>
+<td><code>sf-uninstall</code></td>
+<td>Removes it</td>
+</tr>
+</tbody></table>
+</details><details>
+<summary><b>Pin a release, installer switches, Windows Server</b></summary><p>The one-liner and <code>sf-update</code> track <code>main</code>. For a reproducible install, pin a
+release tag in both the URL and <code>-Branch</code>:</p>
+<pre><code>$tag = 'v1.0.0-rc1'   # a published release tag you reviewed
+&amp; ([scriptblock]::Create((irm "https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/$tag/install.ps1"))) -Branch $tag
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Switch</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-WithSensor</code></td>
+<td>Also builds the Rust ETW sensor</td>
+</tr>
+<tr>
+<td><code>-AutoStart</code></td>
+<td>Starts the engine at logon</td>
+</tr>
+<tr>
+<td><code>-IngestToken &lt;t&gt;</code></td>
+<td>Sets the ingest authentication token</td>
+</tr>
+<tr>
+<td><code>-Server</code></td>
+<td>Installs boot tasks under ProgramData (admin)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>The installer verifies every toolchain download by SHA-256.</li>
+<li><strong>Release provenance:</strong> binaries carry a Sigstore build attestation
+(<code>gh attestation verify &lt;file&gt; --repo Ruby570bocadito/bluetardigrade</code>).</li>
+<li><strong>Windows Server</strong> without an interactive session:
+<a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/WINDOWS-SERVER.md">server deployment</a>.</li>
+<li><strong>Smart App Control blocks a binary:</strong>
+<a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/SMART-APP-CONTROL.md">application-control diagnosis</a>.</li>
+</ul>
+</details><details>
+<summary><b>Linux, macOS or Docker (engine + collectors)</b></summary><p>The source path needs <strong>Go 1.26.10 or newer</strong> (<a href="https://go.dev/dl/">https://go.dev/dl/</a>) and
+<strong>make</strong>; Docker needs neither.</p>
+<pre><code>git clone https://github.com/Ruby570bocadito/bluetardigrade.git
+cd bluetardigrade
+make build
+./bin/engine run -i                       # interactive terminal workspace
+./bin/collector -source suricata -observer IDS-01 -file /path/to/eve.json
+</code></pre>
+<pre><code>docker build -t bluetardigrade .
+docker run --rm -p 127.0.0.1:7777:7777 -p 127.0.0.1:7778:7778 \
+  -e SF_API_TOKEN -e SF_INGEST_TOKEN bluetardigrade
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Default endpoint</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sensor ingest</td>
+<td><code>127.0.0.1:7777</code>: NDJSON over TCP, optional TLS + AUTH</td>
+</tr>
+<tr>
+<td>Engine API</td>
+<td><code>http://127.0.0.1:7778</code>: REST, SSE and Prometheus</td>
+</tr>
+<tr>
+<td>Web console</td>
+<td><code>http://localhost:3000</code></td>
+</tr>
+<tr>
+<td>AI analyst hub (optional)</td>
+<td><code>http://127.0.0.1:3003</code></td>
+</tr>
+</tbody></table>
+</details><h2>Telemetry sources</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>What it collects</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Rust ETW sensor</strong> (<code>sensor/</code>)</td>
+<td>Process creation (command line, parent, owner SID, image path and SHA-256), TCP connections with the resolved domain, DNS queries, registry writes the detections read (Run, IFEO, Defender, LSA, services…), YARA matches on files and process memory</td>
+<td>Bounded queue plus an on-disk spool: an engine restart loses no events. Runs as a Windows service</td>
+</tr>
+<tr>
+<td><strong>Sysmon</strong> (<code>sf-sensor</code>)</td>
+<td>Process, network, registry, file and image-load events</td>
+<td>Ships a tuned config; <code>sf-sensor -SetupSysmon</code> installs it</td>
+</tr>
+<tr>
+<td><strong>Collector</strong> (<code>sf-collector</code>)</td>
+<td>Suricata EVE, Zeek conn, osquery differential, Cowrie, Windows firewall logs, EML mail</td>
+<td>Offline import; never runs provider commands or visits mail URLs</td>
+</tr>
+<tr>
+<td><strong>Windows Event Forwarding</strong></td>
+<td>Security and System logs of domain controllers and servers</td>
+<td>Nothing installed on the DCs: <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/AD-WEF-SUSCRIPCION.md">subscription guide</a></td>
+</tr>
+</tbody></table>
+<h2>Console tour</h2>
+<p>A Next.js console. Everything reaches the engine through its same-origin
+proxy, so the API token never reaches the browser.</p>
+<table>
+<tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/alertas.webp" alt="Alert queue with the severity strip and a selected alert's detail" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/seleccion.webp" alt="Several alerts selected with the bulk action bar" /></td>
+</tr>
+<tr>
+<td><b>Alertas</b> · live queue or paged history; detail with graph, forensic bundle, reputation and reports</td>
+<td><b>Bulk actions</b> · triage, assign, suppress or open an incident for a whole selection</td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/incidentes.webp" alt="Incident detail with alerts, graph and timeline" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/equipos.webp" alt="Host page with sensor health, process tree and graph" /></td>
+</tr>
+<tr>
+<td><b>Incidentes</b> · cases with owner, affected hosts, graph and timeline</td>
+<td><b>Equipos</b> · fleet status, enrollment and a page per host</td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/reglas.webp" alt="Rule coverage by ATT&amp;CK tactic, severity and event type" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/cadenas.webp" alt="Kill chains drawn as flows with per-step alerts" /></td>
+</tr>
+<tr>
+<td><b>Detección</b> · ATT&amp;CK, severity and event-type coverage of the loaded rules</td>
+<td><b>Cadenas</b> · kill chains step by step, with completed campaigns</td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/flujo.webp" alt="Live telemetry feed" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/estado.webp" alt="Platform health: engine, ingest, queues, store and delivery" /></td>
+</tr>
+<tr>
+<td><b>Flujo en vivo</b> · the raw telemetry, filterable and exportable</td>
+<td><b>Estado</b> · runtime counters of every stage of the pipeline</td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/respuesta.webp" alt="Active response: armed surface and audit" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/reglas-light.webp" alt="The detection tabs in the light theme" /></td>
+</tr>
+<tr>
+<td><b>Respuesta activa</b> · arming state, decisions and denial codes</td>
+<td><b>Light theme</b> · every view, validated for contrast in both themes</td>
+</tr>
+</table><details>
+<summary><b>Every view</b></summary><table>
+<thead>
+<tr>
+<th>View</th>
+<th>What the analyst does there</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Panel</strong></td>
+<td>Triage backlog, KPIs, activity and severity trends, investigation graph, MITRE coverage and a host × tactic heatmap</td>
+</tr>
+<tr>
+<td><strong>Estado</strong></td>
+<td>Platform health: engine runtime counters, ingest, queues, store and external delivery</td>
+</tr>
+<tr>
+<td><strong>Flujo en vivo</strong></td>
+<td>Live telemetry with pause, search, type filters and JSONL/CSV export</td>
+</tr>
+<tr>
+<td><strong>Alertas</strong></td>
+<td>Live queue or paged history; bulk triage, assignment, incidents, suppressions and exports; per-alert graph, forensic bundle, reputation, containment and reports</td>
+</tr>
+<tr>
+<td><strong>Incidentes</strong></td>
+<td>Cases that group alerts: status, severity, owner, hosts, graph and timeline</td>
+</tr>
+<tr>
+<td><strong>Equipos</strong></td>
+<td>Fleet status from heartbeats, enrollment and approval of new machines, host groups, and a page per host</td>
+</tr>
+<tr>
+<td><strong>Directorio</strong></td>
+<td>Read-only Active Directory snapshot and domain posture: findings, sensor coverage and objects</td>
+</tr>
+<tr>
+<td><strong>Informes</strong></td>
+<td>The engine's report catalogue with CSV/JSON download and a printable view</td>
+</tr>
+<tr>
+<td><strong>Consulta BD</strong></td>
+<td>Read-only SQL over the evidence store, administrators only, every query audited</td>
+</tr>
+<tr>
+<td><strong>Detección</strong></td>
+<td>Rules, kill chains, threat intel, suppressions, rule tester, noise report and detection validation</td>
+</tr>
+<tr>
+<td><strong>Respuesta activa</strong></td>
+<td>Arming state and the forensic response audit</td>
+</tr>
+<tr>
+<td><strong>Analista IA</strong></td>
+<td>Optional triage assistant with your own model</td>
+</tr>
+<tr>
+<td><strong>Ajustes</strong></td>
+<td>Language, accounts, host groups, the AD connector, notification channels and integrations</td>
+</tr>
+</tbody></table>
+</details><p>There is also a keyboard-driven <strong>terminal workspace</strong>: <code>engine run -i</code> (see
+the <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/OPERATIONS.md">operations guide</a>). To run the console from source:
+<a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/web/console/README.md">web/console/README.md</a>.</p>
+<h2>Notifications</h2>
+<p>
+  <img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/avisos.webp" alt="Ajustes, Avisos externos: an ntfy, an email and a Telegram channel with their counters" width="100%" />
+</p><p>Every alert that passes a channel's minimum severity reaches that channel,
+without ever slowing detection down (one bounded queue per channel, three
+attempts, every outcome counted on <code>/api/stats</code> and <code>/metrics</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>What arrives</th>
+<th>You need</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ntfy</strong></td>
+<td>A push on the phone: <code>[CRITICAL] rule @ host</code> as the title, the severity as the priority (critical rings through <em>do not disturb</em>), a tap opens the alert</td>
+<td>The ntfy app and a topic on <a href="https://ntfy.sh">ntfy.sh</a> or on your own server</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>The alert line, its link and the full alert as JSON (the mailbox doubles as a record)</td>
+<td>An SMTP relay (StartTLS by default)</td>
+</tr>
+<tr>
+<td><strong>Telegram</strong></td>
+<td>The alert line and its link</td>
+<td>A bot from BotFather and the chat id</td>
+</tr>
+<tr>
+<td><strong>Slack</strong></td>
+<td>The alert line and its link</td>
+<td>An incoming webhook</td>
+</tr>
+</tbody></table>
+<p><strong>From the console</strong> (administrators, engine started with <code>-api-write</code> —
+<code>sf-start</code> does both): <strong>Ajustes → Avisos externos</strong>, add a channel, choose
+its minimum severity, fill in the console address so every message links to
+its alert, <strong>Guardar avisos</strong>, then <strong>Enviar prueba</strong>. Secrets are
+write-only: the console shows «guardado» and never reads them back.</p>
+<p><strong>Phone push in three steps:</strong></p>
+<ol>
+<li>Install <strong>ntfy</strong> on the phone (Android or iPhone) and subscribe to a
+hard-to-guess topic, e.g. <code>soc-acme-7f3k</code>.</li>
+<li>In <strong>Ajustes → Avisos externos</strong>, add an <strong>ntfy</strong> channel with the
+server (<code>https://ntfy.sh</code>, or yours) and that topic, minimum severity
+<strong>Alta</strong>.</li>
+<li><strong>Enviar prueba</strong>: the phone rings. From now on, so does every high or
+critical alert.</li>
+</ol>
+<p><strong>Or as a file</strong> — <code>tools\config\notify.yaml</code>, the same one the console
+writes (<a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/notify.example.yaml">full example</a>):</p>
+<pre><code>console_url: https://soc.acme.local          # every message links to its alert
+channels:
+  - type: ntfy
+    name: guardia-movil
+    min_severity: high
+    url: https://ntfy.acme.local             # or https://ntfy.sh
+    topic: soc-acme-7f3k
+    token_env: SF_NTFY_TOKEN                 # only if the server has access control
+  - type: email
+    name: soc-correo
+    min_severity: medium
+    server: smtp.acme.local:587
+    from: bluetardigrade@acme.local
+    to: [soc@acme.local]
+    username_env: SF_SMTP_USER
+    password_env: SF_SMTP_PASSWORD
+  - type: telegram
+    name: guardia-telegram
+    min_severity: critical
+    token_env: SF_TELEGRAM_TOKEN
+    chat_id: "-1001234567890"
+</code></pre>
+<p>Details: <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/OPERATIONS.md#external-notifications-slack-telegram-email-ntfy">External notifications</a>.</p>
+<h2>On your phone</h2>
+<p>
+  <img src="https://raw.githubusercontent.com/Ruby570bocadito/bluetardigrade/HEAD/docs/assets/showcase/movil.webp" alt="Three phones with the phone view: the hosts, the alert queue and the light theme" width="100%" />
+</p><p><code>https://&lt;your console&gt;/movil</code> is the console for whoever is on call, and it
+<strong>installs as an app</strong> (home-screen icon, full screen, opens straight on the
+alerts).</p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What you do there</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Alertas</strong></td>
+<td>Open alerts filtered to <em>Críticas</em>, <em>Altas y críticas</em> or <em>Todas</em>; <strong>Reconocer</strong> or <strong>Cerrar</strong> from the card; ↗ opens the alert in the full console</td>
+</tr>
+<tr>
+<td><strong>Incidentes</strong></td>
+<td>Open incidents, most severe and most recently touched first, with their alerts, hosts and owner</td>
+</tr>
+<tr>
+<td><strong>Equipos</strong></td>
+<td>Every machine, the ones that stopped sending heartbeats first</td>
+</tr>
+</tbody></table>
+<p>The badges on the tabs count critical alerts, open incidents and silent
+machines. A viewer sees the cards without the buttons; every decision is
+signed with the session's account, exactly as on the desktop.</p>
+<h3>Connecting a phone</h3>
+<p>A phone reaches the console over the network, and browsers only install apps
+from <strong>HTTPS</strong>. Publish it <strong>inside the company network or its VPN — never to
+the internet</strong>:</p>
+<ol>
+<li><p><strong>Accounts with two-step sign-in</strong> for everyone who will use a phone:</p>
+<pre><code>sf-console -AddUser ana -Role analyst
+sf-console -RequireMfa admin,analyst
+</code></pre>
+</li>
+<li><p><strong>Let the console answer to the name the phones use, and only from the
+VPN.</strong> Add it to the console's allowed hosts and open the port in the
+server firewall to the VPN range only (no port forwarding on the router):</p>
+<pre><code># then sf-stop and sf-start from a new terminal
+[Environment]::SetEnvironmentVariable('CONSOLE_ALLOWED_HOSTS', 'soc.acme.local', 'User')
+New-NetFirewallRule -DisplayName 'bluetardigrade console (VPN)' -Direction Inbound `
+  -Protocol TCP -LocalPort 443 -RemoteAddress 10.8.0.0/16 -Action Allow
+</code></pre>
+</li>
+<li><p><strong>Put HTTPS in front</strong> with a certificate the phones trust (your company
+CA). For example with <a href="https://caddyserver.com">Caddy</a> on the same server:</p>
+<pre><code>soc.acme.local {
+    tls C:/certs/soc.acme.local.crt C:/certs/soc.acme.local.key
+    reverse_proxy 127.0.0.1:3000
+}
+</code></pre>
+<p>Caddy sends <code>X-Forwarded-Proto: https</code>, so the console marks its session
+cookie <code>Secure</code> and sends HSTS. IIS with URL Rewrite or nginx work the same
+way.</p>
+</li>
+<li><p><strong>On the phone</strong> (connected to the VPN), open <code>https://soc.acme.local/movil</code>
+and sign in. Then:</p>
+<ul>
+<li><strong>Android (Chrome):</strong> menu ⋮ → <strong>Instalar aplicación</strong>.</li>
+<li><strong>iPhone (Safari):</strong> Share → <strong>Añadir a pantalla de inicio</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>Sessions on the phone follow the desktop rules: they expire when idle and
+after 12 hours, end on sign-out, and end on the server when the account
+changes. Pairing a phone by QR code with per-device sessions is on the
+roadmap. Details: <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/OPERATIONS.md#the-console-on-a-phone">The console on a phone</a>.</p>
+<h2>Security model</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ingest</td>
+<td>Shared token or <strong>per-sensor identities</strong> bound to their hosts; events for other hosts are refused and counted</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>Native TLS on both listeners; the sensor trusts only the CA you give it</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Bearer token; listens on loopback by default</td>
+</tr>
+<tr>
+<td>Console</td>
+<td>Sign-in page and expiring sessions; <strong>per-analyst accounts</strong> (viewer / analyst / admin) or <strong>Active Directory accounts</strong> by group; optional or per-role <strong>TOTP</strong>; <strong>host groups</strong> that limit what an account sees; every write and sign-in audited</td>
+</tr>
+<tr>
+<td>AI hub</td>
+<td><code>HUB_ACCESS_TOKEN</code> per socket, Origin allowlist and shared rate limits</td>
+</tr>
+<tr>
+<td>Response</td>
+<td><code>kill_process</code> needs an arm flag, a response token and <strong>per-operator credentials</strong>; protected processes are refused; every attempt audited</td>
+</tr>
+<tr>
+<td>Evidence</td>
+<td>Stored events are <strong>append-only</strong>: a second copy of an event id cannot rewrite the first</td>
+</tr>
+<tr>
+<td>Privacy</td>
+<td>Reads of a user's directory record are audited; personal audit tables expire with the store retention</td>
+</tr>
+<tr>
+<td>Supply chain</td>
+<td>SHA-pinned GitHub Actions, minimal permissions, Sigstore release attestations</td>
+</tr>
+</tbody></table>
+<p>Report vulnerabilities privately: <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/SECURITY.md">SECURITY.md</a>.</p>
+<h2>Architecture</h2>
+<pre><code>flowchart LR
+    subgraph Endpoints
+      E["Rust ETW sensor&lt;br/&gt;(+ YARA)"]
+      S["Sysmon"]
+    end
+    W["DCs and servers&lt;br/&gt;(WEF)"] --&gt; I
+    L["Suricata · Zeek · osquery&lt;br/&gt;Cowrie · firewall · EML"] --&gt; C["Collector"]
+    E --&gt;|NDJSON / TLS| I
+    S --&gt;|NDJSON / TLS| I
+    C --&gt; I
+    subgraph Engine["Go engine (single binary)"]
+      I["Ingest + auth"] --&gt; D["Rules · kill chains&lt;br/&gt;beaconing · thresholds"]
+      D --&gt; A["Alerts · risk · lifecycle&lt;br/&gt;forensic bundles"]
+    end
+    A --&gt; API["REST · SSE · Prometheus"]
+    A --&gt; DB[("SQLite history")]
+    A --&gt; OUT["Webhook · Elastic · Splunk&lt;br/&gt;Slack · Telegram · email"]
+    API --&gt; UI["SOC console"]
+    API --&gt; T["Terminal workspace"]
+</code></pre>
+<p><code>pkg/model</code> defines the event contract every sensor emits. Package
+responsibilities and data flow: <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/ARCHITECTURE.md">ARCHITECTURE.md</a>.</p>
+<p><strong>Performance</strong>, from loopback lab measurements (not deployment guarantees):</p>
+<table>
+<thead>
+<tr>
+<th>Measurement</th>
+<th>Before</th>
+<th>Now</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Throughput with <code>-store</code> (SQLite on), using batched transactions</td>
+<td>~8.3k events/s</td>
+<td><strong>~23.6k events/s</strong></td>
+</tr>
+<tr>
+<td>Rule field resolution</td>
+<td>8.0 µs per event</td>
+<td><strong>1.7 µs per event</strong></td>
+</tr>
+</tbody></table>
+<p>Ingest→alert p99 latency was about 0.4 ms. Reproduce it with
+<code>scripts/dev-tests/bench</code>, following the
+<a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/OPERATIONS.md#measured-performance">method</a>.</p>
+<details>
+<summary><b>Repository layout</b></summary><pre><code>cmd/engine/          Go engine, interactive CLI, doctor, reports
+cmd/collector/       observed-log and offline mail importer
+internal/            detection, correlation, store, API, delivery, response
+pkg/model/           event wire contract
+sensor/              Rust Windows ETW sensor (+ YARA)
+rules/  sequences/   YAML detection content and kill chains
+web/console/         Next.js SOC console
+web/console-service/ Bun + socket.io AI analyst hub
+website/             project landing page
+scripts/             Windows tooling, dev tests and verification harnesses
+tools/               browser-test tooling for the console
+changelog.d/         one changelog fragment per change, consolidated on release
+docs/                guides, architecture, API reference and README media
+</code></pre>
+</details><h2>Documentation</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/GUIA-INICIO.md">Guía de inicio</a></td>
+<td>First run, operation and troubleshooting (Spanish)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/OPERATIONS.md">Operations</a></td>
+<td>Flags, environment, API, storage, integrations, accounts, response, CLI</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/ARCHITECTURE.md">Architecture</a></td>
+<td>System design, event contract, feature inventory</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/FLOTA-REMOTA.md">Remote fleet</a></td>
+<td>Enrolling remote machines: identities, TLS, firewall, silent-sensor alerts (Spanish)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/AD-WEF-SUSCRIPCION.md">AD over WEF</a></td>
+<td>Forwarding DC and server logs without installing anything on them (Spanish)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/DOCTOR.md">Deployment doctor</a></td>
+<td>Diagnosing rules, tokens, TLS, SQLite, sensors and console</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/false-positive-control.md">False-positive control</a></td>
+<td>Dedup, suppressions and noise tuning</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/DETECCION-Y-EVIDENCIA.md">File detections and evidence</a></td>
+<td>Artifact alarms and forensic evidence</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/SOC-INTEGRACIONES-E-INFORMES.md">SOC integrations and reports</a></td>
+<td>Collector formats, investigation workflow, reports</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/PHISHING.md">Email phishing</a></td>
+<td>Explainable indicators in imported EML</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/WINDOWS-SERVER.md">Windows Server</a></td>
+<td>Boot tasks and persisted credentials</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/STARTUP-FIXES.md">Startup fixes</a></td>
+<td>Windows startup: hub origin, console CSP, inherited credentials</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/SMART-APP-CONTROL.md">Smart App Control</a></td>
+<td>Execution blocks and signing</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/MODELO-DE-AMENAZAS.md">Threat model</a></td>
+<td>What the platform defends against, and how (Spanish)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/PRUEBAS-PENDIENTES.md">Pending tests</a></td>
+<td>What still needs a real Windows host (Spanish)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/api/openapi.yaml">OpenAPI</a></td>
+<td>API integration</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/ROADMAP.md">Roadmap</a> · <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/CHANGELOG.md">Changelog</a></td>
+<td>What's next, and what shipped</td>
+</tr>
+</tbody></table>
+<h2>Development</h2>
+<pre><code>make test        # Go tests
+make ci          # everything CI runs (prerequisites in the Makefile)
+
+cd web/console &amp;&amp; bun test &amp;&amp; bun run typecheck &amp;&amp; bun run build
+make console-browser   # Chromium checks of the built console, desktop + mobile
+make console-a11y      # axe (WCAG 2.1 AA) over every view, both themes
+</code></pre>
+<p>CI runs Go formatting, vet, staticcheck and race tests; console and hub tests,
+type checks and a production build; DOM, Chromium, accessibility, CSP and
+motion checks of the console; the OpenAPI drift guard; Rust checks on Linux and
+Windows; and a native Windows response smoke test — on SHA-pinned actions with
+minimal permissions. Releases are gated on SemVer and the changelog.</p>
+<details>
+<summary><b>Regenerating the README media</b></summary><p>Screenshots, framed images and demo clips are all scripted from the console
+build and the repository's fixtures (details in
+<a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/assets/README.md">docs/assets/README.md</a>):</p>
+<pre><code>node docs/assets/src/capture_console.mjs   # console-*.png
+node docs/assets/src/frame_shots.mjs       # showcase/*.webp
+node docs/assets/src/record_demo.mjs       # demo/raw/*.webm
+docs/assets/src/make_media.sh              # demo/*.webp + the MP4 tour
+</code></pre>
+</details><h2>Roadmap</h2>
+<ul>
+<li><strong>Before 1.0:</strong> a 24–48 h soak test with the sensor as a service, laptop
+suspend, long engine outages and a week of CPU and memory on real Windows
+hosts (<a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/PRUEBAS-PENDIENTES.md">checklist</a>).</li>
+<li><strong>Next:</strong><ul>
+<li>extended response, opt-in at install: isolate a host, quarantine a file,
+signed and audited orders to the sensor, one- or two-person approval;</li>
+<li>pairing a phone by QR code, with per-device sessions revocable from the
+console;</li>
+<li>a reviewed SigmaHQ pack, a rule editor and YARA management in the console;</li>
+<li>continuous anti-phishing (IMAP mailbox, SPF/DKIM/DMARC, look-alike domains,
+QR codes).</li>
+</ul>
+</li>
+<li><strong>Later:</strong> <code>lite</code> and <code>full</code> editions, a signed plugin catalogue, explainable
+ML triage, and many engines under one master for large fleets.</li>
+</ul>
+<p>The full plan is in <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/docs/ROADMAP.md">docs/ROADMAP.md</a> and <a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/TODO.md">TODO.md</a>.</p>
+<h2>Contributing</h2>
+<p>Open an issue, or a focused PR that states the problem, the resulting behavior
+and how you verified it. Detection changes should include the modeled TTP, lab
+events that trigger it and the observed false-positive profile.</p>
+<blockquote>
+<p>The project was renamed from <code>security-framework</code>. GitHub redirects the old
+URLs, and the Windows shims keep their <code>sf-*</code> names so existing installs
+keep updating.</p>
+</blockquote>
+<h2>License</h2>
+<p><a href="https://github.com/Ruby570bocadito/bluetardigrade/blob/HEAD/LICENSE">Apache License 2.0</a></p>

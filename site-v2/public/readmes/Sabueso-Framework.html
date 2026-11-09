@@ -1,0 +1,173 @@
+<p><img src="https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/HEAD/docs/assets/banner-es.svg" alt="Sabueso — Sigue el rastro. Las conclusiones, tuyas." width="100%" /></p><p>
+  <b>Análisis forense de Windows para peritos</b>: de la imagen de disco al informe pericial firmado,<br />
+  con una cadena de custodia que se puede demostrar y un sabueso que te dice qué hacer después.
+  <br /><br />
+  <a href="https://github.com/Ruby570bocadito/Sabueso-Framework#pruébalo-en-un-minuto">Pruébalo</a> ·
+  <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/MANUAL.md">Manual</a> ·
+  <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/VALIDACION.md">Validación</a> ·
+  <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/TODO.md">Hoja de ruta</a> ·
+  <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/README.en.md">English</a>
+</p><hr />
+<p><img src="https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/HEAD/docs/assets/terminal-es.svg" alt="Sesión de terminal: portada de Sabueso, caso de demostración, hallazgos críticos, relato ATT&amp;CK y siguiente paso" width="92%" /></p><h2>Qué es</h2>
+<p><strong>Sabueso</strong> es una herramienta libre (Apache 2.0) para investigar ordenadores Windows comprometidos y presentar lo
+encontrado con garantías ante un cliente o un juzgado. Abre imágenes de disco sin montarlas, analiza más de 25 tipos
+de artefactos, señala <strong>indicios</strong> con la regla que los disparó y deja que el perito los confirme o descarte. Todo
+queda en una cadena de custodia encadenada por SHA-256 y termina en un informe en español o inglés.</p>
+<blockquote>
+<p>Hallazgos ≠ conclusiones. Sabueso marca dónde mirar; <strong>el veredicto lo firma el perito</strong>.</p>
+</blockquote>
+<h2>Por qué Sabueso</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>⚖️ <strong>Pensado para el perito</strong></td>
+<td>Informe pericial (UNE 71506) con objeto, limitaciones generadas a partir del caso, declaración del art. 335.2 LEC, datos del procedimiento en la portada y firma Ed25519.</td>
+</tr>
+<tr>
+<td>🔗 <strong>Custodia demostrable</strong></td>
+<td>La evidencia nunca se modifica; cada acción, informe y exportación queda en un registro encadenado por hash, y los archivos extraídos conservan sus fechas originales.</td>
+</tr>
+<tr>
+<td>🧭 <strong>Te guía</strong></td>
+<td>Cada caso sabe en qué punto está: la CLI y la web te dicen el siguiente paso y la orden exacta.</td>
+</tr>
+<tr>
+<td>📊 <strong>Validado con casos reales</strong></td>
+<td>Probado con 261 ataques reales, 599 registros de Hayabusa y el disco del NIST «Hacking Case»; las cifras, los fallos y sus correcciones son <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/VALIDACION.md">públicos</a>.</td>
+</tr>
+<tr>
+<td>🧰 <strong>Todo en uno y sin nube</strong></td>
+<td>E01, VHDX, VMDK, QCOW2, VSS y BitLocker; registro, EVTX + Sigma, $MFT, Prefetch, SRUM, papelera, navegadores, memoria con Volatility, YARA, MITRE ATT&amp;CK, STIX 2.1 y Timesketch. Funciona en un laboratorio aislado.</td>
+</tr>
+<tr>
+<td>🌍 <strong>Bilingüe de verdad</strong></td>
+<td>El mismo caso se revisa e informa en español o en inglés.</td>
+</tr>
+</tbody></table>
+<h2>Pruébalo en un minuto</h2>
+<pre><code>sabueso demo ./laboratorio            # crea un caso de intrusión ficticio y lo analiza
+sabueso web -w ./laboratorio --abrir  # ábrelo en el navegador
+</code></pre>
+<p>Para instalarlo, elige una vía (todas terminan con <code>sabueso doctor</code>, que comprueba que todo funciona):</p>
+<table>
+<thead>
+<tr>
+<th>Vía</th>
+<th>Cómo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Windows, sin Python</strong></td>
+<td>Descarga <code>sabueso-&lt;versión&gt;-windows-x64.zip</code> de <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/releases/latest">Releases</a>, descomprímelo y ejecuta <code>sabueso\sabueso.exe</code>. Cabe en un USB.</td>
+</tr>
+<tr>
+<td><strong>Instalador de Windows</strong></td>
+<td><code>irm https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/main/install/install.ps1 | iex</code></td>
+</tr>
+<tr>
+<td><strong>Linux y macOS</strong></td>
+<td><code>curl -fsSL https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/main/install/install.sh | sh</code></td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td><code>docker compose up -d</code> (web en <code>http://127.0.0.1:8765</code>)</td>
+</tr>
+<tr>
+<td><strong>pip</strong></td>
+<td><code>pip install https://github.com/Ruby570bocadito/Sabueso-Framework/archive/refs/heads/main.zip</code></td>
+</tr>
+</tbody></table>
+<p>Detalles y opciones en el <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/MANUAL.md#instalaci%C3%B3n">manual</a>.</p>
+<h2>Cómo trabaja</h2>
+<pre><code>flowchart LR
+    A[Evidencia&lt;br&gt;disco, RAM, triaje] --&gt;|hash + custodia| B[Extracción&lt;br&gt;sin montar]
+    B --&gt; C[25 módulos&lt;br&gt;+ Sigma + YARA]
+    C --&gt; D[Hallazgos&lt;br&gt;con su regla]
+    D --&gt;|el perito| E[Revisión&lt;br&gt;confirma / descarta]
+    E --&gt; F[Conclusiones]
+    F --&gt; G[Informe pericial&lt;br&gt;HTML / PDF firmado]
+    D --&gt; H[ATT&amp;CK · STIX · Timesketch]
+</code></pre>
+<p>En la práctica, una orden hace todo el recorrido automático y tú haces la parte que es tuya:</p>
+<pre><code>sabueso auto disco.E01 --nuevo ./caso-2026-017 -i "R. García"   # extrae, analiza, informa y exporta
+sabueso -c ./caso-2026-017 hallazgos                            # revisa los indicios
+sabueso -c ./caso-2026-017 revisar 12 confirmado -n "Coincide con el 4688 del DC"
+sabueso -c ./caso-2026-017 informe --pericial --juzgado "Juzgado de Instrucción n.º 3" --pdf --firmar
+</code></pre>
+<h2>Vistazo</h2>
+<p><img src="https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/HEAD/docs/assets/recorrido-web.gif" alt="Recorrido por la interfaz web: casos, resumen, hallazgos, ATT&amp;CK, línea temporal, ejecución e informes" width="92%" /></p><table>
+<thead>
+<tr>
+<th>Resumen del caso, con el siguiente paso</th>
+<th>Técnicas MITRE ATT&amp;CK observadas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/HEAD/docs/assets/resumen.png" alt="Resumen del caso de demostración" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/HEAD/docs/assets/attack.png" alt="Matriz ATT&amp;CK del caso de demostración" /></td>
+</tr>
+<tr>
+<td><strong>Hallazgos con su revisión</strong></td>
+<td><strong>Modo oscuro</strong> (sigue al del sistema)</td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/HEAD/docs/assets/hallazgos.png" alt="Hallazgos del caso de demostración" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/HEAD/docs/assets/resumen-oscuro.png" alt="Resumen en modo oscuro" /></td>
+</tr>
+</tbody></table>
+<h2>Validado con casos reales</h2>
+<table>
+<thead>
+<tr>
+<th>Conjunto público</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>261 registros de ataques reales (<a href="https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES">EVTX-ATTACK-SAMPLES</a>)</td>
+<td>Detecta el 24 % con las 15 reglas integradas y el <strong>74 %</strong> con las de SigmaHQ; 0 errores de lectura</td>
+</tr>
+<tr>
+<td>599 registros de <a href="https://github.com/Yamato-Security/hayabusa-sample-evtx">Hayabusa</a></td>
+<td>26.197 eventos y 2.888 hallazgos sin un fallo, en 108 s con 2.405 reglas Sigma</td>
+</tr>
+<tr>
+<td>Disco del <a href="https://cfreds-archive.nist.gov/Hacking_Case.html">NIST «Hacking Case»</a> (Windows XP)</td>
+<td><strong>15 de 31</strong> preguntas oficiales respondidas por completo y 9 en parte, en 13 s</td>
+</tr>
+</tbody></table>
+<p>Cada fallo encontrado se convirtió en un test de regresión. Método, cifras y lo que falta: <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/VALIDACION.md">docs/VALIDACION.md</a>.</p>
+<h2>Cuándo usar otra herramienta</h2>
+<p>Sabueso es honesto con sus límites (lista completa en el <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/MANUAL.md#limitaciones-conocidas">manual</a>):</p>
+<ul>
+<li><strong>Linux, macOS o móviles</strong> como sistemas analizados: todavía no.</li>
+<li><strong>Cientos de equipos a la vez</strong>: para caza a escala, una plataforma como Velociraptor; Sabueso puede analizar
+después sus recolecciones.</li>
+<li><strong>Memoria RAM a fondo</strong>: Sabueso automatiza lo habitual de Volatility 3; para investigaciones complejas, úsalo
+directamente.</li>
+<li><strong>Detección en registros de eventos</strong>: con las reglas integradas es mínima; descarga las de SigmaHQ
+(<code>sabueso sigma download</code>; <code>sabueso doctor</code> te lo recuerda).</li>
+</ul>
+<h2>Documentación</h2>
+<ul>
+<li><a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/MANUAL.md">Manual</a>: instalación, configuración, todas las órdenes, módulos, informes, integridad y cómo
+escribir un módulo.</li>
+<li><a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/VALIDACION.md">Validación</a>: cómo se prueba Sabueso con casos reales y qué resultados da.</li>
+<li><a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/IDENTIDAD.md">Identidad</a>: cómo habla Sabueso y por qué los informes no llevan su personalidad.</li>
+<li><a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/TODO.md">Hoja de ruta</a> y <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/CHANGELOG.md">CHANGELOG</a>.</li>
+</ul>
+<h2>Conoce a Sabu</h2>
+<img src="https://raw.githubusercontent.com/Ruby570bocadito/Sabueso-Framework/HEAD/docs/assets/sabu.svg" alt="Sabu, la mascota de Sabueso" width="120" /><p>Sabu es la mascota del proyecto: un sabueso con collar azul y una placa con forma de escudo (la custodia) y una huella
+(el rastro). Te recibe en la terminal, te acompaña en la web y se queda fuera de los informes, porque un informe se
+lee en un juzgado.</p>
+<h2>Contribuir y licencia</h2>
+<p>Las contribuciones son bienvenidas: un artefacto nuevo llega con una muestra real con licencia, textos en español e
+inglés y tests (detalles en el <a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/MANUAL.md#arquitectura-y-c%C3%B3mo-crear-un-m%C3%B3dulo">manual</a>). Para comprobar un cambio:
+<code>python -m pytest -q</code> y <code>ruff check sabueso tests scripts</code>.</p>
+<p><a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/LICENSE">Apache License 2.0</a>. Las dependencias conservan sus licencias (detalle en el
+<a href="https://github.com/Ruby570bocadito/Sabueso-Framework/blob/HEAD/docs/MANUAL.md#licencia">manual</a>).</p>

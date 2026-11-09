@@ -1,0 +1,184 @@
+<h1>🛡️ Adarve</h1>
+<p><strong>Auditoría y hardening para Windows, Windows Server y Linux</strong></p>
+<p>Evalúa la configuración de seguridad de tus equipos frente a perfiles de hardening,
+calcula una puntuación de postura, la mapea a MITRE ATT&amp;CK y te dice qué corregir primero.</p>
+
+<p><a href="https://github.com/Ruby570bocadito/best-harden#-instalaci%C3%B3n-en-una-l%C3%ADnea">Instalación</a> · <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/10-guia-de-uso.md">Uso</a> · <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/README.md">Documentación</a> · <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/13-hoja-de-ruta.md">Hoja de ruta</a></p>
+<p><sub>Antes se llamaba <b>Bastion</b>. Al actualizar con el instalador se traslada todo: historial, excepciones, instantáneas y la ronda diaria.</sub></p>
+<hr />
+<p><img src="https://raw.githubusercontent.com/Ruby570bocadito/best-harden/HEAD/docs/assets/demo.gif" alt="La consola de Adarve: cada tramo de la muralla es una categoría de controles; al simular la ola 1, los tramos que se reparan solos crecen y la puntuación sube del 74 % al 89 %" /></p>
+<details>
+<summary>Más capturas: la muralla, las puertas y el informe HTML</summary><table>
+<thead>
+<tr>
+<th>La muralla (<code>adarve ui</code>)</th>
+<th>Las puertas: superficie de ataque</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/best-harden/HEAD/docs/assets/consola.png" alt="Consola de Adarve: la muralla por categorías y el tramo seleccionado" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/best-harden/HEAD/docs/assets/consola-puertas.png" alt="Consola de Adarve: los puertos de la red como puertas abiertas, con rastrillo o cerradas" /></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Informe de la ronda, de día</th>
+<th>Informe de la ronda, de noche</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/best-harden/HEAD/docs/assets/informe-claro.png" alt="Informe HTML de Adarve, tema claro" /></td>
+<td><img src="https://raw.githubusercontent.com/Ruby570bocadito/best-harden/HEAD/docs/assets/informe-oscuro.png" alt="Informe HTML de Adarve, tema oscuro" /></td>
+</tr>
+</tbody></table>
+<p><sub>Datos de demostración de un servidor ficticio (<code>web-01</code>), evaluado con el código real de Adarve: <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/scripts/demo"><code>scripts/demo</code></a>.</sub></p>
+</details><h2>✨ Qué hace hoy</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🔍 <strong>Auditoría de solo lectura</strong></td>
+<td>161 controles reales para Windows 10/11, Windows Server 2016-2025 (miembro y DC) y Linux (Ubuntu, Debian, RHEL y derivados). <code>scan</code> nunca modifica el sistema. Lo que solo puede juzgar una persona (quién debe ser administrador, quién puede usar sudo…) queda <strong>para revisar a mano</strong>, con la evidencia reunida y fuera de la puntuación.</td>
+</tr>
+<tr>
+<td>🛡️ <strong>Hardening seguro</strong></td>
+<td><code>adarve harden</code> corrige 121 controles con simulación, instantánea previa, verificación y <strong>rollback automático</strong>; olas por riesgo de rotura y dead-man switch para SSH/RDP.</td>
+</tr>
+<tr>
+<td>🎯 <strong>Perfiles por rol</strong></td>
+<td>Estación de trabajo, servidor miembro, controlador de dominio y servidor Linux, con niveles L1/L2. Adarve detecta el rol y elige el perfil.</td>
+</tr>
+<tr>
+<td>📊 <strong>Puntuación de postura</strong></td>
+<td>Puntuación ponderada por severidad (0-100, A-F), por categoría y por severidad.</td>
+</tr>
+<tr>
+<td>📝 <strong>Excepciones con caducidad</strong></td>
+<td>Acepta un control fallido con motivo, responsable y fecha de caducidad (máximo un año): sale aparte, no cuenta y vuelve a fallar al caducar.</td>
+</tr>
+<tr>
+<td>🧭 <strong>MITRE ATT&amp;CK</strong></td>
+<td>Cada control enlaza técnicas y mitigaciones. El informe muestra qué técnicas quedan expuestas.</td>
+</tr>
+<tr>
+<td>🧾 <strong>Evidencias</strong></td>
+<td>Para cada control: valor real, valor esperado y de dónde sale el dato (clave de registro, <code>sshd -T</code>, <code>secedit</code>...).</td>
+</tr>
+<tr>
+<td>🛠️ <strong>Remediación guiada</strong></td>
+<td>Para lo que no es automático: resumen, ruta de GPO, comandos listos para copiar, riesgo de rotura e impacto.</td>
+</tr>
+<tr>
+<td>🌐 <strong>Informe HTML autocontenido</strong></td>
+<td>Un solo fichero, modo claro y oscuro, filtros, sin conexión, imprimible a PDF.</td>
+</tr>
+<tr>
+<td>🌍 <strong>Superficie de ataque</strong></td>
+<td><code>adarve surface</code> lista qué escucha en la red y con qué proceso, evalúa el firewall (Windows, nftables e iptables, que cubren ufw y firewalld) para decir si cada puerto está abierto a cualquiera, limitado o filtrado, y señala los servicios de riesgo expuestos (SMB, RDP, Redis, Docker API…) y los recursos compartidos abiertos a todos.</td>
+</tr>
+<tr>
+<td>🖥️ <strong>Consola local</strong></td>
+<td><code>adarve ui</code> abre un panel en el navegador con la tendencia de la puntuación, el plan de hardening por olas, el historial y las excepciones. Solo en 127.0.0.1 y con token.</td>
+</tr>
+<tr>
+<td>⚙️ <strong>Listo para CI/CD</strong></td>
+<td>Salida JSON estable y <code>--min-score</code> para fallar un pipeline de imágenes doradas.</td>
+</tr>
+<tr>
+<td>🔄 <strong>Auto-actualización firmada</strong></td>
+<td><code>adarve update</code> y los instaladores comprueban la firma de la release y la suma SHA-256 antes de instalar nada. Las reglas viajan dentro del binario.</td>
+</tr>
+</tbody></table>
+<h2>🚀 Instalación en una línea</h2>
+<p>El mismo comando <strong>instala, actualiza, prepara y lanza un primer escaneo</strong>. Vuelve a ejecutarlo cuando quieras actualizar.</p>
+<p><strong>Linux</strong> (como root):</p>
+<pre><code>curl -fsSL https://raw.githubusercontent.com/Ruby570bocadito/adarve/main/scripts/install.sh | sudo bash
+</code></pre>
+<p><strong>Windows</strong> (PowerShell como administrador):</p>
+<pre><code>irm https://raw.githubusercontent.com/Ruby570bocadito/adarve/main/scripts/install.ps1 | iex
+</code></pre>
+<p>Opciones, instalación sin conexión, espejos internos y desinstalación: <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/09-instalacion.md">docs/09-instalacion.md</a>.</p>
+<h2>🧪 Uso rápido</h2>
+<pre><code>adarve info                        # plataforma, rol y perfil detectados
+adarve scan                        # auditar con el perfil por defecto
+adarve scan --save --open          # guardar y abrir el informe HTML
+adarve ui                          # consola en el navegador: tendencia, plan e historial
+adarve surface                     # qué puede tocar un atacante desde la red
+adarve surface fix --apply         # limitar a la red local lo abierto a cualquiera (Windows, con rollback)
+adarve schedule enable             # análisis diario: tendencia y aviso de cambios en la exposición
+adarve schedule notify --set URL   # avisos en el móvil o en un chat (ntfy, Slack, Discord, Teams)
+adarve scan -p win-workstation-l2  # otro perfil
+adarve scan --format json          # salida JSON (integraciones)
+adarve scan --min-score 80         # código de salida 2 si no llega (CI/CD)
+adarve rules show WIN-NET-001      # detalle y remediación de un control
+adarve harden                      # simulación: qué cambiaría (no toca nada)
+adarve harden --apply              # corregir la ola 1 (riesgo nulo o bajo)
+adarve rollback                    # deshacer el último cambio
+adarve exceptions add LNX-FW-001 --reason "Filtrado en el perímetro" --expires 90d
+adarve update                      # actualizar Adarve y sus reglas
+</code></pre>
+<pre><code>  ▲ ADARVE  · auditoría de hardening  0.1.0
+  ────────────────────────────────────────────────────────────────────────
+  Equipo    web-01 · Ubuntu 24.04.1 LTS · kernel 6.8.0 · amd64
+  Perfil    Linux Servidor · Nivel 1 (linux-server-l1)
+  Escaneo   57 controles en 39 ms
+
+  POSTURA    65/100 D  ███████████████████████░░░░░░░░░░░░░
+           ✓ 22 superados   ✗ 15 fallidos   ! 0 errores   ○ 20 no aplican
+
+  FALLIDOS (15)
+  ✗ ALTO     LNX-FW-001    Firewall de host activo
+                           ufw: actual no configurado · esperado yes
+  ✗ ALTO     LNX-MAC-001   Control de acceso obligatorio activo (AppArmor o SELinux)
+  ...
+</code></pre>
+<h2>🗺️ Hacia dónde va</h2>
+<p><strong>La v1.0</strong> es la mejor herramienta para endurecer <strong>un equipo</strong>: auditar Windows 11, Windows Server 2022 y Ubuntu 24.04, endurecerlos con rollback y entregar un informe defendible, sin falsos positivos conocidos y con releases firmadas.</p>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Qué falta</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Identidad</td>
+<td>Renombrado a Adarve, informes con la nueva identidad, capturas y GIF</td>
+</tr>
+<tr>
+<td>Confianza</td>
+<td>Releases firmadas, análisis de seguridad y <em>fuzzing</em> en CI, instaladores probados de punta a punta</td>
+</tr>
+<tr>
+<td>Precisión</td>
+<td>Laboratorio con <em>golden files</em> en 3 sistemas, estado <code>manual</code></td>
+</tr>
+<tr>
+<td>Estabilidad</td>
+<td>Esquemas congelados y guía de operación</td>
+</tr>
+</tbody></table>
+<p>Detalle y estado de cada tarea en la <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/13-hoja-de-ruta.md">hoja de ruta</a>. La flota, la defensa y el modo enterprise son la <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/15-vision-a-largo-plazo.md">visión a largo plazo</a>, después de la v1.0.</p>
+<h2>🔐 Principios de seguridad</h2>
+<ul>
+<li><strong>Nada cambia sin pedirlo.</strong> <code>scan</code> es de solo lectura y <code>harden</code> es una simulación salvo que se use <code>--apply</code>. Cada cambio guarda antes el estado previo, se verifica y se revierte si falla.</li>
+<li><strong>Sin ejecución arbitraria.</strong> Las reglas son datos declarativos: un paquete de reglas no puede ejecutar comandos. Los comandos del sistema que usan los probes están fijados en el código y se invocan con ruta absoluta.</li>
+<li><strong>Releases firmadas.</strong> El instalador y <code>adarve update</code> comprueban la firma de <code>checksums.txt</code> con la clave pública que llevan dentro y después la suma SHA-256 del archivo.</li>
+<li><strong>Informe blindado.</strong> Los datos leídos del sistema nunca se interpretan como HTML y la página tiene una CSP con nonce.</li>
+</ul>
+<p>Más en <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/08-seguridad-de-la-plataforma.md">docs/08-seguridad-de-la-plataforma.md</a>. Para reportar vulnerabilidades: <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/SECURITY.md">SECURITY.md</a>.</p>
+<h2>📚 Documentación</h2>
+<p>Toda la documentación está en <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/README.md"><code>docs/</code></a>: visión, arquitectura, herramientas, motor de reglas, remediación segura, catálogo de controles, diseño de la UI, seguridad, instalación, guía de uso, desarrollo, pruebas, hoja de ruta, marcos normativos y decisiones de arquitectura (ADR).</p>
+<h2>🧑‍💻 Desarrollo</h2>
+<pre><code>make build        # bin/adarve
+make test         # tests
+make lint         # gofmt + go vet (Linux y Windows)
+make rules-lint   # validar el paquete de reglas
+sudo make scan    # escanear este equipo
+</code></pre>
+<p>Guía completa: <a href="https://github.com/Ruby570bocadito/best-harden/blob/HEAD/docs/11-desarrollo.md">docs/11-desarrollo.md</a>.</p>
